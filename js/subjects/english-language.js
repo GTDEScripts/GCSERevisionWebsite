@@ -2,290 +2,292 @@
 
 const ENGLISH_LANG_DATA = [
   {
-    section: '1. Paper 1: Creative Reading & Writing',
+    section: '1. Paper 1 Section A: Reading (40 marks)',
     icon: '📖',
     color: '#DC2626',
     topics: [
       {
-        ref: '1.1',
-        title: 'Paper 1 Q1: Reading (retrieval & summary)',
+        ref: 'P1 Q1',
+        title: 'Q1 — List/Retrieval (4 marks)',
         points: [
-          'Question type: "What do we learn about X from this section?" OR "Find four things that the character does/thinks/feels"',
-          'Marks: typically 4-8 marks. Straightforward comprehension (easiest question)',
-          'Task: identify explicit information directly stated in text. No inference required, no analysis needed',
-          'Method: scan text systematically, find relevant quotes, explain what they reveal. Must be concise',
-          'What NOT to do: don\'t infer (that\'s Q2), don\'t analyse techniques (that\'s Q2/Q3), don\'t discuss writer\'s methods',
-          'Evidence: provide quotes/details from text. Each point needs brief explanation (one sentence)',
-          'Format: bullet points acceptable, or short sentences. Clear and direct answers',
-          'Common mistakes: including inference (wrong question type), too much detail (waste time), not quoting specific evidence',
-          'Time management: spend ~8-10 minutes. Retrieve information, don\'t linger. Move on to Q2'
+          'Format: "List four things you learn about X from lines 1–15" or "What do we learn about X?"',
+          'Marks: 4 marks — one mark per valid point. No analysis required whatsoever',
+          'Source: One unseen fiction text (20th or 21st century prose fiction). Directed to specific lines',
+          'Task: retrieve EXPLICIT information only — what the text directly states, not what it implies',
+          'Method: scan the directed lines, pick out four separate facts/details. Quote or paraphrase both fine',
+          'Do NOT: analyse language, infer meaning, or discuss writer\'s methods — you will waste time and marks',
+          'Format: bullet points acceptable. Keep each point brief (one clause is enough)',
+          'Common pitfall: repeating the same point in different words counts as one mark only',
+          'Time: ~5 minutes maximum. This is the fastest question on the paper'
         ],
-        tip: 'Q1 is STRAIGHTFORWARD. Just retrieve explicit facts. Don\'t overthink. What does the text directly SAY about this character/situation?',
-        example: 'Question: "What do we learn about Sarah\'s appearance?" Text: "Sarah had long red hair and wore a blue dress." Answer: She has long red hair and wears a blue dress. That\'s it!'
+        tip: 'Q1 is pure retrieval — what does the text DIRECTLY SAY? No technique spotting, no inference. Find four separate facts from the given lines and write them down.',
+        example: '"List four things about the journey." Text says: "muddy track", "three hours", "blistered feet", "arrived at dusk." Four points = four marks. Done.'
       },
       {
-        ref: '1.2',
-        title: 'Paper 1 Q2: Reading (inference & analysis)',
+        ref: 'P1 Q2',
+        title: 'Q2 — Language Analysis (8 marks)',
         points: [
-          'Question type: "What does the writer convey/suggest about X?" OR "How does the writer present Y?" OR "What is the effect of...?"',
-          'Marks: 8-10 marks. Requires inference and comment on writer\'s methods',
-          'Task: infer meaning from evidence, analyse language/structural choices, explain their effect on reader',
-          'Inference: read between lines. Example: "He stared at the photograph for hours" → suggests emotional connection/nostalgia/loss',
-          'Language analysis: examine word choice (connotations, why that word?), phrases, imagery, tone, mood',
-          'Structural analysis: short/long sentences, fragments, punctuation choices, repetition, sentence order',
-          'Technique + quote + effect: PEE structure (Point-Evidence-Explanation) mandatory',
-          'Effect on reader: doesn\'t just state technique, explains how it makes reader feel/think',
-          'Length: 3-5 detailed paragraphs. Quality over quantity (one great analysis beats three weak ones)',
-          'Common mistakes: identifying technique without explaining effect, quoting long passages, not explaining WHY writer chose this'
+          'Format: "How does the writer use language to describe X?" or "How does the writer create tension/atmosphere/mood in lines X–Y?"',
+          'Marks: 8 marks. Assesses AO2 — understanding of language choices and their effects',
+          'Source: directed to specific lines of the fiction extract',
+          'Task: analyse the writer\'s language choices — word choice, imagery, sentence structure, tone — and explain their EFFECT',
+          'Structure each point with: technique identified + quote embedded + effect on reader explained',
+          'Language features to cover: word choice/connotations, metaphor/simile, personification, listing, repetition, short/fragmented sentences, sensory language',
+          'Effect must be specific: not "it makes it interesting" but "it creates unease in the reader because..."',
+          'Aim for 3–4 well-developed points. Quality over quantity — one fully explained point beats three surface-level ones',
+          'Use subject terminology accurately (e.g., sibilance, semantic field, juxtaposition) but only if you can explain the effect',
+          'Do NOT: discuss structure here (that is Q3), do not retell the story, do not just list techniques without effect'
         ],
-        tip: 'Q2 DEMANDS ANALYSIS. Don\'t just say "the writer uses a metaphor". Say WHAT the metaphor is, WHY they chose it, and WHAT EFFECT it creates on the reader.',
-        example: 'Poor: "The writer uses vivid imagery." Good: "The writer uses the image \'petals scattered like snow\' to suggest fragility and transience, evoking sadness in the reader." Name technique, quote evidence, explain effect.'
+        tip: 'Q2 wants LANGUAGE analysis. Name the technique, embed a quote, explain the effect. "The writer uses the verb \'clawed\' to suggest desperation, making the reader feel the character\'s panic."',
+        example: 'Weak: "The writer uses lots of descriptive language." Strong: "The metaphor \'the fog swallowed the street\' personifies the fog as predatory, creating a threatening atmosphere that unsettles the reader."'
       },
       {
-        ref: '1.3',
-        title: 'Paper 1 Q3: Writing (descriptive or narrative)',
+        ref: 'P1 Q3',
+        title: 'Q3 — Structure Analysis (8 marks)',
         points: [
-          'Question type: "Write a description of..." OR "Continue the story..." OR "Write about a time when..."',
-          'Marks: 24 marks (40% of Paper 1). Significant marks available',
-          'Task: write 400-600 words of creative, descriptive, or narrative writing',
-          'Descriptive writing: paint vivid picture using sensory language (sight, sound, smell, taste, touch). Mood is crucial',
-          'Narrative writing: tell engaging story with characters, plot, dialogue, setting. Beginning-middle-end structure',
-          'Technique essential: use metaphors, similes, personification, precise vocabulary, varied sentence lengths',
-          'Sensory details: instead of "nice day", write "golden sunlight filtered through leaves, warm breeze carried scent of honeysuckle"',
-          'Show, don\'t tell: instead of "He was angry", write "His jaw clenched, fists balled, face flushed crimson"',
-          'Structure matters: clear beginning (set scene/introduce character), middle (develop action/description), ending (resolution/reflection)',
-          'Dialogue (if narrative): breaks up narrative, reveals character, adds realism. Format: new speaker = new line',
-          'Vocabulary: ambitious word choices impress examiners. Avoid "nice", "good", "bad" - use "exquisite", "malevolent", "austere"',
-          'Spelling/grammar: accuracy matters (20 marks). Proofread. Errors lose marks',
-          'Planning essential: spend 5 minutes brainstorming ideas, structure, key phrases before writing'
+          'Format: "How does the writer structure the text to interest you as a reader?" or "How is the text structured to build tension?"',
+          'Marks: 8 marks. Assesses AO2 — understanding of structural choices and their effects',
+          'Source: the whole fiction extract (not directed to specific lines)',
+          'Task: analyse structural decisions — how the text is put together — not language features',
+          'Structural features to discuss: openings (how the extract begins, what it establishes), endings (how it closes, any resolution or cliff-hanger), shifts in focus (narrator perspective changes), narrative development (how tension builds/releases), time shifts (flashback, flash-forward), paragraph lengths (short paragraph = emphasis), sentence variety (short for impact, long for complexity)',
+          'Zoom in AND out: comment on whole-text structure (how it develops) AND zoom into specific moments (a short paragraph, a sentence fragment)',
+          'Use language like: "At the start of the extract... As the text develops... Towards the end..."',
+          'Do NOT: analyse language choices here (that is Q2). Avoid commenting on word choice/imagery in Q3',
+          'Common pitfall: confusing language and structure. Structure = HOW the text is organised. Language = WHAT words are used',
+          'Aim for 3–4 structural points, each with a quote/reference and effect explained'
         ],
-        tip: 'Q3 is YOUR CHANCE to show writing ability. Use techniques. Create atmosphere. Choose ambitious vocabulary. Show examiners you can WRITE.',
-        example: 'Weak: "The forest was dark." Strong: "Ancient oaks stretched skyward, their gnarled branches intertwining to create a canopy so dense that even midday sunlight could barely penetrate, casting the forest floor into perpetual twilight."'
+        tip: 'Q3 is about STRUCTURE — how the text is built, ordered, paced. Think: beginnings, endings, shifts, pace, paragraph lengths, perspective changes. NOT word choice.',
+        example: 'Strong: "The writer opens in medias res — mid-action — immediately immersing the reader. Towards the end, a shift to slow, reflective sentences creates contrast with the earlier urgency, suggesting the character has processed their fear."'
       },
       {
-        ref: '1.4',
-        title: 'Paper 1 Q4: Writing (transactional)',
+        ref: 'P1 Q4',
+        title: 'Q4 — Evaluation / Critical Reading (20 marks)',
         points: [
-          'Question type: "Write a letter/email/article/speech/review about..." OR "Write to persuade/inform/explain"',
-          'Marks: 16 marks. Less than Q3, but specific format required',
-          'Task: write 200-300 words in specific format (letter, email, article, speech, etc.)',
-          'Purpose matters: know whether you\'re persuading, informing, explaining, entertaining. Adjust tone/language accordingly',
-          'Audience matters: writing to school headteacher ≠ writing to friend. Register (formality level) changes',
-          'Format accuracy: if letter, include correct layout (address, date, salutation "Dear...", sign-off). If speech, address audience directly',
-          'Structure: introduction (hook reader, state purpose), main points (develop ideas with evidence/reasons), conclusion (summarise, call to action)',
-          'Technique: use persuasive techniques (rhetorical questions, emotive language, statistics, repetition) if persuasive task',
-          'Tone: consistency important. Don\'t switch between formal and informal. Match purpose and audience',
-          'Vocabulary: appropriate to genre (letter = formal, speech = engaging, article = informative)',
-          'Common mistakes: wrong format (email when letter requested), ignoring audience (too casual/formal), no clear purpose',
-          'Time management: ~20 minutes. Plan briefly, write clearly, proofread quickly'
+          'Format: "A student says \'the writer presents X as...\'  To what extent do you agree with this view?" Directed to a section of the text',
+          'Marks: 20 marks — the highest-tariff reading question. Assesses AO4',
+          'Task: evaluate the extent to which you agree with a given statement. This requires a CRITICAL, PERSONAL response supported by textual evidence',
+          'Must: state your personal viewpoint clearly; support with quotes; analyse language for effect; consider both where you agree AND disagree',
+          'Structure: agree with evidence, then agree elsewhere, then partially disagree with evidence, then balanced conclusion (or fully agree/disagree with nuance)',
+          'Key word: "evaluate" = weigh up, consider extent, don\'t just agree fully or disagree fully. Show critical thinking',
+          'Every point needs: your opinion + quote + analysis of language + link to the given statement',
+          'AO4 mark scheme bands: simple/limited (1–5), some understanding (6–10), clear understanding (11–15), perceptive/detailed (16–20)',
+          'Perceptive responses: develop interpretations beyond the obvious; consider implications; suggest what effect writer intended',
+          'Time: ~20 minutes. Write 4–6 well-developed paragraphs. This is where top grades are achieved in reading'
         ],
-        tip: 'Q4 tests FORM + PURPOSE + AUDIENCE. Know exact format. Match tone to audience. Don\'t just write an essay - write what\'s asked.',
-        example: 'If asked to write persuasive letter to council about new cycle lane: include proper letter format, persuasive techniques (rhetorical questions, emotive language), address councillor formally, sign with "Yours faithfully" (formal letter sign-off).'
+        tip: 'Q4 needs EVALUATION — agree + disagree with the statement, analyse language throughout. Show you\'re thinking critically. Use phrases like "This supports the view that..." and "However, one could argue..."',
+        example: 'Statement: "The writer presents the village as peaceful and safe." Agree: "arrived like coming home" — safe connotations. However disagree: "shadows crept between the houses" — personification of threat undermines safety. Conclusion: peaceful on the surface, but underlying tension.'
       }
     ]
   },
   {
-    section: '2. Paper 2: Writers\' Viewpoints & Perspectives',
+    section: '2. Paper 1 Section B: Writing (40 marks)',
     icon: '✍️',
+    color: '#B45309',
+    topics: [
+      {
+        ref: 'P1 Q5',
+        title: 'Q5 — Creative Writing (40 marks: 24 content + 16 technical accuracy)',
+        points: [
+          'Format: choice of two tasks — either (a) descriptive writing prompted by image OR (b) narrative writing with a given title/opening/situation',
+          'Marks: 40 total. AO5 Content & Organisation: 24 marks. AO6 Technical Accuracy: 16 marks. Both halves equally important',
+          'AO5 (24 marks): communicate clearly and effectively; select vocabulary and techniques for effect; organise information with structural/grammatical features',
+          'AO6 (16 marks): correct spelling, punctuation, grammar; varied vocabulary; accurate sentence structures',
+          'Recommended length: 450–600 words. Quality matters more than quantity, but very short responses cap at lower marks',
+          'PLAN first — 5 minutes minimum. Decide: narrative arc OR descriptive angle, key moments, atmosphere, opening hook, ending',
+          'Show, don\'t tell: "He was frightened" = telling. "His hands shook; he pressed himself flat against the wall" = showing',
+          'Techniques to include: varied sentence lengths (short for impact), figurative language (metaphor, simile, personification), sensory detail (all five senses), structural devices (in medias res opening, circular structure, cliff-hanger ending)',
+          'Ambitious vocabulary: avoid "nice", "good", "bad", "said". Use "exquisite", "unsettling", "austere", "murmured", "hissed"',
+          'Paragraph clearly: each paragraph moves the description/narrative forward. Use discourse markers if helpful',
+          'Proofread: leave 3–5 minutes at the end. Check spelling, missing words, punctuation. SPaG worth 16 marks'
+        ],
+        tip: 'Q5 is 40 marks — your biggest opportunity. Plan it. Use techniques. Write vividly. PROOFREAD. Half the marks are for technical accuracy so spelling and punctuation matter enormously.',
+        example: 'Descriptive task — image of a railway station at night. Open in medias res: "Steam billowed across the platform, swallowing figures whole." Use senses: sight (pale lamps), sound (screeching brakes), smell (diesel). Short sentence for impact: "Then silence." End reflectively.'
+      }
+    ]
+  },
+  {
+    section: '3. Paper 2 Section A: Reading (40 marks)',
+    icon: '📰',
     color: '#2563EB',
     topics: [
       {
-        ref: '2.1',
-        title: 'Paper 2 Q1: Reading (retrieval)',
+        ref: 'P2 Q1',
+        title: 'Q1 — True/False Retrieval (4 marks)',
         points: [
-          'Question type: "What do we learn about X from both texts?" OR "Find one way that the texts are similar/different"',
-          'Marks: 4 marks (only 2 texts, not detailed analysis)',
-          'Task: retrieve explicit information from BOTH texts, identify similarities or differences',
-          'Method: scan both texts for relevant information. Identify explicit facts (no inference yet)',
-          'Both texts required: must reference both texts equally. Don\'t focus on one text only',
-          'Evidence: short quotes from both texts supporting your point',
-          'Format: 2-3 sentences per point. Concise and clear',
-          'Common mistakes: only using one text, inferring (that\'s Q2/Q3), being too detailed',
-          'Time management: ~8 minutes total. Retrieve information quickly'
+          'Format: "Choose four statements which are TRUE" from a list of eight about Source A',
+          'Marks: 4 marks — one mark per correctly identified true statement',
+          'Source: Source A only (one of the two non-fiction texts). Directed to the whole source or specific lines',
+          'Task: read statements, match to text, tick or identify the four that are accurate',
+          'Method: read each statement, locate in the text, verify it is explicitly true',
+          'Do NOT: infer or interpret. Statements are either explicitly supported or they are not',
+          'Common pitfall: a statement that sounds plausible but is not directly in the text = false',
+          'Time: ~5 minutes. Fast question. Move on quickly'
         ],
-        tip: 'Q1 is RETRIEVAL from TWO TEXTS. Find what\'s explicitly stated in both. No inference, no analysis, no technique discussion.',
-        example: 'Question: "What do both texts reveal about attitudes to technology?" Text A: "Technology has revolutionised communication." Text B: "Modern gadgets have made us isolated." Both texts discuss technology, but with opposing viewpoints.'
+        tip: 'Q1 Paper 2 is TRUE/FALSE. Go back to the text for each statement. If you cannot find it stated explicitly, it is not true. Do not guess.',
+        example: 'Statement: "The writer visited the location in summer." Text says "the long summer days stretched endlessly." This is TRUE — directly supported. Statement: "The writer enjoyed the trip." Text does not say this explicitly — could be FALSE even if implied.'
       },
       {
-        ref: '2.2',
-        title: 'Paper 2 Q2: Reading (comparison analysis)',
+        ref: 'P2 Q2',
+        title: 'Q2 — Summary / Synthesis (8 marks)',
         points: [
-          'Question type: "How do the writers present viewpoints/perspectives on X?" OR "Compare how the texts present..."',
-          'Marks: 10 marks. Significant analysis required',
-          'Task: analyse HOW writers present viewpoints in BOTH texts. Compare their methods',
-          'Comparison essential: can\'t just analyse one text. Must explicitly compare: "Text A uses... whereas Text B uses..."',
-          'Methods include: language choices (tone, vocabulary, phrases), structural choices (sentence length, paragraph breaks, openings/closings), techniques (rhetoric, imagery, repetition)',
-          'Perspective/viewpoint: what does each writer believe? Don\'t just identify technique, explain what viewpoint it conveys',
-          'PEE structure: Point (what viewpoint?), Evidence (quote from both texts), Effect (how does language/structure create this?)',
-          'Balance: spend roughly equal time on both texts. Compare consistently',
-          'Common mistakes: analysing only one text, not comparing, describing technique without linking to viewpoint',
-          'Length: 5-7 detailed paragraphs. Deep analysis, not surface-level observation',
-          'Signposting language: "Similarly, both texts...", "In contrast to Text A, Text B...", "While Text A presents... Text B argues..."'
+          'Format: "You need to refer to Source A and Source B. Use details from BOTH sources. Write a summary of the differences/similarities between X in Source A and Source B"',
+          'Marks: 8 marks. Assesses AO1 — selecting and synthesising evidence from both texts',
+          'Task: identify and summarise the KEY differences or similarities between both sources on a given topic. Must use BOTH texts',
+          'DO NOT: analyse language (that is Q3). This question is about IDEAS not HOW they are expressed',
+          'Structure: identify a difference/similarity, quote or paraphrase from Source A, quote or paraphrase from Source B, brief explanation',
+          'Balance: reference both sources equally. Spending too long on one source loses marks',
+          'Synthesis: don\'t just describe each text separately. COMPARE them: "While Source A suggests... Source B presents a contrasting view..."',
+          'Aim for 4–5 well-evidenced comparison points',
+          'Common pitfall: analysing language techniques. For Q2, you just need to show you understand WHAT each source says, not HOW it says it'
         ],
-        tip: 'Q2 COMPARES VIEWPOINTS. Not just "both texts discuss X". Rather: "Text A celebrates technology\'s progress (evidenced by...) while Text B laments human connection lost (shown by...)."',
-        example: 'Text A (19th century) celebrates progress: formal tone, optimistic language ("triumph", "advance"). Text B (modern) questions progress: fragmented sentences, sarcastic tone ("so-called progress"). Both discuss technology, but oppose views.'
+        tip: 'Q2 is about IDEAS in BOTH texts. What do they say about the topic differently/similarly? Synthesise — compare them directly. No language analysis needed here.',
+        example: 'Topic: "Attitudes to city life." Source A (Victorian): describes city as exciting, full of opportunity ("the streets hummed with possibility"). Source B (modern): portrays city as isolating ("surrounded by millions yet completely alone"). Both discuss city but hold opposing views.'
       },
       {
-        ref: '2.3',
-        title: 'Paper 2 Q3: Reading (summary/synthesis)',
+        ref: 'P2 Q3',
+        title: 'Q3 — Language Analysis of One Source (12 marks)',
         points: [
-          'Question type: "Summarise what the texts tell us about X" OR "Identify three ways the texts are similar/different"',
-          'Marks: 6 marks. Focused retrieval with some synthesis',
-          'Task: synthesise information from both texts. Summarise main ideas. Identify patterns/connections',
-          'Synthesis: combining ideas from both texts to create bigger picture. Not just listing observations',
-          'Similarity/difference: identify patterns. Example: both texts discuss climate change (similar topic), but one blames industry, one blames consumers (different viewpoints)',
-          'Summary: condense key points from both texts into 3-4 clear statements',
-          'Evidence: support with quotes/references from both texts',
-          'Common mistakes: only one text, too much detail (this is summary, not analysis), not synthesising (just listing)',
-          'Format: bullet points or short paragraphs. Clear and concise',
-          'Time management: ~10 minutes. Retrieve main ideas, synthesise briefly, move on'
+          'Format: "How does the writer of Source A use language to present their views about X?" or "...to influence the reader?"',
+          'Marks: 12 marks. Assesses AO2 — language choices and effects',
+          'Source: directed to Source A only (or sometimes Source B — check carefully)',
+          'Task: analyse HOW the writer uses language to convey their viewpoint or persuade the reader. Same skills as Paper 1 Q2 but higher marks',
+          'Techniques in non-fiction/persuasive texts: rhetorical questions, emotive language, direct address ("you"), statistics, anecdote, hyperbole, listing, inclusive language ("we"), imperatives',
+          'Structure each point: technique + embedded quote + effect on reader + link to writer\'s purpose',
+          'Effect must link to writer\'s viewpoint: "This hyperbole suggests the writer is outraged, positioning the reader to share their anger"',
+          'Aim for 4–5 well-developed points. Higher marks (9–12) require perceptive analysis — consider WHY the writer made this choice',
+          'Consider tone: angry, calm, humorous, ironic, passionate, detached? What does this reveal about the writer\'s attitude?',
+          'Vocabulary choices: "The writer selects the verb \'abandon\' rather than \'leave\' to emphasise..."'
         ],
-        tip: 'Q3 SUMMARISES and SYNTHESISES. What\'s the big picture? What do both texts together tell us? Find connections.',
-        example: 'Both texts discuss education reform. Text A advocates traditional methods (grammar focus, exams). Text B champions progressive methods (creativity focus, project-based). Both seek improvement, but disagree on method.'
+        tip: 'Q3 Paper 2 = language analysis of non-fiction. Focus on persuasive/rhetorical techniques. Always link to the writer\'s viewpoint/purpose. Embed quotes.',
+        example: 'Technique: direct address. Quote: "You must ask yourself." Effect: "By directly addressing the reader, the writer creates a sense of personal responsibility, making it harder to dismiss the argument."'
       },
       {
-        ref: '2.4',
-        title: 'Paper 2 Q4: Writing (argumentative/persuasive)',
+        ref: 'P2 Q4',
+        title: 'Q4 — Compare Writers\' Viewpoints (16 marks)',
         points: [
-          'Question type: "Write a speech/article/letter arguing that..." OR "Write persuasively about..."',
-          'Marks: 24 marks (40% of Paper 2). Highest marks for single response',
-          'Task: write 400-600 words arguing a specific position persuasively or argumentatively',
-          'Argumentative: present claim with evidence, acknowledge opposing views, refute them. Logic-focused',
-          'Persuasive: convince through emotion, appeal to values, call to action. Emotion + logic',
-          'Clear thesis: state your position clearly at start. "Technology has transformed education for better." Not wishy-washy',
-          'Supporting evidence: facts, statistics, expert opinions, examples. Each paragraph develops one point',
-          'Counterargument: acknowledge opposing view ("Some argue technology distracts..."), then refute ("However, evidence shows...").',
-          'Technique essential: rhetorical questions ("Do we really want to return to chalkboards?"), repetition, emotive language, lists, inclusive language ("we", "us")',
-          'Structure: introduction (hook + thesis), body (3-4 paragraphs with evidence), counterargument (acknowledge alternative view), conclusion (restate thesis + final persuasive push or call to action)',
-          'Tone: consistency important. Don\'t become sarcastic mid-argument (unless intentional). Match purpose',
-          'Vocabulary: ambitious word choices. Vary sentence length (short for impact, long for complexity)',
-          'Spelling/grammar: 20 marks for accuracy. Proofread carefully',
-          'Planning: 5 minutes brainstorming ideas, evidence, counterargument before writing'
+          'Format: "Compare how the writers of Source A and Source B present their different viewpoints about X. Use evidence from both sources"',
+          'Marks: 16 marks. Assesses AO3 — comparing ideas and perspectives across texts',
+          'Task: compare HOW (the methods used) both writers present their viewpoints, not just WHAT they think',
+          'Must reference: both sources throughout. Each paragraph should compare, not describe one then the other separately',
+          'Structure: point of comparison + evidence from Source A (with language analysis) + evidence from Source B (with language analysis) + comparison of effect',
+          'Comparison language: "While Source A uses... to convey..., Source B employs... to suggest...", "Both writers... however they differ in..."',
+          'Methods to compare: tone, vocabulary choices, structural choices (opening/ending), techniques (rhetorical question vs direct statement), sentence length, use of evidence',
+          'Don\'t forget context: Source A may be 19th century — consider how historical context affects language/viewpoint',
+          'Aim for 4–5 comparative paragraphs with dual evidence in each',
+          'Top marks (13–16) require: perceptive comparison of both WHAT writers think AND HOW they use language to express it'
         ],
-        tip: 'Q4 demands ARGUMENTATION or PERSUASION. Not just opinion. Present evidence. Acknowledge alternatives. Strengthen your case by showing you\'ve thought about opposing views.',
-        example: 'Thesis: "Social media has damaged mental health in teenagers." Evidence: studies show increased anxiety/depression. Counter: "Social media enables connection." Refute: "Connection online ≠ genuine relationships; lacks non-verbal communication." Conclusion: limit screen time, promote in-person connection.'
+        tip: 'Q4 must COMPARE BOTH sources throughout. Don\'t do Source A then Source B — compare them side by side in each paragraph. Analyse METHODS (language, tone, structure) not just ideas.',
+        example: 'Strong: "Source A employs formal, measured language (\'extensive research confirms\') to establish credibility, while Source B uses emotive, urgent rhetoric (\'children are dying\') to galvanise the reader into action. Both aim to persuade, but use contrasting registers to do so."'
       }
     ]
   },
   {
-    section: '3. Spoken Language Endorsement',
-    icon: '🎤',
+    section: '4. Paper 2 Section B: Writing (40 marks)',
+    icon: '🗣️',
     color: '#7C3AED',
     topics: [
       {
-        ref: '3.1',
-        title: 'Individual Presentation (5-7 minutes)',
+        ref: 'P2 Q5',
+        title: 'Q5 — Transactional / Persuasive Writing (40 marks: 24 content + 16 technical accuracy)',
         points: [
-          'Format: Solo presentation on topic of choice (can be academic or personal interest)',
-          'Marks: 50 marks (endorsement = separate, doesn\'t affect A*-C grade but shows communication skill)',
-          'Assessment: teacher assesses on content, delivery, communication effectiveness',
-          'Content matters: relevant information, logical structure, evidence/examples supporting ideas',
-          'Delivery assessment: volume (audible), pace (not rushing, clear diction), intonation (varied, engaging), confidence (eye contact, posture)',
-          'Engagement: maintain listener interest through vocal variety, visual aids (optional but effective), direct address to audience',
-          'Structure essential: introduction (grab attention, state topic, preview main points), body (3-4 main points with evidence), conclusion (summary, memorable ending)',
-          'Visual aids: slides/posters acceptable but not required. If used, support speech, don\'t distract',
-          'Language: clear, formal register (not conversational), appropriate vocabulary, no verbal fillers ("um", "like", "you know")',
-          'Preparation: practise aloud multiple times. Timing essential - too short/long loses marks. Cue cards allowed (notes, not full script)',
-          'Confidence techniques: deep breathing before starting, focus on message not nervousness, imagine friendly audience'
+          'Format: a writing task to a specific audience, purpose and form — e.g. "Write a speech arguing that...", "Write a letter to your MP persuading...", "Write a magazine article about..."',
+          'Marks: 40 total. AO5 Content & Organisation: 24 marks. AO6 Technical Accuracy: 16 marks',
+          'AO5 (24 marks): communicate clearly and effectively for purpose/audience; organise information; use structural/grammatical features',
+          'AO6 (16 marks): accurate spelling, punctuation, grammar; varied vocabulary and sentence structures',
+          'Form matters: if asked to write a speech, open with direct address ("Ladies and gentlemen..."). Letter needs correct format. Article needs headline/subheadings optional. Know conventions',
+          'Audience and purpose: tailor register to audience. Writing to a politician = formal, persuasive. Writing to peers = engaging, slightly informal. Always persuasive/argumentative tone',
+          'Structure: introduction (hook + clear stance), body paragraphs (one argument per paragraph with evidence/example), counterargument (acknowledge + refute), conclusion (restate stance + call to action or memorable close)',
+          'Persuasive techniques: AFOREST — Anecdote, Facts, Opinion, Rhetorical questions, Emotive language, Statistics, Triplets (rule of three)',
+          'Counter-argument: include and refute opposing views. Shows sophistication and strengthens your position',
+          'Vocabulary: formal, ambitious. Avoid passive hedging ("maybe", "perhaps"). Assert your viewpoint confidently',
+          'Proofread: 3–5 minutes at the end. SPaG = 16 marks. Correct spelling of key words. Check punctuation'
         ],
-        tip: 'PRESENTATION assesses communication. Speak clearly, vary tone, maintain eye contact. Don\'t just read notes. ENGAGE your audience.',
-        example: 'Topic: Climate change in polar regions. Structure: 1) Hook with statistic ("Polar ice melting 3x faster than 20 years ago"), 2) Causes (greenhouse gases), 3) Effects (habitat loss, rising sea levels), 4) Solutions (renewable energy). Conclusion: call to action (support green policy).'
-      },
-      {
-        ref: '3.2',
-        title: 'Responding to Questions (5-7 minutes)',
-        points: [
-          'Format: Audience asks questions about your presentation (2-3 questions typically)',
-          'Assessment: ability to listen, understand questions, respond relevantly and clearly',
-          'Active listening: focus fully on questioner, don\'t interrupt, take brief notes if helpful',
-          'Understanding: if confused about question, ask for clarification ("Do you mean...?"). Better than guessing',
-          'Responding: answer directly and fully. Don\'t ramble. 2-3 sentences per answer usually sufficient',
-          'Vocabulary: maintain formal register. Don\'t become casual or defensive',
-          'Admitting uncertainty: if unsure of answer, say so honestly ("That\'s a good question I hadn\'t considered. I think..."). Don\'t bluff',
-          'Building on points: use questions as opportunity to extend your argument. "That\'s interesting because it relates to my point about..."',
-          'Confidence: maintain eye contact with questioner, speak clearly, pause briefly before answering (seems thoughtful, not rushed)',
-          'Common mistakes: dismissing questions ("That\'s not important"), becoming defensive, giving irrelevant answers, rambling'
-        ],
-        tip: 'RESPONDING tests comprehension and communication. Listen carefully. Answer the actual question. Be honest if you don\'t know something.',
-        example: 'Questioner: "How would we transition from fossil fuels to renewables without economic collapse?" Answer: "That\'s crucial. My presentation discussed renewable energy growth in countries like Denmark. They transitioned gradually while creating jobs in new sectors. Gradual transition with government investment minimises economic disruption."'
-      },
-      {
-        ref: '3.3',
-        title: 'Use of Standard English & Formality',
-        points: [
-          'Standard English: correct grammar, complete sentences, formal vocabulary. No slang, dialect features, or informal speech',
-          'Accent/dialect: acceptable if clear. Examiners assess communication, not accent. Clarity essential',
-          'Vocabulary: subject-appropriate terminology. If discussing science, use precise scientific terms. Academic register',
-          'Grammar: correct subject-verb agreement, consistent tense, proper sentence structure. One grammatical error won\'t fail you, but patterns suggest poor English',
-          'Pronunciation: clear articulation essential. Practice tricky words beforehand if needed',
-          'Formality: match presentation context. Academic presentation = formal. Personal interest presentation = still formal (not conversational chat)',
-          'Fillers & hesitations: avoid "um", "uh", "like", "you know", "innit". Pause instead if needing thinking time (seems more confident)',
-          'Verbal tics: repetitive phrases ("basically", "literally") weaken communication. Vary opening phrases',
-          'Non-verbal communication: matches Standard English standard. Posture (stand tall), gestures (purposeful), eye contact (regular), facial expressions (engaged)',
-          'Audience awareness: adjust complexity of language to listener understanding. Don\'t use jargon without explaining'
-        ],
-        tip: 'STANDARD ENGLISH is formal, grammatically correct, clear communication. Not your everyday speech. Think "academic" not "chat with friends".',
-        example: 'Informal: "So like, climate change is basically destroying the planet, innit? It\'s caused by us burning stuff and it\'s gonna make everything super bad." Formal: "Climate change results from anthropogenic emissions. These greenhouse gases trap heat, causing catastrophic environmental consequences including ecosystem collapse and human displacement."'
+        tip: 'Q5 Paper 2 = persuasive/argumentative writing. Know your FORM (speech, letter, article). Make your viewpoint clear from the start. Use AFOREST techniques throughout. Proofread — 16 marks for accuracy.',
+        example: 'Task: "Write a speech to your school arguing that social media does more harm than good." Open: "Picture this: a teenager, alone at midnight, scrolling through images of perfect lives." Use rhetorical question, statistics, emotive language. Counterargument: "Some claim social media connects us. But connection requires presence, not a screen."'
       }
     ]
   },
   {
-    section: '4. Reading & Language Analysis Skills',
-    icon: '🔤',
+    section: '5. Spoken Language Endorsement',
+    icon: '🎤',
     color: '#059669',
     topics: [
       {
-        ref: '4.1',
-        title: 'Language Analysis Techniques',
+        ref: '5.1',
+        title: 'Spoken Language: Presentation & Delivery',
         points: [
-          'Word choice (diction): why did writer choose THIS word over synonym? Connotations matter. "Slender" vs "scrawny" vs "skeletal" = different impressions. Always ask WHY',
-          'Imagery: vivid descriptive language appealing to senses. Simile ("like a tiger"), metaphor ("she is a tiger"), personification ("the trees danced"), oxymoron ("deafening silence")',
-          'Tone: writer\'s attitude (formal, sarcastic, angry, sad, hopeful, ironic). Created through word choice, sentence structure, examples chosen',
-          'Mood: emotional atmosphere created for reader (tense, peaceful, sinister, joyful). Tone + language create mood',
-          'Syntax: sentence structure matters. Short sentences = punchy, dramatic, emphatic. Long sentences = complex, sophisticated, winding. Fragment = stark, dramatic. Questions = engaging',
-          'Repetition: repeating words/phrases for emphasis or effect. "We will fight, we will win, we will prevail" = builds momentum, rallies audience',
-          'Lists: accumulation of ideas builds effect. Three items common (rule of three). "Flexible hours, free lunch, gym access" = generous benefits',
-          'Rhetorical devices: rhetorical question (no answer expected, for effect), pun (wordplay), alliteration (repeated initial sounds), assonance (repeated vowel sounds)',
-          'Register: formality level (formal, informal, colloquial). Affects credibility and audience',
-          'Perspective: whose viewpoint? First person (I), second person (you), third person (he/she). Affects distance, intimacy, authority'
+          'Assessment: teacher-assessed endorsement. Reported as Pass, Merit, or Distinction. Does NOT count towards GCSE grade (0% weighting) but appears on certificate',
+          'Format: individual prepared presentation (typically 5–10 minutes), followed by questions from the audience or teacher',
+          'AO7 (Spoken language): communicate effectively in a range of contexts, selecting appropriate register',
+          'AO8 (Listening and responding): listen and respond appropriately to spoken language, including questions and feedback',
+          'AO9 (Standard English): use Standard English where appropriate',
+          'Delivery skills assessed: clarity of speech (volume, pace, pronunciation), intonation (vocal variety — avoid monotone), eye contact (engage with audience, not notes), posture and confidence',
+          'Content skills: clear structure (introduction, main points, conclusion), relevant supporting evidence, sustained engagement with topic',
+          'Standard English: formal vocabulary, correct grammar, no excessive filler words ("um", "like", "basically"). Regional accent is acceptable — clarity is what matters',
+          'Responding to questions: listen carefully, answer relevantly, extend your answer with examples, admit uncertainty honestly rather than bluffing',
+          'Preparation: practise aloud multiple times. Use cue cards (key prompts only — not a full script to read). Time your presentation. Anticipate likely questions and prepare responses'
         ],
-        tip: 'ALWAYS identify technique + quote evidence + explain EFFECT on reader. Never just name technique. "The writer uses a metaphor" is incomplete. "The metaphor \'petals scattered like snow\' suggests fragility, evoking sadness" is complete.',
-        example: 'Weak analysis: "The writer uses short sentences." Strong analysis: "The writer uses short sentences (\'He stopped. She stared. Time froze.\') to create staccato rhythm mimicking the character\'s shock and panic, making the reader share his disorientation."'
+        tip: 'Spoken Language is assessed by your teacher and does not affect your grade — but Distinction shows strong communication skills. Speak clearly, vary your tone, maintain eye contact, use Standard English.',
+        example: 'Topic: "Schools should ban smartphones." Structure: 1) Hook ("What if I told you the average teen checks their phone 96 times a day?"), 2) Three arguments with evidence, 3) Counterargument refuted, 4) Conclusion with call to action.'
+      }
+    ]
+  },
+  {
+    section: '6. Reading & Writing Toolkit',
+    icon: '🔤',
+    color: '#374151',
+    topics: [
+      {
+        ref: '6.1',
+        title: 'Language Techniques & Terminology',
+        points: [
+          'Simile: comparison using "like" or "as" — "cold as stone", "moved like water". Effect: creates vivid image, often softens/sharpens comparison',
+          'Metaphor: direct comparison without "like/as" — "she was a storm", "the city is a jungle". Effect: stronger than simile, merges two concepts',
+          'Personification: gives human qualities to non-human things — "the wind howled", "shadows crept". Effect: creates mood, often menacing or sympathetic',
+          'Sibilance: repeated "s" sounds — "shadows slipped silently". Effect: soft, sinister, hissing quality',
+          'Alliteration: repeated initial consonant sounds — "dark, damp, dripping dungeon". Effect: creates rhythm, emphasis, memorability',
+          'Semantic field: group of words related to same topic — "darkness, shadow, night, void" all relate to darkness. Effect: sustained mood or theme',
+          'Connotations: associations a word carries beyond its literal meaning — "slender" (elegant), "scrawny" (unhealthy), "skeletal" (disturbing). Choice reveals attitude',
+          'Rhetorical question: question not expecting answer — "Is this the world we want to leave our children?" Effect: challenges reader, creates urgency',
+          'Anaphora: repetition at the start of successive clauses — "We will fight. We will endure. We will prevail." Effect: builds momentum, emphasises commitment',
+          'Juxtaposition: placing contrasting ideas side by side — "the opulent palace shadowed the slum below". Effect: highlights contrast, often implies criticism',
+          'Hyperbole: deliberate exaggeration — "I\'ve told you a thousand times." Effect: emphasises emotion, often creates humour or outrage',
+          'Irony: saying the opposite of what you mean — "What lovely weather" during a storm. Effect: creates humour or biting criticism'
+        ],
+        tip: 'Know your techniques BUT always explain their EFFECT. "The writer uses alliteration" earns one mark. "The alliteration \'dead, dark, dank\' creates a relentless oppressive rhythm, making the reader feel trapped" earns full marks.',
+        example: 'Weak: "The writer uses personification." Strong: "The personification of the city as a \'breathing beast\' suggests it has its own hunger and will, positioning the narrator as vulnerable prey rather than a citizen."'
       },
       {
-        ref: '4.2',
-        title: 'Inference & Interpretation',
+        ref: '6.2',
+        title: 'PEE Structure & Writing Paragraphs',
         points: [
-          'Explicit information: directly stated in text. "The sky was blue." No inference needed',
-          'Implicit information: suggested but not stated. "She clutched the rejection letter" → implies emotional distress (not directly said)',
-          'Inference: reading between lines, interpreting meaning beyond explicit words. Requires textual evidence, not guessing',
-          'Evidence-based: every inference must be supported by quote/detail. "X suggests Y because [quote]"',
-          'Connotation: associated meanings. "Stubborn" (negative) vs "determined" (positive) = same concept, different judgments',
-          'Context matters: historical context, social context, character context affects interpretation. Victorian attitudes ≠ modern attitudes',
-          'Multiple interpretations: some texts allow valid different readings. Accept complexity. Don\'t assume one "right" answer',
-          'Avoiding over-interpretation: don\'t read meanings that aren\'t supported. Stick to evidence. "Plausible and supported" is standard',
-          'Supporting interpretation: own judgement acceptable if backed by textual evidence. "I think the character is guilty because..." (provide evidence)',
-          'Bias awareness: recognise own assumptions. Text might challenge your views. Try to understand writer\'s perspective'
+          'PEE stands for: Point (your interpretation/analysis claim), Evidence (quote from text — embedded in your sentence), Explanation (how evidence supports point + effect on reader)',
+          'Point: make a clear analytical claim first. "The writer presents the protagonist as deeply isolated." Don\'t begin with a quote',
+          'Evidence: embed quote smoothly in your sentence. "The writer presents isolation through the image of Oliver \'huddled in the corner, invisible to all\'." Do not paste long block quotes',
+          'Explanation: explain HOW the evidence creates the effect AND what effect it has on the reader. "The verb \'huddled\' suggests he has made himself small to avoid notice, evoking pathos in the reader."',
+          'Zoom in: analyse specific words or phrases within your quote. "The noun \'invisible\' suggests he has ceased to exist socially, not just physically — he is entirely disregarded."',
+          'Link back: connect paragraph to the question at end. "This reinforces the idea that the writer presents society\'s indifference to poverty."',
+          'Avoid: beginning paragraph with quote, writing "This quote shows...", describing plot, explaining technique without effect',
+          'Multiple evidence: can use two pieces of evidence per paragraph if both support the same point',
+          'Vary openers: "The writer conveys...", "X is presented as...", "The use of X reveals...", "Through the imagery of X, the writer suggests..."'
         ],
-        tip: 'INFERENCE needs EVIDENCE. Never guess. "X suggests Y" → provide quote supporting this connection. Examiners want thinking based on text, not wild interpretation.',
-        example: 'Text: "He stared at her passport, lips tightening." Inference: He\'s concerned about her leaving (suggested by staring + physical response, not directly stated). Evidence: "stared" (intense focus), "lips tightening" (involuntary reaction showing tension).'
+        tip: 'PEE is non-negotiable. Point → Evidence → Explanation. If you only have a quote with no explanation, you are describing not analysing. Analyse EVERY quote you use.',
+        example: 'Full PEE: "Dickens presents Victorian poverty as dehumanising [POINT]. Oliver is described as \'no more than a small bundle of rags\' [EVIDENCE]. The reductive noun phrase strips him of personhood, comparing him to rubbish, implying the poor are treated as disposable by society [EXPLANATION]."'
       },
       {
-        ref: '4.3',
-        title: 'PEE Paragraph Structure (Point-Evidence-Explanation)',
+        ref: '6.3',
+        title: 'Context: Reading 19th-Century Texts',
         points: [
-          'Point: state your interpretation/analysis first. "The writer presents the setting as threatening." Clear, bold statement',
-          'Evidence: provide quote or specific textual reference supporting your point. "\'Gnarled branches intertwined like skeletal fingers\'" shows threatening imagery',
-          'Explanation: explain HOW the evidence supports your point and WHAT EFFECT it creates. "The simile and personification combine to suggest supernatural evil, frightening the reader."',
-          'Full structure: Point sentence + Evidence quote + Explanation of effect. Three separate elements',
-          'Multiple evidence: can use 2 pieces of evidence per paragraph if they support same point. Keep explanation clear',
-          'Length: one paragraph = one point. Don\'t cram multiple ideas together',
-          'Linking: connect to question. "This reinforces that..." or "This demonstrates the writer\'s perspective on..." shows relevance',
-          'Conclusion of paragraph: often restate point in context of question. "Thus, the writer conveys the character\'s isolation through..."',
-          'Variation: occasionally start Evidence first if more effective, but Point-Evidence-Explanation is most reliable structure'
+          'Paper 1 source: 20th or 21st century fiction. Paper 2 has one pre-1900 non-fiction source alongside one modern non-fiction text',
+          'Victorian era (1837–1901): class system rigid (upper, middle, working, poor). Industrial Revolution — factories, child labour, urbanisation. Reforms being debated (Education Acts, Factory Acts)',
+          'Victorian attitudes: women had fewer rights, expected to be domestic. Poor seen as morally lacking. Social reform movements growing (Dickens, Booth)',
+          'Pre-1900 language: more formal, longer sentences, complex vocabulary, passive voice more common. Addressed reader formally',
+          'Contextual reading: understanding when a text was written helps explain its attitudes. A 19th-century writer defending Empire would not be seen as problematic in their time',
+          'Do NOT drop in context for its own sake — only if it helps explain the text or writer\'s viewpoint',
+          'Useful contextual references: Victorian poverty/reform, Empire and colonialism (attitudes), women\'s roles (pre-suffrage), religious influence on society, industrialisation effects'
         ],
-        tip: 'PEE is your structure LIFELINE. Point first (what are you claiming?), Evidence second (prove it), Explanation third (why does it matter?). Every paragraph follows this.',
-        example: 'Point: "Dickens presents Victorian poverty as dehumanising." Evidence: "Oliver was no more than a small bundle of rags, barely human in appearance." Explanation: "The simile strips Oliver of humanity, suggesting the poor are treated as objects rather than people, critiquing Victorian social indifference."'
+        tip: 'Context helps explain WHY a 19th-century writer holds certain views. Only reference context if it helps your analysis — don\'t just describe history.',
+        example: 'A 19th-century text praising Empire expansion — contextual note: writing before anti-colonial movements emerged, writer would see expansion as progress. This helps explain the triumphant, uncritical tone.'
       }
     ]
   }
