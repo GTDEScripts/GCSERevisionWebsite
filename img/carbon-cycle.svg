@@ -1,0 +1,61 @@
+<svg viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+  <text x="250" y="25" text-anchor="middle" font-size="16" font-weight="bold">Carbon Cycle</text>
+
+  <!-- Atmosphere CO2 -->
+  <rect x="180" y="40" width="140" height="50" fill="#B0E0E6" stroke="#0077BE" stroke-width="2" rx="5"/>
+  <text x="250" y="65" text-anchor="middle" font-size="12" font-weight="bold">Atmospheric CO₂</text>
+
+  <!-- Plants -->
+  <ellipse cx="100" cy="160" rx="50" ry="60" fill="#90EE90" stroke="#2E7D32" stroke-width="2"/>
+  <text x="100" y="160" text-anchor="middle" font-size="11" font-weight="bold">Plants</text>
+  <text x="100" y="175" text-anchor="middle" font-size="10">(Producers)</text>
+
+  <!-- Animals -->
+  <ellipse cx="400" cy="160" rx="50" ry="60" fill="#FFB6C1" stroke="#C71585" stroke-width="2"/>
+  <text x="400" y="160" text-anchor="middle" font-size="11" font-weight="bold">Animals</text>
+  <text x="400" y="175" text-anchor="middle" font-size="10">(Consumers)</text>
+
+  <!-- Decomposers -->
+  <rect x="200" y="240" width="100" height="60" fill="#D2B48C" stroke="#8B4513" stroke-width="2" rx="5"/>
+  <text x="250" y="265" text-anchor="middle" font-size="11" font-weight="bold">Decomposers</text>
+  <text x="250" y="280" text-anchor="middle" font-size="10">(Bacteria, Fungi)</text>
+
+  <!-- Photosynthesis arrow -->
+  <path d="M 250 90 L 130 110" stroke="#2E7D32" stroke-width="3" fill="none" marker-end="url(#arrowgreen)"/>
+  <text x="180" y="95" font-size="9" font-weight="bold" fill="#2E7D32">Photosynthesis</text>
+
+  <!-- Respiration from plants -->
+  <path d="M 130 220 L 180 250" stroke="#FF6347" stroke-width="3" fill="none" marker-end="url(#arrowred)"/>
+  <text x="140" y="235" font-size="9" font-weight="bold" fill="#FF6347">Respiration</text>
+
+  <!-- Plants to Animals -->
+  <path d="M 150 160 L 350 160" stroke="#8B4513" stroke-width="3" fill="none" marker-end="url(#arrowbrown)"/>
+  <text x="250" y="150" text-anchor="middle" font-size="9" font-weight="bold" fill="#8B4513">Feeding</text>
+
+  <!-- Animal Respiration -->
+  <path d="M 370 220 L 320 250" stroke="#FF6347" stroke-width="3" fill="none" marker-end="url(#arrowred)"/>
+  <text x="360" y="235" font-size="9" font-weight="bold" fill="#FF6347">Respiration</text>
+
+  <!-- Decomposition -->
+  <path d="M 250 300 L 250 90" stroke="#333" stroke-width="3" fill="none" marker-end="url(#arrowblack)" stroke-dasharray="5,5"/>
+  <text x="270" y="200" font-size="9" font-weight="bold">Returns CO₂</text>
+
+  <!-- Combustion -->
+  <text x="50" y="320" font-size="10" font-weight="bold">• Combustion (burning)</text>
+  <text x="50" y="335" font-size="10" font-weight="bold">• Volcanic activity</text>
+
+  <defs>
+    <marker id="arrowgreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2E7D32"/>
+    </marker>
+    <marker id="arrowred" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#FF6347"/>
+    </marker>
+    <marker id="arrowbrown" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8B4513"/>
+    </marker>
+    <marker id="arrowblack" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+</svg>

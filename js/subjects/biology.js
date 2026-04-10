@@ -21,7 +21,8 @@ const BIO_DATA = [
           'Order of size: most animal cells ~10–30μm, plant cells ~10–100μm, bacteria ~1–5μm'
         ],
         tip: 'In the exam, always specify WHERE in the cell a process happens. Respiration = mitochondria. Protein synthesis = ribosomes. Photosynthesis = chloroplasts.',
-        example: 'A cell image is 30mm across. Magnification is ×2000. What is the actual size?\nActual = 30 ÷ 2000 = 0.015mm = 15μm'
+        example: 'A cell image is 30mm across. Magnification is ×2000. What is the actual size?\nActual = 30 ÷ 2000 = 0.015mm = 15μm',
+        image: 'img/cell-structure.svg'
       },
       {
         ref: '4.1.1.3',
@@ -209,7 +210,8 @@ const BIO_DATA = [
           'Inverse square law: light intensity ∝ 1/distance² — doubling distance = ¼ the light intensity'
         ],
         tip: 'At any time, only ONE factor is limiting. If increasing light doesn\'t increase rate, then temperature or CO₂ must be limiting instead. Greenhouse owners use this to optimise all three factors.',
-        example: 'Graph interpretation: if rate plateaus as light increases, another factor (CO₂ or temperature) has become limiting. The graph shows a curve that levels off.'
+        example: 'Graph interpretation: if rate plateaus as light increases, another factor (CO₂ or temperature) has become limiting. The graph shows a curve that levels off.',
+        image: 'img/photosynthesis.svg'
       },
       {
         ref: '4.4.2',
@@ -377,7 +379,8 @@ const BIO_DATA = [
           'Threats to biodiversity: habitat destruction, pollution, climate change, overexploitation, invasive species',
           'Conservation: breeding programmes, seed banks, nature reserves, reforestation, legislation (legal protections)'
         ],
-        tip: 'The carbon cycle links to BOTH photosynthesis and respiration. Plants do both — they photosynthesise AND respire. At night, they only respire (releasing CO₂).'
+        tip: 'The carbon cycle links to BOTH photosynthesis and respiration. Plants do both — they photosynthesise AND respire. At night, they only respire (releasing CO₂).',
+        image: 'img/carbon-cycle.svg'
       },
       {
         ref: '4.7.5',

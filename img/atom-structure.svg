@@ -1,0 +1,33 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <text x="150" y="20" text-anchor="middle" font-size="16" font-weight="bold">Atomic Structure</text>
+
+  <!-- Nucleus -->
+  <circle cx="150" cy="150" r="35" fill="#FF6B6B" stroke="#333" stroke-width="2"/>
+  <text x="150" y="145" text-anchor="middle" font-size="11" font-weight="bold">Nucleus</text>
+  <text x="150" y="160" text-anchor="middle" font-size="10">Protons +</text>
+  <text x="150" y="175" text-anchor="middle" font-size="10">Neutrons</text>
+
+  <!-- Electron shells -->
+  <circle cx="150" cy="150" r="80" fill="none" stroke="#4169E1" stroke-width="2" stroke-dasharray="5,5"/>
+  <circle cx="150" cy="150" r="110" fill="none" stroke="#20B2AA" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Electrons on first shell -->
+  <circle cx="230" cy="150" r="6" fill="#4169E1" stroke="#333" stroke-width="1"/>
+  <circle cx="150" cy="70" r="6" fill="#4169E1" stroke="#333" stroke-width="1"/>
+
+  <!-- Electrons on second shell -->
+  <circle cx="250" cy="200" r="5" fill="#20B2AA" stroke="#333" stroke-width="1"/>
+  <circle cx="200" cy="250" r="5" fill="#20B2AA" stroke="#333" stroke-width="1"/>
+  <circle cx="100" cy="250" r="5" fill="#20B2AA" stroke="#333" stroke-width="1"/>
+
+  <!-- Labels -->
+  <text x="280" y="155" text-anchor="start" font-size="11">Electrons -</text>
+  <text x="10" y="155" text-anchor="start" font-size="11">Electron</text>
+  <text x="10" y="170" text-anchor="start" font-size="11">Shells</text>
+
+  <!-- Key info -->
+  <rect x="20" y="220" width="260" height="70" fill="#F0F0F0" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="150" y="240" text-anchor="middle" font-size="11" font-weight="bold">Key Points:</text>
+  <text x="30" y="260" font-size="10">• Protons = positive charge • Neutrons = no charge</text>
+  <text x="30" y="280" font-size="10">• Electrons = negative charge • Arranged in shells</text>
+</svg>

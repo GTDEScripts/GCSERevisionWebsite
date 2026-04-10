@@ -1,0 +1,34 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cell membrane -->
+  <ellipse cx="200" cy="150" rx="180" ry="140" fill="none" stroke="#333" stroke-width="3"/>
+  <text x="200" y="30" text-anchor="middle" font-size="14" font-weight="bold">Plant Cell</text>
+
+  <!-- Cell wall -->
+  <ellipse cx="200" cy="150" rx="185" ry="145" fill="none" stroke="#8B4513" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Nucleus -->
+  <circle cx="200" cy="120" r="40" fill="#FFB6C1" stroke="#333" stroke-width="2"/>
+  <circle cx="200" cy="120" r="12" fill="#FF69B4"/>
+  <text x="200" y="125" text-anchor="middle" font-size="11" font-weight="bold">Nucleus</text>
+
+  <!-- Mitochondria -->
+  <ellipse cx="120" cy="100" rx="25" ry="40" fill="#FFA500" stroke="#333" stroke-width="2"/>
+  <text x="120" y="105" text-anchor="middle" font-size="9">Mito.</text>
+
+  <!-- Chloroplast -->
+  <ellipse cx="280" cy="100" rx="30" ry="45" fill="#90EE90" stroke="#333" stroke-width="2"/>
+  <text x="280" y="105" text-anchor="middle" font-size="9">Chloro.</text>
+
+  <!-- Vacuole -->
+  <circle cx="200" cy="190" r="50" fill="#E0FFFF" stroke="#333" stroke-width="2"/>
+  <text x="200" y="195" text-anchor="middle" font-size="10">Vacuole</text>
+
+  <!-- Ribosomes -->
+  <circle cx="130" cy="160" r="8" fill="#FFD700" stroke="#333" stroke-width="1"/>
+  <circle cx="150" cy="145" r="8" fill="#FFD700" stroke="#333" stroke-width="1"/>
+  <text x="130" y="180" text-anchor="middle" font-size="8">Ribosomes</text>
+
+  <!-- Labels -->
+  <text x="360" y="150" text-anchor="start" font-size="10" fill="#8B4513">Cell Wall</text>
+  <text x="360" y="165" text-anchor="start" font-size="10">Cell Membrane</text>
+</svg>

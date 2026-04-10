@@ -367,6 +367,10 @@ function renderAllNotes(data,filter=''){
       if(topic.tip){
         bodyHtml+=`<div class="note-tip">💡 ${highlightSearch(topic.tip,q)}</div>`;
       }
+      // Image
+      if(topic.image){
+        bodyHtml+=`<div class="note-image" style="margin-top:12px;text-align:center"><img src="${topic.image}" alt="${topic.title}" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:4px;padding:8px;background:#f9f9f9"></div>`;
+      }
       bodyHtml+='</div>';
       topicDiv.innerHTML=`<div class="note-topic-head" onclick="this.parentElement.classList.toggle('open')"><span class="note-topic-icon">▶</span><span class="note-topic-title">${highlightSearch(topic.title,q)}</span><span class="note-topic-count">${topic.ref}</span></div><div class="note-topic-body">${bodyHtml}</div>`;
       secDiv.appendChild(topicDiv);

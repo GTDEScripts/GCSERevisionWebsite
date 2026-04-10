@@ -19,7 +19,8 @@ const CHEM_DATA = [
           'Ion: an atom that has gained or lost electrons. Cation = positive (lost electrons). Anion = negative (gained electrons)'
         ],
         tip: 'Atoms are NEUTRAL because protons = electrons. If an atom loses an electron, it becomes a positive ion (one more proton than electrons).',
-        example: 'Chlorine has two isotopes: ³⁵Cl (75%) and ³⁷Cl (25%)\nAr = (35×75 + 37×25) ÷ 100 = (2625+925) ÷ 100 = 35.5'
+        example: 'Chlorine has two isotopes: ³⁵Cl (75%) and ³⁷Cl (25%)\nAr = (35×75 + 37×25) ÷ 100 = (2625+925) ÷ 100 = 35.5',
+        image: 'img/atom-structure.svg'
       },
       {
         ref: '5.1.1.4',
