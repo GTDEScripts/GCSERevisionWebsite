@@ -4,8 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GCSE Revision Tools</title>
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Main Stylesheet -->
 <link rel="stylesheet" href="css/styles.css">
+
+<!-- Web App Manifest -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#7C3AED">
 </head>
@@ -330,30 +335,37 @@
 <!-- CONFETTI CANVAS -->
 <canvas id="confetti-canvas"></canvas>
 
-<!-- Data: split by subject -->
-<script src="data/english-literature.js"></script>
-<script src="data/power-conflict.js"></script>
-<script src="data/maths.js"></script>
-<script src="data/maths-quiz.js"></script>
-<script src="data/biology.js"></script>
-<script src="data/chemistry.js"></script>
-<script src="data/physics.js"></script>
-<script src="data/subjects.js"></script>
+    <!-- ====================== DATA & SUBJECT FILES ====================== -->
+    <!-- These contain question banks, quotes, topics, and subject-specific content -->
+    <script src="js/subjects/subjects.js"></script>
+    <script src="js/subjects/biology.js"></script>
+    <script src="js/subjects/chemistry.js"></script>
+    <script src="js/subjects/physics.js"></script>
+    <script src="js/subjects/maths.js"></script>
+    <script src="js/subjects/english-literature.js"></script>
+    <script src="js/subjects/power-conflict.js"></script>
 
-<!-- App -->
-<script src="js/app.js"></script>
-<script src="js/quizzes/bio-quiz.js"></script>
-<script src="js/quizzes/chem-quiz.js"></script>
-<script src="js/quizzes/phys-quiz.js"></script>
-<script src="js/features.js"></script>
+    <!-- ====================== QUIZ FILES ====================== -->
+    <!-- Quiz logic and question handling for each subject -->
+    <script src="js/quiz/bio-quiz.js"></script>
+    <script src="js/quiz/chem-quiz.js"></script>
+    <script src="js/quiz/phys-quiz.js"></script>
 
-<!-- PWA: register service worker -->
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
-    });
-  }
-</script>
+    <!-- ====================== CORE APP FILES ====================== -->
+    <!-- Main application logic and shared features -->
+    <script src="js/app.js"></script>
+    <script src="js/features.js"></script>
+
+    <!-- ====================== PWA SUPPORT ====================== -->
+    <!-- Register Service Worker for offline functionality -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered successfully'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+    </script>
 </body>
 </html>
