@@ -68,5 +68,33 @@ const SUBJECTS = {
     sub: 'AQA 8463 · Triple Science',
     type: 'notes',
     data: PHYS_DATA
+  },
+
+  'geography': {
+    title: 'Geography',
+    sub: 'AQA 8035',
+    type: 'notes',
+    data: GEO_DATA
+  },
+
+  'business': {
+    title: 'Business',
+    sub: 'OCR J204',
+    type: 'notes',
+    data: BUSINESS_DATA
+  },
+
+  'computer-science': {
+    title: 'Computer Science',
+    sub: 'OCR J277',
+    type: 'notes',
+    data: COMP_SCI_DATA
+  },
+
+  'english-language': {
+    title: 'English Language',
+    sub: 'AQA 8700',
+    type: 'notes',
+    data: ENGLISH_LANG_DATA
   }
 };
