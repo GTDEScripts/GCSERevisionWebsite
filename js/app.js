@@ -5,7 +5,7 @@ function saveSettings(){try{localStorage.setItem('gcse_settings',JSON.stringify(
 function applySettings(){
   document.documentElement.setAttribute('data-theme',settings.dark?'dark':'');
   document.documentElement.style.setProperty('--font-scale',settings.fontSize);
-  document.getElementById('toggle-dark').classList.toggle('on',settings.dark);
+  const td=document.getElementById('toggle-dark');if(td)td.classList.toggle('on',settings.dark);
   document.getElementById('font-size-select').value=settings.fontSize;
   document.getElementById('daily-goal-select').value=settings.dailyGoal;
   document.getElementById('toggle-autoadvance').classList.toggle('on',settings.autoAdvance);
