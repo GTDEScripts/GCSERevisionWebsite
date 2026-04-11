@@ -156,27 +156,122 @@ function getDueCards(){const today=getToday();return app.allQuotes.filter(c=>{co
 function getWeakCards(){return app.allQuotes.filter(c=>{const sr=getSR(c);return sr.lastRating===0||sr.ef<2.0})}
 
 // ══════ NAVIGATION ══════
-const PARENT_LABELS={'sciences':'Sciences','sciences-aqa':'AQA Sciences','sciences-edexcel':'Edexcel Sciences','humanities-business':'Humanities & Business'};
-function openSubject(id){app.currentSubject=id;const S=SUBJECTS[id];
-// Track parent subject for nested navigation
-if(id==='sciences'||id==='humanities-business'){app.parentSubject=null}
-else if(id==='sciences-aqa'||id==='sciences-edexcel'){app.parentSubject='sciences'}
-else if(['biology','chemistry','physics'].includes(id)){/* parentSubject already set by board selection */}
-else if(['geography','business','computer-science'].includes(id)){app.parentSubject='humanities-business'}
-else{app.parentSubject=null}
-// Update back button text
-const backBtn=document.querySelector('.subject-view .back-btn');if(backBtn){const label=app.parentSubject?PARENT_LABELS[app.parentSubject]:'All Subjects';backBtn.textContent='\u2190 '+label;}
-// ── Sciences: show AQA vs Edexcel board picker ──
-if(id==='sciences'){document.getElementById('sv-title').textContent='Sciences';document.getElementById('sv-sub').textContent='Choose your exam board';const grid=document.getElementById('sv-text-grid');grid.innerHTML='';const boards=[{id:'sciences-aqa',icon:'🎓',title:'AQA Sciences',desc:'AQA Triple Science · Biology, Chemistry, Physics',sub:'AQA 8461 / 8462 / 8463'},{id:'sciences-edexcel',icon:'📐',title:'Edexcel Sciences',desc:'Edexcel Triple Science · Biology, Chemistry, Physics',sub:'Edexcel 1BI0 / 1CH0 / 1PH0'}];boards.forEach(b=>{grid.innerHTML+=`<div class="text-card sci-board" onclick="openSubject('${b.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">${b.desc}</div><div class="card-stats"><span class="card-stat">${b.sub}</span></div></div>`});document.getElementById('home-screen').style.display='none';document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');window.scrollTo(0,0);return}
-// ── AQA Sciences ──
-if(id==='sciences-aqa'){app.parentSubject='sciences';document.getElementById('sv-title').textContent='AQA Sciences';document.getElementById('sv-sub').textContent='AQA Triple Science';const grid=document.getElementById('sv-text-grid');grid.innerHTML='';const scienceSubjects=[{id:'biology',icon:'🧬',title:'Biology',desc:'AQA 8461 · Cell biology to Ecology',sub:'7 units, 23 topics'},{id:'chemistry',icon:'⚗️',title:'Chemistry',desc:'AQA 8462 · Atomic structure to Resources',sub:'8 units, 17 topics'},{id:'physics',icon:'⚡',title:'Physics',desc:'AQA 8463 · Energy to Space',sub:'8 units, 15 topics'}];scienceSubjects.forEach(sci=>{grid.innerHTML+=`<div class="text-card sci-${sci.id}" onclick="openSubjectFromBoard('${sci.id}','sciences-aqa')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${sci.icon}</span><div class="card-title">${sci.title}</div><div class="card-desc">${sci.desc}</div><div class="card-stats"><span class="card-stat">${sci.sub}</span></div></div>`});const backBtn2=document.querySelector('.subject-view .back-btn');if(backBtn2)backBtn2.textContent='\u2190 Sciences';document.getElementById('home-screen').style.display='none';document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');window.scrollTo(0,0);return}
-// ── Edexcel Sciences ──
-if(id==='sciences-edexcel'){app.parentSubject='sciences';document.getElementById('sv-title').textContent='Edexcel Sciences';document.getElementById('sv-sub').textContent='Edexcel Triple Science';const grid=document.getElementById('sv-text-grid');grid.innerHTML='';const scienceSubjects=[{id:'biology-edexcel',icon:'🧬',title:'Biology',desc:'Edexcel 1BI0 · Cell biology to Ecology',sub:'9 topics, 23 detailed sections'},{id:'chemistry-edexcel',icon:'⚗️',title:'Chemistry',desc:'Edexcel 1CH0 · Atomic structure to Nanochemistry',sub:'9 topics, 25 detailed sections'},{id:'physics-edexcel',icon:'⚡',title:'Physics',desc:'Edexcel 1PH0 · Motion to Forces & Matter',sub:'15 topics, 35 detailed sections'}];scienceSubjects.forEach(sci=>{grid.innerHTML+=`<div class="text-card sci-${sci.id}" onclick="openSubjectFromBoard('${sci.id}','sciences-edexcel')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${sci.icon}</span><div class="card-title">${sci.title}</div><div class="card-desc">${sci.desc}</div><div class="card-stats"><span class="card-stat">${sci.sub}</span></div></div>`});const backBtn3=document.querySelector('.subject-view .back-btn');if(backBtn3)backBtn3.textContent='\u2190 Sciences';document.getElementById('home-screen').style.display='none';document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');window.scrollTo(0,0);return}
-if(id==='humanities-business'){document.getElementById('sv-title').textContent='Humanities & Business';document.getElementById('sv-sub').textContent='AQA & OCR';const grid=document.getElementById('sv-text-grid');grid.innerHTML='';const humSubjects=[{id:'geography',icon:'🌍',title:'Geography',desc:'AQA 8035 · Hazards to Environmental Management',sub:'4 sections, 15 topics'},{id:'business',icon:'💼',title:'Business',desc:'OCR J204 · Business Activity to Influences',sub:'6 sections, 18 topics'},{id:'computer-science',icon:'💻',title:'Computer Science',desc:'OCR J277 · Architecture to Cyber Security',sub:'4 sections, 20 topics'}];humSubjects.forEach(hum=>{grid.innerHTML+=`<div class="text-card hum-${hum.id}" onclick="openSubject('${hum.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${hum.icon}</span><div class="card-title">${hum.title}</div><div class="card-desc">${hum.desc}</div><div class="card-stats"><span class="card-stat">${hum.sub}</span></div></div>`});document.getElementById('home-screen').style.display='none';document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');window.scrollTo(0,0);return}
-if(S.type==='notes'){openNotesView(id,S);return}
-document.getElementById('sv-title').textContent=S.title;document.getElementById('sv-sub').textContent=S.sub;const grid=document.getElementById('sv-text-grid');grid.innerHTML='';S.texts.forEach(tid=>{const tc=S.textCards[tid];grid.innerHTML+=`<div class="text-card ${tc.cls}" onclick="openTool('${tid}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${tc.icon}</span><div class="card-title">${tc.title}</div><div class="card-desc">${tc.desc}</div><div class="card-stats">${tc.stats.map(s=>`<span class="card-stat">${s}</span>`).join('')}</div></div>`});if(S.extra)S.extra.forEach(e=>{grid.innerHTML+=`<div class="text-card ${e.cls}${e.disabled?' disabled':''}"><span class="card-badge ${e.disabled?'badge-soon':'badge-ready'}">${e.disabled?'Coming soon':'Ready'}</span><span class="card-icon">${e.icon}</span><div class="card-title">${e.title}</div><div class="card-desc">${e.desc}</div></div>`});document.getElementById('home-screen').style.display='none';document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');window.scrollTo(0,0)}
-// Opens a science subject (bio/chem/phys) and tracks which board it came from
-function openSubjectFromBoard(subjectId,boardId){app.parentSubject=boardId;openSubject(subjectId)}
+// ══════ GENERALIZED BOARD SELECTOR ══════
+function showBoardSelector(id){
+  const S=SUBJECTS[id];
+  document.getElementById('sv-title').textContent=S.title;
+  document.getElementById('sv-sub').textContent='Choose your exam board';
+  const grid=document.getElementById('sv-text-grid');
+  grid.innerHTML='';
+
+  S.boards.forEach(b=>{
+    if(b.status==='coming-soon'){
+      grid.innerHTML+=`<div class="text-card disabled"><span class="card-badge badge-soon">Coming soon</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">Exam board content</div></div>`;
+    }else{
+      const boardTitle=S.title+' - '+b.title;
+      grid.innerHTML+=`<div class="text-card board-option" onclick="openSubject('${b.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">${boardTitle}</div></div>`;
+    }
+  });
+
+  document.getElementById('home-screen').style.display='none';
+  document.getElementById('tool-view').classList.remove('active');
+  document.getElementById('notes-view').classList.remove('active');
+  document.getElementById('subject-view').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showBoardContent(id){
+  const S=SUBJECTS[id];
+  const subjects=S.subjects||[];
+
+  document.getElementById('sv-title').textContent=S.title;
+  document.getElementById('sv-sub').textContent=S.sub;
+  const grid=document.getElementById('sv-text-grid');
+  grid.innerHTML='';
+
+  subjects.forEach(subj=>{
+    grid.innerHTML+=`<div class="text-card" onclick="openSubjectFromBoard('${subj.id}','${id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${subj.icon}</span><div class="card-title">${subj.title}</div><div class="card-desc">${subj.sub}</div></div>`;
+  });
+
+  document.getElementById('home-screen').style.display='none';
+  document.getElementById('tool-view').classList.remove('active');
+  document.getElementById('notes-view').classList.remove('active');
+  document.getElementById('subject-view').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+const PARENT_LABELS={'sciences':'Sciences','sciences-aqa':'AQA Sciences','sciences-edexcel':'Edexcel Sciences','english':'English','english-aqa':'AQA English','maths':'Mathematics','maths-edexcel':'Edexcel Mathematics','geography':'Geography','geography-aqa':'AQA Geography','business':'Business','business-ocr':'OCR Business','computer-science':'Computer Science','computer-science-ocr':'OCR Computer Science'};
+
+function openSubject(id){
+  app.currentSubject=id;
+  const S=SUBJECTS[id];
+  if(!S){console.error('Subject not found:',id);return}
+
+  // Determine parent subject for nested navigation
+  if(['sciences','english','maths','geography','business','computer-science'].includes(id)){
+    app.parentSubject=null;
+  }else if(id.includes('-aqa')||id.includes('-edexcel')||id.includes('-ocr')||id.includes('-wjec')){
+    const parentId=id.split('-').slice(0,-1).join('-');
+    app.parentSubject=SUBJECTS[parentId]?parentId:null;
+  }else{
+    // Individual content pages (biology, macbeth, etc)
+    // parent already set by showBoardContent
+  }
+
+  // Update back button
+  const backBtn=document.querySelector('.subject-view .back-btn');
+  if(backBtn){
+    const label=app.parentSubject?PARENT_LABELS[app.parentSubject]:'All Subjects';
+    backBtn.textContent='\u2190 '+label;
+  }
+
+  // Handle different subject types
+  if(S.type==='board-selector'){
+    showBoardSelector(id);
+    return;
+  }
+
+  if(S.type==='board-content'){
+    showBoardContent(id);
+    return;
+  }
+
+  if(S.type==='notes'){
+    openNotesView(id,S);
+    return;
+  }
+
+  // Fallback: text content
+  document.getElementById('sv-title').textContent=S.title;
+  document.getElementById('sv-sub').textContent=S.sub;
+  const grid=document.getElementById('sv-text-grid');
+  grid.innerHTML='';
+
+  if(S.texts){
+    S.texts.forEach(tid=>{
+      const tc=S.textCards[tid];
+      grid.innerHTML+=`<div class="text-card ${tc.cls}" onclick="openTool('${tid}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${tc.icon}</span><div class="card-title">${tc.title}</div><div class="card-desc">${tc.desc}</div><div class="card-stats">${tc.stats.map(s=>`<span class="card-stat">${s}</span>`).join('')}</div></div>`;
+    });
+  }
+
+  if(S.extra){
+    S.extra.forEach(e=>{
+      grid.innerHTML+=`<div class="text-card ${e.cls}${e.disabled?' disabled':''}"><span class="card-badge ${e.disabled?'badge-soon':'badge-ready'}">${e.disabled?'Coming soon':'Ready'}</span><span class="card-icon">${e.icon}</span><div class="card-title">${e.title}</div><div class="card-desc">${e.desc}</div></div>`;
+    });
+  }
+
+  document.getElementById('home-screen').style.display='none';
+  document.getElementById('tool-view').classList.remove('active');
+  document.getElementById('notes-view').classList.remove('active');
+  document.getElementById('subject-view').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// Opens a subject and tracks the board it came from
+function openSubjectFromBoard(subjectId,boardId){
+  app.parentSubject=boardId;
+  openSubject(subjectId);
+}
 function backToHome(){app.parentSubject=null;document.getElementById('subject-view').classList.remove('active');document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('home-screen').style.display='';if(exam.timer){clearInterval(exam.timer);exam.timer=null}stopTTS();renderStreak();renderQOTD();updateNavTabs('home');window.scrollTo(0,0)}
 function backToParent(){if(app.parentSubject){openSubject(app.parentSubject)}else{backToHome()}}
 function backToSubject(){document.getElementById('tool-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');if(exam.timer){clearInterval(exam.timer);exam.timer=null}window.scrollTo(0,0)}
@@ -334,13 +429,14 @@ function openNotesView(id,S){
   document.getElementById('notes-back-btn').textContent='\u2190 '+backLabel;
   document.getElementById('notes-search').value='';
 
-  // Add quiz button for humanities subjects
+  // Add quiz button for humanities subjects (geography, business, computer-science)
   const notesHeader = document.querySelector('.notes-header');
   // Always remove and recreate the button to ensure correct subject is bound
   const existingBtn = document.getElementById('notes-quiz-btn');
   if (existingBtn) existingBtn.remove();
 
-  if (['geography','business','computer-science'].includes(id)) {
+  const hasQuiz=['geography','business','computer-science'].some(subj => id.includes(subj));
+  if (hasQuiz) {
     const quizBtn = document.createElement('button');
     quizBtn.id = 'notes-quiz-btn';
     quizBtn.className = 'btn secondary';

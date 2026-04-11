@@ -618,15 +618,20 @@ function openShortAnsQuiz(subject) {
   shortAnsQuizState.qIdx = 0;
   shortAnsQuizState.currentScore = undefined;
 
-  // Get quiz data based on subject
+  // Get quiz data based on subject (handle both old and new naming schemes)
   const quizMap = {
     'geography': typeof GEO_QUIZ !== 'undefined' ? GEO_QUIZ : [],
+    'geography-aqa': typeof GEO_QUIZ !== 'undefined' ? GEO_QUIZ : [],
     'business': typeof BUS_QUIZ !== 'undefined' ? BUS_QUIZ : [],
-    'computer-science': typeof CS_QUIZ !== 'undefined' ? CS_QUIZ : []
+    'business-ocr': typeof BUS_QUIZ !== 'undefined' ? BUS_QUIZ : [],
+    'computer-science': typeof CS_QUIZ !== 'undefined' ? CS_QUIZ : [],
+    'computer-science-ocr': typeof CS_QUIZ !== 'undefined' ? CS_QUIZ : []
   };
 
   shortAnsQuizState.quizData = quizMap[subject] || [];
-  shortAnsQuizState.storageKey = `${subject}_short_ans_scores`;
+  // Use base subject name for storage key (without board suffix)
+  const baseSubject = subject.replace(/-aqa|-edexcel|-ocr|-wjec/, '');
+  shortAnsQuizState.storageKey = `${baseSubject}_short_ans_scores`;
 
   // Flatten all topics
   shortAnsQuizState.allTopics = [];
@@ -642,8 +647,11 @@ function openShortAnsQuiz(subject) {
 
   const titleMap = {
     'geography': '🌍 Geography Quiz',
+    'geography-aqa': '🌍 Geography Quiz',
     'business': '💼 Business Quiz',
-    'computer-science': '💻 Computer Science Quiz'
+    'business-ocr': '💼 Business Quiz',
+    'computer-science': '💻 Computer Science Quiz',
+    'computer-science-ocr': '💻 Computer Science Quiz'
   };
 
   document.getElementById('qa-title').textContent = titleMap[subject] || 'Quiz';
