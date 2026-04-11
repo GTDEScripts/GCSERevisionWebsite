@@ -543,6 +543,39 @@ body.focus-mode .focus-toggle{background:var(--accent);color:#fff;border-color:v
 .sq-results-label{font-size:14px;color:var(--text2);margin-bottom:20px}
 .sq-results-breakdown{text-align:left;max-width:400px;margin:0 auto}
 
+/* ═══ SHORT-ANSWER QUIZ VIEW ═══ */
+.short-ans-quiz-view{max-width:960px;margin:0 auto;padding:1rem 1.25rem 3rem;display:none}
+.short-ans-quiz-view.active{display:block}
+.qa-header{text-align:center;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.qa-header h2{font-family:'Crimson Pro',serif;font-size:28px;font-weight:600;color:var(--text);margin:0}
+.qa-header #qa-progress{font-size:12px;color:var(--text3)}
+
+.qa-topic-list{max-width:720px;margin:0 auto}
+.qa-topics{display:flex;flex-direction:column;gap:10px}
+.qa-topic-btn{background:var(--card-bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.qa-topic-btn:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.qa-topic-info{text-align:left;flex:1}
+.qa-topic-name{font-family:'Crimson Pro',serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
+.qa-topic-meta{font-size:11px;color:var(--text3)}
+.qa-topic-progress{text-align:center}
+.qa-progress-pct{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.qa-progress-status{font-size:16px}
+
+.qa-active{max-width:640px;margin:0 auto}
+.qa-question-card{background:var(--card-bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+.qa-question-text{font-size:15px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:16px}
+
+.mark-scheme-box{list-style:none}
+.mark-scheme-box ul{list-style:none;margin:0;padding:0}
+.mark-scheme-box li{font-size:13px;color:var(--text2);line-height:1.6}
+
+.model-answer-box{font-size:13px;color:var(--text2);line-height:1.6}
+
+.qa-reveal{animation:fadeSlideIn .3s ease}
+
+.qa-results{text-align:center;padding:2rem}
+.qa-results h3{font-family:'Crimson Pro',serif;font-size:22px;font-weight:600;margin-bottom:12px}
+
 /* ═══ VISUAL ENHANCEMENTS ═══ */
 /* Decorative floating shapes */
 .deco-shapes{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}

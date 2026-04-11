@@ -313,6 +313,25 @@ function openNotesView(id,S){
   document.getElementById('notes-sub').textContent=S.sub;
   document.getElementById('notes-back-btn').textContent='\u2190 All Subjects';
   document.getElementById('notes-search').value='';
+
+  // Add quiz button for humanities subjects
+  const notesHeader = document.querySelector('.notes-header');
+  if (['geography','business','computer-science'].includes(id)) {
+    if (!document.getElementById('notes-quiz-btn')) {
+      const quizBtn = document.createElement('button');
+      quizBtn.id = 'notes-quiz-btn';
+      quizBtn.className = 'btn secondary';
+      quizBtn.style.fontSize = '12px';
+      quizBtn.style.marginLeft = '12px';
+      quizBtn.textContent = '📝 Quiz';
+      quizBtn.onclick = (e) => { e.stopPropagation(); openShortAnsQuiz(id); };
+      notesHeader.appendChild(quizBtn);
+    }
+  } else {
+    const existingBtn = document.getElementById('notes-quiz-btn');
+    if (existingBtn) existingBtn.remove();
+  }
+
   renderAllNotes(currentNotesData);
   window.scrollTo(0,0);
 }

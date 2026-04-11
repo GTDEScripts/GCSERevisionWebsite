@@ -395,6 +395,111 @@ const BIO_DATA = [
           'Food security threatened by: population growth, climate change, new pests/pathogens, cost of farming, conflicts'
         ],
         tip: 'In any food chain, energy is ALWAYS lost between levels. That\'s why food chains rarely have more than 4-5 trophic levels — there isn\'t enough energy left.'
+      },
+      {
+        ref: '4.1.4',
+        title: 'Stem Cells & Cell Differentiation',
+        points: [
+          'Stem cells: undifferentiated cells with two key properties: self-renewal (divide to make more stem cells) and differentiation (develop into specialized cells)',
+          'Embryonic stem cells: found in early embryos, can become ANY cell type (totipotent)',
+          'Adult stem cells: found in bone marrow, blood, skin — can become limited cell types (multipotent). Used for replacing damaged tissue',
+          'Differentiation: a cell becomes specialized — nucleus stays the same but different genes are switched ON/OFF in different cell types',
+          'Therapeutic uses: repairing spinal cord damage, growing replacement skin, producing insulin-producing cells for diabetics',
+          'Ethical concerns with embryonic stem cells: destroying potential human life vs medical benefits'
+        ],
+        tip: 'Stem cells = can divide AND differentiate. Differentiated cells have lost the ability to divide (e.g., nerve cells). This is why stem cells are valuable for medicine.'
+      },
+      {
+        ref: '4.5.1',
+        title: 'Gene Expression & Protein Synthesis',
+        points: [
+          'DNA → mRNA (transcription in nucleus) → protein (translation in ribosome)',
+          'Transcription: DNA unwinds, RNA polymerase copies one strand to make mRNA — complementary base pairing (A↔U, T↔A, G↔C, C↔G)',
+          'mRNA is a temporary copy — leaves nucleus through nuclear pores, carries genetic code to ribosomes',
+          'Translation: mRNA attaches to ribosome, tRNA brings amino acids in correct order (each codon = 3 bases codes for one amino acid), peptide bonds link amino acids into a protein chain',
+          'Genetic code: 64 different codons (some redundancy — multiple codons for same amino acid), stop codons signal end of translation',
+          'Mutations affecting translation: silent (no amino acid change), missense (wrong amino acid), nonsense (stop codon produced — truncated protein)'
+        ],
+        tip: 'Transcription = DNA → mRNA. Translation = mRNA → protein. The genetic code is universal across almost all organisms.'
+      },
+      {
+        ref: '4.5.2',
+        title: 'Mutation Types & Evolution',
+        points: [
+          'Mutation: a change in DNA sequence — usually random and caused by radiation, chemicals, or copy errors',
+          'Point mutations: change in a single base — can be substitution (one base replaced), insertion (base added), or deletion (base removed)',
+          'Frameshift mutations: insertion/deletion causes all downstream codons to shift — usually very harmful',
+          'Chromosomal mutations: entire sections of DNA duplicated, deleted, inverted, or moved to different chromosomes',
+          'Most mutations are neutral or harmful — beneficial mutations are rare but drive evolution',
+          'Natural selection: organisms with beneficial mutations survive and reproduce more (pass genes to offspring), disadvantageous mutations eliminated',
+          'Antibiotic resistance: bacteria with genes for resistance survive antibiotics and reproduce — this is evolution happening NOW'
+        ],
+        tip: 'Mutations are the source of variation. Without mutation, evolution cannot happen. Antibiotic resistance is a real-world example of natural selection.'
+      },
+      {
+        ref: '4.3.2',
+        title: 'Immune Response — Antibodies & Antigens',
+        points: [
+          'Pathogen: organism causing disease (bacteria, viruses, parasites)',
+          'Antigen: foreign substance that triggers immune response — found on pathogen surface',
+          'White blood cells: lymphocytes produce antibodies (B cells), kill infected cells (T cells); phagocytes engulf pathogens',
+          'Antibody: Y-shaped protein produced by B cells, specific to one antigen — binds to antigen marking it for destruction',
+          'Immune response timeline: Day 1-3 (slow, innate response by phagocytes) → Day 4-7 (adaptive response, B cells produce antibodies — slower but more specific) → Day 7+ (memory cells provide fast response on second exposure)',
+          'Vaccination: gives weakened/dead pathogen or antigen → body produces antibodies WITHOUT getting sick → memory cells provide immunity for years',
+          'Antibiotics: kill bacteria (not effective against viruses) — target cell walls, ribosomes, or DNA replication'
+        ],
+        tip: 'Antigens are foreign. Antibodies are made BY the body AGAINST antigens. Each antibody is specific to one antigen. Vaccination creates immunity without disease.'
+      },
+      {
+        ref: '4.4.1',
+        title: 'Homeostasis — Temperature Regulation',
+        points: [
+          'Homeostasis: maintaining constant internal environment (temperature, pH, glucose) — essential for enzyme function',
+          'Humans maintain ~37°C — too hot/cold and enzymes denature or work too slowly',
+          'Thermoregulation: skin + nervous + endocrine system coordinate',
+          'If core temperature rises: sweat glands produce sweat (evaporative cooling), blood vessels dilate (more blood to skin loses heat), reduce muscle activity',
+          'If core temperature falls: shivering generates heat from muscle contraction, blood vessels constrict (reduces heat loss), increase muscle activity',
+          'Skin structure: epidermis (protective), dermis (contains sweat glands, blood vessels, hair follicles, sensory receptors), subcutaneous fat (insulation)',
+          'Hair erector muscles contract in cold → "goose bumps" — traps warm air (more useful in hairy animals)'
+        ],
+        tip: 'Temperature regulation is automatic via the hypothalamus (brain). If asked to explain response to cold: shivering + vasoconstriction. For heat: sweating + vasodilation.'
+      },
+      {
+        ref: '4.4.2',
+        title: 'Hormonal Control of Menstrual Cycle',
+        formulas: [
+          'FSH (pituitary) → follicle development in ovary',
+          'LH surge → ovulation',
+          'Progesterone (corpus luteum) → thickens uterus lining'
+        ],
+        points: [
+          'Menstrual cycle: ~28 days, controlled by hormones FSH, LH, oestrogen, progesterone',
+          'Days 1-5 (Menstruation): low oestrogen + progesterone → uterus lining breaks down, bleeding',
+          'Days 6-12 (Follicular phase): FSH from pituitary rises → ovary follicles develop → produce oestrogen → builds uterus lining',
+          'Day 13-14 (Ovulation): oestrogen peak triggers LH surge → ovary releases egg',
+          'Days 15-28 (Luteal phase): corpus luteum (remnant of follicle) produces progesterone → maintains lining, prevents FSH/LH',
+          'If no fertilisation: progesterone falls → cycle restarts. If fertilisation: hCG (from embryo) maintains corpus luteum',
+          'Contraceptive pill: contains oestrogen + progesterone → suppresses FSH/LH → prevents ovulation'
+        ],
+        tip: 'FSH starts follicle development, LH causes ovulation, progesterone maintains pregnancy. If you see \"positive feedback\" mentioned, it\'s oestrogen triggering LH surge.'
+      },
+      {
+        ref: '4.2.2.4',
+        title: 'Enzyme Kinetics — Rate of Reaction',
+        formulas: [
+          'Rate of reaction = product formed ÷ time OR substrate used ÷ time',
+          'At constant enzyme amount: reaction rate ∝ substrate concentration (until all enzyme active sites are occupied)'
+        ],
+        points: [
+          'Substrate concentration: at low substrate, increasing it increases reaction rate (more frequent enzyme-substrate collisions). At high substrate, all enzyme active sites occupied — rate plateaus',
+          'Temperature: increasing temperature increases molecular movement → more collisions → faster reaction (until enzyme denatures ~45°C)',
+          'Competitive inhibition: inhibitor competes with substrate for enzyme active site — can be overcome by increasing substrate concentration',
+          'Non-competitive inhibition: inhibitor binds to enzyme away from active site, changes enzyme shape — cannot be overcome by adding more substrate',
+          'Enzyme concentration: more enzyme = proportionally more active sites = faster reaction rate',
+          'pH: each enzyme has optimal pH (pepsin = 2, trypsin = 8, most = 7). Extreme pH denatures enzyme',
+          'Enzyme denaturation: extreme temperature or pH permanently changes protein 3D shape — active site destroyed, cannot recover'
+        ],
+        tip: 'Substrate concentration increases rate until SATURATION (all active sites busy). Temperature increases rate up to DENATURATION. Inhibitors decrease rate without being used up.'
       }
     ]
   }

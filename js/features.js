@@ -613,6 +613,209 @@ function backFromSciQuiz() {
   window.scrollTo(0, 0);
 }
 
+// ═══ SHORT-ANSWER QUIZ SYSTEM ═══
+let shortAnsQuizState = {
+  subject: null,
+  quizData: null,
+  allTopics: [],
+  currentTopic: null,
+  currentQuestions: [],
+  qIdx: 0,
+  storageKey: null
+};
+
+function openShortAnsQuiz(subject) {
+  shortAnsQuizState.subject = subject;
+
+  // Get quiz data based on subject
+  const quizMap = {
+    'geography': typeof GEO_QUIZ !== 'undefined' ? GEO_QUIZ : [],
+    'business': typeof BUS_QUIZ !== 'undefined' ? BUS_QUIZ : [],
+    'computer-science': typeof CS_QUIZ !== 'undefined' ? CS_QUIZ : []
+  };
+
+  shortAnsQuizState.quizData = quizMap[subject] || [];
+  shortAnsQuizState.storageKey = `${subject}_short_ans_scores`;
+
+  // Flatten all topics
+  shortAnsQuizState.allTopics = [];
+  shortAnsQuizState.quizData.forEach(section => {
+    section.topics.forEach(topic => {
+      shortAnsQuizState.allTopics.push({ ...topic, section: section.section });
+    });
+  });
+
+  // Hide all other views
+  document.getElementById('home-screen').style.display = 'none';
+  document.getElementById('subject-view').classList.remove('active');
+  document.getElementById('tool-view').classList.remove('active');
+  document.getElementById('notes-view').classList.remove('active');
+  document.getElementById('sci-quiz-view').classList.remove('active');
+
+  // Show quiz view
+  const view = document.getElementById('short-ans-quiz-view');
+  view.classList.add('active');
+
+  const titleMap = {
+    'geography': '🌍 Geography Quiz',
+    'business': '💼 Business Quiz',
+    'computer-science': '💻 Computer Science Quiz'
+  };
+
+  document.getElementById('qa-title').textContent = titleMap[subject] || 'Quiz';
+
+  renderShortAnsTopicList();
+  window.scrollTo(0, 0);
+}
+
+function renderShortAnsTopicList() {
+  document.getElementById('qa-topic-list').style.display = 'block';
+  document.getElementById('qa-active').style.display = 'none';
+  document.getElementById('qa-reveal').style.display = 'none';
+
+  const container = document.getElementById('qa-topics');
+  const scores = JSON.parse(localStorage.getItem(shortAnsQuizState.storageKey) || '{}');
+
+  let html = '';
+  shortAnsQuizState.allTopics.forEach(topic => {
+    const topicKey = `${topic.section}_${topic.topic}`;
+    const score = scores[topicKey] || { answered: 0, total: 0 };
+    const pct = score.total > 0 ? Math.round((score.answered / score.total) * 100) : 0;
+    const status = pct === 100 ? '✓' : pct > 0 ? '◐' : '○';
+
+    html += `
+      <div class="qa-topic-btn" onclick="startShortAnsQuiz('${topic.section.replace(/'/g, "\\'")}', '${topic.topic.replace(/'/g, "\\'")}')">
+        <div class="qa-topic-info">
+          <div class="qa-topic-name">${topic.topic}</div>
+          <div class="qa-topic-meta">${topic.questions.length} questions · ${topic.section}</div>
+        </div>
+        <div class="qa-topic-progress">
+          <div class="qa-progress-pct">${pct}%</div>
+          <div class="qa-progress-status">${status}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function startShortAnsQuiz(section, topicName) {
+  const topic = shortAnsQuizState.allTopics.find(t => t.section === section && t.topic === topicName);
+  if (!topic) return;
+
+  shortAnsQuizState.currentTopic = topic;
+  shortAnsQuizState.currentQuestions = topic.questions;
+  shortAnsQuizState.qIdx = 0;
+
+  document.getElementById('qa-topic-list').style.display = 'none';
+  document.getElementById('qa-active').style.display = 'block';
+  document.getElementById('qa-reveal').style.display = 'none';
+  document.getElementById('qa-user-answer').value = '';
+
+  renderShortAnsQuestion();
+}
+
+function renderShortAnsQuestion() {
+  const { qIdx, currentQuestions } = shortAnsQuizState;
+
+  if (qIdx >= currentQuestions.length) {
+    renderShortAnsResults();
+    return;
+  }
+
+  const q = currentQuestions[qIdx];
+  const total = currentQuestions.length;
+  const progressPct = Math.round((qIdx / total) * 100);
+
+  document.getElementById('qa-progress').textContent = `Question ${qIdx + 1} of ${total}`;
+  document.getElementById('qa-question').textContent = q.q;
+  document.getElementById('qa-user-answer').value = '';
+  document.getElementById('qa-reveal').style.display = 'none';
+  document.getElementById('qa-user-answer').focus();
+}
+
+function revealMarkSchemeAndModel() {
+  const { qIdx, currentQuestions } = shortAnsQuizState;
+  const q = currentQuestions[qIdx];
+  const userAnswer = document.getElementById('qa-user-answer').value;
+
+  // Score based on keywords
+  const score = scoreUserAnswer(userAnswer, q.keywords);
+
+  // Display mark scheme
+  let markHtml = '';
+  q.markScheme.forEach(point => {
+    markHtml += `<li style="margin-bottom:8px">• ${point}</li>`;
+  });
+  document.getElementById('qa-mark-points').innerHTML = markHtml;
+  document.getElementById('qa-score').textContent = score.achieved;
+  document.getElementById('qa-max-marks').textContent = q.maxMarks;
+  document.getElementById('qa-model-answer').textContent = q.modelAnswer;
+
+  // Save score
+  const topicKey = `${shortAnsQuizState.currentTopic.section}_${shortAnsQuizState.currentTopic.topic}`;
+  const scores = JSON.parse(localStorage.getItem(shortAnsQuizState.storageKey) || '{}');
+  if (!scores[topicKey]) scores[topicKey] = { answered: 0, total: q.maxMarks };
+  scores[topicKey].answered += score.achieved;
+  scores[topicKey].total += q.maxMarks;
+  localStorage.setItem(shortAnsQuizState.storageKey, JSON.stringify(scores));
+
+  // Show reveal
+  document.getElementById('qa-reveal').style.display = 'block';
+  window.scrollTo(0, document.getElementById('qa-reveal').offsetTop - 100);
+}
+
+function scoreUserAnswer(userAnswer, keywords) {
+  const answer = userAnswer.toLowerCase();
+  let achieved = 0;
+  keywords.forEach(keyword => {
+    if (answer.includes(keyword.toLowerCase())) {
+      achieved++;
+    }
+  });
+  return { achieved: Math.min(achieved, keywords.length), maxMarks: keywords.length };
+}
+
+function skipQuestion() {
+  shortAnsQuizState.qIdx++;
+  renderShortAnsQuestion();
+}
+
+function nextShortAnsQuestion() {
+  shortAnsQuizState.qIdx++;
+  renderShortAnsQuestion();
+}
+
+function renderShortAnsResults() {
+  const topicKey = `${shortAnsQuizState.currentTopic.section}_${shortAnsQuizState.currentTopic.topic}`;
+  const scores = JSON.parse(localStorage.getItem(shortAnsQuizState.storageKey) || '{}');
+  const score = scores[topicKey] || { answered: 0, total: 0 };
+  const pct = score.total > 0 ? Math.round((score.answered / score.total) * 100) : 0;
+
+  let resultsHtml = `
+    <div class="qa-results" style="text-align:center;padding:20px">
+      <h3 style="margin-bottom:12px">Quiz Complete!</h3>
+      <div style="font-size:48px;font-weight:700;color:var(--accent);margin-bottom:8px">${pct}%</div>
+      <div style="font-size:18px;margin-bottom:16px">
+        <span style="font-weight:600">${score.answered} / ${score.total}</span> marks achieved
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center">
+        <button class="btn" onclick="startShortAnsQuiz('${shortAnsQuizState.currentTopic.section.replace(/'/g, "\\'")}', '${shortAnsQuizState.currentTopic.topic.replace(/'/g, "\\'")}')" style="background:var(--accent);color:#fff;border-color:var(--accent)">Retry Topic</button>
+        <button class="btn" onclick="renderShortAnsTopicList()">Back to Topics</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('qa-active').innerHTML = resultsHtml;
+}
+
+function backFromShortAnsQuiz() {
+  document.getElementById('short-ans-quiz-view').classList.remove('active');
+  document.getElementById('notes-view').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
 // ═══ INIT NEW FEATURES ═══
 document.addEventListener('DOMContentLoaded', () => {
   loadPomoStats();

@@ -344,6 +344,99 @@ const CHEM_DATA = [
           'Haber process ammonia used for fertilisers: N₂ + 3H₂ ⇌ 2NH₃ (iron catalyst, 450°C, 200 atm)'
         ],
         tip: 'LCA questions often ask you to evaluate — you need to give advantages AND disadvantages, then reach a justified conclusion. There\'s rarely a single "right answer" for these.'
+      },
+      {
+        ref: '5.3.3',
+        title: 'Redox Reactions & Oxidation States',
+        formulas: [
+          'Oxidation = loss of electrons (oxidation number increases)',
+          'Reduction = gain of electrons (oxidation number decreases)',
+          'Redox = reduction + oxidation happening together'
+        ],
+        points: [
+          'Oxidation state: number of electrons lost/gained by an atom in a compound. Rules: element = 0, ion = charge, Group 1 = +1, Group 2 = +2, oxygen usually -2, hydrogen usually +1',
+          'In redox: one substance oxidised (loses e⁻), one reduced (gains e⁻). Must happen together',
+          'Identifying redox: check oxidation state changes. If no change, not redox',
+          'Half equations: separate oxidation and reduction. Balance atoms, then electrons',
+          'Example: Zn + Cu²⁺ → Zn²⁺ + Cu. Zn oxidised (0→+2, loses 2e⁻), Cu²⁺ reduced (+2→0, gains 2e⁻)',
+          'Displacement reactions: more reactive element displaces less reactive. Metal + salt of less reactive metal. Example: Fe + CuSO₄ → FeSO₄ + Cu',
+          'Combustion: oxygen oxidises fuel. CₓHᵧ + O₂ → CO₂ + H₂O. Complete combustion with excess O₂ (blue flame). Incomplete with limited O₂ (yellow flame, produces C and CO)'
+        ],
+        tip: 'Check oxidation state changes to identify redox. Oxidation and reduction ALWAYS occur together. Use oxidation numbers to identify which element is oxidised/reduced.'
+      },
+      {
+        ref: '5.4.4',
+        title: 'Electrolysis of Ionic Compounds',
+        formulas: [
+          'Q = I × t (charge = current × time, in Coulombs)',
+          'Moles of electrons = Q ÷ 96500 (Faraday constant F = 96500 C/mol)'
+        ],
+        points: [
+          'Electrolysis: using electric current to drive non-spontaneous reactions. Ionic compounds conduct when molten or in solution',
+          'Electrodes: anode (positive, oxidation occurs — electrons leave), cathode (negative, reduction occurs — electrons arrive)',
+          'At cathode: metal ions reduced to metal, H⁺ reduced to H₂. More reactive metal salt → H₂ released. Less reactive (Cu, Ag) → metal deposited',
+          'At anode: non-metal ions oxidised to non-metals (Cl⁻ → Cl₂, O²⁻ → O₂), or metal oxidised if using reactive anode',
+          'Aluminium extraction: Al₂O₃ electrolysed at 1000°C. Al³⁺ reduced to Al at cathode. O²⁻ oxidised to O₂ at carbon anode (gets burned away, needs replacing)',
+          'Copper purification: impure Cu anode, pure Cu cathode, CuSO₄ solution. Cu oxidised at anode, reduced at cathode → purification',
+          'Faraday\'s law: mass deposited/released ∝ charge passed. Example: 1 mole e⁻ = 96500 C deposits 1 mole of metal if M²⁺ → M, 0.5 mole if M³⁺ → M'
+        ],
+        tip: 'Cathode = CATion reduction (metal deposits). Anode = Anion oxidised (non-metal gas released). At cathode: H⁺ from water competes with metal ions — more reactive metals lose (H₂ released).'
+      },
+      {
+        ref: '5.2.1',
+        title: 'Chemical Equilibrium & Le Chatelier\'s Principle',
+        formulas: [
+          'aA + bB ⇌ cC + dD',
+          'Kc = [C]^c[D]^d / [A]^a[B]^b'
+        ],
+        points: [
+          'Reversible reaction: aA + bB ⇌ cC + dD. Reaction goes both directions. At equilibrium, forward rate = reverse rate (concentrations constant but not necessarily equal)',
+          'Dynamic equilibrium: reactions continue but overall composition unchanged. Macroscopically static, microscopically dynamic',
+          'Le Chatelier\'s principle: if equilibrium disturbed, system shifts to oppose change',
+          'Increase concentration of reactant → equilibrium shifts RIGHT (uses up added substance). Increase product → shifts LEFT',
+          'Increase pressure: equilibrium shifts toward side with fewer gas molecules (reduces pressure). N₂ + 3H₂ ⇌ 2NH₃: 4 moles → 2 moles, so shift RIGHT at high pressure',
+          'Increase temperature: exothermic reaction shifts LEFT (absorbs heat), endothermic shifts RIGHT (absorbs heat)',
+          'Catalyst: speeds up both forward and reverse reactions equally — doesn\'t change equilibrium position or Kc',
+          'Haber process conditions: high pressure (shifts right for more NH₃) but high temperature needed for reasonable rate (but shifts left). Compromise: 450°C, 200 atm'
+        ],
+        tip: 'Equilibrium position = which way shifted. Equilibrium constant Kc = numerical value. Catalyst and pressure on container (not on system) DON\'T change Kc. Only temperature changes Kc.'
+      },
+      {
+        ref: '5.6.1',
+        title: 'Organic Chemistry — Alkanes & Alkenes',
+        formulas: [
+          'Alkanes: CₙH₂ₙ₊₂ (single bonds only, saturated)',
+          'Alkenes: CₙH₂ₙ (C=C double bond, unsaturated)',
+          'Combustion: CₙH₂ₙ₊₂ + (3n+1)/2 O₂ → n CO₂ + (n+1) H₂O'
+        ],
+        points: [
+          'Alkanes: unreactive, only burn. Examples: methane CH₄, ethane C₂H₆, propane C₃H₈, butane C₄H₁₀. Used as fuels',
+          'Alkenes: contain C=C double bond — reactive. Examples: ethene C₂H₄, propene C₃H₆. Unsaturated (add H₂ to become alkane)',
+          'Test for alkene: bromine water (orange) + alkene → brown (Br₂ decolorizes), bromine water + alkane → no change',
+          'Addition polymerization: many alkene molecules join via C=C, form long chain polymer. Example: ethene → polyethene',
+          'Functional groups: —OH (alcohol), —COOH (carboxylic acid), —CHO (aldehyde), —CO— (ketone), —COOR (ester)',
+          'Isomerism: different structures, same molecular formula. Structural isomers (chain, position), stereoisomers (E/Z around C=C)',
+          'Reactions: alkenes undergo addition (H₂, Br₂, H₂O, HBr) by electrophilic addition. Alcohols oxidised to aldehydes/ketones to carboxylic acids'
+        ],
+        tip: 'Alkanes = boring, only burn. Alkenes = reactive due to C=C. Test for C=C: bromine water goes from orange to colourless. Know functional groups by sight.'
+      },
+      {
+        ref: '5.7.1',
+        title: 'Reaction Kinetics — Rate Equations & Order',
+        formulas: [
+          'Rate = k[A]^m[B]^n',
+          'Half-life: time for concentration to halve (independent of concentration for 1st order)'
+        ],
+        points: [
+          'Order of reaction: power of concentration in rate equation. Zero order (rate = k, constant), 1st order (rate = k[A]), 2nd order (rate = k[A]²)',
+          'Determining order: plot concentration vs time (zero order = straight line, 1st = curve flattening, 2nd = sharper curve). Or use initial rate method with different concentrations',
+          'Rate constant k: increases with temperature (exponential), units depend on overall order',
+          'Activation energy Ea: minimum energy needed for reaction to occur. Lower Ea = faster reaction. Catalyst lowers Ea without changing ΔH',
+          'Half-life: for 1st order, constant (always halve in same time). For 2nd order, increases (takes longer each half-life). Only 1st order has predictable half-life',
+          'Arrhenius equation: k = Ae^(-Ea/RT). Higher T or lower Ea → higher k. A = frequency factor (how often molecules collide)',
+          'Mechanism: series of elementary steps adding to overall equation. Rate-determining step = slowest step. Rate equation matches rate-determining step, not overall'
+        ],
+        tip: 'Order determined experimentally, not from stoichiometry. 1st order has constant half-life. 2nd order: initial concentration affects rate more dramatically. RDS determines rate equation.'
       }
     ]
   }

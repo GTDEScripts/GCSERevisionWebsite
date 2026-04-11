@@ -352,5 +352,153 @@ const PHYS_DATA = [
         tip: 'Star life cycle depends on MASS. Small/medium stars → red giant → white dwarf. Massive stars → red supergiant → supernova → neutron star/black hole. The supernova is what creates heavy elements and distributes them.'
       }
     ]
+  },
+  {
+    section: '0. Work, Energy & Power (Fundamentals)',
+    icon: '⚡',
+    color: '#F59E0B',
+    topics: [
+      {
+        ref: '3.1.1',
+        title: 'Work, Energy & Power',
+        formulas: [
+          'Work W = F × s × cos(θ) (force × distance × cos angle)',
+          'When F parallel to motion: W = F × s',
+          'Power P = W/t = F × v',
+          'Efficiency = (useful energy out / total energy in) × 100%'
+        ],
+        points: [
+          'Work: done when a force moves an object. W = F × s (joules). If force perpendicular to motion, no work done',
+          'Energy: capacity to do work. Different types: kinetic (moving objects), gravitational potential (height), elastic potential (springs), chemical (fuel), nuclear (radioactive decay)',
+          'Kinetic energy: Ek = ½mv² (joules). Depends on mass and velocity squared (doubling v quadruples Ek)',
+          'Gravitational PE: Ep = mgh (near Earth\'s surface). Depends on mass, gravity (9.8 N/kg), height',
+          'Elastic PE: Ep = ½ks² (s = extension, k = spring constant). Stiffer spring (higher k) = more PE for same extension',
+          'Conservation of energy: total energy is constant. In closed system, energy transfers between forms but total stays same. Example: falling object has Ep → Ek',
+          'Power: rate of energy transfer. P = W/t. Units: watts (W) = joules/second. 1 kW = 1000 W',
+          'Efficiency: useful energy out / total energy in. Example: light bulb converts ~5% of electrical energy to light, 95% to heat (wasted)',
+          'Example: 2 kg ball dropped from 10 m. Ep at top = 2×10×10 = 200 J. At bottom, v = ½mv² = 200 J → v = √(2×200/2) = 14.1 m/s'
+        ],
+        tip: 'Work = Force × Distance (parallel component). Power = Work/Time. Efficiency always <100%. Energy can change forms but total is conserved (without losses).'
+      },
+      {
+        ref: '4.2.1',
+        title: 'Simple Harmonic Motion (SHM)',
+        formulas: [
+          'a = -ω²x (acceleration proportional to displacement, opposite direction)',
+          'Period T = 1/f',
+          'Frequency f = 1/T',
+          'Displacement: x = A sin(ωt) or x = A cos(ωt)'
+        ],
+        points: [
+          'SHM: oscillatory motion where acceleration is always toward the center and proportional to displacement. Example: mass on spring, pendulum (small angle)',
+          'Amplitude A: maximum displacement from equilibrium',
+          'Period T: time for one complete oscillation',
+          'Frequency f: number of oscillations per second (Hz)',
+          'At equilibrium (x=0): acceleration = 0, velocity = maximum',
+          'At maximum displacement (x=A): acceleration = maximum, velocity = 0',
+          'Energy in SHM: oscillates between kinetic (at equilibrium) and potential (at extremes). Total energy = ½kA² (constant)',
+          'Damping: friction causes amplitude to decrease over time. Underdamped (oscillates while decreasing), critically damped (returns to equilibrium without overshooting), overdamped (slow return)',
+          'Resonance: when driving frequency matches natural frequency, amplitude increases dramatically. Example: pushing a swing at just the right moment'
+        ],
+        tip: 'At equilibrium: v = max, a = 0. At extremes: v = 0, a = max (toward center). Energy oscillates between KE and PE but total is constant.'
+      },
+      {
+        ref: '4.3.1',
+        title: 'Waves — Types, Properties & Equations',
+        formulas: [
+          'Wave speed v = f × λ (frequency × wavelength)',
+          'Intensity I ∝ (amplitude)²',
+          'Intensity I = P/A (power / area)'
+        ],
+        points: [
+          'Mechanical wave: requires a medium (sound, water waves). Electromagnetic wave: doesn\'t (light, radio, X-rays)',
+          'Transverse wave: oscillations perpendicular to direction of travel (light, water surface). Longitudinal wave: oscillations parallel to travel (sound, compressions)',
+          'Wavelength λ: distance between consecutive crests/compressions (meters)',
+          'Frequency f: oscillations per second (Hz)',
+          'Speed v = f × λ. Higher frequency = shorter wavelength (at constant speed)',
+          'Intensity: power per unit area, proportional to (amplitude)². Double amplitude → quadruple intensity',
+          'Diffraction: waves bend around obstacles or through gaps. Longer wavelength = more diffraction (why low-frequency radio diffuses around buildings)',
+          'Refraction: waves bend when entering different medium. Speed changes → direction changes. Shorter wavelength in denser medium',
+          'Interference: when two waves overlap. Constructive (in phase → amplitude increases) or destructive (opposite phase → cancellation)'
+        ],
+        tip: 'v = f × λ always. Higher frequency = shorter wavelength. Intensity ∝ amplitude². Diffraction better at longer wavelengths. Refraction at medium boundaries.'
+      },
+      {
+        ref: '4.4.1',
+        title: 'Sound Waves & Doppler Effect',
+        formulas: [
+          'Speed of sound in air: ~343 m/s (20°C)',
+          'Intensity level (dB) = 10 log(I/I₀) where I₀ = 10⁻¹² W/m²',
+          'Doppler effect: f\' = f × (v + v_observer) / (v - v_source)'
+        ],
+        points: [
+          'Sound: longitudinal wave. Human hearing range: 20 Hz (infrasound) to 20,000 Hz (ultrasound, beyond hearing)',
+          'Frequency: perceived as pitch. Higher frequency = higher pitch',
+          'Intensity: perceived as loudness. Measured in decibels (dB). Threshold of hearing = 0 dB, 10 dB = whisper, 60 dB = conversation, 120 dB = pain threshold',
+          'Ultrasound: f > 20,000 Hz. Uses: medical imaging (ultrasound scan), cleaning, echolocation',
+          'Doppler effect: frequency appears higher when source moves toward observer, lower when moving away. Example: ambulance siren (high pitch approaching, low pitch receding)',
+          'When source approaches: f\' > f. When source recedes: f\' < f. Formula includes observer and source velocities relative to medium',
+          'Speed of sound varies by medium: ~343 m/s in air (20°C), ~1,480 m/s in water, ~5,000 m/s in steel (faster in denser media)',
+          'Echo: sound reflects off surface and returns. Time delay = 2 × distance / speed'
+        ],
+        tip: 'Sound = longitudinal mechanical wave. Doppler effect = frequency shift due to relative motion. Speed of sound depends on medium (faster in solids/liquids).'
+      },
+      {
+        ref: '4.5.1',
+        title: 'Light & Refraction — Critical Angle & TIR',
+        formulas: [
+          'Refractive index n = c/v (c = speed of light in vacuum, v = speed in medium)',
+          'Snell\'s law: n₁ sin(θ₁) = n₂ sin(θ₂)',
+          'Critical angle θc: sin(θc) = n₂/n₁ (when light goes from denser to less dense medium)'
+        ],
+        points: [
+          'Light: electromagnetic wave. Speed in vacuum ~3×10⁸ m/s. Slows in medium',
+          'Refractive index: n > 1 for all media. Higher n = slower light. Glass ~1.5, water ~1.33, diamond ~2.4',
+          'Refraction: light bends at interface between media due to change in speed. Bends toward normal when entering denser medium, away when entering less dense',
+          'Snell\'s law: relates angles and refractive indices. Used to calculate refraction angle',
+          'Critical angle: angle at which light refracts at 90° to normal. Beyond this = total internal reflection (TIR)',
+          'Total internal reflection: light reflects completely off interface (no light escapes). Occurs only when light travels from denser to less dense medium AND angle > critical angle',
+          'Applications of TIR: optical fibers (light bounces along fiber, doesn\'t escape), prisms (reflect light instead of refracting through)',
+          'Example: Light in glass (n=1.5) hitting air (n=1). θc = arcsin(1/1.5) = 42°. Angles > 42° give TIR'
+        ],
+        tip: 'Critical angle only occurs denser → less dense. TIR = light reflects completely (like a mirror). Optical fibers use TIR to transmit light over long distances.'
+      },
+      {
+        ref: '6.1.1',
+        title: 'Nuclear Physics — Decay & Half-Life',
+        formulas: [
+          'Activity A = λN (decay constant × number of nuclei)',
+          'Half-life t½: time for activity to halve',
+          'Remaining: N = N₀ × (½)^(t/t½)'
+        ],
+        points: [
+          'Nucleus: contains protons (positive) and neutrons (neutral). Electrons outside nucleus',
+          'Radioactive decay: unstable nuclei emit particles/radiation to become stable',
+          'Alpha decay (α): emits ⁴He nucleus (2 protons + 2 neutrons). Example: ²³⁸U → ²³⁴Th + ⁴He',
+          'Beta decay (β⁻): neutron converts to proton + electron (emitted). Example: ¹⁴C → ¹⁴N + e⁻',
+          'Gamma decay (γ): nucleus releases energy as high-energy radiation. Usually after α or β decay',
+          'Half-life: time for half of nuclei to decay. Constant for each isotope (independent of conditions or remaining quantity). Example: ¹⁴C half-life = 5,730 years',
+          'Activity: rate of decay (decays per second). A = λN where λ = decay constant. As N decreases, A decreases',
+          'Detecting radiation: Geiger counter, photographic film, ionization chamber'
+        ],
+        tip: 'Half-life is constant and predictable. After 1 half-life, 50% remains. After 2, 25%. After 3, 12.5%. Radiocarbon dating uses ¹⁴C half-life.'
+      },
+      {
+        ref: '6.1.2',
+        title: 'Radiation Safety & Protection',
+        points: [
+          'Ionizing radiation: has enough energy to remove electrons from atoms, creating ions. Can damage cells and DNA',
+          'Alpha particles: helium nuclei, stopped by skin or paper. Dangerous if ingested (internal source)',
+          'Beta particles: electrons, penetrate skin, stopped by thin metal foil',
+          'Gamma rays: high-energy photons, very penetrating, stopped by thick lead or concrete',
+          'Safe exposure limits: background radiation ~2-3 mSv/year is unavoidable. Occupational limit ~20 mSv/year for controlled exposure',
+          'Sources of background radiation: cosmic rays (higher at altitude), terrestrial (uranium, radon in rocks), medical (X-rays, CT scans), nuclear weapons testing',
+          'Shielding: distance, time, and barriers. Distance: intensity ∝ 1/distance² (double distance = quarter intensity). Time: shorter exposure = less dose',
+          'Protective barriers: α blocked by paper, β by aluminum, γ by lead/concrete. Concrete is cheapest for γ shielding',
+          'Uses of radiation: medical imaging (X-rays, PET scans), cancer treatment (radiotherapy), sterilization, power generation (nuclear reactors)'
+        ],
+        tip: 'Alpha particles = dangerous inside body but harmless externally. Gamma rays = very dangerous (penetrating). Distance is your friend — intensity decreases with 1/r².'
+      }
+    ]
   }
 ];

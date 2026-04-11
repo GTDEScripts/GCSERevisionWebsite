@@ -214,6 +214,50 @@
 <div id="sci-quiz-content"></div>
 </div>
 
+<!-- ═══ SHORT-ANSWER QUIZ VIEW ═══ -->
+<div class="short-ans-quiz-view" id="short-ans-quiz-view">
+<button class="back-btn" onclick="backFromShortAnsQuiz()">← Back</button>
+<div class="qa-header">
+  <h2 id="qa-title"></h2>
+  <div id="qa-progress"></div>
+</div>
+
+<div class="qa-topic-list" id="qa-topic-list" style="display:none">
+  <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:16px">Select a topic to start the quiz</p>
+  <div class="qa-topics" id="qa-topics"></div>
+</div>
+
+<div class="qa-active" id="qa-active" style="display:none">
+  <div class="qa-question-card">
+    <p class="qa-question-text" id="qa-question"></p>
+    <textarea id="qa-user-answer" placeholder="Enter your answer..." style="width:100%;height:120px;padding:12px;border-radius:8px;border:1px solid var(--border);font-size:14px;font-family:inherit;margin-top:12px"></textarea>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="revealMarkSchemeAndModel()" style="flex:1">Check Answer</button>
+      <button class="btn secondary" onclick="skipQuestion()" style="flex:1">Skip</button>
+    </div>
+  </div>
+
+  <div class="qa-reveal" id="qa-reveal" style="display:none;margin-top:20px">
+    <div class="mark-scheme-box" style="background:var(--bg2);padding:12px;border-radius:8px;margin-bottom:12px">
+      <h4 style="margin:0 0 8px 0">Mark Scheme</h4>
+      <ul id="qa-mark-points" style="list-style:none;padding:0;margin:0"></ul>
+      <div style="margin-top:8px;font-weight:600;font-size:14px">
+        Your Score: <span id="qa-score">0</span> / <span id="qa-max-marks">0</span>
+      </div>
+    </div>
+
+    <div class="model-answer-box" style="background:var(--bg2);padding:12px;border-radius:8px;margin-bottom:12px">
+      <h4 style="margin:0 0 8px 0">Model Answer</h4>
+      <p id="qa-model-answer" style="margin:0;font-size:13px;line-height:1.5"></p>
+    </div>
+
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="nextShortAnsQuestion()" style="flex:1">Next Question →</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <!-- POMODORO TIMER -->
 <button class="pomo-fab" id="pomo-fab" onclick="togglePomo()" title="Pomodoro Timer">🍅</button>
 <div class="pomo-overlay" id="pomo-overlay" onclick="togglePomo()"></div>
@@ -347,6 +391,9 @@
     <script src="js/quiz/bio-quiz.js"></script>
     <script src="js/quiz/chem-quiz.js"></script>
     <script src="js/quiz/phys-quiz.js"></script>
+    <script src="js/subjects/geography-quiz.js"></script>
+    <script src="js/subjects/business-quiz.js"></script>
+    <script src="js/subjects/computer-science-quiz.js"></script>
 
     <!-- ====================== SUBJECTS CONFIG ====================== -->
     <script src="js/subjects.js"></script>
