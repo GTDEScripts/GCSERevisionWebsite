@@ -811,8 +811,19 @@ function renderShortAnsResults() {
 }
 
 function backFromShortAnsQuiz() {
+  // Hide quiz view and show notes view
   document.getElementById('short-ans-quiz-view').classList.remove('active');
   document.getElementById('notes-view').classList.add('active');
+
+  // Reset quiz state
+  shortAnsQuizState.currentTopic = null;
+  shortAnsQuizState.currentQuestions = [];
+  shortAnsQuizState.qIdx = 0;
+
+  // Hide both quiz sections
+  document.getElementById('qa-topic-list').style.display = 'none';
+  document.getElementById('qa-active').style.display = 'none';
+
   window.scrollTo(0, 0);
 }
 
