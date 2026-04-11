@@ -163,7 +163,8 @@ else if(['biology','chemistry','physics'].includes(id)){app.parentSubject='scien
 else if(['geography','business','computer-science'].includes(id)){app.parentSubject='humanities-business'}
 else{app.parentSubject=null}
 // Update back button text
-const backBtn=document.querySelector('.subject-view .back-btn');if(backBtn){const label=app.parentSubject?SUBJECTS[app.parentSubject].title:'All Subjects';backBtn.textContent='\u2190 '+label;}
+const parentLabels={'sciences':'Sciences','humanities-business':'Humanities & Business'};
+const backBtn=document.querySelector('.subject-view .back-btn');if(backBtn){const label=app.parentSubject?parentLabels[app.parentSubject]:'All Subjects';backBtn.textContent='\u2190 '+label;}
 if(id==='sciences'){document.getElementById('sv-title').textContent='Sciences';document.getElementById('sv-sub').textContent='AQA Triple Science';const grid=document.getElementById('sv-text-grid');grid.innerHTML='';const scienceSubjects=[{id:'biology',icon:'🧬',title:'Biology',desc:'AQA 8461 · Cell biology to Ecology',sub:'7 units, 23 topics'},{id:'chemistry',icon:'⚗️',title:'Chemistry',desc:'AQA 8462 · Atomic structure to Resources',sub:'8 units, 17 topics'},{id:'physics',icon:'⚡',title:'Physics',desc:'AQA 8463 · Energy to Space',sub:'8 units, 15 topics'}];scienceSubjects.forEach(sci=>{grid.innerHTML+=`<div class="text-card sci-${sci.id}" onclick="openSubject('${sci.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${sci.icon}</span><div class="card-title">${sci.title}</div><div class="card-desc">${sci.desc}</div><div class="card-stats"><span class="card-stat">${sci.sub}</span></div></div>`});document.getElementById('home-screen').style.display='none';document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');window.scrollTo(0,0);return}
 if(id==='humanities-business'){document.getElementById('sv-title').textContent='Humanities & Business';document.getElementById('sv-sub').textContent='AQA & OCR';const grid=document.getElementById('sv-text-grid');grid.innerHTML='';const humSubjects=[{id:'geography',icon:'🌍',title:'Geography',desc:'AQA 8035 · Hazards to Environmental Management',sub:'4 sections, 15 topics'},{id:'business',icon:'💼',title:'Business',desc:'OCR J204 · Business Activity to Influences',sub:'6 sections, 18 topics'},{id:'computer-science',icon:'💻',title:'Computer Science',desc:'OCR J277 · Architecture to Cyber Security',sub:'4 sections, 20 topics'}];humSubjects.forEach(hum=>{grid.innerHTML+=`<div class="text-card hum-${hum.id}" onclick="openSubject('${hum.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${hum.icon}</span><div class="card-title">${hum.title}</div><div class="card-desc">${hum.desc}</div><div class="card-stats"><span class="card-stat">${hum.sub}</span></div></div>`});document.getElementById('home-screen').style.display='none';document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');window.scrollTo(0,0);return}
 if(S.type==='notes'){openNotesView(id,S);return}
@@ -321,7 +322,8 @@ function openNotesView(id,S){
   document.getElementById('notes-title').textContent=S.title;
   document.getElementById('notes-sub').textContent=S.sub;
   // Update back button text based on parent subject
-  const backLabel=app.parentSubject?SUBJECTS[app.parentSubject].title:'All Subjects';
+  const parentLabels={'sciences':'Sciences','humanities-business':'Humanities & Business'};
+  const backLabel=app.parentSubject?parentLabels[app.parentSubject]:'All Subjects';
   document.getElementById('notes-back-btn').textContent='\u2190 '+backLabel;
   document.getElementById('notes-search').value='';
 
