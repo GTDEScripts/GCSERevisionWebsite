@@ -43,6 +43,32 @@ const GEO_QUIZ = [
             keywords: ["megathrust", "subduction", "uplift", "seafloor", "displacement", "magnitude"],
             modelAnswer: "A magnitude 9.0-9.3 megathrust earthquake occurred at the Sumatra-Andaman subduction zone. The sudden vertical uplift of the seafloor displaced an enormous volume of water, creating tsunami waves. These waves radiated outward at ~800 km/h and struck coastlines across the Indian Ocean.",
             hint: "Focus on the specific type of earthquake and how it moved the ocean."
+          },
+          {
+            q: "Describe the characteristics of shield volcanoes and explain why they are less dangerous than composite volcanoes.",
+            markScheme: [
+              "Shield volcanoes have gentle sloping sides (low angle)",
+              "Lava flows are fluid and travel far from crater",
+              "Eruptions are relatively gentle with low-viscosity lava",
+              "Less explosive than composite volcanoes with steep sides"
+            ],
+            maxMarks: 4,
+            keywords: ["shield", "gentle", "slope", "fluid", "low-viscosity", "explosive"],
+            modelAnswer: "Shield volcanoes have gently sloping sides built up by many layers of low-viscosity lava flows. The lava is fluid and flows easily, spreading far from the volcano before cooling. Eruptions are relatively gentle without major explosions. Composite volcanoes are steeper and more explosive because they have higher-viscosity lava and more gas content.",
+            hint: "Compare the shape and type of lava erupted."
+          },
+          {
+            q: "Explain the difference between seismic waves P and S waves in terms of their speed and motion.",
+            markScheme: [
+              "P-waves are primary/faster (6-7 km/s)",
+              "P-waves travel through solids and liquids",
+              "S-waves are slower (3-4 km/s) and only through solids",
+              "P-waves move particles parallel to wave direction; S-waves perpendicular"
+            ],
+            maxMarks: 4,
+            keywords: ["P-waves", "S-waves", "speed", "faster", "slower", "solids", "liquids"],
+            modelAnswer: "P-waves (primary) are faster, traveling at 6-7 km/s through both solids and liquids. They compress and expand rocks in the direction of wave travel. S-waves (secondary) are slower at 3-4 km/s and can only travel through solids. They cause sideways (shear) motion perpendicular to wave direction. P-waves arrive first; the time gap between P and S waves indicates earthquake distance.",
+            hint: "Think about speed differences and what materials they travel through."
           }
         ]
       },
@@ -74,6 +100,32 @@ const GEO_QUIZ = [
             keywords: ["eye", "calm", "eye wall", "thunderstorms", "rainbands", "spiral"],
             modelAnswer: "A tropical cyclone has a circular structure. At the centre is the eye—a calm area with light winds. Surrounding the eye is the eye wall, a band of intense thunderstorms with the strongest winds. Spiral rainbands extend outward from the eye wall, with wind speeds gradually decreasing towards the edge.",
             hint: "Describe from the centre outward."
+          },
+          {
+            q: "Explain why tropical cyclones weaken when they move over land.",
+            markScheme: [
+              "Cut off from warm ocean water energy source",
+              "Friction with land surface slows wind speed",
+              "No evaporation from ocean to release latent heat",
+              "Pressure gradient weakens as energy dissipates"
+            ],
+            maxMarks: 4,
+            keywords: ["warm water", "energy", "friction", "evaporation", "latent heat"],
+            modelAnswer: "Tropical cyclones weaken rapidly over land because they lose their primary energy source—warm ocean water. The land surface creates friction, slowing wind speeds and disrupting the circulation. Without ocean evaporation to release latent heat, the low-pressure system weakens. The temperature gradient between the system and surrounding air decreases, causing the cyclone to dissipate.",
+            hint: "Think about what tropical cyclones need to maintain strength."
+          },
+          {
+            q: "Describe the impacts of tropical cyclones on human populations.",
+            markScheme: [
+              "Strong winds destroy buildings and infrastructure",
+              "Heavy rainfall causes flooding and landslides",
+              "Storm surge inundates coastal areas and causes drowning",
+              "Economic damage to crops, homes, and livelihoods"
+            ],
+            maxMarks: 4,
+            keywords: ["wind", "destroy", "flooding", "rainfall", "storm surge", "damage"],
+            modelAnswer: "Tropical cyclones cause widespread destruction through multiple mechanisms. Extreme winds exceed 200 km/h, destroying buildings and uprooting trees. Heavy rainfall (300+ mm) causes severe flooding and landslides. Storm surge pushes ocean water onto coasts, inundating settlements. Economically, cyclones devastate agriculture, fishing, and tourism, causing billions in damage and displacing populations.",
+            hint: "Consider wind, water, and economic impacts separately."
           }
         ]
       }
@@ -110,6 +162,32 @@ const GEO_QUIZ = [
             keywords: ["erosional", "depositional", "cliffs", "platforms", "beaches", "spits", "high-energy", "low-energy"],
             modelAnswer: "Erosional landforms like cliffs and wave-cut platforms form where high-energy waves attack the shore, removing material. Depositional landforms like beaches and spits form in low-energy areas where waves have insufficient energy to remove sediment, allowing it to accumulate.",
             hint: "Think about where waves are strong versus weak."
+          },
+          {
+            q: "Explain the formation of a spit and describe how longshore drift contributes to its growth.",
+            markScheme: [
+              "Spit forms when coastline changes direction",
+              "Longshore drift carries sediment across the bay mouth",
+              "Sediment accumulates, creating a narrow ridge extending into the sea",
+              "Hook at end forms due to wave refraction changing sediment direction"
+            ],
+            maxMarks: 4,
+            keywords: ["spit", "direction", "longshore drift", "sediment", "bay", "hook", "refraction"],
+            modelAnswer: "A spit forms where a coastline changes direction (like at a bay). Longshore drift carries sediment along the shore, but when the coast turns, sediment is deposited across the bay mouth due to lack of wave energy. A narrow ridge of sediment builds up, extending into the sea. At the spit's tip, waves are refracted by the changing depth, redirecting sediment to create a curved hook.",
+            hint: "Focus on the change in coastline direction and sediment deposition."
+          },
+          {
+            q: "Describe the causes of coastal erosion and explain why some coasts erode faster than others.",
+            markScheme: [
+              "Wave erosion: wave energy attacks cliffs through hydraulic action and abrasion",
+              "Human activities: building sea walls, dams reduce sediment supply",
+              "Rock type: softer rocks (chalk) erode faster than harder rocks (granite)",
+              "Fetch: longer fetch means higher-energy waves and greater erosion"
+            ],
+            maxMarks: 4,
+            keywords: ["erosion", "waves", "fetch", "rock type", "human", "sediment", "hydraulic action"],
+            modelAnswer: "Coastal erosion is caused by wave action (hydraulic action and abrasion), especially where fetch is long, creating powerful waves. Rock type affects erosion rate: soft rocks like chalk erode rapidly, while granite resists erosion. Human activities like coastal defences and river damming reduce sediment supply, destabilizing adjacent coasts. Storms accelerate erosion significantly.",
+            hint: "Consider wave energy, rock resistance, and human impacts."
           }
         ]
       },
@@ -128,6 +206,32 @@ const GEO_QUIZ = [
             keywords: ["hydraulic action", "pressure", "abrasion", "sediment", "sandpaper", "scraping"],
             modelAnswer: "Hydraulic action occurs when the force of water under pressure breaks and loosens rock material from the riverbed and banks. Abrasion happens when sediment particles carried by the river act like sandpaper, scraping and smoothing the channel. Together, these erosional processes remove material and gradually deepen and widen the river channel.",
             hint: "Describe two different ways water/sediment removes rock."
+          },
+          {
+            q: "Explain the formation of a meander in a river and describe how a meander develops over time.",
+            markScheme: [
+              "Unequal erosion and deposition on river bends creates curves",
+              "On the outside of the curve, erosion removes material creating a cliff",
+              "On the inside, slower water deposits sediment forming a beach",
+              "Curves grow tighter as erosion intensifies on the outer bank"
+            ],
+            maxMarks: 4,
+            keywords: ["meander", "bend", "erosion", "deposition", "outer bank", "inner bank", "curve"],
+            modelAnswer: "Meanders form when rivers develop curves due to unequal erosion and deposition. On the outside of a bend, water flows faster and erosion undercuts the bank, creating a cliff. On the inside, water flows slower, and sediment is deposited, forming a beach. Over time, the meander becomes increasingly tight, and the outer bank is undercut further until a cut-off occurs, forming an oxbow lake.",
+            hint: "Think about what happens on the outer and inner banks separately."
+          },
+          {
+            q: "Describe how rivers transport sediment and explain the difference between suspension, saltation, and traction.",
+            markScheme: [
+              "Suspension: fine sediment (silt, clay) carried in the water as turbidity",
+              "Saltation: medium sediment bounces along the riverbed in hops",
+              "Traction: large sediment rolls/slides along the bottom",
+              "Transport method depends on particle size and river energy"
+            ],
+            maxMarks: 4,
+            keywords: ["suspension", "saltation", "traction", "sediment", "transport", "particle size", "energy"],
+            modelAnswer: "Rivers transport sediment in three ways depending on particle size and water energy. Fine sediment (silt, clay) is carried in suspension, making the water turbid. Medium sand bounces along the bed in saltation. Large pebbles and boulders are pushed along the bottom by traction. During floods, increased water energy can move larger particles, carrying more sediment downstream.",
+            hint: "Consider how different sized particles move differently in the water."
           }
         ]
       }
@@ -164,6 +268,19 @@ const GEO_QUIZ = [
             keywords: ["10 million", "dominates", "economy", "politics", "global", "influence"],
             modelAnswer: "A megacity has a population exceeding 10 million people. It dominates its country's economy and political system. Megacities have significant global influence through finance, culture, and trade. They have complex, diverse economies with varied employment opportunities across services, manufacturing, and finance sectors.",
             hint: "Focus on size, influence, and economic importance."
+          },
+          {
+            q: "Explain the advantages and disadvantages of urbanization for people living in developing countries.",
+            markScheme: [
+              "Advantages: better job opportunities, access to services (healthcare, education)",
+              "Advantages: improved infrastructure and electricity supply",
+              "Disadvantages: overcrowded housing, poor sanitation, crime",
+              "Disadvantages: environmental pollution, disease, social inequality"
+            ],
+            maxMarks: 4,
+            keywords: ["opportunities", "services", "infrastructure", "housing", "sanitation", "pollution", "inequality"],
+            modelAnswer: "Urbanization in developing countries offers opportunities: cities provide jobs in manufacturing and services, access to schools and hospitals, and infrastructure like electricity. However, rapid migration creates disadvantages: overcrowding and slums, inadequate sanitation causing disease spread, high crime rates, pollution from factories, and widening inequality between rich and poor residents.",
+            hint: "Balance positive economic opportunities against negative social conditions."
           }
         ]
       },
@@ -182,6 +299,32 @@ const GEO_QUIZ = [
             keywords: ["present", "future", "needs", "economic", "social", "environmental", "conservation"],
             modelAnswer: "Sustainable development means meeting the needs of present generations while ensuring that future generations can also meet their needs. It requires balancing economic development, social well-being, and environmental protection. Resources must be used in a way that allows for long-term conservation and availability.",
             hint: "Think about balancing today's needs with tomorrow's."
+          },
+          {
+            q: "Compare the development status of developed and developing countries using specific indicators.",
+            markScheme: [
+              "Developed: high GDP per capita, high HDI, low infant mortality",
+              "Developed: high literacy rates, good healthcare, advanced infrastructure",
+              "Developing: low GDP per capita, low HDI, high infant mortality",
+              "Developing: limited education access, poor healthcare, inadequate infrastructure"
+            ],
+            maxMarks: 4,
+            keywords: ["GDP", "HDI", "mortality", "literacy", "healthcare", "infrastructure", "developed", "developing"],
+            modelAnswer: "Developed countries (USA, Germany, Japan) have high GDP per capita (>$20,000), high HDI (>0.8), low infant mortality (<5 per 1000), and high literacy rates (>95%). Infrastructure is advanced with reliable electricity and transport. Developing countries (Bangladesh, Kenya) have low GDP per capita, low HDI, high infant mortality (>50 per 1000), low literacy, and limited infrastructure.",
+            hint: "Use economic, health, and education indicators to compare."
+          },
+          {
+            q: "Explain the causes of global inequality between developed and developing countries.",
+            markScheme: [
+              "Historical colonialism extracted resources and wealth",
+              "Unequal trade relationships favor developed countries",
+              "Limited access to education and technology in developing regions",
+              "Debt burdens prevent investment in infrastructure and services"
+            ],
+            maxMarks: 4,
+            keywords: ["colonialism", "trade", "education", "technology", "debt", "investment", "resources"],
+            modelAnswer: "Global inequality stems from colonialism, which extracted resources and established power imbalances that persist. Developed countries dominate trade, setting prices that favor their industries while developing countries export raw materials cheaply. Education and technology access is limited in developing regions, preventing economic diversification. Many developing countries carry high national debt, restricting investment in infrastructure and services.",
+            hint: "Consider historical, economic, and structural factors."
           }
         ]
       },
@@ -213,6 +356,32 @@ const GEO_QUIZ = [
             keywords: ["thermal", "expansion", "melting", "ice", "glaciers", "rising", "coastal"],
             modelAnswer: "Climate change raises sea levels through thermal expansion (warmer water expands) and melting ice. Greenland and Antarctic ice sheets are melting, adding water to oceans. Mountain glaciers also melt, contributing to sea level rise. This threatens coastal cities, islands, and agricultural areas.",
             hint: "Consider both direct melting and water expansion effects."
+          },
+          {
+            q: "Explain the potential impacts of climate change on agriculture and food security.",
+            markScheme: [
+              "Temperature increase may shift suitable growing regions poleward",
+              "Changing rainfall patterns cause droughts in some areas, floods in others",
+              "Crop yields decline due to water stress and extreme weather",
+              "Food security threatened in developing countries dependent on agriculture"
+            ],
+            maxMarks: 4,
+            keywords: ["temperature", "rainfall", "drought", "flood", "yields", "agriculture", "food security"],
+            modelAnswer: "Climate change threatens agriculture globally. Rising temperatures shift crop-growing zones toward the poles and higher altitudes, displacing current agricultural regions. Changing rainfall patterns create droughts in some areas (reducing crops) and floods in others (destroying harvests). Extreme heat and water stress reduce crop yields. Food security is particularly threatened in developing countries where populations depend heavily on agriculture for survival and income.",
+            hint: "Consider temperature, water availability, and economic vulnerability."
+          },
+          {
+            q: "Describe strategies for climate change mitigation and explain the difference between mitigation and adaptation.",
+            markScheme: [
+              "Mitigation: reducing greenhouse gas emissions (renewable energy, reforestation)",
+              "Adaptation: adjusting to impacts of climate change already occurring",
+              "Mitigation examples: carbon capture, electric vehicles, reduced consumption",
+              "Adaptation examples: flood defences, drought-resistant crops, migration"
+            ],
+            maxMarks: 4,
+            keywords: ["mitigation", "adaptation", "emissions", "renewable", "defences", "adjustment"],
+            modelAnswer: "Mitigation involves reducing greenhouse gas emissions to prevent further climate change: switching to renewable energy, protecting forests, improving energy efficiency. Adaptation means adjusting to climate impacts already happening: building flood defences, developing drought-resistant crops, relocating vulnerable communities. Both strategies are necessary; mitigation prevents future damage, while adaptation reduces current impacts.",
+            hint: "Distinguish between preventing climate change and coping with its effects."
           }
         ]
       }
