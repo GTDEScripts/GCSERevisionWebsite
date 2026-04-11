@@ -142,7 +142,7 @@ function getDueTodayAll(){const today=getToday();let due=0;try{Object.values(TEX
 function renderHomeStats(){const ss=document.getElementById('stat-studied');const sd=document.getElementById('stat-due');if(ss)ss.textContent=getStudiedToday();if(sd)sd.textContent=getDueTodayAll()}
 
 // ══════ SPACED REPETITION ══════
-function quoteHash(q){return q.quote.substring(0,30)}
+function quoteHash(q){return HashUtil.quoteHash(q.quote, q.speaker)}
 function getSR(card){const h=quoteHash(card);if(!sr.data[h])sr.data[h]={interval:1,ef:2.5,nextReview:getToday(),lastRating:-1,reviews:0};return sr.data[h]}
 function updateModeCounters(){const due=getDueCards().length;const weak=getWeakCards().length;const fav=getFavCards().length;document.getElementById('btn-due').textContent=`🔄 DUE (${due})`;document.getElementById('btn-weak').textContent=`⚠️ WEAK (${weak})`;document.getElementById('btn-fav').textContent=`⭐ FAVS (${fav})`}
 function rateDifficulty(quality){if(sr.rated)return;sr.rated=true;const qMap=[1,5];const q=qMap[quality];const card=cards.deck[cards.index];const cardSR=getSR(card);cardSR.reviews++;const oldEF=cardSR.ef;cardSR.ef=Math.max(1.3,oldEF+(0.1-(5-q)*(0.08+(5-q)*0.02)));if(q<3)cardSR.interval=1;else if(cardSR.reviews===1)cardSR.interval=1;else if(cardSR.reviews===2)cardSR.interval=6;else cardSR.interval=Math.round(cardSR.interval*cardSR.ef);cardSR.lastRating=quality;const next=new Date();next.setDate(next.getDate()+cardSR.interval);cardSR.nextReview=next.toISOString().split('T')[0];saveSR();trackCardStudied();recordStudyDay();updateModeCounters();updateCardRatingTag();

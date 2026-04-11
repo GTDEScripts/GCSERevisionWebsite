@@ -216,7 +216,10 @@
 
 <!-- ═══ SHORT-ANSWER QUIZ VIEW ═══ -->
 <div class="short-ans-quiz-view" id="short-ans-quiz-view">
-<button class="back-btn" onclick="backFromShortAnsQuiz()">← Back</button>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px">
+  <button class="back-btn" id="qa-back-btn" onclick="backFromShortAnsQuiz()">← Notes</button>
+  <button class="back-btn secondary" id="qa-topics-btn" onclick="backToTopicsList()" style="display:none">← Topics</button>
+</div>
 <div class="qa-header">
   <h2 id="qa-title"></h2>
   <div id="qa-progress"></div>
@@ -391,12 +394,15 @@
     <script src="js/quiz/bio-quiz.js"></script>
     <script src="js/quiz/chem-quiz.js"></script>
     <script src="js/quiz/phys-quiz.js"></script>
-    <script src="js/subjects/geography-quiz.js"></script>
-    <script src="js/subjects/business-quiz.js"></script>
-    <script src="js/subjects/computer-science-quiz.js"></script>
+    <script src="js/quiz/geography-quiz.js"></script>
+    <script src="js/quiz/business-quiz.js"></script>
+    <script src="js/quiz/computer-science-quiz.js"></script>
 
     <!-- ====================== SUBJECTS CONFIG ====================== -->
     <script src="js/subjects.js"></script>
+
+    <!-- ====================== UTILITIES ====================== -->
+    <script src="js/utils.js"></script>
 
     <!-- ====================== CORE APP FILES ====================== -->
     <script src="js/app.js"></script>

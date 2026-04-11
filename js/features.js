@@ -77,16 +77,12 @@ let pomoState = {
 };
 
 function loadPomoStats() {
-  try {
-    const s = localStorage.getItem('gcse_pomo');
-    if (s) {
-      const d = JSON.parse(s);
-      pomoState.sessions = d.sessions || 0;
-      pomoState.totalMins = d.totalMins || 0;
-      pomoState.todaySessions = d.todaySessions || 0;
-      pomoState.todayDate = d.todayDate || '';
-    }
-  } catch(e) {}
+  const d = StorageUtil.getJSON(STORAGE_KEYS.POMO, {});
+  pomoState.sessions = d.sessions || 0;
+  pomoState.totalMins = d.totalMins || 0;
+  pomoState.todaySessions = d.todaySessions || 0;
+  pomoState.todayDate = d.todayDate || '';
+
   // Reset today counter if it's a new day
   const today = new Date().toISOString().split('T')[0];
   if (pomoState.todayDate !== today) {
@@ -97,14 +93,12 @@ function loadPomoStats() {
 }
 
 function savePomoStats() {
-  try {
-    localStorage.setItem('gcse_pomo', JSON.stringify({
-      sessions: pomoState.sessions,
-      totalMins: pomoState.totalMins,
-      todaySessions: pomoState.todaySessions,
-      todayDate: pomoState.todayDate
-    }));
-  } catch(e) {}
+  StorageUtil.setJSON(STORAGE_KEYS.POMO, {
+    sessions: pomoState.sessions,
+    totalMins: pomoState.totalMins,
+    todaySessions: pomoState.todaySessions,
+    todayDate: pomoState.todayDate
+  });
 }
 
 function updatePomoStats() {
@@ -343,25 +337,19 @@ function openSciQuiz(subject) {
   sciQuizState.storageKey = info.key;
   sciQuizState.currentTopic = null;
 
-  // Hide other views
-  document.getElementById('home-screen').style.display = 'none';
-  document.getElementById('subject-view').classList.remove('active');
-  document.getElementById('tool-view').classList.remove('active');
-  document.getElementById('notes-view').classList.remove('active');
-
-  // Show quiz view
-  const view = document.getElementById('sci-quiz-view');
-  view.classList.add('active');
+  // Hide other views and show quiz view
+  DOMUtil.hideAllViews();
+  DOMUtil.showView(DOM_IDS.SCI_QUIZ_VIEW);
   document.getElementById('sci-quiz-title').textContent = info.icon + ' ' + info.title + ' Quiz';
   document.getElementById('sci-quiz-sub').textContent = info.sub;
 
   renderSciQuizTopicList();
-  window.scrollTo(0, 0);
+  UIUtil.scrollToTop();
 }
 
 function renderSciQuizTopicList() {
   const container = document.getElementById('sci-quiz-content');
-  const scores = JSON.parse(localStorage.getItem(sciQuizState.storageKey) || '{}');
+  const scores = StorageUtil.getJSON(sciQuizState.storageKey, {});
 
   let totalTopics = 0, passedTopics = 0, totalQs = 0;
   sciQuizState.quizData.forEach(sec => sec.topics.forEach(t => {
@@ -439,7 +427,7 @@ function startSciTopicQuiz(topicName) {
   sciQuizState.answers = [];
 
   renderSciQuizQuestion();
-  window.scrollTo(0, 0);
+  UIUtil.scrollToTop();
 }
 
 function renderSciQuizQuestion() {
@@ -528,35 +516,32 @@ function nextSciQuizQ() {
   sciQuizState.qIdx++;
   sciQuizState.answered = false;
   renderSciQuizQuestion();
-  window.scrollTo(0, 0);
+  UIUtil.scrollToTop();
 }
 
 function renderSciQuizResults() {
   const { correct, questions, currentTopic } = sciQuizState;
   const total = questions.length;
-  const pct = Math.round((correct / total) * 100);
+  const pct = CalcUtil.percentage(correct, total);
   const passed = pct >= 70;
 
   // Save score
-  try {
-    const scores = JSON.parse(localStorage.getItem(sciQuizState.storageKey) || '{}');
-    const prev = scores[currentTopic.topic];
-    scores[currentTopic.topic] = {
-      lastScore: correct,
-      lastTotal: total,
-      lastPct: pct,
-      bestPct: prev ? Math.max(prev.bestPct, pct) : pct,
-      attempts: (prev ? prev.attempts : 0) + 1,
-      lastDate: new Date().toISOString().split('T')[0]
-    };
-    localStorage.setItem(sciQuizState.storageKey, JSON.stringify(scores));
-  } catch(e) {}
+  const scores = StorageUtil.getJSON(sciQuizState.storageKey, {});
+  const prev = scores[currentTopic.topic];
+  scores[currentTopic.topic] = {
+    lastScore: correct,
+    lastTotal: total,
+    lastPct: pct,
+    bestPct: prev ? Math.max(prev.bestPct, pct) : pct,
+    attempts: (prev ? prev.attempts : 0) + 1,
+    lastDate: new Date().toISOString().split('T')[0]
+  };
+  StorageUtil.setJSON(sciQuizState.storageKey, scores);
 
-  let scoreClass = pct >= 80 ? 'great' : pct >= 50 ? 'ok' : 'poor';
-  let emoji = pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '💪';
-  let message = pct >= 80 ? 'Excellent work!' : pct >= 50 ? 'Good effort! Keep practising.' : 'Keep going — revision is the key!';
+  const feedback = CalcUtil.getScoreFeedback(pct);
+  const { emoji, message, shouldConfetti } = feedback;
 
-  if (pct >= 80) launchConfetti();
+  if (shouldConfetti) launchConfetti();
 
   let html = `
     <div class="sq-results">
@@ -601,7 +586,7 @@ function renderSciQuizResults() {
 
   document.getElementById('sci-quiz-content').innerHTML = html;
   updateProgressBars();
-  window.scrollTo(0, 0);
+  UIUtil.scrollToTop();
 }
 
 function backFromSciQuiz() {
@@ -610,7 +595,7 @@ function backFromSciQuiz() {
   if (typeof renderStreak === 'function') renderStreak();
   if (typeof renderQOTD === 'function') renderQOTD();
   updateProgressBars();
-  window.scrollTo(0, 0);
+  UIUtil.scrollToTop();
 }
 
 // ═══ SHORT-ANSWER QUIZ SYSTEM ═══
@@ -626,7 +611,12 @@ let shortAnsQuizState = {
 };
 
 function openShortAnsQuiz(subject) {
+  // COMPLETELY reset state to prevent cross-contamination between quizzes
   shortAnsQuizState.subject = subject;
+  shortAnsQuizState.currentTopic = null;
+  shortAnsQuizState.currentQuestions = [];
+  shortAnsQuizState.qIdx = 0;
+  shortAnsQuizState.currentScore = undefined;
 
   // Get quiz data based on subject
   const quizMap = {
@@ -646,16 +636,9 @@ function openShortAnsQuiz(subject) {
     });
   });
 
-  // Hide all other views
-  document.getElementById('home-screen').style.display = 'none';
-  document.getElementById('subject-view').classList.remove('active');
-  document.getElementById('tool-view').classList.remove('active');
-  document.getElementById('notes-view').classList.remove('active');
-  document.getElementById('sci-quiz-view').classList.remove('active');
-
-  // Show quiz view
-  const view = document.getElementById('short-ans-quiz-view');
-  view.classList.add('active');
+  // Hide all other views and show quiz view
+  DOMUtil.hideAllViews();
+  DOMUtil.showView(DOM_IDS.SHORT_ANS_QUIZ_VIEW);
 
   const titleMap = {
     'geography': '🌍 Geography Quiz',
@@ -673,6 +656,10 @@ function renderShortAnsTopicList() {
   document.getElementById('qa-topic-list').style.display = 'block';
   document.getElementById('qa-active').style.display = 'none';
   document.getElementById('qa-reveal').style.display = 'none';
+
+  // Update back button to go to notes (not topics)
+  document.getElementById('qa-back-btn').style.display = 'block';
+  document.getElementById('qa-topics-btn').style.display = 'none';
 
   const container = document.getElementById('qa-topics');
   const scores = JSON.parse(localStorage.getItem(shortAnsQuizState.storageKey) || '{}');
@@ -699,6 +686,7 @@ function renderShortAnsTopicList() {
   });
 
   container.innerHTML = html;
+  UIUtil.scrollToTop();
 }
 
 function startShortAnsQuiz(section, topicName) {
@@ -728,6 +716,10 @@ function renderShortAnsQuestion() {
   const q = currentQuestions[qIdx];
   const total = currentQuestions.length;
   const progressPct = Math.round((qIdx / total) * 100);
+
+  // Show "Back to Topics" button when in a quiz
+  document.getElementById('qa-back-btn').style.display = 'none';
+  document.getElementById('qa-topics-btn').style.display = 'block';
 
   document.getElementById('qa-progress').textContent = `Question ${qIdx + 1} of ${total}`;
   document.getElementById('qa-question').textContent = q.q;
@@ -846,17 +838,19 @@ function nextShortAnsQuestion() {
 
 function renderShortAnsResults() {
   const topicKey = `${shortAnsQuizState.currentTopic.section}_${shortAnsQuizState.currentTopic.topic}`;
-  const scores = JSON.parse(localStorage.getItem(shortAnsQuizState.storageKey) || '{}');
+  const scores = StorageUtil.getJSON(shortAnsQuizState.storageKey, {});
   const score = scores[topicKey] || { answered: 0, total: 0 };
-  const pct = score.total > 0 ? Math.round((score.answered / score.total) * 100) : 0;
+  const pct = CalcUtil.percentage(score.answered, score.total);
+  const feedback = CalcUtil.getScoreFeedback(pct);
 
   let resultsHtml = `
     <div class="qa-results" style="text-align:center;padding:20px">
-      <h3 style="margin-bottom:12px">Quiz Complete!</h3>
+      <h3 style="margin-bottom:12px">Quiz Complete! ${feedback.emoji}</h3>
       <div style="font-size:48px;font-weight:700;color:var(--accent);margin-bottom:8px">${pct}%</div>
       <div style="font-size:18px;margin-bottom:16px">
         <span style="font-weight:600">${score.answered} / ${score.total}</span> marks achieved
       </div>
+      <div style="font-size:14px;margin-bottom:16px;color:var(--text2)">${feedback.message}</div>
       <div style="display:flex;gap:8px;justify-content:center">
         <button class="btn" onclick="startShortAnsQuiz('${shortAnsQuizState.currentTopic.section.replace(/'/g, "\\'")}', '${shortAnsQuizState.currentTopic.topic.replace(/'/g, "\\'")}')" style="background:var(--accent);color:#fff;border-color:var(--accent)">Retry Topic</button>
         <button class="btn" onclick="renderShortAnsTopicList()">Back to Topics</button>
@@ -876,11 +870,17 @@ function backFromShortAnsQuiz() {
   shortAnsQuizState.currentTopic = null;
   shortAnsQuizState.currentQuestions = [];
   shortAnsQuizState.qIdx = 0;
+  shortAnsQuizState.currentScore = undefined;
 
   // Hide both quiz sections
   document.getElementById('qa-topic-list').style.display = 'none';
   document.getElementById('qa-active').style.display = 'none';
 
+  window.scrollTo(0, 0);
+}
+
+function backToTopicsList() {
+  renderShortAnsTopicList();
   window.scrollTo(0, 0);
 }
 
