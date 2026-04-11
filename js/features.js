@@ -862,14 +862,18 @@ function renderShortAnsResults() {
 }
 
 function backFromShortAnsQuiz() {
-  // Hide quiz view and show notes view
-  document.getElementById('short-ans-quiz-view').classList.remove('active');
-  document.getElementById('notes-view').classList.add('active');
+  // Use DOMUtil for consistent view management
+  DOMUtil.hideView('short-ans-quiz-view');
+  DOMUtil.showView('notes-view');
 
-  // Reset quiz state
+  // COMPLETELY reset all quiz state to prevent cross-contamination
+  shortAnsQuizState.subject = null;
+  shortAnsQuizState.quizData = null;
+  shortAnsQuizState.allTopics = [];
   shortAnsQuizState.currentTopic = null;
   shortAnsQuizState.currentQuestions = [];
   shortAnsQuizState.qIdx = 0;
+  shortAnsQuizState.storageKey = null;
   shortAnsQuizState.currentScore = undefined;
 
   // Hide both quiz sections
