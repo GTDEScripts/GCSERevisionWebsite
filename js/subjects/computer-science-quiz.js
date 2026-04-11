@@ -374,7 +374,7 @@ const CS_QUIZ = [
             keywords: ["authentication", "authorization", "identity", "permissions", "access", "password"],
             modelAnswer: "Authentication verifies a user's identity (who you are). Methods include passwords, fingerprints, or two-factor codes. Authorization determines what an authenticated user can do—which files they can access, which programs they can run. You might authenticate with a password, but your authorization might limit you to read-only access to a file. Both are necessary for security.",
             hint: "Think about proving identity first, then what you're allowed to do with it."
-          }
+          },
           {
             q: "Explain what a DDoS attack is and how it disrupts services.",
             markScheme: [
