@@ -621,7 +621,8 @@ let shortAnsQuizState = {
   currentTopic: null,
   currentQuestions: [],
   qIdx: 0,
-  storageKey: null
+  storageKey: null,
+  currentScore: undefined
 };
 
 function openShortAnsQuiz(subject) {
@@ -740,41 +741,77 @@ function revealMarkSchemeAndModel() {
   const q = currentQuestions[qIdx];
   const userAnswer = document.getElementById('qa-user-answer').value;
 
-  // Score based on keywords
-  const score = scoreUserAnswer(userAnswer, q.keywords);
-
-  // Display mark scheme
+  // Display interactive mark scheme checklist
   let markHtml = '';
-  q.markScheme.forEach(point => {
-    markHtml += `<li style="margin-bottom:8px">• ${point}</li>`;
+  q.markScheme.forEach((point, idx) => {
+    markHtml += `
+      <label style="display:flex;align-items:flex-start;margin-bottom:10px;cursor:pointer">
+        <input type="checkbox" id="mark-${idx}" data-marks="1" style="margin-right:10px;margin-top:4px;cursor:pointer">
+        <span>${point}</span>
+      </label>
+    `;
   });
+
+  // Add custom mark entry
+  markHtml += `
+    <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:12px">
+      <label style="display:block;font-size:12px;font-weight:600;margin-bottom:8px">
+        Additional marks (if applicable):
+      </label>
+      <input type="number" id="custom-marks" min="0" max="${q.maxMarks}" value="0" placeholder="0"
+             style="width:60px;padding:6px;border:1px solid var(--border);border-radius:6px;font-size:13px">
+      <span style="margin-left:8px;font-size:11px;color:var(--text3)">out of ${q.maxMarks}</span>
+    </div>
+  `;
+
   document.getElementById('qa-mark-points').innerHTML = markHtml;
-  document.getElementById('qa-score').textContent = score.achieved;
-  document.getElementById('qa-max-marks').textContent = q.maxMarks;
   document.getElementById('qa-model-answer').textContent = q.modelAnswer;
 
-  // Save score
-  const topicKey = `${shortAnsQuizState.currentTopic.section}_${shortAnsQuizState.currentTopic.topic}`;
-  const scores = JSON.parse(localStorage.getItem(shortAnsQuizState.storageKey) || '{}');
-  if (!scores[topicKey]) scores[topicKey] = { answered: 0, total: q.maxMarks };
-  scores[topicKey].answered += score.achieved;
-  scores[topicKey].total += q.maxMarks;
-  localStorage.setItem(shortAnsQuizState.storageKey, JSON.stringify(scores));
+  // Add event listeners for auto-calculation
+  q.markScheme.forEach((_, idx) => {
+    const checkbox = document.getElementById(`mark-${idx}`);
+    if (checkbox) {
+      checkbox.addEventListener('change', updateMarkTotal);
+    }
+  });
+  const customInput = document.getElementById('custom-marks');
+  if (customInput) {
+    customInput.addEventListener('input', updateMarkTotal);
+  }
+
+  // Initialize score display
+  updateMarkTotal();
 
   // Show reveal
   document.getElementById('qa-reveal').style.display = 'block';
   window.scrollTo(0, document.getElementById('qa-reveal').offsetTop - 100);
 }
 
-function scoreUserAnswer(userAnswer, keywords) {
-  const answer = userAnswer.toLowerCase();
-  let achieved = 0;
-  keywords.forEach(keyword => {
-    if (answer.includes(keyword.toLowerCase())) {
-      achieved++;
+function updateMarkTotal() {
+  const { qIdx, currentQuestions } = shortAnsQuizState;
+  const q = currentQuestions[qIdx];
+
+  // Count checked boxes
+  let checkedMarks = 0;
+  q.markScheme.forEach((_, idx) => {
+    const checkbox = document.getElementById(`mark-${idx}`);
+    if (checkbox && checkbox.checked) {
+      checkedMarks += 1;
     }
   });
-  return { achieved: Math.min(achieved, keywords.length), maxMarks: keywords.length };
+
+  // Add custom marks
+  const customInput = document.getElementById('custom-marks');
+  const customMarks = customInput ? parseInt(customInput.value) || 0 : 0;
+
+  const totalMarks = checkedMarks + customMarks;
+
+  // Update display
+  document.getElementById('qa-score').textContent = totalMarks;
+  document.getElementById('qa-max-marks').textContent = q.maxMarks;
+
+  // Save this score when user updates it
+  shortAnsQuizState.currentScore = totalMarks;
 }
 
 function skipQuestion() {
@@ -783,6 +820,26 @@ function skipQuestion() {
 }
 
 function nextShortAnsQuestion() {
+  // Save the score that user marked
+  const { qIdx, currentQuestions, currentTopic } = shortAnsQuizState;
+  const q = currentQuestions[qIdx];
+
+  if (shortAnsQuizState.currentScore !== undefined) {
+    const topicKey = `${currentTopic.section}_${currentTopic.topic}`;
+    const scores = JSON.parse(localStorage.getItem(shortAnsQuizState.storageKey) || '{}');
+
+    if (!scores[topicKey]) {
+      scores[topicKey] = { answered: 0, total: 0 };
+    }
+
+    scores[topicKey].answered += shortAnsQuizState.currentScore;
+    scores[topicKey].total += q.maxMarks;
+    localStorage.setItem(shortAnsQuizState.storageKey, JSON.stringify(scores));
+
+    // Reset score for next question
+    shortAnsQuizState.currentScore = undefined;
+  }
+
   shortAnsQuizState.qIdx++;
   renderShortAnsQuestion();
 }
