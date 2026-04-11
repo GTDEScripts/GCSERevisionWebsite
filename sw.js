@@ -1,7 +1,7 @@
 // Service Worker for GCSE Revision Website
 // Enables offline functionality and caching
 
-const CACHE_NAME = 'gcse-revision-v2';
+const CACHE_NAME = 'gcse-revision-v3';
 const urlsToCache = [
   './',
   './index.html',
@@ -35,29 +35,38 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - network-first for JS/HTML, cache-first for CSS/fonts
 self.addEventListener('fetch', event => {
-  if (event.request.url.includes('chrome-extension')) {
-    return;
-  }
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(response => {
-          if (!response || response.status !== 200 || response.type === 'error') {
-            return response;
+  if (!event.request.url.startsWith('http')) return;
+
+  const isJS = event.request.url.endsWith('.js');
+  const isHTML = event.request.destination === 'document';
+
+  if (isJS || isHTML) {
+    // Network-first: always get fresh JS and HTML
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
           }
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME)
-            .then(cache => cache.put(event.request, responseToCache));
           return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+  } else {
+    // Cache-first for CSS, fonts, images
+    event.respondWith(
+      caches.match(event.request).then(response => {
+        return response || fetch(event.request).then(res => {
+          if (res && res.status === 200) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return res;
         });
-      })
-      .catch(() => {
-        return caches.match('./index.html');
-      })
-  );
+      }).catch(() => caches.match('./index.html'))
+    );
+  }
 });
