@@ -96,6 +96,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .subj-card.sc-eng-lit::before{background:linear-gradient(180deg,#B8336A,#9D174D)}
 .subj-card.sc-eng-lang::before{background:linear-gradient(180deg,#7C3AED,#4338CA)}
 .subj-card.sc-maths::before{background:linear-gradient(180deg,#2563EB,#1E40AF)}
+.subj-card.sc-sciences::before{background:linear-gradient(180deg,#059669,#0891B2)}
 .subj-card.sc-bio::before{background:linear-gradient(180deg,#059669,#065F46)}
 .subj-card.sc-chem::before{background:linear-gradient(180deg,#D97706,#92400E)}
 .subj-card.sc-phys::before{background:linear-gradient(180deg,#DC2626,#991B1B)}
