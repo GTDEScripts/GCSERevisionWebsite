@@ -320,25 +320,26 @@ function openNotesView(id,S){
   document.getElementById('notes-view').classList.add('active');
   document.getElementById('notes-title').textContent=S.title;
   document.getElementById('notes-sub').textContent=S.sub;
-  document.getElementById('notes-back-btn').textContent='\u2190 All Subjects';
+  // Update back button text based on parent subject
+  const backLabel=app.parentSubject?SUBJECTS[app.parentSubject].title:'All Subjects';
+  document.getElementById('notes-back-btn').textContent='\u2190 '+backLabel;
   document.getElementById('notes-search').value='';
 
   // Add quiz button for humanities subjects
   const notesHeader = document.querySelector('.notes-header');
+  // Always remove and recreate the button to ensure correct subject is bound
+  const existingBtn = document.getElementById('notes-quiz-btn');
+  if (existingBtn) existingBtn.remove();
+
   if (['geography','business','computer-science'].includes(id)) {
-    if (!document.getElementById('notes-quiz-btn')) {
-      const quizBtn = document.createElement('button');
-      quizBtn.id = 'notes-quiz-btn';
-      quizBtn.className = 'btn secondary';
-      quizBtn.style.fontSize = '12px';
-      quizBtn.style.marginLeft = '12px';
-      quizBtn.textContent = '📝 Quiz';
-      quizBtn.onclick = (e) => { e.stopPropagation(); openShortAnsQuiz(id); };
-      notesHeader.appendChild(quizBtn);
-    }
-  } else {
-    const existingBtn = document.getElementById('notes-quiz-btn');
-    if (existingBtn) existingBtn.remove();
+    const quizBtn = document.createElement('button');
+    quizBtn.id = 'notes-quiz-btn';
+    quizBtn.className = 'btn secondary';
+    quizBtn.style.fontSize = '12px';
+    quizBtn.style.marginLeft = '12px';
+    quizBtn.textContent = '📝 Quiz';
+    quizBtn.onclick = (e) => { e.stopPropagation(); openShortAnsQuiz(id); };
+    notesHeader.appendChild(quizBtn);
   }
 
   renderAllNotes(currentNotesData);
@@ -346,8 +347,12 @@ function openNotesView(id,S){
 }
 function backToSubjectFromNotes(){
   document.getElementById('notes-view').classList.remove('active');
-  document.getElementById('home-screen').style.display='';
-  renderStreak();renderQOTD();
+  if(app.parentSubject){
+    openSubject(app.parentSubject);
+  }else{
+    document.getElementById('home-screen').style.display='';
+    renderStreak();renderQOTD();
+  }
   window.scrollTo(0,0);
 }
 function highlightSearch(text,query){
