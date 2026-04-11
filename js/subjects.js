@@ -46,7 +46,7 @@ const SUBJECTS = {
     title: 'Mathematics',
     sub: 'Edexcel 1MA1 · Higher Tier',
     type: 'notes',
-    data: MATHS_NOTES
+    data: MATHS_DATA
   },
 
   'biology': {
