@@ -70,6 +70,27 @@ const SUBJECTS = {
     data: PHYS_DATA
   },
 
+  'biology-edexcel': {
+    title: 'Biology',
+    sub: 'Edexcel 1BI0 · Triple Science',
+    type: 'notes',
+    data: EDEXCEL_BIO_DATA
+  },
+
+  'chemistry-edexcel': {
+    title: 'Chemistry',
+    sub: 'Edexcel 1CH0 · Triple Science',
+    type: 'notes',
+    data: EDEXCEL_CHEM_DATA
+  },
+
+  'physics-edexcel': {
+    title: 'Physics',
+    sub: 'Edexcel 1PH0 · Triple Science',
+    type: 'notes',
+    data: EDEXCEL_PHYS_DATA
+  },
+
   'geography': {
     title: 'Geography',
     sub: 'AQA 8035',
