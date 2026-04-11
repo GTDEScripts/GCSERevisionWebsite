@@ -351,9 +351,10 @@ textarea.ef-input{resize:vertical;min-height:70px;line-height:1.5}
 body.focus-mode .navbar,body.focus-mode .filter-section,body.focus-mode .search-wrap,body.focus-mode .kb-hint,body.focus-mode .streak-bar,body.focus-mode .count-badge,body.focus-mode .back-btn{display:none!important}
 body.focus-mode .tool-header{margin-bottom:.5rem}
 body.focus-mode .tool-view{padding:.5rem}
-.focus-toggle{position:fixed;top:16px;right:16px;z-index:100;width:36px;height:36px;border-radius:10px;background:var(--card-bg);border:1.5px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .3s;box-shadow:0 2px 8px var(--shadow)}
+.focus-toggle{position:fixed;top:8px;right:12px;z-index:100;width:36px;height:36px;border-radius:10px;background:var(--card-bg);border:1.5px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .3s;box-shadow:0 2px 8px var(--shadow)}
 .focus-toggle:hover{border-color:var(--accent)}
 body.focus-mode .focus-toggle{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media(max-width:640px){.focus-toggle{top:auto;bottom:16px;z-index:99}}
 /* Cloze */
 .cloze-blank{display:inline-block;min-width:60px;border-bottom:2px dashed var(--accent);color:transparent;transition:color .3s;cursor:pointer;font-weight:600;padding:0 4px;margin:0 2px}
 .cloze-blank.revealed{color:var(--accent);border-bottom-style:solid}
