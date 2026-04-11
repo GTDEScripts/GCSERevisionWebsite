@@ -1,7 +1,7 @@
 // Service Worker for GCSE Revision Website
 // Enables offline functionality and caching
 
-const CACHE_NAME = 'gcse-revision-v1';
+const CACHE_NAME = 'gcse-revision-v2';
 const urlsToCache = [
   './',
   './index.html',
@@ -37,6 +37,9 @@ self.addEventListener('activate', event => {
 
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', event => {
+  if (event.request.url.includes('chrome-extension')) {
+    return;
+  }
   event.respondWith(
     caches.match(event.request)
       .then(response => {
