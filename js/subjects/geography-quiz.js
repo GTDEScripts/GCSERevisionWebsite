@@ -184,6 +184,37 @@ const GEO_QUIZ = [
             hint: "Think about balancing today's needs with tomorrow's."
           }
         ]
+      },
+      {
+        topic: "Climate Change",
+        questions: [
+          {
+            q: "Explain the greenhouse effect and how it relates to climate change.",
+            markScheme: [
+              "Greenhouse gases trap heat in the atmosphere",
+              "Solar radiation enters atmosphere and warms surface",
+              "Surface radiates heat back as infrared radiation",
+              "Gases prevent heat from escaping to space"
+            ],
+            maxMarks: 4,
+            keywords: ["greenhouse", "gases", "trap", "heat", "infrared", "atmosphere"],
+            modelAnswer: "The greenhouse effect occurs when greenhouse gases (CO2, methane) trap heat in the atmosphere. Solar radiation enters and warms the Earth's surface. The surface radiates this energy back as infrared radiation. Greenhouse gases absorb this radiation and prevent heat from escaping to space, causing global temperatures to rise.",
+            hint: "Think of the atmosphere as a blanket trapping heat."
+          },
+          {
+            q: "Describe the impacts of climate change on sea levels.",
+            markScheme: [
+              "Thermal expansion: warmer water takes up more space",
+              "Melting ice sheets: Greenland and Antarctica contribute",
+              "Melting glaciers: mountain ice adds to ocean volume",
+              "Rising sea levels threaten low-lying coastal areas"
+            ],
+            maxMarks: 4,
+            keywords: ["thermal", "expansion", "melting", "ice", "glaciers", "rising", "coastal"],
+            modelAnswer: "Climate change raises sea levels through thermal expansion (warmer water expands) and melting ice. Greenland and Antarctic ice sheets are melting, adding water to oceans. Mountain glaciers also melt, contributing to sea level rise. This threatens coastal cities, islands, and agricultural areas.",
+            hint: "Consider both direct melting and water expansion effects."
+          }
+        ]
       }
     ]
   }

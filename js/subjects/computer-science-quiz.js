@@ -205,6 +205,32 @@ const CS_QUIZ = [
             keywords: ["strong", "password", "unauthorized", "uppercase", "lowercase", "characters"],
             modelAnswer: "Strong passwords are essential because weak passwords can be quickly cracked, allowing attackers to access accounts and data. A strong password should be at least 12 characters, mixing uppercase letters, lowercase letters, numbers, and special symbols (@#$). It should avoid dictionary words, names, and predictable patterns. This makes brute-force attacks (trying all combinations) and dictionary attacks impractical.",
             hint: "Focus on characteristics that make passwords hard to crack."
+          },
+          {
+            q: "Explain the difference between hardware and software firewalls.",
+            markScheme: [
+              "Hardware firewall: network device protecting entire network",
+              "Software firewall: installed on individual computers/devices",
+              "Hardware: blocks traffic at network boundary",
+              "Software: monitors and controls individual computer traffic"
+            ],
+            maxMarks: 4,
+            keywords: ["hardware", "software", "firewall", "network", "device", "computer"],
+            modelAnswer: "A hardware firewall is a physical device protecting an entire network by filtering traffic at the network boundary. A software firewall is installed on individual computers to monitor and control outgoing/incoming traffic on that device. Hardware firewalls protect the whole network; software firewalls protect individual devices.",
+            hint: "Think about scope of protection: whole network vs. single device."
+          },
+          {
+            q: "Explain what a DDoS attack is and how it disrupts services.",
+            markScheme: [
+              "Distributed Denial of Service: overwhelming traffic attack",
+              "Attacker sends massive traffic from multiple sources",
+              "Server cannot handle volume, crashes or becomes very slow",
+              "Legitimate users cannot access the service"
+            ],
+            maxMarks: 4,
+            keywords: ["DDoS", "denial", "service", "overwhelming", "traffic", "crash", "legitimate"],
+            modelAnswer: "A DDoS (Distributed Denial of Service) attack overwhelms a server with traffic from multiple sources, making it impossible to process legitimate requests. The server crashes or becomes so slow that legitimate users cannot access it. This disrupts online services and can cause significant business losses.",
+            hint: "Focus on the 'distributed' nature and the resulting service disruption."
           }
         ]
       }

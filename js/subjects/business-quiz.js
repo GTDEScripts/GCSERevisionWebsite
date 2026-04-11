@@ -223,6 +223,37 @@ const BUS_QUIZ = [
             keywords: ["Maslow", "Herzberg", "hierarchy", "hygiene", "motivators", "satisfaction", "needs"],
             modelAnswer: "Maslow proposed five levels of need (basic, safety, social, esteem, self-actualization) that all people progress through. Herzberg argued there are two distinct categories: hygiene factors (pay, conditions, job security) which prevent dissatisfaction, and motivators (achievement, recognition, responsibility) which create satisfaction. Improvement in hygiene doesn't motivate; only motivators drive performance.",
             hint: "Identify the key distinction in how each theory explains motivation."
+          },
+          {
+            q: "Explain why employee retention is important to a business.",
+            markScheme: [
+              "Reduces recruitment and training costs",
+              "Maintains experienced workforce with strong skills",
+              "Improves organizational culture and team cohesion",
+              "Reduces productivity loss from staff turnover"
+            ],
+            maxMarks: 4,
+            keywords: ["retention", "recruitment", "costs", "experienced", "culture", "turnover", "productivity"],
+            modelAnswer: "High staff turnover is expensive due to recruitment and training costs. Experienced employees are valuable assets with developed skills and knowledge. Retaining staff maintains team stability and improves organizational culture. Constant turnover disrupts productivity and morale, making retention economically important.",
+            hint: "Consider both financial and organizational impacts."
+          }
+        ]
+      },
+      {
+        topic: "Leadership & Management",
+        questions: [
+          {
+            q: "Compare autocratic and democratic leadership styles.",
+            markScheme: [
+              "Autocratic: leader makes all decisions with little employee input",
+              "Democratic: leader consults employees and encourages participation",
+              "Autocratic: quick decisions but may reduce employee motivation",
+              "Democratic: slower but improves morale and commitment"
+            ],
+            maxMarks: 4,
+            keywords: ["autocratic", "democratic", "decisions", "employees", "input", "participation", "motivation"],
+            modelAnswer: "Autocratic leaders make decisions without consulting employees, enabling quick action but potentially reducing motivation. Democratic leaders involve employees in decision-making, improving morale and commitment but slowing decision-making. Democratic leadership typically produces better long-term results through higher employee engagement.",
+            hint: "Consider decision-making speed versus employee satisfaction."
           }
         ]
       }
