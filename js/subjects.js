@@ -261,22 +261,4 @@ const SUBJECTS = {
     data: COMP_SCI_DATA,
     boardId: 'ocr'
   },
-
-  // ══════ POETRY ══════
-  'poetry': {
-    title: 'Poetry',
-    sub: 'Power & Conflict',
-    type: 'texts',
-    texts: ['power_conflict'],
-    textCards: {
-      power_conflict: {
-        icon: '⚔️',
-        cls: 'pac',
-        title: 'Power & Conflict Poems',
-        desc: 'Quote flashcards · Analysis · Comparison prep',
-        stats: ['90 quotes', '10 themes', '15 poems']
-      }
-    },
-    extra: []
-  }
 };
