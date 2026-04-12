@@ -45,6 +45,84 @@ function resetAllProgress(){
 }
 loadSettings();applySettings();
 
+// ══════ SWIPE & DRAG HANDLING ══════
+let swipeState={startX:0,startY:0,isDragging:false};
+function initSwipeListeners(){
+  const cardWrap=document.querySelector('.card-wrap');
+  if(!cardWrap)return;
+
+  // Touch events for mobile swipe
+  cardWrap.addEventListener('touchstart',e=>{
+    swipeState.startX=e.touches[0].clientX;
+    swipeState.startY=e.touches[0].clientY;
+    swipeState.isDragging=true;
+  });
+
+  cardWrap.addEventListener('touchmove',e=>{
+    if(!swipeState.isDragging)return;
+    const deltaX=e.touches[0].clientX-swipeState.startX;
+    const deltaY=e.touches[0].clientY-swipeState.startY;
+    const threshold=50;
+    if(Math.abs(deltaX)>Math.abs(deltaY)&&Math.abs(deltaX)>threshold){
+      e.preventDefault();
+      const card=document.getElementById('card');
+      if(card)card.style.transform=`translateX(${deltaX*0.3}px)`;
+    }
+  });
+
+  cardWrap.addEventListener('touchend',e=>{
+    const deltaX=e.changedTouches[0].clientX-swipeState.startX;
+    const threshold=50;
+    const card=document.getElementById('card');
+    if(card)card.style.transform='';
+    if(Math.abs(deltaX)>threshold){
+      if(deltaX>0)prev();
+      else next();
+    }
+    swipeState.isDragging=false;
+  });
+
+  // Mouse events for desktop drag
+  cardWrap.addEventListener('mousedown',e=>{
+    if(e.button!==0)return;
+    swipeState.startX=e.clientX;
+    swipeState.startY=e.clientY;
+    swipeState.isDragging=true;
+  });
+
+  cardWrap.addEventListener('mousemove',e=>{
+    if(!swipeState.isDragging)return;
+    const deltaX=e.clientX-swipeState.startX;
+    const deltaY=e.clientY-swipeState.startY;
+    const threshold=50;
+    if(Math.abs(deltaX)>Math.abs(deltaY)&&Math.abs(deltaX)>threshold){
+      const card=document.getElementById('card');
+      if(card)card.style.transform=`translateX(${deltaX*0.3}px)`;
+    }
+  });
+
+  cardWrap.addEventListener('mouseup',e=>{
+    const deltaX=e.clientX-swipeState.startX;
+    const threshold=50;
+    const card=document.getElementById('card');
+    if(card)card.style.transform='';
+    if(Math.abs(deltaX)>threshold){
+      if(deltaX>0)prev();
+      else next();
+    }
+    swipeState.isDragging=false;
+  });
+
+  cardWrap.addEventListener('mouseleave',()=>{
+    if(swipeState.isDragging){
+      const card=document.getElementById('card');
+      if(card)card.style.transform='';
+      swipeState.isDragging=false;
+    }
+  });
+}
+window.addEventListener('load',initSwipeListeners);
+
 // ══════ TECHNIQUE & THEME MAPS ══════
 const DC={metaphor:{bg:'#DBEAFE',c:'#1E40AF'},simile:{bg:'#D1FAE5',c:'#065F46'},soliloquy:{bg:'#FCE7F3',c:'#9D174D'},aside:{bg:'#FED7AA',c:'#9A3412'},imagery:{bg:'#D9F99D',c:'#3F6212'},alliteration:{bg:'#E0E7FF',c:'#4338CA'},repetition:{bg:'#FEF3C7',c:'#92400E'},rhetorical_question:{bg:'#FEE2E2',c:'#991B1B'},exclamation:{bg:'#FFEDD5',c:'#9A3412'},hamartia:{bg:'#EDE9FE',c:'#5B21B6'},dramatic_irony:{bg:'#CCFBF1',c:'#115E59'},imperative:{bg:'#ECFCCB',c:'#3F6212'},antithesis:{bg:'#DBEAFE',c:'#1E40AF'},hubris:{bg:'#FEE2E2',c:'#991B1B'},motif:{bg:'#FEF3C7',c:'#92400E'},hyperbole:{bg:'#FFEDD5',c:'#9A3412'},apostrophe:{bg:'#FCE7F3',c:'#9D174D'},biblical_allusion:{bg:'#D9F99D',c:'#3F6212'},structural_irony:{bg:'#DBEAFE',c:'#1E40AF'},paradox:{bg:'#F5D0FE',c:'#86198F'},parallelism:{bg:'#FEF3C7',c:'#92400E'},personification:{bg:'#CCFBF1',c:'#115E59'},nihilism:{bg:'#FEE2E2',c:'#991B1B'},pathos:{bg:'#FFEDD5',c:'#9A3412'},anagnorisis:{bg:'#EDE9FE',c:'#5B21B6'},assonance:{bg:'#DBEAFE',c:'#1E40AF'},symbolism:{bg:'#F5D0FE',c:'#86198F'},foreshadowing:{bg:'#FCE7F3',c:'#9D174D'},stage_directions:{bg:'#E0E7FF',c:'#4338CA'},euphemism:{bg:'#FED7AA',c:'#9A3412'},listing:{bg:'#ECFCCB',c:'#3F6212'},allegory:{bg:'#EDE9FE',c:'#5B21B6'},pathetic_fallacy:{bg:'#D1FAE5',c:'#065F46'},anaphora:{bg:'#DBEAFE',c:'#1E40AF'},tricolon:{bg:'#FEF3C7',c:'#92400E'}};
 const techNames={metaphor:'metaphor',simile:'simile',soliloquy:'soliloquy',aside:'aside',imagery:'imagery',alliteration:'alliteration',repetition:'repetition',rhetorical_question:'rhetorical question',exclamation:'exclamation',hamartia:'hamartia',dramatic_irony:'dramatic irony',imperative:'imperative',antithesis:'antithesis',hubris:'hubris',motif:'motif',hyperbole:'hyperbole',apostrophe:'apostrophe',biblical_allusion:'biblical allusion',structural_irony:'structural irony',paradox:'paradox',parallelism:'parallelism',personification:'personification',nihilism:'nihilism',pathos:'pathos',anagnorisis:'anagnorisis',assonance:'assonance',symbolism:'symbolism',foreshadowing:'foreshadowing',stage_directions:'stage directions',euphemism:'euphemism',listing:'listing',allegory:'allegory',pathetic_fallacy:'pathetic fallacy',anaphora:'anaphora',tricolon:'tricolon'};
