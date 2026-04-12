@@ -191,7 +191,7 @@ function showBoardContent(id){
   grid.innerHTML='';
 
   subjects.forEach(subj=>{
-    grid.innerHTML+=`<div class="text-card" data-text-id="${subj.id}" onclick="openSubject('${subj.id}');window.location.hash='${id}/${subj.id}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${subj.icon}</span><div class="card-title">${subj.title}</div><div class="card-desc">${subj.sub}</div></div>`;
+    grid.innerHTML+=`<div class="text-card" data-text-id="${subj.id}" onclick="app.parentSubject='${id}';openSubject('${subj.id}');window.location.hash='${id}/${subj.id}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${subj.icon}</span><div class="card-title">${subj.title}</div><div class="card-desc">${subj.sub}</div></div>`;
   });
 
   document.getElementById('home-screen').style.display='none';
