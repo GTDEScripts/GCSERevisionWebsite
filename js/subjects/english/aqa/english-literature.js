@@ -8,6 +8,7 @@ const TEXTS = {
   unitBg:{1:'#DBEAFE',2:'#D1FAE5',3:'#FFEDD5',4:'#D9F99D',5:'#FCE7F3'},
   unitText:{1:'#1E40AF',2:'#065F46',3:'#9A3412',4:'#3F6212',5:'#9D174D'},
   themes:{ambition:{bg:'#FEF3C7',c:'#92400E'},guilt:{bg:'#FEE2E2',c:'#991B1B'},power:{bg:'#EDE9FE',c:'#5B21B6'},deception:{bg:'#CCFBF1',c:'#115E59'},gender:{bg:'#FCE7F3',c:'#9D174D'},supernatural:{bg:'#D9F99D',c:'#3F6212'},fate:{bg:'#DBEAFE',c:'#1E40AF'},loyalty:{bg:'#FFEDD5',c:'#9A3412'},chaos:{bg:'#F3F4F6',c:'#4B5563'},nature:{bg:'#D1FAE5',c:'#065F46'}},
+  contextWords:['macbeth','shakespeare','ambition','guilt','power','witches','lady macbeth','supernatural','scotland','king','murder','blood','fate','evil','darkness','light','madness','sleep','nature','chaos','order','masculinity','femininity','betrayal','loyalty','divine','justice'],
   quotes: [
     {
       quote: 'Fair is foul, and foul is fair',

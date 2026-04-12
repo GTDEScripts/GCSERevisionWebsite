@@ -61,6 +61,7 @@ const POWER_CONFLICT = {
     reality_of_war: { bg: '#CCFBF1', c: '#115E59' },
     anger: { bg: '#D9F99D', c: '#3F6212' }
   },
+  contextWords: ['power', 'conflict', 'war', 'poetry', 'poem', 'poet', 'theme', 'imagery', 'structure', 'technique', 'violence', 'death', 'nature', 'love', 'loss', 'identity', 'duty', 'pride', 'suffering', 'memory', 'historical', 'metaphor', 'simile', 'personification', 'symbolism', 'alliteration', 'repetition'],
   quotes: [
 
     // ── OZYMANDIAS (Shelley, 1818) ──────────────────────────────────
