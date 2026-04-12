@@ -170,7 +170,7 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .hint{font-size:calc(12px * var(--font-scale));color:var(--text3)}
 .shuffle-btn{font-size:calc(11px * var(--font-scale));color:var(--accent);background:none;border:1px solid var(--accent);cursor:pointer;padding:4px 14px;border-radius:99px;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .2s}
 .shuffle-btn:hover{background:var(--accent);color:#fff}
-.card-wrap{perspective:1000px;width:100%;max-width:720px;min-height:380px;cursor:pointer;margin:0 auto}
+.card-wrap{perspective:1000px;width:100%;max-width:720px;min-height:380px;cursor:pointer;margin:0 auto;user-select:none}
 .card{width:100%;min-height:380px;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
 .card.flipped{transform:rotateY(180deg)}
 .card.no-transition{transition:none!important}
