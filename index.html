@@ -159,15 +159,15 @@
 <button class="back-btn" id="tool-back-btn" onclick="backToSubject()">← Back</button>
 <div class="tool-header"><h1 id="tool-title"></h1><div class="sub" id="tool-sub"></div></div>
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('flashcards',this)">📇 CARDS</button>
-  <button class="tab-btn" onclick="switchTab('test',this)">🧠 QUIZ</button>
-  <button class="tab-btn" onclick="switchTab('dashboard',this)">📊 STATS</button>
-  <button class="tab-btn" onclick="switchTab('essay',this)">📝 ESSAY</button>
-  <button class="tab-btn" onclick="switchTab('checker',this)">✍️ CHECKER</button>
-  <button class="tab-btn" onclick="switchTab('exam',this)">⏱️ EXAM</button>
-  <button class="tab-btn" onclick="switchTab('tracker',this)">✅ PROGRESS</button>
-  <button class="tab-btn" onclick="switchTab('compare',this)">⚖️ COMPARE</button>
-  <button class="tab-btn" onclick="switchTab('editor',this)">✏️ EDITOR</button>
+  <button class="tab-btn active" data-tool="flashcards" onclick="switchTab('flashcards',this)">📇 CARDS</button>
+  <button class="tab-btn" data-tool="test" onclick="switchTab('test',this)">🧠 QUIZ</button>
+  <button class="tab-btn" data-tool="dashboard" onclick="switchTab('dashboard',this)">📊 STATS</button>
+  <button class="tab-btn" data-tool="essay" onclick="switchTab('essay',this)">📝 ESSAY</button>
+  <button class="tab-btn" data-tool="checker" onclick="switchTab('checker',this)">✍️ CHECKER</button>
+  <button class="tab-btn" data-tool="exam" onclick="switchTab('exam',this)">⏱️ EXAM</button>
+  <button class="tab-btn" data-tool="tracker" onclick="switchTab('tracker',this)">✅ PROGRESS</button>
+  <button class="tab-btn" data-tool="compare" onclick="switchTab('compare',this)">⚖️ COMPARE</button>
+  <button class="tab-btn" data-tool="editor" onclick="switchTab('editor',this)">✏️ EDITOR</button>
 </div>
 <!-- FLASHCARDS -->
 <div class="tab-content active" id="tab-flashcards">
