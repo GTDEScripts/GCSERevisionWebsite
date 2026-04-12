@@ -169,7 +169,7 @@ function showBoardSelector(id){
       grid.innerHTML+=`<div class="text-card disabled"><span class="card-badge badge-soon">Coming soon</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">Exam board content</div></div>`;
     }else{
       const boardTitle=S.title+' - '+b.title;
-      grid.innerHTML+=`<div class="text-card board-option" onclick="openSubjectWithRoute('${b.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">${boardTitle}</div></div>`;
+      grid.innerHTML+=`<div class="text-card board-option" data-text-id="${b.id}" onclick="openSubjectWithRoute('${b.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">${boardTitle}</div></div>`;
     }
   });
 
@@ -190,7 +190,7 @@ function showBoardContent(id){
   grid.innerHTML='';
 
   subjects.forEach(subj=>{
-    grid.innerHTML+=`<div class="text-card" onclick="openSubject('${subj.id}');window.location.hash='${id}/${subj.id}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${subj.icon}</span><div class="card-title">${subj.title}</div><div class="card-desc">${subj.sub}</div></div>`;
+    grid.innerHTML+=`<div class="text-card" data-text-id="${subj.id}" onclick="openSubject('${subj.id}');window.location.hash='${id}/${subj.id}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${subj.icon}</span><div class="card-title">${subj.title}</div><div class="card-desc">${subj.sub}</div></div>`;
   });
 
   document.getElementById('home-screen').style.display='none';
