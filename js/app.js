@@ -525,7 +525,10 @@ function filterNotes(){renderAllNotes(currentNotesData,document.getElementById('
 // ══════ KEYBOARD SHORTCUTS ══════
 document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;if(!app.currentTextId)return;const tab=document.querySelector('#tab-flashcards.active');if(!tab)return;switch(e.key){case ' ':case'Enter':e.preventDefault();flip();break;case'ArrowRight':e.preventDefault();next();break;case'ArrowLeft':e.preventDefault();prev();break;case'1':e.preventDefault();rateDifficulty(0);break;case'2':e.preventDefault();rateDifficulty(1);break;case'3':e.preventDefault();rateDifficulty(2);break;case's':e.preventDefault();shuffle();break;case'r':e.preventDefault();if(typeof speakQuote==='function')speakQuote();break}});
 
+// ══════ URL ROUTING ══════
+function initRouter(){window.addEventListener('hashchange',handleRoute);handleRoute()}function handleRoute(){const hash=window.location.hash.slice(1);if(!hash||hash==='home'){navGo('home')}else{const[view,param]=hash.split('/');if(view==='subject'&&param){openSubject(param)}}}function openSubjectWithRoute(id){window.location.hash=`subject/${id}`;openSubject(id)}
+
 // ══════ INIT ══════
-renderStreak();renderQOTD();
+initRouter();renderStreak();renderQOTD();
 
 
