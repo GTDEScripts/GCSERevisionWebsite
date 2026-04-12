@@ -15,6 +15,7 @@ function toggleSettings(){document.getElementById('settings-overlay').classList.
 function toggleDark(){settings.dark=!settings.dark;saveSettings();applySettings()}
 function navGo(target){
   if(target==='home'){
+    window.location.hash='';
     document.getElementById('tool-view').classList.remove('active');
     document.getElementById('subject-view').classList.remove('active');
     document.getElementById('notes-view').classList.remove('active');
@@ -272,7 +273,7 @@ function openSubjectFromBoard(subjectId,boardId){
   app.parentSubject=boardId;
   openSubject(subjectId);
 }
-function backToHome(){app.parentSubject=null;document.getElementById('subject-view').classList.remove('active');document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('home-screen').style.display='';if(exam.timer){clearInterval(exam.timer);exam.timer=null}stopTTS();renderStreak();renderQOTD();updateNavTabs('home');window.scrollTo(0,0)}
+function backToHome(){window.location.hash='';app.parentSubject=null;document.getElementById('subject-view').classList.remove('active');document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('home-screen').style.display='';if(exam.timer){clearInterval(exam.timer);exam.timer=null}stopTTS();renderStreak();renderQOTD();updateNavTabs('home');window.scrollTo(0,0)}
 function backToParent(){if(app.parentSubject){openSubject(app.parentSubject)}else{backToHome()}}
 function backToSubject(){document.getElementById('tool-view').classList.remove('active');document.getElementById('subject-view').classList.add('active');if(exam.timer){clearInterval(exam.timer);exam.timer=null}window.scrollTo(0,0)}
 
