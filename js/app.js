@@ -46,80 +46,65 @@ function resetAllProgress(){
 loadSettings();applySettings();
 
 // ══════ SWIPE & DRAG HANDLING ══════
-let swipeState={startX:0,startY:0,isDragging:false};
+let _swipeDragging=false,_swipeStartX=0,_swipeStartY=0,_swipeMoved=false;
 function initSwipeListeners(){
   const cardWrap=document.querySelector('.card-wrap');
   if(!cardWrap)return;
 
-  // Touch events for mobile swipe
-  cardWrap.addEventListener('touchstart',e=>{
-    swipeState.startX=e.touches[0].clientX;
-    swipeState.startY=e.touches[0].clientY;
-    swipeState.isDragging=true;
-  });
+  function startDrag(x,y){
+    _swipeStartX=x;_swipeStartY=y;_swipeDragging=true;_swipeMoved=false;
+    cardWrap.style.transition='none';
+  }
 
+  function moveDrag(x,y){
+    if(!_swipeDragging)return;
+    const dx=x-_swipeStartX,dy=y-_swipeStartY;
+    if(!_swipeMoved&&Math.abs(dx)<8)return;
+    if(!_swipeMoved&&Math.abs(dy)>Math.abs(dx)){_swipeDragging=false;return;}
+    _swipeMoved=true;
+    const rot=dx*0.04;
+    cardWrap.style.transform=`translateX(${dx}px) rotate(${rot}deg)`;
+    cardWrap.style.opacity=String(Math.max(0.5,1-Math.abs(dx)/500));
+  }
+
+  function endDrag(x){
+    if(!_swipeDragging)return;
+    _swipeDragging=false;
+    const dx=x-_swipeStartX;
+    const THRESHOLD=80;
+    cardWrap.style.transition='transform 0.3s ease, opacity 0.3s ease';
+    if(_swipeMoved&&Math.abs(dx)>THRESHOLD){
+      const dir=dx>0?1:-1;
+      cardWrap.style.transform=`translateX(${dir*110}vw) rotate(${dir*20}deg)`;
+      cardWrap.style.opacity='0';
+      setTimeout(()=>{
+        cardWrap.style.transition='none';
+        cardWrap.style.transform='';
+        cardWrap.style.opacity='';
+        if(dir>0)prev();else next();
+      },300);
+    }else{
+      cardWrap.style.transform='';
+      cardWrap.style.opacity='';
+    }
+  }
+
+  // Block flip click if we actually dragged
+  cardWrap.addEventListener('click',e=>{if(_swipeMoved)e.stopImmediatePropagation();},{capture:true});
+
+  // Touch
+  cardWrap.addEventListener('touchstart',e=>startDrag(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
   cardWrap.addEventListener('touchmove',e=>{
-    if(!swipeState.isDragging)return;
-    const deltaX=e.touches[0].clientX-swipeState.startX;
-    const deltaY=e.touches[0].clientY-swipeState.startY;
-    const threshold=50;
-    if(Math.abs(deltaX)>Math.abs(deltaY)&&Math.abs(deltaX)>threshold){
-      e.preventDefault();
-      const card=document.getElementById('card');
-      if(card)card.style.transform=`translateX(${deltaX*0.3}px)`;
-    }
-  });
+    if(!_swipeDragging)return;
+    if(e.cancelable)e.preventDefault();
+    moveDrag(e.touches[0].clientX,e.touches[0].clientY);
+  },{passive:false});
+  cardWrap.addEventListener('touchend',e=>endDrag(e.changedTouches[0].clientX));
 
-  cardWrap.addEventListener('touchend',e=>{
-    const deltaX=e.changedTouches[0].clientX-swipeState.startX;
-    const threshold=50;
-    const card=document.getElementById('card');
-    if(card)card.style.transform='';
-    if(Math.abs(deltaX)>threshold){
-      if(deltaX>0)prev();
-      else next();
-    }
-    swipeState.isDragging=false;
-  });
-
-  // Mouse events for desktop drag
-  cardWrap.addEventListener('mousedown',e=>{
-    if(e.button!==0)return;
-    swipeState.startX=e.clientX;
-    swipeState.startY=e.clientY;
-    swipeState.isDragging=true;
-  });
-
-  cardWrap.addEventListener('mousemove',e=>{
-    if(!swipeState.isDragging)return;
-    const deltaX=e.clientX-swipeState.startX;
-    const deltaY=e.clientY-swipeState.startY;
-    const threshold=50;
-    if(Math.abs(deltaX)>Math.abs(deltaY)&&Math.abs(deltaX)>threshold){
-      const card=document.getElementById('card');
-      if(card)card.style.transform=`translateX(${deltaX*0.3}px)`;
-    }
-  });
-
-  cardWrap.addEventListener('mouseup',e=>{
-    const deltaX=e.clientX-swipeState.startX;
-    const threshold=50;
-    const card=document.getElementById('card');
-    if(card)card.style.transform='';
-    if(Math.abs(deltaX)>threshold){
-      if(deltaX>0)prev();
-      else next();
-    }
-    swipeState.isDragging=false;
-  });
-
-  cardWrap.addEventListener('mouseleave',()=>{
-    if(swipeState.isDragging){
-      const card=document.getElementById('card');
-      if(card)card.style.transform='';
-      swipeState.isDragging=false;
-    }
-  });
+  // Mouse — attach move/up to window so fast drags don't break
+  cardWrap.addEventListener('mousedown',e=>{if(e.button===0)startDrag(e.clientX,e.clientY);});
+  window.addEventListener('mousemove',e=>{if(_swipeDragging)moveDrag(e.clientX,e.clientY);});
+  window.addEventListener('mouseup',e=>{if(_swipeDragging)endDrag(e.clientX);});
 }
 window.addEventListener('load',initSwipeListeners);
 
