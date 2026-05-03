@@ -194,10 +194,11 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .analysis-bullets,.context-bullets{list-style:none;padding:0;margin:0 0 10px;width:100%;text-align:left}
 .analysis-bullets li,.context-bullets li{position:relative;padding:5px 0 5px 20px;font-size:calc(15px * var(--font-scale));line-height:1.65;border-bottom:1px solid var(--border)}
 .analysis-bullets li:last-child,.context-bullets li:last-child{border-bottom:none}
-.analysis-bullets li{color:var(--text)}
-.context-bullets li{color:var(--text2);font-size:calc(14px * var(--font-scale))}
-.analysis-bullets li::before,.context-bullets li::before{content:'▸';position:absolute;left:2px;color:var(--accent);font-weight:700;font-size:calc(11px * var(--font-scale))}
+.analysis-bullets li{color:var(--text);border-left:3px solid var(--card-accent,var(--accent));padding-left:22px}
+.context-bullets li{color:var(--text2);font-size:calc(14px * var(--font-scale));border-left:3px solid var(--card-accent,var(--accent));opacity:0.85;padding-left:22px}
+.analysis-bullets li::before,.context-bullets li::before{content:'▸';position:absolute;left:4px;color:var(--card-accent,var(--accent));font-weight:700;font-size:calc(11px * var(--font-scale))}
 .tech-hl{font-weight:600;padding:1px 7px;border-radius:5px;font-size:calc(12px * var(--font-scale));white-space:nowrap}
+.q-word{font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;font-style:normal}
 mark.search-hl{background:#FEF08A;color:#713F12;padding:1px 3px;border-radius:3px;font-weight:600}
 .pill{font-size:calc(10px * var(--font-scale));font-weight:600;padding:3px 10px;border-radius:99px;display:inline-block;margin:2px;letter-spacing:.2px}
 /* SR BUTTONS */
