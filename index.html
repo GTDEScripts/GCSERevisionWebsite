@@ -158,17 +158,19 @@
 <div class="tool-view" id="tool-view">
 <button class="back-btn" id="tool-back-btn" onclick="backToSubject()">← Back</button>
 <div class="tool-header"><h1 id="tool-title"></h1><div class="sub" id="tool-sub"></div></div>
+<div class="tool-body">
 <div class="tab-bar">
-  <button class="tab-btn active" data-tool="flashcards" onclick="switchTab('flashcards',this)">📇 CARDS</button>
-  <button class="tab-btn" data-tool="test" onclick="switchTab('test',this)">🧠 QUIZ</button>
-  <button class="tab-btn" data-tool="dashboard" onclick="switchTab('dashboard',this)">📊 STATS</button>
-  <button class="tab-btn" data-tool="essay" onclick="switchTab('essay',this)">📝 ESSAY</button>
-  <button class="tab-btn" data-tool="checker" onclick="switchTab('checker',this)">✍️ CHECKER</button>
-  <button class="tab-btn" data-tool="exam" onclick="switchTab('exam',this)">⏱️ EXAM</button>
-  <button class="tab-btn" data-tool="tracker" onclick="switchTab('tracker',this)">✅ PROGRESS</button>
-  <button class="tab-btn" data-tool="compare" onclick="switchTab('compare',this)">⚖️ COMPARE</button>
-  <button class="tab-btn" data-tool="editor" onclick="switchTab('editor',this)">✏️ EDITOR</button>
+  <button class="tab-btn active" data-tool="flashcards" onclick="switchTab('flashcards',this)"><span class="tab-icon">📇</span><span class="tab-label">CARDS</span></button>
+  <button class="tab-btn" data-tool="test" onclick="switchTab('test',this)"><span class="tab-icon">🧠</span><span class="tab-label">QUIZ</span></button>
+  <button class="tab-btn" data-tool="dashboard" onclick="switchTab('dashboard',this)"><span class="tab-icon">📊</span><span class="tab-label">STATS</span></button>
+  <button class="tab-btn" data-tool="essay" onclick="switchTab('essay',this)"><span class="tab-icon">📝</span><span class="tab-label">ESSAY</span></button>
+  <button class="tab-btn" data-tool="checker" onclick="switchTab('checker',this)"><span class="tab-icon">✍️</span><span class="tab-label">CHECK</span></button>
+  <button class="tab-btn" data-tool="exam" onclick="switchTab('exam',this)"><span class="tab-icon">⏱️</span><span class="tab-label">EXAM</span></button>
+  <button class="tab-btn" data-tool="tracker" onclick="switchTab('tracker',this)"><span class="tab-icon">✅</span><span class="tab-label">TRACK</span></button>
+  <button class="tab-btn" data-tool="compare" onclick="switchTab('compare',this)"><span class="tab-icon">⚖️</span><span class="tab-label">COMP</span></button>
+  <button class="tab-btn" data-tool="editor" onclick="switchTab('editor',this)"><span class="tab-icon">✏️</span><span class="tab-label">EDIT</span></button>
 </div>
+<div class="tool-content">
 <!-- FLASHCARDS -->
 <div class="tab-content active" id="tab-flashcards">
 <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="search-input" type="text" placeholder="Search quotes by keyword..." oninput="searchQuotes()"></div>
@@ -214,6 +216,7 @@
 </div>
 <!-- EDITOR -->
 <div class="tab-content" id="tab-editor"><div class="editor-section"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><p style="font-size:13px;color:var(--text2)"><span id="editor-count">0</span> custom quotes</p><button class="shuffle-btn" onclick="showAddForm()" id="add-new-btn">+ ADD NEW QUOTE</button></div><div id="editor-form-wrap" style="display:none;margin-bottom:16px"><div class="editor-form"><h3 id="ef-title">Add New Quote</h3><div class="ef-row"><label class="ef-label">Quote</label><input class="ef-input" id="ef-quote" placeholder="Enter quote..."></div><div class="ef-row-inline"><div class="ef-row"><label class="ef-label">Speaker</label><input class="ef-input" id="ef-speaker" placeholder="e.g. Macbeth"></div><div class="ef-row" style="max-width:80px"><label class="ef-label" id="ef-unit-label">Act</label><select class="ef-input" id="ef-act"></select></div></div><div class="ef-row"><label class="ef-label">Themes</label><div class="ef-chips" id="ef-themes"></div></div><div class="ef-row"><label class="ef-label">Techniques</label><div class="ef-chips" id="ef-techniques"></div></div><div class="ef-row"><label class="ef-label">Word-level analysis</label><textarea class="ef-input" id="ef-word" placeholder="Write your analysis..."></textarea></div><div class="ef-row"><label class="ef-label">Context link</label><textarea class="ef-input" id="ef-context" placeholder="Historical/social context..." style="min-height:50px"></textarea></div><div class="ef-actions"><button class="ef-cancel" onclick="cancelEdit()">CANCEL</button><button class="ef-submit" id="ef-submit" onclick="saveQuote()">ADD QUOTE</button></div></div></div><div id="editor-list"></div><div style="margin-top:16px;padding-top:12px;border-top:1.5px solid var(--border);display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="ef-cancel" onclick="exportAll()" style="font-size:11px;padding:8px 16px">📤 EXPORT</button><button class="ef-cancel" onclick="document.getElementById('import-file').click()" style="font-size:11px;padding:8px 16px">📥 IMPORT</button><input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)"></div></div></div>
+</div></div>
 </div>
 
 <!-- ═══ SCIENCE QUIZ VIEW ═══ -->

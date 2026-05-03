@@ -142,10 +142,18 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .tool-header .sub{font-size:calc(13px * var(--font-scale));color:var(--text3);margin-top:4px;letter-spacing:1px;text-transform:uppercase}
 /* TABS */
 .tab-bar{display:flex;gap:4px;justify-content:center;margin-bottom:1rem;flex-wrap:wrap}
-.tab-btn{font-size:calc(10px * var(--font-scale));font-weight:600;padding:6px 14px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;letter-spacing:.4px;text-transform:uppercase;transition:all .25s cubic-bezier(.4,0,.2,1);font-family:'DM Sans',sans-serif}
+.tab-btn{display:inline-flex;align-items:center;gap:3px;font-size:calc(10px * var(--font-scale));font-weight:600;padding:6px 14px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;letter-spacing:.4px;text-transform:uppercase;transition:all .25s cubic-bezier(.4,0,.2,1);font-family:'DM Sans',sans-serif}
 .tab-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--glow)}
 .tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 2px 12px var(--glow)}
 .tab-content{display:none}.tab-content.active{display:block}
+@media(min-width:640px){
+  .tool-body{display:flex;align-items:flex-start;gap:14px}
+  .tool-content{flex:1;min-width:0}
+  .tab-bar{flex-direction:column;width:80px;flex-shrink:0;margin-bottom:0;gap:4px;justify-content:flex-start;position:sticky;top:80px}
+  .tab-bar .tab-btn{flex-direction:column;padding:10px 6px;border-radius:14px;gap:4px;width:100%;text-align:center;justify-content:center;letter-spacing:0}
+  .tab-bar .tab-icon{font-size:20px;line-height:1}
+  .tab-bar .tab-label{font-size:calc(8px * var(--font-scale));letter-spacing:.3px;line-height:1.2}
+}
 /* SEARCH & FILTERS */
 .search-wrap{max-width:720px;margin:0 auto 12px;position:relative}
 .search-input{width:100%;font-family:'DM Sans',sans-serif;font-size:calc(13px * var(--font-scale));padding:10px 14px 10px 36px;border-radius:10px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text);transition:border-color .3s,box-shadow .3s}
