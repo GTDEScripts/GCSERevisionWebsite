@@ -344,6 +344,13 @@ function openTool(id){console.log('BASE', id, app.currentText, TEXTS[id], app.al
 function switchTab(t,btn){document.querySelectorAll('#tool-view .tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('#tool-view .tab-bar .tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');btn.classList.add('active');window.location.hash=`${app.currentSubject}/${app.currentTextId}/${t}`;if(t==='test')startTest();if(t==='tracker')renderTracker();if(t==='essay')buildEssayThemes();if(t==='editor')renderEditor();if(t==='dashboard')renderDashboard();if(t==='exam'){if(exam.timer)clearInterval(exam.timer);document.getElementById('exam-setup').style.display='';document.getElementById('exam-active').style.display='none';document.getElementById('exam-results').style.display='none'}}
 
 // ══════ FLASHCARDS ══════
+function toBulletList(text,hl){
+  if(!text)return'';
+  const items=Array.isArray(text)?text:text.split(/\.\s+(?=[A-Z“"])/).filter(s=>s.trim().length>8);
+  if(items.length<=1){const s=Array.isArray(text)?text[0]||'':text;return hl?highlightTechniques(s):s;}
+  const cls=hl?'analysis-bullets':'context-bullets';
+  return`<ul class="${cls}">${items.map(s=>{const c=s.trim().replace(/\.$/,'');return`<li>${hl?highlightTechniques(c):c}</li>`;}).join('')}</ul>`;
+}
 function getSource(){if(cards.mode==='best')return app.bestQuotes;if(cards.mode==='due')return getDueCards();if(cards.mode==='weak')return getWeakCards();if(cards.mode==='fav')return getFavCards();if(cards.mode==='cloze')return app.allQuotes;return app.allQuotes}
 function getFavCards(){return app.allQuotes.filter(c=>favourites[quoteHash(c)])}
 function toggleFav(){if(!cards.deck.length)return;const h=quoteHash(cards.deck[cards.index]);favourites[h]=!favourites[h];if(!favourites[h])delete favourites[h];saveFav();updateFavBtn();updateModeCounters()}
@@ -352,19 +359,12 @@ function pills(arr,cMap){return arr.map(x=>{const c=cMap[x]||{bg:'#F3F4F6',c:'#4
 function render(){if(!cards.deck.length){document.getElementById('quote-text').textContent='No quotes match.';document.getElementById('front-badge').style.display='none';document.getElementById('front-devices').innerHTML='';document.getElementById('progress').textContent='0 / 0';document.getElementById('prev-btn').disabled=true;document.getElementById('next-btn').disabled=true;document.getElementById('count-badge').textContent='Try removing a filter';document.getElementById('card').classList.remove('flipped');return}if(cards.index>=cards.deck.length)cards.index=cards.deck.length-1;document.getElementById('front-badge').style.display='inline-block';const c=cards.deck[cards.index];const bs=`background:${app.currentText.unitBg[c.act]};color:${app.currentText.unitText[c.act]};`;document.getElementById('front-badge').style.cssText=bs;document.getElementById('front-badge').textContent=app.currentText.unitLabel.toUpperCase()+' '+c.act;
 // Cloze mode: blank key words
 if(cards.mode==='cloze'){const words=c.quote.split(' ');const blanked=words.map((w,i)=>{if(w.length>3&&i%3===1)return`<span class="cloze-blank" onclick="event.stopPropagation();this.classList.add('revealed')">${w}</span>`;return w}).join(' ');document.getElementById('quote-text').innerHTML='\u201C'+blanked+'\u201D'}else{document.getElementById('quote-text').textContent='\u201C'+c.quote+'\u201D'}
-document.getElementById('front-devices').innerHTML=pills(c.devices,DC);document.getElementById('back-badge').style.cssText=bs;document.getElementById('back-badge').textContent=app.currentText.unitLabel.toUpperCase()+' '+c.act;document.getElementById('back-speaker').textContent=c.speaker;document.getElementById('back-themes').innerHTML=pills(c.themes,app.currentText.themes);document.getElementById('back-word').innerHTML=highlightTechniques(c.analysis);document.getElementById('back-context').textContent=c.context;document.getElementById('progress').textContent=(cards.index+1)+' / '+cards.deck.length;document.getElementById('prev-btn').disabled=cards.index===0;document.getElementById('next-btn').disabled=cards.index===cards.deck.length-1;document.getElementById('card').classList.toggle('flipped',cards.isFlipped);document.getElementById('count-badge').textContent=cards.deck.length+' quotes';updateSRHints();updateFavBtn();updateCardRatingTag()}
+document.getElementById('front-devices').innerHTML=pills(c.devices,DC);document.getElementById('back-badge').style.cssText=bs;document.getElementById('back-badge').textContent=app.currentText.unitLabel.toUpperCase()+' '+c.act;document.getElementById('back-speaker').textContent=c.speaker;document.getElementById('back-themes').innerHTML=pills(c.themes,app.currentText.themes);document.getElementById('back-word').innerHTML=toBulletList(c.analysis,true);document.getElementById('back-context').innerHTML=toBulletList(c.context,false);document.getElementById('progress').textContent=(cards.index+1)+' / '+cards.deck.length;document.getElementById('prev-btn').disabled=cards.index===0;document.getElementById('next-btn').disabled=cards.index===cards.deck.length-1;document.getElementById('card').classList.toggle('flipped',cards.isFlipped);document.getElementById('count-badge').textContent=cards.deck.length+' quotes';updateSRHints();updateFavBtn();updateCardRatingTag()}
 function flip(){cards.isFlipped=!cards.isFlipped;render()}
 function stopTTS(){try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}ttsActive=false;const b=document.getElementById('tts-btn');if(b)b.classList.remove('speaking')}
 function navCard(){
-  const card=document.getElementById('card');
-  card.style.transition='none';
-  card.style.transformStyle='flat';
-  card.classList.remove('flipped');
-  void card.offsetHeight;
+  document.getElementById('card').classList.remove('flipped');
   render();
-  card.style.transformStyle='preserve-3d';
-  void card.offsetHeight;
-  requestAnimationFrame(()=>{card.style.transition=''});
 }
 function next(){if(cards.index<cards.deck.length-1){cards.index++;cards.isFlipped=false;sr.rated=false;stopTTS();navCard()}}
 function prev(){if(cards.index>0){cards.index--;cards.isFlipped=false;sr.rated=false;stopTTS();navCard()}}
