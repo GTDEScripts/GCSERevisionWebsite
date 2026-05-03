@@ -13,6 +13,7 @@ const TEXTS = {
     {
       quote: 'Fair is foul, and foul is fair',
       act: 1,
+      scene: "S1 · The witches open",
       speaker: 'The Witches',
       themes: ['supernatural', 'deception', 'nature'],
       devices: ['antithesis', 'repetition', 'alliteration', 'paradox', 'parallelism'],
@@ -22,6 +23,7 @@ const TEXTS = {
     {
       quote: 'For brave Macbeth – well he deserves that name',
       act: 1,
+      scene: "S2 · The battle report",
       speaker: 'The Captain',
       themes: ['loyalty', 'deception'],
       devices: ['dramatic_irony'],
@@ -31,6 +33,7 @@ const TEXTS = {
     {
       quote: 'So foul and fair a day I have not seen',
       act: 1,
+      scene: "S3 · Meeting the witches",
       speaker: 'Macbeth',
       themes: ['supernatural', 'deception', 'nature'],
       devices: ['dramatic_irony', 'paradox'],
@@ -40,6 +43,7 @@ const TEXTS = {
     {
       quote: 'Stars, hide your fires; let not light see my black and deep desires',
       act: 1,
+      scene: "S4 · Malcolm named heir",
       speaker: 'Macbeth',
       themes: ['ambition', 'guilt', 'supernatural'],
       devices: ['soliloquy', 'imagery', 'imperative', 'hamartia'],
@@ -49,6 +53,7 @@ const TEXTS = {
     {
       quote: 'Come, thick night, and pall thee in the dunnest smoke of Hell… nor Heaven peep through',
       act: 1,
+      scene: "S5 · Lady Macbeth's letter",
       speaker: 'Lady Macbeth',
       themes: ['supernatural', 'ambition', 'deception'],
       devices: ['imperative', 'imagery', 'apostrophe'],
@@ -58,6 +63,7 @@ const TEXTS = {
     {
       quote: 'Come, you spirits\u2026unsex me here and fill me from the crown to the toe top full of direst cruelty',
       act: 1,
+      scene: "S5 \u00b7 Lady Macbeth's letter",
       speaker: 'Lady Macbeth',
       themes: ['gender', 'ambition', 'power', 'supernatural'],
       devices: ['imperative', 'imagery', 'apostrophe', 'hamartia'],
@@ -67,6 +73,7 @@ const TEXTS = {
     {
       quote: 'Look like the innocent flower, but be the serpent under\'t',
       act: 1,
+      scene: "S5 · Lady Macbeth's letter",
       speaker: 'Lady Macbeth',
       themes: ['deception', 'ambition', 'power'],
       devices: ['simile', 'imagery', 'biblical_allusion', 'imperative'],
@@ -76,6 +83,7 @@ const TEXTS = {
     {
       quote: 'When you durst do it, then you were a man',
       act: 1,
+      scene: "S7 · The persuasion scene",
       speaker: 'Lady Macbeth',
       themes: ['gender', 'ambition', 'power'],
       devices: ['rhetorical_question', 'dramatic_irony'],
@@ -85,6 +93,7 @@ const TEXTS = {
     {
       quote: 'I have no spur to prick the sides of my intent, but only vaulting ambition, which o\'erleaps itself',
       act: 1,
+      scene: "S7 · The persuasion scene",
       speaker: 'Macbeth',
       themes: ['ambition', 'fate'],
       devices: ['soliloquy', 'metaphor', 'hamartia'],
@@ -94,6 +103,7 @@ const TEXTS = {
     {
       quote: 'Is this a dagger which I see before me, the handle toward my hand?',
       act: 2,
+      scene: "S1 · The dagger soliloquy",
       speaker: 'Macbeth',
       themes: ['guilt', 'supernatural', 'ambition'],
       devices: ['rhetorical_question', 'soliloquy', 'imagery', 'apostrophe'],
@@ -103,6 +113,7 @@ const TEXTS = {
     {
       quote: 'Will all great Neptune\'s ocean wash this blood clean from my hand?',
       act: 2,
+      scene: "S2 · Duncan's murder",
       speaker: 'Macbeth',
       themes: ['guilt', 'ambition'],
       devices: ['rhetorical_question', 'metaphor', 'hyperbole', 'motif'],
@@ -112,6 +123,7 @@ const TEXTS = {
     {
       quote: 'A little water clears us of this deed',
       act: 2,
+      scene: "S2 · Duncan's murder",
       speaker: 'Lady Macbeth',
       themes: ['guilt', 'gender', 'deception'],
       devices: ['dramatic_irony', 'structural_irony'],
@@ -121,6 +133,7 @@ const TEXTS = {
     {
       quote: 'Macbeth does murder sleep',
       act: 2,
+      scene: "S2 · Duncan's murder",
       speaker: 'Macbeth',
       themes: ['guilt', 'supernatural', 'nature'],
       devices: ['metaphor', 'personification', 'motif'],
@@ -130,6 +143,7 @@ const TEXTS = {
     {
       quote: 'Wake Duncan with thy knocking! I would thou couldst',
       act: 2,
+      scene: "S2 · Duncan's murder",
       speaker: 'Macbeth',
       themes: ['guilt', 'ambition'],
       devices: ['exclamation', 'dramatic_irony'],
@@ -139,6 +153,7 @@ const TEXTS = {
     {
       quote: 'Oh horror! Horror! Horror!',
       act: 2,
+      scene: "S3 · Discovery of murder",
       speaker: 'Macduff',
       themes: ['chaos', 'loyalty', 'nature'],
       devices: ['repetition', 'exclamation'],
@@ -148,6 +163,7 @@ const TEXTS = {
     {
       quote: 'There\'s daggers in men\'s smiles',
       act: 2,
+      scene: "S3 · Discovery of murder",
       speaker: 'Donalbain',
       themes: ['deception', 'chaos'],
       devices: ['metaphor'],
@@ -157,6 +173,7 @@ const TEXTS = {
     {
       quote: 'Thou hast it all now, King, Cawdor, Glamis, all\u2026 and I fear thou play\'dst most foully for\'t',
       act: 3,
+      scene: "S1 \u00b7 Banquo's suspicions",
       speaker: 'Banquo',
       themes: ['loyalty', 'fate', 'ambition'],
       devices: ['aside', 'dramatic_irony'],
@@ -166,6 +183,7 @@ const TEXTS = {
     {
       quote: 'To be thus is nothing, but to be safely thus',
       act: 3,
+      scene: "S1 · Banquo's suspicions",
       speaker: 'Macbeth',
       themes: ['ambition', 'power', 'guilt'],
       devices: ['soliloquy', 'metaphor'],
@@ -175,6 +193,7 @@ const TEXTS = {
     {
       quote: 'O, full of scorpions is my mind, dear wife',
       act: 3,
+      scene: "S2 · Before Banquo's murder",
       speaker: 'Macbeth',
       themes: ['guilt', 'power', 'chaos'],
       devices: ['metaphor', 'soliloquy'],
@@ -184,6 +203,7 @@ const TEXTS = {
     {
       quote: 'Be innocent of the knowledge, dearest chuck',
       act: 3,
+      scene: "S2 · Before Banquo's murder",
       speaker: 'Macbeth',
       themes: ['power', 'gender', 'deception'],
       devices: ['dramatic_irony'],
@@ -193,6 +213,7 @@ const TEXTS = {
     {
       quote: 'Never shake thy gory locks at me',
       act: 3,
+      scene: "S4 · The banquet scene",
       speaker: 'Macbeth',
       themes: ['guilt', 'supernatural'],
       devices: ['imagery', 'dramatic_irony', 'assonance'],
@@ -202,6 +223,7 @@ const TEXTS = {
     {
       quote: 'I am in blood / Stepped in so far that, should I wade no more, / Returning were as tedious as go o\'er',
       act: 3,
+      scene: "S4 · The banquet scene",
       speaker: 'Macbeth',
       themes: ['ambition', 'guilt', 'fate'],
       devices: ['metaphor', 'soliloquy', 'motif'],
@@ -211,6 +233,7 @@ const TEXTS = {
     {
       quote: 'By the pricking of my thumbs, something wicked this way comes',
       act: 4,
+      scene: "S1 · The witches' cauldron",
       speaker: 'The Witches',
       themes: ['supernatural', 'ambition', 'chaos'],
       devices: ['dramatic_irony', 'alliteration', 'assonance'],
@@ -220,6 +243,7 @@ const TEXTS = {
     {
       quote: 'From this moment, the very firstlings of my heart shall be the firstlings of my hand',
       act: 4,
+      scene: "S1 · The witches' cauldron",
       speaker: 'Macbeth',
       themes: ['ambition', 'power', 'chaos'],
       devices: ['soliloquy', 'alliteration'],
@@ -229,6 +253,7 @@ const TEXTS = {
     {
       quote: 'The castle of Macduff I will surprise; seize upon Fife',
       act: 4,
+      scene: "S1 · The witches' cauldron",
       speaker: 'Macbeth',
       themes: ['power', 'chaos', 'ambition'],
       devices: ['imperative'],
@@ -238,6 +263,7 @@ const TEXTS = {
     {
       quote: 'Macbeth is ripe for shaking, and the powers above / Put on their instruments',
       act: 4,
+      scene: "S3 · Malcolm & Macduff in England",
       speaker: 'Malcolm',
       themes: ['fate', 'chaos', 'loyalty'],
       devices: ['metaphor'],
@@ -247,6 +273,7 @@ const TEXTS = {
     {
       quote: 'Out, damned spot! Out, I say!\u2026 Will these hands ne\'er be clean?',
       act: 5,
+      scene: "S1 \u00b7 Lady Macbeth's sleepwalking",
       speaker: 'Lady Macbeth',
       themes: ['guilt', 'chaos', 'ambition'],
       devices: ['repetition', 'exclamation', 'rhetorical_question', 'motif', 'dramatic_irony', 'structural_irony'],
@@ -256,6 +283,7 @@ const TEXTS = {
     {
       quote: 'All the perfumes of Arabia will not sweeten this little hand',
       act: 5,
+      scene: "S1 · Lady Macbeth's sleepwalking",
       speaker: 'Lady Macbeth',
       themes: ['guilt', 'ambition'],
       devices: ['hyperbole', 'metaphor', 'structural_irony'],
@@ -265,6 +293,7 @@ const TEXTS = {
     {
       quote: 'Life\u2026 is a tale told by an idiot, full of sound and fury, signifying nothing',
       act: 5,
+      scene: "S5 \u00b7 Tomorrow soliloquy",
       speaker: 'Macbeth',
       themes: ['ambition', 'fate', 'chaos'],
       devices: ['metaphor', 'nihilism', 'soliloquy', 'pathos', 'anagnorisis'],
@@ -274,6 +303,7 @@ const TEXTS = {
     {
       quote: 'Out, out, brief candle',
       act: 5,
+      scene: "S5 · Tomorrow soliloquy",
       speaker: 'Macbeth',
       themes: ['fate', 'ambition'],
       devices: ['metaphor', 'repetition', 'motif'],
@@ -283,6 +313,7 @@ const TEXTS = {
     {
       quote: 'I bear a charmed life, which must not yield / To one of woman born',
       act: 5,
+      scene: "S8 · Macbeth vs Macduff",
       speaker: 'Macbeth',
       themes: ['fate', 'ambition', 'supernatural'],
       devices: ['hubris', 'dramatic_irony', 'hamartia'],
@@ -292,6 +323,7 @@ const TEXTS = {
     {
       quote: 'Macduff was from his mother\'s womb / Untimely ripped',
       act: 5,
+      scene: "S8 · Macbeth vs Macduff",
       speaker: 'Macduff',
       themes: ['fate', 'supernatural'],
       devices: ['dramatic_irony', 'anagnorisis'],
@@ -301,6 +333,7 @@ const TEXTS = {
     {
       quote: 'Turn, hell-hound, turn\u2026 my sword is my voice',
       act: 5,
+      scene: "S8 \u00b7 Macbeth vs Macduff",
       speaker: 'Macduff',
       themes: ['loyalty', 'chaos', 'fate'],
       devices: ['metaphor', 'imagery'],
@@ -310,6 +343,7 @@ const TEXTS = {
     {
       quote: 'The dead butcher and his fiend-like queen',
       act: 5,
+      scene: "S9 · Malcolm's restoration",
       speaker: 'Malcolm',
       themes: ['ambition', 'supernatural', 'chaos'],
       devices: ['metaphor', 'dramatic_irony'],
@@ -319,6 +353,7 @@ const TEXTS = {
     {
       quote: 'His fiend-like queen who, as \'tis thought, by self and violent hands took off her life',
       act: 5,
+      scene: "S9 · Malcolm's restoration",
       speaker: 'Malcolm',
       themes: ['guilt', 'gender', 'ambition'],
       devices: ['dramatic_irony', 'structural_irony'],
