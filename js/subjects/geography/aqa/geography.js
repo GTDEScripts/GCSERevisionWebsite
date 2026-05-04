@@ -213,5 +213,264 @@ const GEO_DATA = [
         example: 'Reading 6-figure grid reference 362524: Easting 362 (go to line 36, then 0.2 of the way to 37 = 36.2), Northing 524 (go to line 52, then 0.4 of the way to 53 = 52.4). This identifies a 100m × 100m square on the map.'
       }
     ]
+  },
+  {
+    section: 'Case Studies',
+    icon: '📍',
+    color: '#B45309',
+    topics: [
+      {
+        ref: 'CS-1',
+        title: 'Japanese Earthquake 2011 (Tectonic Hazard — HIC)',
+        points: [
+          'Location: Pacific Plate subducts under North American Plate — destructive boundary off NE Japan coast',
+          'Magnitude 9.0 — one of the strongest earthquakes ever recorded; depth ~30km',
+          'Primary effects: ground shaking caused 127,000 buildings to collapse; 15,000+ people killed; 14,000+ injured; Fukushima Daiichi nuclear plant reactors failed',
+          'Secondary — Social: over 340,000 people displaced; mass evacuation zones around Fukushima; long-term psychological trauma',
+          'Secondary — Economic: total cost ~$235 billion; global supply chain disruption (car, electronics manufacturing halted); fishing industry collapsed',
+          'Secondary — Environmental: radioactive water leaked into Pacific Ocean from Fukushima; farmland contaminated; 20km exclusion zone still partly in force',
+          'Tsunami: triggered by earthquake — waves up to 40m high struck coastline within 30 minutes; inundated 560km² of land',
+          'Fully linked chain: Earthquake → Tsunami → Reactor meltdown → Supply chain disruption → Global food/energy shortages → Long-term environmental degradation',
+          'Immediate responses: 100,000 military deployed for search and rescue; 120,000 people evacuated from coastal towns; emergency shelters set up',
+          'Long-term responses: Reconstruction of coastal towns and seawalls; Nuclear safety reforms; improved early warning systems; "Build Back Better" philosophy applied'
+        ],
+        tip: 'Japan is an HIC with excellent preparation (strict building codes, early warning system) yet still suffered massive losses — shows that even wealthy countries cannot fully prevent tectonic hazard damage.',
+        example: 'Compare Japan 2011 vs Haiti 2010: Japan (HIC, M9.0) ~15,000 deaths; Haiti (LIC, M7.0) ~220,000 deaths. Level of development and preparedness — not just magnitude — determines death toll.'
+      },
+      {
+        ref: 'CS-2',
+        title: 'Haiti Earthquake 2010 (Tectonic Hazard — LIC)',
+        points: [
+          'Date: 12 January 2010, 16:53 local time; Magnitude 7.0 on Richter Scale; depth ~13km; epicentre 25km from Port-au-Prince',
+          'Plate boundary: conservative/transform boundary — Caribbean and North American plates slide past each other',
+          'Primary effects: 336,000 people killed; 90% of buildings in worst-hit towns destroyed; 13 of 15 government ministry offices destroyed; half of Haiti\'s schools collapsed',
+          'Secondary effects: main road to Jacmel blocked for 10+ days, preventing aid delivery; Radio Lumière (broadcasts to 90% of Haiti) went off-air; main prison in Port-au-Prince destroyed, 4,000 inmates escaped',
+          'Immediate responses: $100 million aid from USA; $330 million from EU; 105,000 tents and 1,000,000+ tarpaulins provided; 4.3 million given food rations in following weeks; American Red Cross worked to prevent cholera',
+          'Long-term responses: temporary schools created, new teachers trained; support for jobs (equates to ~70% of population needing income); cash-for-work projects',
+          'Why so devastating: LIC with weak building standards (no earthquake-resistant construction), inadequate emergency services, political instability, extreme poverty; 80% of population lived below poverty line',
+          'Earthquake struck a densely populated area — Port-au-Prince had 3 million people in a small area'
+        ],
+        tip: 'Haiti vs Japan: same decade, very different outcomes. Haiti shows how poverty amplifies hazard impacts — weak buildings, poor governance, limited emergency services, and pre-existing poverty created catastrophic death toll.',
+        example: 'Haiti M7.0 = 336,000 deaths. Japan M9.0 = 15,000 deaths. Magnitude alone does not determine impact — development level is the key variable.'
+      },
+      {
+        ref: 'CS-3',
+        title: 'Typhoon Haiyan 2013 (Tropical Cyclone — LIC/NEE)',
+        points: [
+          'Date: 7–8 November 2013; Philippines — western Pacific; Category: Super Typhoon (highest category)',
+          'Wind speeds up to 314 km/h; storm surge 6–8m high; rainfall ~400mm in 12 hours; landfall near Tacloban city',
+          'Primary effects: 6,000+ people killed; 28,000 injured; 1.1 million houses damaged or destroyed; large-scale crop failure (coconut and rice)',
+          'Secondary — Social: disease outbreaks (cholera, dysentery from contaminated water); long-term mental health problems; 4 million people displaced',
+          'Secondary — Economic: $2.86 billion total damage; fishing industry devastated; destroyed infrastructure impeded aid delivery',
+          'Secondary — Environmental: coastal ecosystems devastated; storm surge flattened coastal vegetation; saltwater intrusion contaminated agricultural land',
+          'Immediate responses: 100,000 military personnel deployed for search and rescue; evacuation of 1.5 million people prior to landfall; emergency food, water and shelter distributed',
+          'Long-term responses: "Build Back Better" programme launched — rebuilding homes to higher standards; mangrove restoration along coastlines to act as natural buffer; coastal sea walls rebuilt; improved early warning systems'
+        ],
+        tip: 'Storm surge is the most deadly element of a tropical cyclone — not wind. Haiyan\'s 6–8m storm surge is what caused mass casualties in Tacloban.',
+        example: 'Haiyan was one of the most powerful tropical cyclones ever recorded at landfall. Despite warnings and evacuations, coastal communities were devastated by storm surge — highlighting limits of preparedness even with warnings.'
+      },
+      {
+        ref: 'CS-4',
+        title: 'Somerset Levels Flooding 2013–14 (UK Flood Event)',
+        points: [
+          'Location: Somerset Moors, SW England — low-lying floodplain of Rivers Parrett and Tone; traditionally managed wetland',
+          'Flooding began November 2013; not fully drained until late February 2014 — lasted ~65 days; 2022 was the UK\'s warmest year on record, making extreme rainfall more likely',
+          'Causes: exceptional autumn/winter rainfall (most since 1766); rivers ran over banks; drains and ditches clogged with sediment; farm fields became saturated; rivers had not been dredged for years',
+          'Effects on farms: 17 farms abandoned (some for up to 36 weeks); crops lost; livestock moved; farm income collapsed; road access across Somerset disrupted',
+          'Transport effects: A361 (main road between Taunton and Glastonbury) flooded and closed; limited access for emergency services',
+          'Community: villages isolated; residents used boats to access homes; psychological stress on local population',
+          'Immediate responses: pumping stations used to increase capacity of rivers; villages used community groups and volunteers; government provided financial support',
+          'Long-term: Somerset Flood Action Plan launched; £100 million investment to dredge rivers, raise road levels, increase pump capacity; allows businesses to continue during future floods; planning restrictions on new flood plain development'
+        ],
+        tip: 'For UK flooding: explain both PHYSICAL causes (prolonged rainfall, saturated soils) and HUMAN causes (lack of dredging, flood plain development, impermeable surfaces). Management must balance hard and soft engineering.',
+        example: 'The Somerset Levels flooding showed how human management decisions (stopping dredging) combined with extreme weather can cause long-term disruption. The £100m action plan balanced engineering with sustainable land management.'
+      },
+      {
+        ref: 'CS-5',
+        title: 'River Tees — River Landscapes in the UK',
+        points: [
+          'The River Tees flows 137km from Cross Fell (893m) in the Pennines to the North Sea at Teesmouth; ideal UK river to show all three landform zones',
+          'Upper Course — High Force Waterfall: one of UK\'s most powerful waterfalls, dropping 21m; formed where river flows over resistant Whin Sill (hard igneous rock) above softer limestone and shale; undercutting creates plunge pool → gorge retreats upstream',
+          'Upper Course features: steep gradient, narrow V-shaped valley, interlocking spurs, waterfalls, rapids; mainly vertical erosion',
+          'Middle Course near Barnard Castle: valley widens; meanders develop; lateral erosion dominant; river cliff on outer bend (erosion), slip-off slope on inner bend (deposition)',
+          'Lower Course landforms (deposition dominant): wide floodplain; levees (raised banks from flood deposition); ox-bow lakes (abandoned meanders cut off); gentle gradient approaching sea',
+          'Linked processes — meander formation: steep slope → fast flow → hydraulic action erodes outer bend → lateral erosion widens valley → deposition on inner bend → meander migrates → neck narrows → ox-bow lake forms',
+          'Lower Course: floodplain created by lateral erosion and deposition of alluvium during floods; builds fertile agricultural land'
+        ],
+        tip: 'For river landscapes: know Upper (erosion dominant — V-shaped valley, waterfalls), Middle (meanders, wider valley), and Lower (deposition dominant — floodplain, ox-bow lakes, delta). Link landforms to PROCESSES.',
+        example: 'High Force: Hard Whin Sill overlies soft limestone. River undercuts the soft rock → overhang collapses → gorge retreats upstream. This shows how differential rock resistance controls landform development.'
+      },
+      {
+        ref: 'CS-6',
+        title: 'Holderness Coastline — Coastal Management',
+        points: [
+          'Location: East Yorkshire, stretching 61km from Flamborough Head in the north to Spurn Head spit in the south; fastest eroding coastline in Europe (~2m/year)',
+          'Why erosion is so rapid: soft boulder clay cliffs (easily eroded), powerful North Sea waves attacking directly from the north-east, longshore drift removes sediment southward, rising sea levels, limited natural beach to absorb wave energy',
+          'Problems of coastal erosion/management: property prices falling (people want to buy a house that might fall into sea); villages lost — 30 since Roman times; businesses at risk of losing income; Easington gas terminal at risk (supplies ~25% of UK\'s gas); farmers lose ~100 acres of farmland per year',
+          'Attempts at coastal management — Mappleton: two rock groynes built (£2 million, 1991) to trap longshore drift sediment and maintain beach; sea wall to protect village and B1242 road',
+          'Conflicts created: Mappleton is protected, but the groynes trap sediment that used to travel south; beaches south of Mappleton now starved of sediment → erosion rate has increased south of Mappleton',
+          'Example: Cowden Farm — ~400 acres of farmland lost to sea; farmer not protected; Great Cowden village lost; dispute between landowners and council',
+          'Spurn Head: a 5km long narrow sand spit formed by longshore drift transporting sediment southward; has been rebuilt after storms several times; now acts as a nature reserve; council decided to allow natural processes rather than defend',
+          'Spurn Head: maintained by deposition of material from northern Holderness erosion — if northern erosion stopped, Spurn Head would disappear'
+        ],
+        tip: 'Holderness shows the classic conflict of coastal management: defending one area can accelerate erosion elsewhere. Always evaluate SOCIAL, ECONOMIC and ENVIRONMENTAL costs and benefits of coastal defences.',
+        example: 'Mappleton sea wall protected 50 homes and a main road (B1242). Cost: ~£2 million. Benefit: village saved. But groynes starved beaches to the south of sediment — accelerating erosion of farmland and other properties. Is protecting one village worth it?'
+      },
+      {
+        ref: 'CS-7',
+        title: 'Amazon Rainforest — Deforestation',
+        points: [
+          'Location: Brazil and 8 surrounding countries; world\'s largest tropical rainforest covering ~5.5 million km²',
+          'Causes of deforestation: commercial farming (soya bean — Brazil is world\'s largest exporter, cattle ranching), logging (mahogany, rosewood), road building (Trans-Amazonian Highway opened up forest to settlers), mineral extraction (iron ore, gold — e.g. Carajás mine, Brazil), energy development (HEP dams — Belo Monte Dam), settlement (government-sponsored migration), population growth',
+          'Scale: Brazil lost over 17% of the Amazon in 50 years; deforestation rate peaked in 2004 (~27,000 km²/year), declined after government action, but rising again',
+          'Advantages of deforestation (economic development): creates jobs, export earnings (soya, beef, timber), tax revenue for government, infrastructure development for remote communities',
+          'Disadvantages/environmental impacts: biodiversity loss — Amazon holds ~10% of all species on Earth; deforestation releases stored carbon (contributes to climate change); soil erosion once tree roots removed; disruption to water cycle; displacement of indigenous communities (e.g. Yanomami tribe)',
+          'Local climate impacts: fewer trees = less transpiration → less rainfall → drier local climate → makes remaining forest more vulnerable to fire and drought',
+          'Sustainable management: selective logging, replanting, REDD+ scheme (pays countries to protect forests), indigenous land rights, ecotourism, debt-for-nature swaps, international pressure (e.g. G7 commitments to protect Amazon)'
+        ],
+        tip: 'Learn the full list of causes of deforestation — examiners expect more than just "logging." Always balance the economic arguments FOR deforestation with environmental arguments AGAINST. Sustainable management is always evaluated.',
+        example: 'Cattle ranching accounts for ~80% of Amazon deforestation — driven by global demand for beef. Brazil exports beef to US, EU, China. This shows the global economic system is linked to local deforestation decisions.'
+      },
+      {
+        ref: 'CS-8',
+        title: 'Thar Desert — Opportunities and Challenges',
+        points: [
+          'Location: India/Pakistan border (Rajasthan state, India); ~200,000 km² of hot desert; annual rainfall <150mm; temperatures up to 50°C in summer, near 0°C in winter',
+          'Opportunities — Mineral extraction: gypsum (used in construction and for making plaster), kerite (used for paper-making); quarrying provides employment and export income',
+          'Opportunities — Energy: ideal for solar energy (very few cloudy days; India\'s National Solar Mission targets large solar farms here); wind energy also harnessed',
+          'Opportunities — Farming: subsistence farming of crops like millet and sorghum (drought resistant); some commercial farming using irrigation (the Indira Gandhi Canal brings water 650km from the Himalayas)',
+          'Opportunities — Tourism: Thar Desert safari popular; tens of thousands of tourists visit annually; camel rides, folk music and festivals attract visitors; local economic benefit from hotels and guides',
+          'Challenges — Extreme temperatures: makes working outdoors very difficult in summer; heat stress on workers, livestock, and crops',
+          'Challenges — Water supply: only a few rivers flow through; demand has increased due to irrigation and population growth; aquifer depletion; Indira Gandhi Canal has led to waterlogging and soil salinisation in some areas',
+          'Challenges — Inaccessibility: poor road network; only a few routes accessible after monsoon rainfall; remote location limits economic development and access to services'
+        ],
+        tip: 'Hot desert case study needs BOTH opportunities AND challenges. Always give specific examples — mineral names, tourist activities, specific canal name — not just vague statements.',
+        example: 'The Indira Gandhi Canal brings irrigation water 650km to the Thar Desert, enabling commercial farming. Benefit: increased food production and income. Problem: waterlogging and salinisation of soil in some irrigated areas — a classic double-edged intervention.'
+      },
+      {
+        ref: 'CS-9',
+        title: 'Rio de Janeiro — Urban Issues in an NEE',
+        points: [
+          'Location and importance: 2nd largest city in Brazil with 13 million in metropolitan area; located on Guanabara Bay in SE Brazil; regional role in South America; major port, financial and tourism centre',
+          'Location/global role: 2nd largest city in South America (after São Paulo); hosts international events (2014 FIFA World Cup, 2016 Olympics); cultural exports include samba, carnival; global centre for trade/tourism',
+          'Causes of urban growth: natural increase (higher birth rate than death rate) and rural-urban migration — people pushed from rural poverty, attracted by Rio\'s jobs, services, and perceived opportunities',
+          'Squatter settlements (favelas): over 1,000 favelas housing ~22% of Rio\'s population; built on steep hillsides (Zona Sul) or flood plains — land nobody else wanted; self-built from scavenged materials; lack clean water, sanitation, electricity, security of tenure',
+          'Rocinha favela: one of South America\'s largest, estimated 70,000–150,000 residents; located next to wealthy Gávea and São Conrado neighbourhoods — visible inequality; steep slope means flood and landslide risk',
+          'Problems in favelas: poor sanitation; inadequate housing (flood and fire risk); high crime (drug gangs control some areas); lack of formal employment; poor access to healthcare and education; stigma prevents residents accessing formal economy',
+          'Favela-Bairro Project: government upgrading programme — paved roads, installed sewers, connected electricity, built sports facilities and health centres; improved conditions for 600,000+ residents; gave legal land titles',
+          'Issues with Favela-Bairro: gentrification pushed some original residents out as land values rose; not all favelas included; crime and gang control remained in some areas',
+          'Regeneration for 2014/2016 events: Olympic stadium, improved transport (BRT metro lines extended), port zone regenerated; but also forced evictions of favela residents from land developers wanted'
+        ],
+        tip: 'Rio exemplifies NEE urban challenges — rapid growth, massive inequality (wealthy Ipanema beach vs Rocinha hillside), and government schemes that help but create new problems (gentrification, displacement).',
+        example: 'Rocinha sits immediately behind the upmarket beach neighbourhood of São Conrado — the contrast is visible in minutes. HDI for Rocinha is lower than many LICs; for São Conrado it matches European averages. Same city, same kilometre, different world.'
+      },
+      {
+        ref: 'CS-10',
+        title: 'Curitiba — Sustainable Urban Living (Brazil)',
+        points: [
+          'Location: Curitiba is the capital of Paraná state, southern Brazil; population ~1.9 million; recognised globally as a model of sustainable urban planning',
+          'Bus Rapid Transit (BRT) — "Green Exchange": Curitiba\'s BRT system is a global model; dedicated bus lanes carry up to 2,200 passengers per hour; re-articulated buses, speedy payment, reliable service; 70% of commuters use public transport (reduces car dependency); integrated network links bus with cycle paths and pedestrian zones',
+          'Waste recycling — "Green Exchange" programme: 70% of Curitiba\'s waste is recycled — one of the most successful recycling rates in the world; the Green Exchange programme allows low-income residents to exchange recyclable waste for food, bus tickets, school supplies, or medical treatment — waste reduction AND social welfare in one scheme',
+          'This reduces time, improves public health and provides incentives for recycling and litter reduction; local schools involved, encouraging community participation',
+          'Creating green space: over 28 parks and woodland areas created, improving quality of life and managing flood risk (floodplains converted to parks rather than built on); 1.5 million trees planted across the city; green parks act as natural flood storage',
+          'Why Curitiba is a model: combines environmental sustainability, social equity, and economic sensibility; long-term planning vision (Mayor Jaime Lerner from 1970s); shows sustainable strategies work together — transport + recycling + green space + local economy'
+        ],
+        tip: 'Curitiba shows that sustainable urban living requires MULTIPLE strategies working together — transport, recycling, green space. The BRT and Green Exchange programmes link environmental, social and economic sustainability.',
+        example: 'The Green Exchange: Curitiba residents in low-income areas bring recyclable waste (cans, bottles, paper) and receive fresh food, bus tokens, or school supplies in return. Result: city gets recycling; residents get food security. A single scheme that achieves environmental AND social goals simultaneously.'
+      },
+      {
+        ref: 'CS-11',
+        title: 'Bristol Temple Quarter — UK Urban Regeneration',
+        points: [
+          'Location: Temple Quarter is an area in central Bristol, adjacent to Bristol Temple Meads railway station (the main intercity rail hub for Bristol)',
+          'History: former industrial and warehouse district; first part of the city to be outside the original medieval city walls; declined as traditional industries left; area became derelict wasteland with empty warehouses',
+          'Why regeneration was needed: economic decline; high unemployment; underused brownfield land in a prime location next to the railway station',
+          'Regeneration plans: major mixed-use redevelopment of ~170 hectares; plans include new homes, commercial offices, hotels, restaurants, visitor attractions, and an arena for up to 12,000 spectators',
+          'University of Bristol enterprise campus: major new academic and commercial campus planned as part of Temple Quarter — bringing student accommodation, research facilities, and academia; high-tech, media and digital industries targeted',
+          'Positives: new jobs created; brownfield land being reused (no green belt impact); improved transport links; tourism boost for city; links to university creates knowledge economy hub',
+          'Negatives/problems: slow progress — much of the area remains undeveloped; local people have been involved very little in planning decisions; housing affordability concerns as regeneration raises property prices',
+          'Conflicts: between developers (profit motive), existing residents (community concerns), and environmentalists (some wildlife habitats on derelict land); arena plans delayed due to costs'
+        ],
+        tip: 'Urban regeneration in UK cities typically involves brownfield redevelopment, public-private partnerships, and flagship projects. Always evaluate who BENEFITS and who LOSES — gentrification is a common criticism.',
+        example: 'Temple Quarter shows urban regeneration is not quick or simple — despite plans dating back years, much of the site remains unused. The arena was delayed repeatedly. This highlights the gap between planning ambitions and real-world delivery.'
+      },
+      {
+        ref: 'CS-12',
+        title: 'Nigeria — Newly Emerging Economy (NEE)',
+        points: [
+          'Location and importance: West Africa, Gulf of Guinea; borders Benin, Niger, Chad and Cameroon; largest economy in Africa (overtook South Africa ~2014); population 220 million+ — most populous country in Africa',
+          'Global/regional role: member of ECOWAS, OPEC, Commonwealth; US peacekeeping troops in region; BBC broadcasts to over 200 countries from Lagos; cultural influence through Nollywood (world\'s second largest film industry by output); one of fastest-growing music/fashion scenes globally',
+          'Changing industrial structure: traditionally dependent on oil (discovered 1958); oil still ~70% of government revenue but manufacturing, services and IT growing; Lagos emerging as financial and commercial hub',
+          'Economic growth benefits: GDP per capita has risen, Nigeria now classed as lower-middle income; reducing absolute poverty; improving healthcare and education access; FDI increasing (Chinese investment in infrastructure)',
+          'Advantages of TNCs/oil: tax revenue, infrastructure investment, technology transfer, thousands of jobs in oil sector',
+          'Challenges/inequalities: GDP per capita masks huge inequality — many in rural north still in absolute poverty; high regional inequality between wealthy Lagos/Abuja and poor rural north; corruption (oil revenues have not always reached people); unstable oil prices',
+          'Political instability: history of military rule; Boko Haram terrorism in north; land conflicts in Niger Delta region linked to oil extraction; elections disputed',
+          'Environmental issues: widespread oil pollution from pipeline spills; gas flaring contributes to climate change; deforestation in south; water contamination in Niger Delta communities'
+        ],
+        tip: 'Nigeria is the AQA go-to NEE case study. Know: location, role in region/world, changing economy (oil to services), advantages AND disadvantages of economic development, AND the role of TNCs (Shell). Link all three together.',
+        example: 'Nigeria earns billions from oil but the Niger Delta — where oil is extracted — has some of the country\'s poorest communities. Shell operates there as a TNC. This illustrates how resource wealth can coexist with local poverty when governance is weak.'
+      },
+      {
+        ref: 'CS-13',
+        title: 'Shell in the Niger Delta — TNC Case Study',
+        points: [
+          'Shell (Royal Dutch Shell) is a TNC that has operated in the Niger Delta since oil was discovered in 1958; Niger Delta = major oil-producing region in southern Nigeria',
+          'Scale of operations: Shell Nigeria has over 6,000km of pipelines; extracts millions of barrels of oil per year; one of Nigeria\'s largest employers',
+          'Advantages to Nigeria: tax and royalty payments to Nigerian government fund public services; ~250,000 Nigerian workers employed directly or indirectly in the energy sector; technology and skills transfer; infrastructure (roads, pipelines) built by Shell',
+          'Disadvantages/problems — Environmental: approximately 300+ oil spills per year from corroded pipelines and sabotage; spills contaminate rivers, groundwater and farmland; mangroves (important coastal ecosystem) heavily damaged; Ogoniland oil spill (UNEP 2011 report) found contamination requiring up to 30 years to clean up',
+          'Disadvantages — Social: local communities (e.g. Ogoni people) receive little of oil wealth; fishing and farming livelihoods destroyed by pollution; protests have been met with military force (Ken Saro-Wiwa executed 1995 after protesting Shell\'s activities)',
+          'Disadvantages — Economic leakage: profits go back to Shell\'s European shareholders and headquarters; Dutch and UK governments/shareholders benefit more than local Nigerian communities',
+          'Gas flaring: Shell burns off excess natural gas at oil wells — wastes energy, pollutes air, contributes to climate change; illegal under Nigerian law but continues',
+          'Shell\'s response: company says many spills caused by pipeline sabotage and oil theft (not their fault); has funded some community development projects; committed to ending gas flaring'
+        ],
+        tip: 'TNC case study: always cover ADVANTAGES (to host country) AND DISADVANTAGES. Shell in Niger Delta perfectly illustrates the tension between economic development and environmental/social justice.',
+        example: 'The Ogoni people\'s land in the Niger Delta has been producing oil for Shell since the 1950s yet Ogoniland remains one of Nigeria\'s poorest regions with severe oil contamination. A UN report (2011) found contamination at levels 1,000× WHO safe limits — requiring the world\'s largest oil cleanup.'
+      },
+      {
+        ref: 'CS-14',
+        title: 'UK Post-Industrial Economy & North-South Divide',
+        points: [
+          'Deindustrialisation: from 1970s–1990s, UK lost primary (coal mining, fishing) and secondary (steel, shipbuilding, textiles) industries; causes: global competition, mechanisation (fewer workers needed), cheaper labour in Asia, North Sea oil decline',
+          'Coal mining example: ~1,000,000 miners in 1920 → fewer than 3,000 today; steel mills in Sheffield/South Wales closed; Manchester\'s cotton industry gone; Middlesbrough\'s steelworks closed',
+          'Shift to tertiary/quaternary: UK economy now ~80% services; financial services (London stock exchange, global banking), IT and digital (1.5 million people in IT sector), creative industries, tourism, education',
+          'IT and digital industries: UK is a global hub for fintech (London = world\'s 2nd fintech centre); 1.4 million people employed in IT sector; UK is one of top 5 global destinations for tech investment',
+          'Science and business parks: Gloucestershire Business Park (near M5 Junction 11A, Cheltenham) — 70+ companies including NHS Shared Business Services, Direct Wines, Ministry of Defence contractors; modern energy-efficient buildings, green landscaping, cycleways; shows UK\'s shift to quaternary sector',
+          'North-South Divide: wages ~£4,000–£14,000 higher on average in South than North; life expectancy 1–2 years lower in North; unemployment higher in North; London and SE generate ~40% of UK\'s GDP',
+          'Strategies to reduce the divide: Northern Powerhouse (investment in Manchester, Leeds, Liverpool); Transport improvements (HS2, East Midlands rail); Enterprise Zones (tax breaks to attract businesses to deprived areas); Devolution (devolving power and budgets to regional assemblies)',
+          'UK in the Wider World: exports to US, Germany, France, Netherlands, Belgium, China; cultural influence (BBC worldwide, Premier League, music); Heathrow — one of world\'s busiest airports; Channel Tunnel links UK to mainland Europe; UK a global hub for financial services'
+        ],
+        tip: 'The UK\'s economic change involves three shifts: primary → secondary → tertiary/quaternary. Always link deindustrialisation to the North-South divide. Know at least one example of a science/business park (Gloucestershire Business Park).',
+        example: 'Gloucestershire Business Park replaced farmland near Cheltenham with modern offices for 70+ companies. Located near M5 Junction 11A — excellent road links. Shows how UK economic growth now clusters around transport hubs rather than coalfields or ports.'
+      },
+      {
+        ref: 'CS-15',
+        title: 'LIC Micro Hydro — Nepal (Renewable Energy)',
+        points: [
+          'Location: Nepal, South Asia — landlocked, mountainous LIC; most rural communities have no connection to national electricity grid',
+          'Scheme: LIC Micro Hydro — small-scale run-of-river hydroelectric schemes built on local fast-flowing rivers and streams in the Himalayas; no large dam required — uses natural flow and gradient',
+          'Benefits: provides affordable electricity to communities previously reliant on candles, kerosene and firewood; powers lights, motors, ICT equipment, small businesses; reduces indoor air pollution from burning kerosene; community-managed and maintained',
+          'Economic benefits: enables small businesses to operate in evenings; children can study after dark; women freed from collecting firewood; supports agriculture through powered irrigation pumps',
+          'The Nepalese government and World Bank have invested heavily: ~500 million rupees committed; supports sustainable, affordable energy aligned with Nepal\'s sustainable development goals',
+          'Successes: micro-hydro now powers over 12% of Nepal\'s energy mix; local communities trained to manage systems; supports economic development without large environmental footprint',
+          'Problems: when snow melts in spring, flood flows can damage turbines and infrastructure; difficult and expensive to repair equipment in remote mountain areas; local communities lack technical skills to maintain complex components; seasonal variation in river flow affects output'
+        ],
+        tip: 'LIC energy case study: micro-hydro is ideal for LICs with mountains and rivers — low cost, community-scale, renewable, no dam needed. But reliability and maintenance in remote areas are key challenges.',
+        example: 'A village in rural Nepal with micro-hydro can power a school, medical clinic, and small businesses. Before: kerosene lamps, early bedtime, high indoor air pollution. After: children study at night, women run evening businesses, health clinic can refrigerate medicine.'
+      },
+      {
+        ref: 'CS-16',
+        title: 'Natural Gas — Resource Management (UK)',
+        points: [
+          'Natural gas is a non-renewable fossil fuel (mainly methane, CH₄); extracted from underground reservoirs; transported by pipeline; UK relies on natural gas for ~40% of electricity generation and most home heating',
+          'Advantages: provides employment for ~1.2 million people in UK gas industry; cleaner than coal (produces ~40% fewer CO₂ emissions per unit of energy); reliable supply during peak demand periods; can respond quickly to changes in electricity demand unlike wind/solar; relatively affordable compared to many alternatives',
+          'Disadvantages: non-renewable — finite resource being depleted; reserves concentrated in politically unstable regions (Russia, Middle East) creating energy security risk; still produces significant CO₂ (contributes to climate change); fracking to extract new gas reserves is controversial (earthquakes, water contamination concerns); leaks from pipelines release methane, a much more potent greenhouse gas than CO₂',
+          'UK energy dependency: UK has significant North Sea gas reserves but these are declining; increasingly dependent on imported gas from Norway, Qatar, Russia; Russia/Ukraine war (2022) highlighted vulnerability of European energy dependence on Russian gas',
+          'Transition challenge: UK aims for net zero by 2050 — must phase out natural gas; replacement requires massive expansion of wind, solar, nuclear; gas boilers in 28 million homes need replacing with heat pumps — expensive and disruptive',
+          'The role of natural gas in transition: often described as a "bridging fuel" — cleaner than coal, buys time while renewables are scaled up; but continued investment in gas infrastructure risks carbon lock-in'
+        ],
+        tip: 'For resource management, always weigh advantages vs disadvantages and consider SUSTAINABILITY. Natural gas is "cleaner than coal" but is still a fossil fuel — it cannot be a long-term solution for net zero.',
+        example: 'UK natural gas: 40% of electricity, 85% of homes heated by gas boilers. Replacing all gas boilers with heat pumps would cost ~£500 billion and is the biggest challenge of the UK\'s net zero transition — showing how deeply embedded fossil fuels are in our energy system.'
+      }
+    ]
   }
 ];
