@@ -111,6 +111,11 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .notes-print-btn{font-family:'DM Sans',sans-serif;font-size:calc(11px * var(--font-scale));font-weight:600;padding:6px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text2);cursor:pointer;transition:all .2s}
 .notes-print-btn:hover{border-color:var(--accent);color:var(--accent)}
 /* SUBJECT SECTIONS */
+.subjects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 20px}
+@media(max-width:640px){.subjects-grid{display:block}}
+.subjects-grid .subject-section{margin-bottom:1.5rem}
+.subjects-grid .subj-grid{grid-template-columns:1fr}
+.subjects-grid .subj-card{width:100%}
 .subject-section{margin-bottom:2.5rem}
 .subject-label{font-size:calc(10px * var(--font-scale));font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--text3);margin-bottom:10px;padding-left:4px;display:flex;align-items:center;gap:8px}
 .subject-label::after{content:'';flex:1;height:1px;background:var(--border)}
