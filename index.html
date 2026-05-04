@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Main Stylesheet -->
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=2">
 
 <!-- Web App Manifest -->
 <link rel="manifest" href="manifest.json">
@@ -45,6 +45,10 @@
     <div class="setting-row"><label>Auto-advance after rating</label><div class="toggle-switch on" id="toggle-autoadvance" onclick="toggleAutoAdvance()"></div></div>
   </div>
   <div class="setting-group">
+    <div class="setting-label">Exam Dates</div>
+    <div id="exam-dates-container"></div>
+  </div>
+  <div class="setting-group">
     <div class="setting-label">Data</div>
     <button class="setting-danger" onclick="if(confirm('Reset ALL progress for ALL texts? This cannot be undone.')){resetAllProgress()}">Reset All Progress</button>
   </div>
@@ -75,7 +79,11 @@
 
 <div class="streak-bar" id="streak-bar"></div>
 
+<div id="exam-countdown-section" class="exam-countdown-section"></div>
+
 <div class="qotd" id="qotd"></div>
+
+<div id="weak-spots-section" class="weak-spots-section" style="display:none"></div>
 
 <div id="home-features" class="feature-row">
   <span class="feature-pill">📇 Flashcards</span>
@@ -148,7 +156,7 @@
 
 <!-- ═══ NOTES VIEW (for maths etc) ═══ -->
 <div class="notes-view" id="notes-view">
-<button class="back-btn" id="notes-back-btn" onclick="backToSubjectFromNotes()">← Back</button>
+<div class="notes-nav"><button class="back-btn" id="notes-back-btn" onclick="backToSubjectFromNotes()">← Back</button><button class="notes-print-btn" onclick="printRevisionSheet()" title="Print revision sheet">🖨️ Print</button></div>
 <div class="notes-header"><h2 id="notes-title"></h2><div class="notes-sub" id="notes-sub"></div></div>
 <input class="notes-search" id="notes-search" type="text" placeholder="Search topics, formulae, methods..." oninput="filterNotes()">
 <div id="notes-container"></div>
@@ -182,7 +190,7 @@
   <button class="tab-btn" id="btn-fav" onclick="setMode('fav')" style="font-size:10px;padding:4px 12px">⭐ FAVS</button>
   <button class="tab-btn" id="btn-cloze" onclick="setMode('cloze')" style="font-size:10px;padding:4px 12px">📝 CLOZE</button>
 </div>
-<div class="toolbar"><span class="hint" id="mode-hint">Tap card to flip · Rate difficulty after</span><div style="display:flex;gap:6px"><button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterPanel()">▼ FILTER</button><button class="shuffle-btn" onclick="shuffle()">⟳ SHUFFLE</button></div></div>
+<div class="toolbar"><span class="hint" id="mode-hint">Tap card to flip · Rate difficulty after</span><div style="display:flex;gap:6px"><button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterPanel()">▼ FILTER</button><button class="shuffle-btn" onclick="shuffle()">⟳ SHUFFLE</button><button class="shuffle-btn" onclick="printFlashcards()" title="Print current deck">🖨️</button></div></div>
 <div class="filter-panel" id="filter-panel"><div class="filter-group"><div class="filter-group-label"><span id="unit-label">ACT</span></div><div class="filter-chips" id="chips-acts"></div></div><div class="filter-group"><div class="filter-group-label">THEME</div><div class="filter-chips" id="chips-themes"></div></div><div class="filter-group"><div class="filter-group-label">TECHNIQUE</div><div class="filter-chips" id="chips-techs"></div></div><div style="text-align:right;margin-top:6px"><button class="clear-filters" id="clear-btn" onclick="clearFilters()">✕ Clear all</button></div></div>
 <div class="card-wrap" onclick="flip()"><div class="card" id="card"><div class="face front" style="position:relative"><button class="fav-btn" id="fav-btn" onclick="event.stopPropagation();toggleFav()" title="Favourite">☆</button><button class="tts-btn" id="tts-btn" onclick="event.stopPropagation();speakQuote()" title="Read aloud">🔊</button><div id="front-badge" class="act-badge"></div><p class="quote-text" id="quote-text"></p><div id="front-devices"></div><div id="card-rating-tag" class="card-rating-tag" onclick="event.stopPropagation()"></div></div><div class="face back"><div style="text-align:center;margin-bottom:10px;width:100%"><div id="back-badge" class="act-badge"></div><p class="speaker-name" id="back-speaker"></p><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:3px;margin-bottom:8px" id="back-themes"></div></div><div style="border-top:1.5px solid var(--border);padding-top:10px;width:100%"><p class="section-label">Word-level analysis</p><div class="analysis-text" id="back-word"></div><p class="section-label">Context link</p><div class="context-text" id="back-context"></div></div></div></div></div>
 <div class="sr-btns"><button class="sr-btn sr-forget" onclick="rateDifficulty(0)">✗ Need to learn</button><button class="sr-btn sr-remember" onclick="rateDifficulty(1)">✓ Remembered</button></div>

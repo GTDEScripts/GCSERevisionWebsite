@@ -78,6 +78,38 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;background:var(--bg);b
 .streak-dot.active{background:var(--accent);color:#fff}
 .streak-dot.today{border:2px solid var(--accent);background:var(--glow)}
 .streak-dot.today.active{background:var(--accent);color:#fff}
+/* EXAM COUNTDOWN */
+.exam-countdown-section{margin-bottom:2rem}
+.exam-empty-prompt{text-align:center;font-size:calc(12px * var(--font-scale));color:var(--text3);padding:12px 16px;border-radius:12px;background:var(--card-bg);border:1.5px dashed var(--border)}
+.exam-settings-link{background:none;border:none;color:var(--accent);font-size:inherit;cursor:pointer;padding:0;font-family:inherit;font-weight:600}
+.exam-countdown-inner{background:var(--card-bg);border:1.5px solid var(--border);border-radius:14px;padding:14px 18px}
+.exam-countdown-header{font-size:calc(10px * var(--font-scale));font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:10px}
+.exam-count-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+.exam-count-card{flex:0 0 auto;width:80px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:10px 8px;text-align:center;transition:all .2s}
+.exam-count-card.soon{background:var(--yellow-bg);border-color:var(--yellow);color:var(--yellow)}
+.exam-count-card.urgent{background:var(--red-bg);border-color:var(--red)}
+.exam-count-icon{font-size:calc(18px * var(--font-scale));margin-bottom:4px}
+.exam-count-subject{font-size:calc(9px * var(--font-scale));font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:4px}
+.exam-count-days{font-size:calc(14px * var(--font-scale));font-weight:700;color:var(--text)}
+.exam-count-card.urgent .exam-count-days{color:var(--red)}
+.exam-count-card.soon .exam-count-days{color:var(--yellow)}
+/* WEAK SPOTS */
+.weak-spots-section{margin-bottom:2rem}
+.weak-spots-inner{background:var(--card-bg);border:1.5px solid var(--border);border-radius:14px;padding:14px 18px}
+.weak-spots-title{font-size:calc(10px * var(--font-scale));font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:10px}
+.weak-spots-sub{font-weight:400;text-transform:none;letter-spacing:0;color:var(--text3);font-size:calc(10px * var(--font-scale))}
+.weak-spots-list{display:flex;flex-direction:column;gap:6px}
+.weak-spot-item{display:flex;align-items:center;gap:10px}
+.weak-spot-label{font-size:calc(12px * var(--font-scale));font-weight:600;color:var(--text2);min-width:110px;flex-shrink:0}
+.weak-spot-track{flex:1;height:6px;background:var(--bg3);border-radius:99px;overflow:hidden}
+.weak-spot-fill{height:100%;background:var(--red);border-radius:99px;transition:width .4s ease}
+.weak-spot-count{font-size:calc(10px * var(--font-scale));font-weight:600;color:var(--red);min-width:52px;text-align:right;flex-shrink:0}
+/* SETTINGS DATE INPUT */
+.setting-date-input{font-family:'DM Sans',sans-serif;font-size:calc(11px * var(--font-scale));padding:5px 8px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer;max-width:140px}
+/* NOTES NAV + PRINT BUTTON */
+.notes-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:0}
+.notes-print-btn{font-family:'DM Sans',sans-serif;font-size:calc(11px * var(--font-scale));font-weight:600;padding:6px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text2);cursor:pointer;transition:all .2s}
+.notes-print-btn:hover{border-color:var(--accent);color:var(--accent)}
 /* SUBJECT SECTIONS */
 .subject-section{margin-bottom:2.5rem}
 .subject-label{font-size:calc(10px * var(--font-scale));font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--text3);margin-bottom:10px;padding-left:4px;display:flex;align-items:center;gap:8px}

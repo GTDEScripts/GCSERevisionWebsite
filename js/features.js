@@ -903,6 +903,244 @@ document.addEventListener('DOMContentLoaded', () => {
   updateProgressBars();
 });
 
+// ═══════════════════════════════════════════
+// WEAK SPOT DETECTOR
+// ═══════════════════════════════════════════
+
+function renderWeakSpots() {
+  const section = document.getElementById('weak-spots-section');
+  if (!section || typeof TEXTS === 'undefined') return;
+
+  const spots = [];
+  Object.entries(TEXTS).forEach(([id, text]) => {
+    try {
+      const srRaw = localStorage.getItem(text.storagePrefix + '_sr');
+      if (!srRaw) return;
+      const srData = JSON.parse(srRaw);
+      const reviewed = Object.values(srData).filter(d => d.reviews > 0);
+      const weak = reviewed.filter(d => d.lastRating === 0 || d.ef < 2.0);
+      if (weak.length > 0) spots.push({ title: text.title, weakCount: weak.length, reviewedCount: reviewed.length });
+    } catch(e) {}
+  });
+
+  if (!spots.length) { section.style.display = 'none'; return; }
+
+  spots.sort((a, b) => b.weakCount - a.weakCount);
+  section.style.display = '';
+
+  const items = spots.map(s => {
+    const pct = s.reviewedCount ? Math.round((s.weakCount / s.reviewedCount) * 100) : 0;
+    return `<div class="weak-spot-item">
+      <span class="weak-spot-label">${s.title}</span>
+      <div class="weak-spot-track"><div class="weak-spot-fill" style="width:${Math.min(100, pct)}%"></div></div>
+      <span class="weak-spot-count">${s.weakCount} card${s.weakCount !== 1 ? 's' : ''}</span>
+    </div>`;
+  }).join('');
+
+  section.innerHTML = `<div class="weak-spots-inner">
+    <div class="weak-spots-title">⚠️ Weak Areas <span class="weak-spots-sub">— focus on these</span></div>
+    <div class="weak-spots-list">${items}</div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════
+// EXAM COUNTDOWN + STUDY PLANNER
+// ═══════════════════════════════════════════
+
+const EXAM_SUBJECTS = [
+  { id: 'english',          label: 'English',     icon: '📖' },
+  { id: 'maths',            label: 'Maths',        icon: '📐' },
+  { id: 'biology',          label: 'Biology',      icon: '🧬' },
+  { id: 'chemistry',        label: 'Chemistry',    icon: '⚗️' },
+  { id: 'physics',          label: 'Physics',      icon: '⚡' },
+  { id: 'geography',        label: 'Geography',    icon: '🌍' },
+  { id: 'business',         label: 'Business',     icon: '💼' },
+  { id: 'computer-science', label: 'Comp. Sci.',   icon: '💻' },
+];
+
+function loadExamDates() { return StorageUtil.getJSON('gcse_exams', {}); }
+function saveExamDates(dates) { StorageUtil.setJSON('gcse_exams', dates); }
+
+function setExamDate(subjectId, dateStr) {
+  const dates = loadExamDates();
+  if (dateStr) dates[subjectId] = dateStr;
+  else delete dates[subjectId];
+  saveExamDates(dates);
+  renderExamCountdown();
+}
+
+function renderExamCountdown() {
+  const section = document.getElementById('exam-countdown-section');
+  if (!section) return;
+
+  const dates = loadExamDates();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const upcoming = EXAM_SUBJECTS
+    .map(s => {
+      const dateStr = dates[s.id];
+      if (!dateStr) return null;
+      const examDate = new Date(dateStr + 'T00:00:00');
+      const diff = Math.round((examDate - today) / 86400000);
+      return { ...s, diff };
+    })
+    .filter(s => s && s.diff >= 0)
+    .sort((a, b) => a.diff - b.diff);
+
+  if (!upcoming.length) {
+    section.innerHTML = `<div class="exam-empty-prompt">📅 Add exam dates in <button class="exam-settings-link" onclick="toggleSettings()">⚙️ Settings</button> to see your countdown</div>`;
+    return;
+  }
+
+  const cardHtml = upcoming.map(s => {
+    const cls = s.diff <= 7 ? 'urgent' : s.diff <= 14 ? 'soon' : '';
+    const label = s.diff === 0 ? 'TODAY!' : s.diff === 1 ? '1 day' : `${s.diff} days`;
+    return `<div class="exam-count-card ${cls}">
+      <div class="exam-count-icon">${s.icon}</div>
+      <div class="exam-count-subject">${s.label}</div>
+      <div class="exam-count-days">${label}</div>
+    </div>`;
+  }).join('');
+
+  section.innerHTML = `<div class="exam-countdown-inner">
+    <div class="exam-countdown-header">📅 Exam Countdown</div>
+    <div class="exam-count-row">${cardHtml}</div>
+  </div>`;
+}
+
+function renderExamSettings() {
+  const container = document.getElementById('exam-dates-container');
+  if (!container) return;
+  const dates = loadExamDates();
+  container.innerHTML = EXAM_SUBJECTS.map(s => `
+    <div class="setting-row">
+      <label>${s.icon} ${s.label}</label>
+      <input type="date" class="setting-date-input" value="${dates[s.id] || ''}"
+        onchange="setExamDate('${s.id}', this.value)">
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════
+// PRINTABLE REVISION SHEETS
+// ═══════════════════════════════════════════
+
+function printRevisionSheet() {
+  if (typeof currentNotesData === 'undefined' || !currentNotesData) return;
+  const title = document.getElementById('notes-title').textContent;
+  const sub = document.getElementById('notes-sub').textContent;
+
+  let body = '';
+  currentNotesData.forEach(section => {
+    body += `<h2>${section.icon || ''} ${section.section}</h2>`;
+    section.topics.forEach(topic => {
+      body += `<div class="topic"><h3>${topic.title} <span class="ref">${topic.ref}</span></h3>`;
+      if (topic.formulas && topic.formulas.length) {
+        body += '<div class="formulas">' + topic.formulas.map(f => `<span class="formula">${f}</span>`).join('') + '</div>';
+      }
+      if (topic.points && topic.points.length) {
+        body += '<ul>' + topic.points.map(p => `<li>${p.replace(/^([^:]+):/, '<strong>$1:</strong>')}</li>`).join('') + '</ul>';
+      }
+      if (topic.example) body += `<div class="example"><strong>Example:</strong> ${topic.example.replace(/\n/g, '<br>')}</div>`;
+      if (topic.tip) body += `<div class="tip">💡 ${topic.tip}</div>`;
+      body += '</div>';
+    });
+  });
+
+  const html = `<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><title>${title} — Revision Sheet</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Georgia,serif;max-width:900px;margin:0 auto;padding:24px;color:#111;font-size:13px}
+h1{font-size:22px;border-bottom:2px solid #333;padding-bottom:8px;margin-bottom:4px}
+.sub{color:#666;font-size:11px;margin-bottom:20px}
+h2{font-size:15px;margin:22px 0 8px;color:#222;border-bottom:1px solid #bbb;padding-bottom:4px;page-break-after:avoid}
+h3{font-size:13px;font-weight:700;margin:14px 0 4px;color:#444;page-break-after:avoid}
+.ref{color:#aaa;font-size:10px;font-weight:400;margin-left:6px}
+.formulas{margin:4px 0 6px}
+.formula{display:inline-block;background:#f0f0f0;border:1px solid #ddd;padding:2px 8px;border-radius:4px;font-family:monospace;font-size:12px;margin:2px}
+ul{margin:4px 0;padding-left:20px}
+li{margin-bottom:3px;line-height:1.5}
+.example{background:#eff6ff;border-left:3px solid #2563eb;padding:6px 10px;margin:6px 0;font-size:12px}
+.tip{background:#fffbeb;border-left:3px solid #d97706;padding:6px 10px;margin:6px 0;font-size:12px}
+.topic{margin-bottom:8px;page-break-inside:avoid}
+@media print{body{padding:0}}
+</style></head><body>
+<h1>${title}</h1>
+<div class="sub">${sub} · Printed ${new Date().toLocaleDateString('en-GB')}</div>
+${body}</body></html>`;
+
+  const w = window.open('', '_blank');
+  if (!w) { showToast('Enable pop-ups to print', 'warning'); return; }
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => w.print(), 400);
+}
+
+function printFlashcards() {
+  if (!app || !app.currentText || !cards.deck.length) return;
+  const deck = cards.deck;
+  const title = app.currentText.title;
+
+  const body = deck.map(c => {
+    const badge = app.currentText.unitLabel + ' ' + c.act + (c.scene ? ' · ' + c.scene : '');
+    const analysis = Array.isArray(c.analysis) ? c.analysis.join(' ') : (c.analysis || '');
+    const context = Array.isArray(c.context) ? c.context.join(' ') : (c.context || '');
+    const themes = (c.themes || []).map(t => t.replace(/_/g, ' ')).join(', ');
+    return `<div class="card">
+      <div class="badge">${badge}</div>
+      <div class="quote">"${c.quote}"</div>
+      <div class="speaker">— ${c.speaker}${themes ? ' · ' + themes : ''}</div>
+      <div class="label">Analysis</div>
+      <div class="analysis">${analysis}</div>
+      ${context ? `<div class="label">Context</div><div class="context">${context}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  const html = `<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><title>${title} — Revision Cards</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Georgia,serif;max-width:900px;margin:0 auto;padding:24px;color:#111;font-size:13px}
+h1{font-size:22px;border-bottom:2px solid #333;padding-bottom:8px;margin-bottom:20px}
+.card{border:1px solid #ccc;border-radius:8px;padding:14px 16px;margin-bottom:14px;page-break-inside:avoid}
+.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:#f0f0f0;color:#555;margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
+.quote{font-style:italic;font-size:15px;border-left:3px solid #B8336A;padding-left:10px;margin-bottom:6px;line-height:1.5}
+.speaker{font-size:11px;font-weight:600;color:#666;margin-bottom:8px}
+.label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#aaa;margin:8px 0 3px}
+.analysis{font-size:12px;line-height:1.6;color:#333}
+.context{font-size:11px;line-height:1.5;color:#555}
+@media print{body{padding:0}}
+</style></head><body>
+<h1>${title} — Quote Cards (${deck.length})</h1>
+${body}</body></html>`;
+
+  const w = window.open('', '_blank');
+  if (!w) { showToast('Enable pop-ups to print', 'warning'); return; }
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+  setTimeout(() => w.print(), 400);
+}
+
+// ═══ HOOK: refresh home widgets whenever renderStreak runs ═══
+(function() {
+  const _orig = typeof renderStreak === 'function' ? renderStreak : null;
+  if (!_orig) return;
+  window.renderStreak = function() {
+    _orig();
+    renderExamCountdown();
+    renderWeakSpots();
+  };
+})();
+
+// Initial render of new home widgets
+renderExamCountdown();
+renderWeakSpots();
+renderExamSettings();
+
 // Also run if DOM already loaded
 if (document.readyState !== 'loading') {
   loadPomoStats();
