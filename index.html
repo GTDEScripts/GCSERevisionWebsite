@@ -65,13 +65,36 @@
 <!-- ═══ HOME SCREEN ═══ -->
 <div class="home-screen" id="home-screen">
 <div class="hero">
-  <h1>GCSE Revision Tools</h1>
-  <p class="tagline">Everything you need to smash your GCSEs. <strong>Flashcards, revision notes, quizzes, essay feedback & exam simulation</strong> — all in one place, completely free.</p>
-  <div class="hero-cta">
-    <button class="cta-btn primary" onclick="document.querySelector('.subject-section').scrollIntoView({behavior:'smooth'})">Get Started →</button>
-    <button class="cta-btn secondary" onclick="document.getElementById('home-features').scrollIntoView({behavior:'smooth'})">See Features</button>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Free · Offline · No signup needed</div>
+    <h1>GCSE Revision Tools</h1>
+    <p class="tagline">Everything you need to smash your GCSEs. <strong>Flashcards, quizzes, essay feedback & exam simulation</strong> — all in one place, completely free.</p>
+    <div class="hero-cta">
+      <button class="cta-btn primary" onclick="document.querySelector('.subject-section').scrollIntoView({behavior:'smooth'})">Get Started →</button>
+      <button class="cta-btn secondary" onclick="document.getElementById('home-features').scrollIntoView({behavior:'smooth'})">See Features</button>
+    </div>
+    <div class="hero-version">v4.5 · 9 GCSE subjects · 127 topics · 83 quotes</div>
   </div>
-  <div class="hero-version">v4.5 · 9 GCSE subjects · 127 topics · 83 quotes</div>
+  <div class="hero-right">
+    <div class="hero-stats-grid">
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">127</div>
+        <div class="hero-stat-label">Revision Topics</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">83</div>
+        <div class="hero-stat-label">Literary Quotes</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">9</div>
+        <div class="hero-stat-label">GCSE Subjects</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-num">Free</div>
+        <div class="hero-stat-label">Always &amp; Forever</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="stats-bar" id="home-stats">
@@ -89,19 +112,46 @@
 
 <div id="weak-spots-section" class="weak-spots-section" style="display:none"></div>
 
-<div id="home-features" class="feature-row">
-  <span class="feature-pill">📇 Flashcards</span>
-  <span class="feature-pill">🔄 Spaced Repetition</span>
-  <span class="feature-pill">🧠 Adaptive Quizzes</span>
-  <span class="feature-pill">✍️ Essay Checker /30</span>
-  <span class="feature-pill">⏱️ Exam Simulation</span>
-  <span class="feature-pill">📊 Progress Dashboard</span>
-  <span class="feature-pill">🔊 Text-to-Speech</span>
-  <span class="feature-pill">🔥 Streak System</span>
-  <span class="feature-pill">📝 Revision Notes</span>
-  <span class="feature-pill">⭐ Favourites</span>
-  <span class="feature-pill">🎉 Confetti Rewards</span>
-  <span class="feature-pill">🌙 Dark Mode</span>
+<div id="home-features" class="features-section">
+  <div class="section-eyebrow">What's Included</div>
+  <h2 class="section-title">Everything you need to revise</h2>
+  <div class="feature-cards">
+    <div class="feature-card">
+      <span class="feature-card-icon">📇</span>
+      <h3 class="feature-card-title">Flashcards &amp; Spaced Repetition</h3>
+      <p class="feature-card-desc">SM-2 algorithm schedules your next review automatically so you study smarter, not harder.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-card-icon">🧠</span>
+      <h3 class="feature-card-title">Adaptive Quizzes</h3>
+      <p class="feature-card-desc">Multiple-choice tests that focus on your weakest areas and track improvement over time.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-card-icon">✍️</span>
+      <h3 class="feature-card-title">Essay Checker /30</h3>
+      <p class="feature-card-desc">Paste any paragraph for instant AO1/AO2/AO3 feedback with a mark out of 30.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-card-icon">⏱️</span>
+      <h3 class="feature-card-title">Exam Simulation</h3>
+      <p class="feature-card-desc">Timed quizzes under real exam conditions — no hints, randomised order, full results breakdown.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-card-icon">📊</span>
+      <h3 class="feature-card-title">Progress Dashboard</h3>
+      <p class="feature-card-desc">Track theme mastery across all your subjects and see exactly where to focus next.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-card-icon">🔥</span>
+      <h3 class="feature-card-title">Streak System</h3>
+      <p class="feature-card-desc">Daily goals and streak tracking keep you consistent in the run-up to your exams.</p>
+    </div>
+  </div>
+</div>
+
+<div class="subjects-section-header">
+  <div class="section-eyebrow">Pick Your Subject</div>
+  <h2 class="section-title">Start revising</h2>
 </div>
 
 <div class="subjects-grid">
