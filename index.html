@@ -4,8 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GCSE Revision Tools</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Free GCSE revision tools: flashcards, quizzes, spaced repetition, essay feedback and exam simulation for English, Maths, Sciences, Geography, Business and Computer Science.">
+<!-- Google Fonts - non-blocking load -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="css/styles.css?v=3">
@@ -33,15 +37,15 @@
 
 <!-- SETTINGS SIDE PANEL -->
 <div class="settings-overlay" id="settings-overlay" onclick="toggleSettings()"></div>
-<div class="settings-panel" id="settings-panel">
+<div class="settings-panel" id="settings-panel" role="dialog" aria-modal="false" aria-label="Settings">
   <h3>⚙️ Settings <button class="settings-close" onclick="toggleSettings()">✕</button></h3>
   <div class="setting-group">
     <div class="setting-label">Appearance</div>
-    <div class="setting-row"><label>Font Size</label><select class="setting-select" id="font-size-select" onchange="setFontSize(this.value)"><option value="0.9">Small</option><option value="1" selected>Medium</option><option value="1.1">Large</option></select></div>
+    <div class="setting-row"><label for="font-size-select">Font Size</label><select class="setting-select" id="font-size-select" onchange="setFontSize(this.value)"><option value="0.9">Small</option><option value="1" selected>Medium</option><option value="1.1">Large</option></select></div>
   </div>
   <div class="setting-group">
     <div class="setting-label">Revision</div>
-    <div class="setting-row"><label>Daily Card Goal</label><select class="setting-select" id="daily-goal-select" onchange="setDailyGoal(this.value)"><option value="10">10 cards</option><option value="20" selected>20 cards</option><option value="30">30 cards</option><option value="50">50 cards</option></select></div>
+    <div class="setting-row"><label for="daily-goal-select">Daily Card Goal</label><select class="setting-select" id="daily-goal-select" onchange="setDailyGoal(this.value)"><option value="10">10 cards</option><option value="20" selected>20 cards</option><option value="30">30 cards</option><option value="50">50 cards</option></select></div>
     <div class="setting-row"><label>Auto-advance after rating</label><div class="toggle-switch on" id="toggle-autoadvance" onclick="toggleAutoAdvance()"></div></div>
   </div>
   <div class="setting-group">
@@ -162,14 +166,14 @@
 <div class="notes-view" id="notes-view">
 <div class="notes-nav"><button class="back-btn" id="notes-back-btn" onclick="backToSubjectFromNotes()">← Back</button><button class="notes-print-btn" onclick="printRevisionSheet()" title="Print revision sheet">🖨️ Print</button></div>
 <div class="notes-header"><h2 id="notes-title"></h2><div class="notes-sub" id="notes-sub"></div></div>
-<input class="notes-search" id="notes-search" type="text" placeholder="Search topics, formulae, methods..." oninput="filterNotes()">
+<input class="notes-search" id="notes-search" type="text" placeholder="Search topics, formulae, methods..." oninput="filterNotes()" aria-label="Search revision topics, formulae and methods">
 <div id="notes-container"></div>
 </div>
 
 <!-- ═══ TOOL VIEW ═══ -->
 <div class="tool-view" id="tool-view">
 <button class="back-btn" id="tool-back-btn" onclick="backToSubject()">← Back</button>
-<div class="tool-header"><h1 id="tool-title"></h1><div class="sub" id="tool-sub"></div></div>
+<div class="tool-header"><h2 id="tool-title"></h2><div class="sub" id="tool-sub"></div></div>
 <div class="tool-body">
 <div class="tab-bar">
   <button class="tab-btn active" data-tool="flashcards" onclick="switchTab('flashcards',this)"><span class="tab-icon">📇</span><span class="tab-label">CARDS</span></button>
@@ -185,7 +189,7 @@
 <div class="tool-content">
 <!-- FLASHCARDS -->
 <div class="tab-content active" id="tab-flashcards">
-<div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="search-input" type="text" placeholder="Search quotes by keyword..." oninput="searchQuotes()"></div>
+<div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="search-input" type="text" placeholder="Search quotes by keyword..." oninput="searchQuotes()" aria-label="Search quotes by keyword"></div>
 <div style="display:flex;gap:4px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
   <button class="tab-btn active" id="btn-all" onclick="setMode('all')" style="font-size:10px;padding:4px 12px">ALL QUOTES</button>
   <button class="tab-btn" id="btn-best" onclick="setMode('best')" style="font-size:10px;padding:4px 12px">⭐ BEST</button>
@@ -215,7 +219,7 @@
 <!-- CHECKER -->
 <div class="tab-content" id="tab-checker"><div class="checker-section"><p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:12px">Paste your essay paragraph below for instant AO1/AO2/AO3 feedback (marked out of 30)</p><textarea class="checker-textarea" id="checker-input" placeholder="Paste your essay response here..."></textarea><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" onclick="checkEssay()" style="flex:1;background:var(--accent);color:#fff;border-color:var(--accent)">CHECK ESSAY</button><button class="btn" onclick="document.getElementById('checker-input').value='';document.getElementById('checker-results').innerHTML=''">CLEAR</button></div><div id="checker-results"></div></div></div>
 <!-- EXAM -->
-<div class="tab-content" id="tab-exam"><div class="exam-section" id="exam-content"><div class="exam-setup" id="exam-setup"><h3>⏱️ Exam Simulation</h3><p style="font-size:12px;color:var(--text3);margin-bottom:16px">Timed quiz under exam conditions — no hints, no filters, random order</p><div class="exam-option"><label>Questions</label><select id="exam-q-count"><option value="10">10</option><option value="20" selected>20</option><option value="all">All</option></select></div><div class="exam-option"><label>Time limit</label><select id="exam-time"><option value="5">5 mins</option><option value="10" selected>10 mins</option><option value="20">20 mins</option><option value="0">No limit</option></select></div><button class="btn" onclick="startExam()" style="width:100%;margin-top:16px;background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:12px">START EXAM</button></div><div id="exam-active" style="display:none"><div class="exam-timer" id="exam-timer">10:00</div><div class="test-card" id="exam-card"><div class="test-score" id="exam-score"></div><div class="test-hint" id="exam-hint"></div><div class="test-prompt" id="exam-prompt"></div><div class="test-options" id="exam-options"></div><div style="margin-top:14px"><button class="btn" id="exam-next" onclick="nextExamQ()" style="display:none">NEXT →</button></div></div></div><div id="exam-results" style="display:none"></div></div></div>
+<div class="tab-content" id="tab-exam"><div class="exam-section" id="exam-content"><div class="exam-setup" id="exam-setup"><h3>⏱️ Exam Simulation</h3><p style="font-size:12px;color:var(--text3);margin-bottom:16px">Timed quiz under exam conditions — no hints, no filters, random order</p><div class="exam-option"><label for="exam-q-count">Questions</label><select id="exam-q-count"><option value="10">10</option><option value="20" selected>20</option><option value="all">All</option></select></div><div class="exam-option"><label for="exam-time">Time limit</label><select id="exam-time"><option value="5">5 mins</option><option value="10" selected>10 mins</option><option value="20">20 mins</option><option value="0">No limit</option></select></div><button class="btn" onclick="startExam()" style="width:100%;margin-top:16px;background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:12px">START EXAM</button></div><div id="exam-active" style="display:none"><div class="exam-timer" id="exam-timer">10:00</div><div class="test-card" id="exam-card"><div class="test-score" id="exam-score"></div><div class="test-hint" id="exam-hint"></div><div class="test-prompt" id="exam-prompt"></div><div class="test-options" id="exam-options"></div><div style="margin-top:14px"><button class="btn" id="exam-next" onclick="nextExamQ()" style="display:none">NEXT →</button></div></div></div><div id="exam-results" style="display:none"></div></div></div>
 <!-- TRACKER -->
 <div class="tab-content" id="tab-tracker"><div class="tracker-stats" id="tracker-stats"></div><div class="tracker-grid" id="tracker-grid"></div></div>
 <!-- COMPARE -->
@@ -260,7 +264,7 @@
 <div class="qa-active" id="qa-active" style="display:none">
   <div class="qa-question-card">
     <p class="qa-question-text" id="qa-question"></p>
-    <textarea id="qa-user-answer" placeholder="Enter your answer..." style="width:100%;height:120px;padding:12px;border-radius:8px;border:1px solid var(--border);font-size:14px;font-family:inherit;margin-top:12px"></textarea>
+    <textarea id="qa-user-answer" placeholder="Enter your answer..." aria-label="Your answer" style="width:100%;height:120px;padding:12px;border-radius:8px;border:1px solid var(--border);font-size:14px;font-family:inherit;margin-top:12px"></textarea>
     <div style="margin-top:12px;display:flex;gap:8px">
       <button class="btn" onclick="revealMarkSchemeAndModel()" style="flex:1">Check Answer</button>
       <button class="btn secondary" onclick="skipQuestion()" style="flex:1">Skip</button>
@@ -269,7 +273,7 @@
 
   <div class="qa-reveal" id="qa-reveal" style="display:none;margin-top:20px">
     <div class="mark-scheme-box" style="background:var(--bg2);padding:12px;border-radius:8px;margin-bottom:12px">
-      <h4 style="margin:0 0 12px 0">Mark Scheme — Check what you got:</h4>
+      <h3 style="margin:0 0 12px 0;font-size:inherit">Mark Scheme — Check what you got:</h3>
       <div id="qa-mark-points" style="list-style:none;padding:0;margin:0"></div>
       <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-weight:600;font-size:15px">
         Your Score: <span id="qa-score" style="color:var(--accent);font-size:16px">0</span> / <span id="qa-max-marks">0</span>
@@ -277,7 +281,7 @@
     </div>
 
     <div class="model-answer-box" style="background:var(--bg2);padding:12px;border-radius:8px;margin-bottom:12px">
-      <h4 style="margin:0 0 8px 0">Model Answer</h4>
+      <h3 style="margin:0 0 8px 0;font-size:inherit">Model Answer</h3>
       <p id="qa-model-answer" style="margin:0;font-size:13px;line-height:1.5"></p>
     </div>
 
@@ -313,7 +317,7 @@
   </div>
   <div class="pomo-config" id="pomo-config">
     <div class="pomo-config-row">
-      <label>Focus duration</label>
+      <label for="pomo-work-dur">Focus duration</label>
       <select id="pomo-work-dur" onchange="updatePomoDuration()">
         <option value="15">15 min</option>
         <option value="20">20 min</option>
@@ -324,7 +328,7 @@
       </select>
     </div>
     <div class="pomo-config-row">
-      <label>Break duration</label>
+      <label for="pomo-break-dur">Break duration</label>
       <select id="pomo-break-dur" onchange="updatePomoDuration()">
         <option value="3">3 min</option>
         <option value="5" selected>5 min</option>
@@ -406,44 +410,44 @@
 
     <!-- ====================== DATA FILES (MUST LOAD FIRST) ====================== -->
     <!-- Maths -->
-    <script src="js/subjects/maths/edexcel/maths-data.js"></script>
+    <script src="js/subjects/maths/edexcel/maths-data.js" defer></script>
     <!-- Sciences - AQA -->
-    <script src="js/subjects/sciences/biology/aqa/biology.js"></script>
-    <script src="js/subjects/sciences/chemistry/aqa/chemistry.js"></script>
-    <script src="js/subjects/sciences/physics/aqa/physics.js"></script>
+    <script src="js/subjects/sciences/biology/aqa/biology.js" defer></script>
+    <script src="js/subjects/sciences/chemistry/aqa/chemistry.js" defer></script>
+    <script src="js/subjects/sciences/physics/aqa/physics.js" defer></script>
     <!-- Sciences - Edexcel -->
-    <script src="js/subjects/sciences/biology/edexcel/biology-edexcel-data.js"></script>
-    <script src="js/subjects/sciences/chemistry/edexcel/chemistry-edexcel-data.js"></script>
-    <script src="js/subjects/sciences/physics/edexcel/physics-edexcel-data.js"></script>
+    <script src="js/subjects/sciences/biology/edexcel/biology-edexcel-data.js" defer></script>
+    <script src="js/subjects/sciences/chemistry/edexcel/chemistry-edexcel-data.js" defer></script>
+    <script src="js/subjects/sciences/physics/edexcel/physics-edexcel-data.js" defer></script>
     <!-- English -->
-    <script src="js/subjects/english/aqa/english-literature.js"></script>
-    <script src="js/subjects/english/aqa/english-language.js"></script>
+    <script src="js/subjects/english/aqa/english-literature.js" defer></script>
+    <script src="js/subjects/english/aqa/english-language.js" defer></script>
     <!-- Poetry -->
-    <script src="js/subjects/poetry/aqa/power-conflict.js"></script>
+    <script src="js/subjects/poetry/aqa/power-conflict.js" defer></script>
     <!-- Geography -->
-    <script src="js/subjects/geography/aqa/geography.js"></script>
+    <script src="js/subjects/geography/aqa/geography.js" defer></script>
     <!-- Business -->
-    <script src="js/subjects/business/ocr/business.js"></script>
+    <script src="js/subjects/business/ocr/business.js" defer></script>
     <!-- Computer Science -->
-    <script src="js/subjects/computer-science/ocr/computer-science.js"></script>
+    <script src="js/subjects/computer-science/ocr/computer-science.js" defer></script>
 
     <!-- ====================== QUIZ DATA ====================== -->
-    <script src="js/quiz/bio-quiz.js"></script>
-    <script src="js/quiz/chem-quiz.js"></script>
-    <script src="js/quiz/phys-quiz.js"></script>
-    <script src="js/quiz/geography-quiz.js"></script>
-    <script src="js/quiz/business-quiz.js"></script>
-    <script src="js/quiz/computer-science-quiz.js"></script>
+    <script src="js/quiz/bio-quiz.js" defer></script>
+    <script src="js/quiz/chem-quiz.js" defer></script>
+    <script src="js/quiz/phys-quiz.js" defer></script>
+    <script src="js/quiz/geography-quiz.js" defer></script>
+    <script src="js/quiz/business-quiz.js" defer></script>
+    <script src="js/quiz/computer-science-quiz.js" defer></script>
 
     <!-- ====================== SUBJECTS CONFIG ====================== -->
-    <script src="js/subjects.js"></script>
+    <script src="js/subjects.js" defer></script>
 
     <!-- ====================== UTILITIES ====================== -->
-    <script src="js/utils.js"></script>
+    <script src="js/utils.js" defer></script>
 
     <!-- ====================== CORE APP FILES ====================== -->
-    <script src="js/app.js"></script>
-    <script src="js/features.js"></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/features.js" defer></script>
 
     <!-- ====================== PWA SUPPORT ====================== -->
     <script>
