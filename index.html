@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GCSE Revision Tools</title>
 <meta name="description" content="Free GCSE revision tools: flashcards, quizzes, spaced repetition, essay feedback and exam simulation for English, Maths, Sciences, Geography, Business and Computer Science.">
+
+<!-- Open Graph Meta Tags for Social Media Embeds -->
+<meta property="og:title" content="GCSE Revision Tools">
+<meta property="og:description" content="Free GCSE revision tools: flashcards, quizzes, spaced repetition, essay feedback and exam simulation.">
+<meta property="og:image" content="img/logo-light.png">
+<meta property="og:url" content="https://yoursite.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="img/logo-light.png">
+<meta name="twitter:title" content="GCSE Revision Tools">
+
 <!-- Google Fonts - non-blocking load -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +24,10 @@
 
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="css/styles.css?v=3">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="img/logo-favicon.png">
+<link rel="apple-touch-icon" href="img/logo-favicon.png">
 
 <!-- Web App Manifest -->
 <link rel="manifest" href="manifest.json">
@@ -23,7 +38,11 @@
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
-    <div class="nav-logo" onclick="navGo('home')">GCSE Revision</div>
+    <div class="nav-logo-container" onclick="navGo('home')">
+      <img class="nav-logo-img nav-logo-light" src="img/logo-light.png" alt="GCSE Revision Tools" title="GCSE Revision Tools">
+      <img class="nav-logo-img nav-logo-dark" src="img/logo-dark.png" alt="GCSE Revision Tools" title="GCSE Revision Tools">
+      <span class="nav-logo-text">GCSE Revision</span>
+    </div>
     <div class="nav-tabs" id="nav-tabs">
       <button class="nav-tab active" onclick="navGo('home')">🏠 Home</button>
       <button class="nav-tab" onclick="navGo('subjects')">📚 Subjects</button>

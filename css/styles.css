@@ -7,6 +7,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .navbar{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 85%,transparent);border-bottom:1px solid var(--border);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);padding:0 1.5rem;transition:background .4s,border-color .4s}
 .navbar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;height:52px;gap:8px}
 .nav-logo{font-family:'Crimson Pro',serif;font-size:calc(18px * var(--font-scale));font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;white-space:nowrap;margin-right:auto;letter-spacing:-.3px}
+.nav-logo-container{display:flex;align-items:center;gap:10px;cursor:pointer;transition:opacity .3s;padding:4px 8px;margin-right:auto}
+.nav-logo-container:hover{opacity:.8}
+.nav-logo-img{height:40px;width:auto;object-fit:contain;display:none}
+.nav-logo-light{display:block}
+[data-theme="dark"] .nav-logo-light{display:none}
+[data-theme="dark"] .nav-logo-dark{display:block}
+.nav-logo-text{font-family:'Crimson Pro',serif;font-size:calc(16px * var(--font-scale));font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.3px;white-space:nowrap}
 .nav-tabs{display:flex;gap:3px;margin-right:auto}
 .nav-tab{font-family:'DM Sans',sans-serif;font-size:calc(11px * var(--font-scale));font-weight:600;padding:6px 14px;border-radius:99px;border:none;background:transparent;color:var(--text3);cursor:pointer;transition:all .25s;letter-spacing:.3px;white-space:nowrap}
 .nav-tab:hover{background:var(--bg2);color:var(--text2)}
