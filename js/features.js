@@ -1015,8 +1015,8 @@ function renderExamSettings() {
   const dates = loadExamDates();
   container.innerHTML = EXAM_SUBJECTS.map(s => `
     <div class="setting-row">
-      <label>${s.icon} ${s.label}</label>
-      <input type="date" class="setting-date-input" value="${dates[s.id] || ''}"
+      <label for="exam-date-${s.id}">${s.icon} ${s.label}</label>
+      <input type="date" id="exam-date-${s.id}" class="setting-date-input" value="${dates[s.id] || ''}"
         onchange="setExamDate('${s.id}', this.value)">
     </div>
   `).join('');
