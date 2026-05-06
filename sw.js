@@ -1,14 +1,15 @@
 // Service Worker for GCSE Revision Website
 // Enables offline functionality and caching
 
-const CACHE_NAME = 'gcse-revision-v7';
+const CACHE_NAME = 'gcse-revision-v8';
 const urlsToCache = [
   './',
   './index.html',
   './css/styles.css',
   './js/app.js',
   './js/features.js',
-  './js/subjects.js'
+  './js/subjects.js',
+  './js/utils.js'
 ];
 
 // Install event - cache resources

@@ -120,7 +120,7 @@
   <div class="stat-item"><span class="stat-val" id="stat-studied">0</span><span class="stat-label">Done Today</span></div>
   <div class="stat-item"><span class="stat-val" id="stat-due">0</span><span class="stat-label">Due Today</span></div>
   <div class="stat-item"><span class="stat-val" id="stat-streak">0</span><span class="stat-label">Day Streak</span></div>
-  <div class="stat-item"><span class="stat-val" id="stat-subjects">6</span><span class="stat-label">Subjects</span></div>
+  <div class="stat-item"><span class="stat-val" id="stat-subjects">9</span><span class="stat-label">Subjects</span></div>
 </div>
 
 <div class="streak-bar" id="streak-bar"></div>
@@ -220,7 +220,7 @@
 </div>
 
 <div class="home-footer">
-  <p>Built for GCSE students, by GCSE students · AQA · Edexcel · OCR<br>83 quotes · 127 revision topics · 6 active subjects · All free, all offline</p>
+  <p>Built for GCSE students, by GCSE students · AQA · Edexcel · OCR<br>83 quotes · 127 revision topics · 9 GCSE subjects · All free, all offline</p>
 </div>
 </div>
 
@@ -259,7 +259,7 @@
 <!-- FLASHCARDS -->
 <div class="tab-content active" id="tab-flashcards">
 <div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="search-input" type="text" placeholder="Search quotes by keyword..." oninput="searchQuotes()" aria-label="Search quotes by keyword"></div>
-<div style="display:flex;gap:4px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
+<div class="mode-chips" style="display:flex;gap:4px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
   <button class="tab-btn active" id="btn-all" onclick="setMode('all')" style="font-size:10px;padding:4px 12px">ALL QUOTES</button>
   <button class="tab-btn" id="btn-best" onclick="setMode('best')" style="font-size:10px;padding:4px 12px">⭐ BEST</button>
   <button class="tab-btn" id="btn-due" onclick="setMode('due')" style="font-size:10px;padding:4px 12px">🔄 DUE</button>

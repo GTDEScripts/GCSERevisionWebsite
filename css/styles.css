@@ -21,6 +21,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .nav-actions{display:flex;gap:6px;align-items:center}
 .nav-icon-btn{width:34px;height:34px;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--card-bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:calc(14px * var(--font-scale));transition:all .25s}
 .nav-icon-btn:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow)}
+@media(max-width:560px){.navbar{padding:0 .75rem}.navbar-inner{gap:4px}.nav-logo-text{display:none}.nav-logo-img{height:32px}.nav-logo-container{padding:4px;margin-right:4px}.nav-tab{padding:6px 10px}}
 /* SETTINGS PANEL */
 .settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
 .settings-overlay.open{opacity:1;pointer-events:auto}
@@ -754,3 +755,94 @@ body.focus-mode .focus-toggle{background:var(--accent);color:#fff;border-color:v
 .onboarding-skip{background:none;border:none;color:var(--text3);font-size:calc(13px * var(--font-scale));font-weight:500;cursor:pointer;padding:8px 12px;border-radius:8px;transition:color .15s}
 .onboarding-skip:hover{color:var(--text2)}
 .onboarding-next{padding:10px 26px;font-size:calc(14px * var(--font-scale));font-weight:700}
+
+/* ═══ MOBILE OVERHAUL ═══ */
+@media(max-width:640px){
+  /* avoid floating FAB / focus-toggle covering bottom action buttons */
+  .home-screen{padding:1rem .9rem 7rem}
+  .tool-view{padding:1rem .9rem 6rem}
+  .subject-view{padding:1.25rem 1rem 6rem}
+  .notes-view{padding:1.25rem 1rem 6rem}
+  /* tab bar (CARDS / QUIZ / STATS / ESSAY ...): horizontal scroll, no wrap */
+  .tab-bar{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 4px;margin-left:-4px;margin-right:-4px}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{flex:0 0 auto;font-size:calc(11px * var(--font-scale));padding:8px 14px}
+  /* filter chips (ALL / BEST / DUE / WEAK / FAVS / CLOZE): horizontal scroll */
+  .filter-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .filter-chips::-webkit-scrollbar{display:none}
+  .filter-chips>*{flex:0 0 auto}
+  .mode-chips{flex-wrap:nowrap!important;overflow-x:auto;justify-content:flex-start!important;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .mode-chips::-webkit-scrollbar{display:none}
+  .mode-chips>*{flex:0 0 auto}
+  /* hero / typography sizing */
+  .hero{padding:1.5rem 0 1rem;gap:1.25rem;margin-bottom:1.25rem}
+  .hero h1{font-size:clamp(34px,9vw,48px)}
+  .hero .tagline{font-size:calc(14px * var(--font-scale));margin-bottom:18px}
+  .hero-cta{gap:8px}
+  .cta-btn{padding:11px 18px;font-size:calc(13px * var(--font-scale))}
+  .tool-header h2{font-size:calc(26px * var(--font-scale))}
+  .tool-header .sub{font-size:calc(11px * var(--font-scale))}
+  /* stats bar — four tiny cells stay readable */
+  .stats-bar{margin-bottom:1.25rem}
+  .stat-item{padding:12px 4px}
+  .stat-val{font-size:calc(20px * var(--font-scale))!important}
+  .stat-label{font-size:calc(9px * var(--font-scale));letter-spacing:.6px}
+  /* streak bar wraps gracefully */
+  .streak-bar{padding:12px 14px;gap:10px;margin-bottom:1.5rem}
+  .streak-dots{gap:3px}
+  /* SR rating buttons: stay readable, more tap area */
+  .sr-btn{padding:14px 8px;font-size:calc(13px * var(--font-scale))}
+  /* card nav row */
+  .nav-btn,.cta-btn,.pomo-btn{min-height:40px}
+  /* shrink floating buttons so they're less in the way */
+  .pomo-fab{width:44px;height:44px;bottom:14px;right:12px;font-size:calc(18px * var(--font-scale));opacity:.85}
+  .pomo-fab:hover,.pomo-fab.active{opacity:1}
+  .focus-toggle{width:32px;height:32px;left:10px;right:auto;bottom:16px;opacity:.85}
+  /* push back-btn / print row inline; allow header tools to wrap */
+  .back-btn{font-size:calc(12px * var(--font-scale));padding:6px 12px}
+  /* sticky settings panel feels nicer full width */
+  .settings-panel{padding:1.25rem 1rem 2rem}
+}
+@media(max-width:380px){
+  .hero h1{font-size:34px}
+  .stat-val{font-size:calc(18px * var(--font-scale))!important}
+  .stat-label{font-size:8.5px}
+  .tab-btn{padding:7px 11px;font-size:10px}
+}
+
+/* ═══ MOBILE HOME — COMPACT ═══ */
+@media(max-width:640px){
+  /* hero: tighter, drop secondary CTA */
+  .hero{padding:.75rem 0 .5rem;gap:.75rem;margin-bottom:1rem}
+  .hero-eyebrow{margin-bottom:8px;font-size:10px;letter-spacing:1.4px}
+  .hero h1{font-size:clamp(30px,8.5vw,42px);line-height:1.05;margin-bottom:4px}
+  .hero .tagline{font-size:13px;line-height:1.45;margin:0 0 14px}
+  .hero-cta .cta-btn.secondary{display:none}
+  .hero-version{display:none}
+  /* hide features marketing block on mobile */
+  .features-section{display:none}
+  /* tighter section header above subjects */
+  .subjects-section-header{margin:.5rem 0 .75rem}
+  .section-eyebrow{margin-bottom:4px}
+  .section-title{font-size:22px!important;margin-bottom:.75rem}
+  /* 2-column compact subject grid */
+  .subjects-grid{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;column-gap:10px}
+  .subjects-grid .subject-section{margin-bottom:0}
+  .subject-label{display:none}
+  .subj-grid{display:block}
+  .subj-card{padding:.85rem .8rem .9rem;border-radius:12px}
+  .subj-card .sc-icon{font-size:24px;margin-bottom:6px}
+  .subj-card .sc-title{font-size:14.5px;margin-bottom:0;line-height:1.25}
+  .subj-card .sc-desc{display:none}
+  .subj-card .sc-badge{top:6px;right:6px;font-size:7.5px;padding:1px 6px}
+  /* compact streak / qotd / countdown */
+  .streak-bar{padding:10px 12px;margin-bottom:1rem;gap:8px}
+  .streak-fire{font-size:22px}
+  .streak-count{font-size:16px}
+  .streak-label{font-size:11px}
+  .streak-dot{width:18px;height:18px;font-size:9px}
+  .qotd{padding:14px 16px;margin-bottom:1rem;border-radius:12px}
+  .qotd-text{font-size:14.5px;line-height:1.55}
+  .exam-countdown-section{margin-bottom:1rem}
+  .home-footer{padding:1rem 0 .5rem;margin-top:1rem}
+}
