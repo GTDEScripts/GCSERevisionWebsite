@@ -1026,6 +1026,6 @@ acc: {
       context: 'Dickens\' own father had been imprisoned for debt when Charles was twelve, and the experience of family absence and humiliation runs through every novel. Fred\'s persistence in inviting Scrooge each year \u2014 the pattern of being ignored by a relative \u2014 is autobiographical in its emotional register. Dickens\' insistence that family love survives rejection is a political claim: the welfare state begins with the household.',
     },
   ],
-  bestIdx: [0, 4, 5, 6, 9, 11, 12, 13, 14, 16, 18, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+  bestIdx: [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 22, 23, 24, 25, 26, 28, 29, 30],
 },
 };
