@@ -14,23 +14,40 @@ function applySettings(){
 function toggleSettings(){document.getElementById('settings-overlay').classList.toggle('open');document.getElementById('settings-panel').classList.toggle('open')}
 function toggleDark(){settings.dark=!settings.dark;saveSettings();applySettings()}
 function navGo(target){
-  if(target==='home'){
+  const goHome=()=>{
     window.location.hash='';
     document.getElementById('tool-view').classList.remove('active');
     document.getElementById('subject-view').classList.remove('active');
     document.getElementById('notes-view').classList.remove('active');
     document.getElementById('home-screen').style.display='';
     renderStreak();renderQOTD();
-    window.scrollTo(0,0);
-    updateNavTabs('home');
+  };
+  if(target==='home'){
+    goHome();window.scrollTo({top:0,behavior:'smooth'});
   } else if(target==='subjects'){
-    document.querySelector('.subject-section').scrollIntoView({behavior:'smooth'});
-    updateNavTabs('subjects');
+    goHome();
+    setTimeout(()=>{const el=document.querySelector('.subjects-section-header')||document.querySelector('.subject-section');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+  } else if(target==='features'){
+    goHome();
+    setTimeout(()=>{const el=document.getElementById('home-features');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+  } else if(target==='progress'){
+    goHome();
+    setTimeout(()=>{const el=document.getElementById('home-stats');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+  } else if(target==='exams'){
+    goHome();
+    setTimeout(()=>{const el=document.getElementById('exam-countdown-section');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+  } else if(target==='pomodoro'){
+    if(typeof togglePomo==='function')togglePomo();
+    return;
   }
+  updateNavTabs(target);
 }
 function updateNavTabs(active){
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>{if(t.textContent.toLowerCase().includes(active))t.classList.add('active')});
+  const map={home:'home',subjects:'subjects',features:'features',progress:'progress',exams:'exams',pomodoro:'focus'};
+  const needle=map[active]||active;
+  document.querySelectorAll('.nav-tab').forEach(t=>{
+    t.classList.toggle('active',t.textContent.toLowerCase().includes(needle));
+  });
 }
 function setFontSize(v){settings.fontSize=v;saveSettings();applySettings()}
 function setDailyGoal(v){settings.dailyGoal=parseInt(v);saveSettings()}

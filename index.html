@@ -23,7 +23,7 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- Main Stylesheet -->
-<link rel="stylesheet" href="css/styles.css?v=3">
+<link rel="stylesheet" href="css/styles.css?v=4">
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="img/logo-favicon.png">
@@ -46,8 +46,13 @@
     <div class="nav-tabs" id="nav-tabs">
       <button class="nav-tab active" onclick="navGo('home')">🏠 Home</button>
       <button class="nav-tab" onclick="navGo('subjects')">📚 Subjects</button>
+      <button class="nav-tab" onclick="navGo('features')">✨ Features</button>
+      <button class="nav-tab" onclick="navGo('progress')">📊 Progress</button>
+      <button class="nav-tab" onclick="navGo('exams')">📅 Exams</button>
+      <button class="nav-tab" onclick="navGo('pomodoro')">🍅 Focus</button>
     </div>
     <div class="nav-actions">
+      <button class="nav-icon-btn" onclick="toggleFocus()" title="Focus mode" id="nav-focus-btn">🎯</button>
       <button class="nav-icon-btn" onclick="toggleDark()" title="Toggle dark mode" id="nav-dark-btn">🌙</button>
       <button class="nav-icon-btn" onclick="toggleSettings()" title="Settings">⚙️</button>
     </div>
