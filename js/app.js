@@ -373,11 +373,46 @@ function getFavCards(){return app.allQuotes.filter(c=>favourites[quoteHash(c)])}
 function toggleFav(){if(!cards.deck.length)return;const h=quoteHash(cards.deck[cards.index]);favourites[h]=!favourites[h];if(!favourites[h])delete favourites[h];saveFav();updateFavBtn();updateModeCounters()}
 function updateFavBtn(){if(!cards.deck.length)return;const h=quoteHash(cards.deck[cards.index]);const btn=document.getElementById('fav-btn');const isFav=!!favourites[h];btn.textContent=isFav?'★':'☆';btn.classList.toggle('faved',isFav)}
 function pills(arr,cMap){return arr.map(x=>{const c=cMap[x]||{bg:'#F3F4F6',c:'#4B5563'};return`<span class="pill" style="background:${c.bg};color:${c.c};">${x.replace(/_/g,' ')}</span>`}).join('')}
+function buildCloze(c){
+  const quote=c.quote;
+  const escapeRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const wrap=t=>`<span class="cloze-blank" onclick="event.stopPropagation();this.classList.add('revealed')">${t}</span>`;
+  // Extract phrases the analysis explicitly quotes (curly or straight quotes)
+  const phrases=new Set();
+  const re=/[“"]([^”"]{1,40})[”"]/g;
+  let m;
+  while((m=re.exec(c.analysis||''))!==null){
+    const p=m[1].trim().replace(/^[…\s,.;:!?]+|[…\s,.;:!?]+$/g,'');
+    if(p && p.length>=2 && quote.toLowerCase().includes(p.toLowerCase())) phrases.add(p);
+  }
+  if(phrases.size){
+    // Sort by length desc so longer phrases get blanked before their substrings
+    const sorted=[...phrases].sort((a,b)=>b.length-a.length);
+    const placeholders=[]; let out=quote;
+    sorted.forEach((p,i)=>{
+      const token=`~${i}~`;
+      const re2=new RegExp(escapeRe(p),'i');
+      const match=out.match(re2);
+      placeholders.push(match?match[0]:p);
+      if(match) out=out.replace(re2,token);
+    });
+    placeholders.forEach((p,i)=>{out=out.split(`~${i}~`).join(wrap(p))});
+    return out;
+  }
+  // Fallback: blank every long-ish content word
+  const stop=new Set(['that','this','with','from','they','their','them','were','have','been','will','what','when','your','about','into','than','then','there','these','those','which','would','could','should','some','more','most','such','only','over','upon']);
+  let n=0;
+  return quote.split(/(\s+)/).map(tok=>{
+    const w=tok.replace(/[^\w']/g,'');
+    if(w.length>4 && !stop.has(w.toLowerCase())){n++; if(n%2===0) return tok.replace(w,wrap(w));}
+    return tok;
+  }).join('');
+}
 function render(){if(!cards.deck.length){document.getElementById('quote-text').textContent='No quotes match.';document.getElementById('front-badge').style.display='none';document.getElementById('front-devices').innerHTML='';document.getElementById('progress').textContent='0 / 0';document.getElementById('prev-btn').disabled=true;document.getElementById('next-btn').disabled=true;document.getElementById('count-badge').textContent='Try removing a filter';document.getElementById('card').classList.remove('flipped');return}if(cards.index>=cards.deck.length)cards.index=cards.deck.length-1;document.getElementById('front-badge').style.display='inline-block';const c=cards.deck[cards.index];const bs=`background:${app.currentText.unitBg[c.act]};color:${app.currentText.unitText[c.act]};`;document.getElementById('front-badge').style.cssText=bs;document.getElementById('front-badge').textContent=app.currentText.unitLabel.toUpperCase()+' '+c.act+(c.scene?' · '+c.scene:'');
 document.getElementById('quote-text').style.color=app.currentText.unitText[c.act]||'';
 document.getElementById('card').style.setProperty('--card-accent',app.currentText.unitText[c.act]||'');
-// Cloze mode: blank key words
-if(cards.mode==='cloze'){const words=c.quote.split(' ');const blanked=words.map((w,i)=>{if(w.length>3&&i%3===1)return`<span class="cloze-blank" onclick="event.stopPropagation();this.classList.add('revealed')">${w}</span>`;return w}).join(' ');document.getElementById('quote-text').innerHTML='\u201C'+blanked+'\u201D'}else{document.getElementById('quote-text').textContent='\u201C'+c.quote+'\u201D'}
+// Cloze mode: blank words the analysis explicitly quotes (the words actually being tested)
+if(cards.mode==='cloze'){document.getElementById('quote-text').innerHTML='\u201C'+buildCloze(c)+'\u201D'}else{document.getElementById('quote-text').textContent='\u201C'+c.quote+'\u201D'}
 document.getElementById('front-devices').innerHTML=pills(c.devices,DC);document.getElementById('back-badge').style.cssText=bs;document.getElementById('back-badge').textContent=app.currentText.unitLabel.toUpperCase()+' '+c.act+(c.scene?' · '+c.scene:'');document.getElementById('back-speaker').textContent=c.speaker;document.getElementById('back-themes').innerHTML=pills(c.themes,app.currentText.themes);document.getElementById('back-word').innerHTML=toBulletList(c.analysis,true);document.getElementById('back-context').innerHTML=toBulletList(c.context,false);document.getElementById('progress').textContent=(cards.index+1)+' / '+cards.deck.length;document.getElementById('prev-btn').disabled=cards.index===0;document.getElementById('next-btn').disabled=cards.index===cards.deck.length-1;document.getElementById('card').classList.toggle('flipped',cards.isFlipped);document.getElementById('count-badge').textContent=cards.deck.length+' quotes';updateSRHints();updateFavBtn();updateCardRatingTag()}
 function flip(){cards.isFlipped=!cards.isFlipped;render()}
 function stopTTS(){try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}ttsActive=false;const b=document.getElementById('tts-btn');if(b)b.classList.remove('speaking')}
@@ -429,8 +464,99 @@ function renderQuizBreakdown(){if(!quiz.results.length)return;const bd=document.
 function renderDashboard(){const d=document.getElementById('dash-content');const memCount=app.allQuotes.filter((_,i)=>app.memorised[i]).length;const due=getDueCards().length;const weak=getWeakCards().length;const reviewed=app.allQuotes.filter(c=>getSR(c).reviews>0).length;const ts={};[...new Set(app.allQuotes.flatMap(c=>c.themes))].forEach(t=>{const cards=app.allQuotes.filter(c=>c.themes.includes(t));const m=cards.filter(c=>{const sr=getSR(c);return sr.lastRating>=1&&sr.ef>=2.0});ts[t]={total:cards.length,mastered:m.length,pct:Math.round(m.length/cards.length*100)}});let h=`<div class="dash-grid"><div class="dash-card"><div class="dash-val">${reviewed}</div><div class="dash-label">Cards Reviewed</div></div><div class="dash-card"><div class="dash-val">${due}</div><div class="dash-label">Due Today</div></div><div class="dash-card"><div class="dash-val">${memCount}</div><div class="dash-label">Memorised</div></div><div class="dash-card"><div class="dash-val">${weak}</div><div class="dash-label">Weak Cards</div></div></div>`;const op=app.allQuotes.length?Math.round(reviewed/app.allQuotes.length*100):0;h+=`<div style="margin-bottom:16px"><div style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Overall Progress</div><div class="tracker-bar" style="height:10px"><div class="tracker-fill" style="width:${op}%"></div></div><div style="font-size:11px;color:var(--text3);margin-top:4px;text-align:center">${op}% reviewed</div></div>`;h+=`<div style="margin-bottom:16px"><div style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Theme Mastery</div>`;Object.entries(ts).sort((a,b)=>a[1].pct-b[1].pct).forEach(([t,s])=>{const c=s.pct>=80?'var(--green)':s.pct>=50?'var(--yellow)':'var(--red)';h+=`<div class="mastery-row"><span class="mastery-label">${t.replace(/_/g,' ')}</span><div class="mastery-bar"><div class="mastery-fill" style="width:${s.pct}%;background:${c}"></div></div><span class="mastery-pct" style="color:${c}">${s.pct}%</span></div>`});h+=`</div>`;d.innerHTML=h}
 
 // ══════ ESSAY BUILDER ══════
-function buildEssayThemes(){const g=document.getElementById('essay-theme-grid');g.innerHTML='';[...new Set(app.allQuotes.flatMap(c=>c.themes))].sort().forEach(t=>{const col=app.currentText.themes[t]||{bg:'#F3F4F6',c:'#4B5563'};const b=document.createElement('button');b.className='essay-theme-btn';b.textContent=t.replace(/_/g,' ');b.style.cssText=`border-color:${col.c};color:${col.c}`;b.onclick=()=>{document.querySelectorAll('.essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''});b.classList.add('active');b.style.background=col.bg;buildEssayPlan(t)};g.appendChild(b)})}
-function buildEssayPlan(theme){const quotes=app.allQuotes.filter(c=>c.themes.includes(theme)).sort((a,b)=>a.act-b.act);const out=document.getElementById('essay-output');if(!quotes.length){out.innerHTML='<p style="text-align:center;color:var(--text3)">No quotes.</p>';return}const picked=[];app.currentText.units.forEach(a=>{const f=quotes.filter(q=>q.act===a);if(f.length)picked.push(f[0])});const final=picked.slice(0,4);if(final.length<3&&quotes.length>=3){const extra=quotes.filter(q=>!final.includes(q));while(final.length<3&&extra.length)final.push(extra.shift())}const labels=['Opening paragraph \u2014 introduce the theme','Development \u2014 show how the theme evolves','Turning point \u2014 key shift','Conclusion \u2014 writer\u2019s message'];let h=`<div class="essay-plan"><h3>Essay Plan: ${theme.replace(/_/g,' ').replace(/\b\w/g,l=>l.toUpperCase())}</h3>`;final.forEach((q,i)=>{h+=`<div class="essay-para"><div class="essay-para-label">${labels[i]||'Supporting'}</div><div class="essay-para-quote">\u201C${q.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${q.speaker}, ${app.currentText.unitLabel} ${q.act}</span></div><div class="essay-para-point"><strong>Analyse:</strong> ${q.analysis.split('.').slice(0,2).join('.')}.</div><div style="margin-top:4px">${pills(q.devices,DC)}</div></div>`});h+=`<div style="padding:10px 16px;border-radius:10px;background:var(--bg2);margin-top:8px;font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--accent)">Tip:</strong> ${app.currentText.essayTip}</div></div>`;out.innerHTML=h}
+let essayMode='single', essayPickA=null, essayPickB=null;
+function essayThemeBtn(t,onClick){const col=app.currentText.themes[t]||{bg:'#F3F4F6',c:'#4B5563'};const b=document.createElement('button');b.className='essay-theme-btn';b.dataset.theme=t;b.textContent=t.replace(/_/g,' ');b.style.cssText=`border-color:${col.c};color:${col.c}`;b.onclick=()=>onClick(t,b,col);return b}
+function buildEssayThemes(){
+  const themes=[...new Set(app.allQuotes.flatMap(c=>c.themes))].sort();
+  const g=document.getElementById('essay-theme-grid');g.innerHTML='';
+  themes.forEach(t=>g.appendChild(essayThemeBtn(t,(theme,b,col)=>{
+    g.querySelectorAll('.essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''});
+    b.classList.add('active');b.style.background=col.bg;
+    buildEssayPlan(theme);
+  })));
+  ['a','b'].forEach(side=>{
+    const grid=document.getElementById('essay-theme-grid-'+side);if(!grid)return;grid.innerHTML='';
+    themes.forEach(t=>grid.appendChild(essayThemeBtn(t,(theme,b,col)=>{
+      grid.querySelectorAll('.essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''});
+      b.classList.add('active');b.style.background=col.bg;
+      if(side==='a')essayPickA=theme;else essayPickB=theme;
+      if(essayPickA&&essayPickB)buildEssayComparePlan(essayPickA,essayPickB);
+    })));
+  });
+}
+function setEssayMode(m){essayMode=m;document.getElementById('essay-mode-single').classList.toggle('active',m==='single');document.getElementById('essay-mode-compare').classList.toggle('active',m==='compare');document.getElementById('essay-single-picker').style.display=m==='single'?'':'none';document.getElementById('essay-compare-picker').style.display=m==='compare'?'':'none';document.getElementById('essay-output').innerHTML='';essayPickA=null;essayPickB=null;document.querySelectorAll('#essay-theme-grid-a .essay-theme-btn,#essay-theme-grid-b .essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''})}
+function essayTitleCase(s){return s.replace(/_/g,' ').replace(/\b\w/g,l=>l.toUpperCase())}
+function pickQuotesForTheme(theme,n){
+  const quotes=app.allQuotes.filter(c=>c.themes.includes(theme)).sort((a,b)=>a.act-b.act);
+  const picked=[];
+  app.currentText.units.forEach(a=>{const f=quotes.filter(q=>q.act===a);if(f.length&&picked.length<n)picked.push(f[0])});
+  if(picked.length<n){const extra=quotes.filter(q=>!picked.includes(q));while(picked.length<n&&extra.length)picked.push(extra.shift())}
+  return picked;
+}
+function thesisFor(theme){const v=app.currentText.authorVerb||'The writer presents';return `${v} ${theme.replace(/_/g,' ')} as <em>[your argument \u2014 e.g. a force that exposes / a moral test that reveals / a structural arc that culminates in\u2026]</em>, ultimately to <em>[writer\u2019s purpose]</em>.`}
+function paraBlock(label,ao,quote,roleHint){
+  const aoTag=ao?`<span class="ao-tag ao-${ao.toLowerCase()}">${ao}</span>`:'';
+  const ctx=quote.context?`<div class="essay-para-point" style="margin-top:6px"><strong>Link (AO3):</strong> ${quote.context}</div>`:'';
+  return `<div class="essay-para">
+    <div class="essay-para-label">${label} ${aoTag}</div>
+    <div class="essay-para-point" style="margin-bottom:6px"><strong>Point:</strong> <em>${roleHint}</em></div>
+    <div class="essay-para-quote">\u201C${quote.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${quote.speaker}, ${app.currentText.unitLabel} ${quote.act}</span></div>
+    <div style="margin:6px 0">${pills(quote.devices,DC)}</div>
+    <div class="essay-para-point"><strong>Explain (AO2):</strong> ${quote.analysis}</div>
+    ${ctx}
+  </div>`;
+}
+function buildEssayPlan(theme){
+  const out=document.getElementById('essay-output');
+  const final=pickQuotesForTheme(theme,4);
+  if(!final.length){out.innerHTML='<p style="text-align:center;color:var(--text3)">No quotes for this theme.</p>';return}
+  const roles=[
+    'Establish the theme at its starting point \u2014 how it is first introduced.',
+    'Develop the theme \u2014 show how it intensifies or complicates.',
+    'Turning point \u2014 the moment the theme reaches its crisis or shift.',
+    'Resolution \u2014 the theme\u2019s final state and what it tells us about the writer\u2019s message.'
+  ];
+  const peel=['P \u2014 Point','E \u2014 Evidence & Explain','E \u2014 Evidence & Explain','L \u2014 Link & Conclude'];
+  const aos=['AO1','AO2','AO2','AO3'];
+  let h=`<div class="essay-plan">
+    <h3>Essay Plan: ${essayTitleCase(theme)}</h3>
+    <div class="essay-thesis"><div class="essay-para-label">Thesis (Introduction)</div><div class="essay-para-point">${thesisFor(theme)}</div></div>`;
+  final.slice(0,4).forEach((q,i)=>{h+=paraBlock(peel[i]||'Supporting',aos[i]||'AO2',q,roles[i]||'Supporting evidence.')});
+  h+=`<div class="essay-conclusion"><div class="essay-para-label">Conclusion</div><div class="essay-para-point">Restate the thesis with the perspective the analysis has earned. End on the writer\u2019s purpose: <em>why</em> the theme matters to the audience \u2014 [your sentence here].</div></div>`;
+  h+=`<div class="essay-tip"><strong>Tip:</strong> ${app.currentText.essayTip}</div></div>`;
+  out.innerHTML=h;
+}
+function buildEssayComparePlan(a,b){
+  const out=document.getElementById('essay-output');
+  const qa=pickQuotesForTheme(a,2);
+  const qb=pickQuotesForTheme(b,2);
+  if(!qa.length||!qb.length){out.innerHTML='<p style="text-align:center;color:var(--text3)">Not enough quotes to compare.</p>';return}
+  const colA=app.currentText.themes[a]||{c:'#4B5563'};
+  const colB=app.currentText.themes[b]||{c:'#4B5563'};
+  let h=`<div class="essay-plan">
+    <h3>Comparative Essay: <span style="color:${colA.c}">${essayTitleCase(a)}</span> vs <span style="color:${colB.c}">${essayTitleCase(b)}</span></h3>
+    <div class="essay-thesis"><div class="essay-para-label">Thesis (Introduction)</div><div class="essay-para-point">${app.currentText.authorVerb||'The writer presents'} <strong style="color:${colA.c}">${a.replace(/_/g,' ')}</strong> and <strong style="color:${colB.c}">${b.replace(/_/g,' ')}</strong> as <em>[connected / opposing / mutually-defining]</em> forces, ultimately to <em>[writer\u2019s overarching purpose]</em>.</div></div>`;
+  const pairs=[
+    ['P \u2014 Point','AO1','Establish how each theme first appears.',qa[0],qb[0]],
+    ['E \u2014 Evidence & Explain','AO2','Show how each theme develops or escalates.',qa[1]||qa[0],qb[1]||qb[0]]
+  ];
+  pairs.forEach(p=>{const label=p[0],ao=p[1],role=p[2],A=p[3],B=p[4];
+    h+=`<div class="essay-para" style="border-left-color:${colA.c}">
+      <div class="essay-para-label">${label} <span class="ao-tag ao-${ao.toLowerCase()}">${ao}</span></div>
+      <div class="essay-para-point" style="margin-bottom:6px"><strong>Point:</strong> <em>${role}</em></div>
+      <div class="essay-para-point" style="margin-bottom:4px;font-weight:600;color:${colA.c}">${essayTitleCase(a)}:</div>
+      <div class="essay-para-quote">\u201C${A.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${A.speaker}, ${app.currentText.unitLabel} ${A.act}</span></div>
+      <div class="essay-para-point" style="margin:6px 0"><strong>Explain:</strong> ${A.analysis.split('.').slice(0,3).join('.')}.</div>
+      <div class="essay-para-point" style="margin:8px 0 4px;font-weight:600;color:${colB.c}">${essayTitleCase(b)}:</div>
+      <div class="essay-para-quote">\u201C${B.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${B.speaker}, ${app.currentText.unitLabel} ${B.act}</span></div>
+      <div class="essay-para-point" style="margin:6px 0"><strong>Explain:</strong> ${B.analysis.split('.').slice(0,3).join('.')}.</div>
+      <div class="essay-para-point"><strong>Link:</strong> <em>How does presenting these two themes together shift the reading? \u2014 [your sentence here]</em></div>
+    </div>`;
+  });
+  h+=`<div class="essay-conclusion"><div class="essay-para-label">Conclusion <span class="ao-tag ao-ao3">AO3</span></div><div class="essay-para-point">Pull both threads together. Which theme dominates, and what does that combination tell us about <em>[context]</em>? End on the writer\u2019s purpose.</div></div>`;
+  h+=`<div class="essay-tip"><strong>Tip:</strong> ${app.currentText.essayTip}</div></div>`;
+  out.innerHTML=h;
+}
 
 // ══════ ESSAY CHECKER (/30 marks) ══════
 function checkEssay(){const text=document.getElementById('checker-input').value;if(!text.trim()){document.getElementById('checker-results').innerHTML='<p style="text-align:center;color:var(--text3);margin-top:12px">Write something first!</p>';return}const a=analyseEssay(text);const s=scoreEssay(a);const fb=generateFeedback(a,s);renderCheckerResults(a,s,fb);recordStudyDay()}
