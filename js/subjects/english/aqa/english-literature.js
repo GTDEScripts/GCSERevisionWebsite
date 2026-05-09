@@ -11,6 +11,16 @@ const TEXTS = {
   contextWords:['macbeth','shakespeare','ambition','guilt','power','witches','lady macbeth','supernatural','scotland','king','murder','blood','fate','evil','darkness','light','madness','sleep','nature','chaos','order','masculinity','femininity','betrayal','loyalty','divine','justice'],
   quotes: [
     {
+      quote: 'In thunder, lightning, or in rain',
+      act: 1,
+      scene: 'S1 · The witches open',
+      speaker: 'The Witches',
+      themes: ['supernatural', 'nature', 'chaos'],
+      devices: ['tricolon', 'pathetic_fallacy', 'trochaic_tetrameter'],
+      analysis: 'The tricolon of violent weather — "thunder, lightning, or in rain" — establishes the witches\' natural habitat as one of elemental disorder, fusing their identity with storm imagery from the play\'s opening seconds. The pathetic fallacy is inverted: rather than nature reflecting human emotion, the witches summon and inhabit the chaos, suggesting they are agents of disturbance rather than passive observers. The conjunction "or" makes the choice arbitrary — any kind of violent weather will do — implying that disorder itself, not any particular form of it, is their element. Crucially, the line is delivered in trochaic tetrameter (DUM-da DUM-da), the inverted rhythm of normal iambic speech, sonically signalling that everything the witches touch is reversed. Shakespeare\'s decision to open the entire play with this line is structural: before any human appears, before Scotland is named, the audience is told that the world of the play is one in which the natural order has already been compromised.',
+      context: 'King James I\'s Demonology (1597) argued that witches could control weather, and the storm imagery here would have been read by a Jacobean audience as literal supernatural evidence rather than metaphor. The Great Chain of Being held that disturbances in nature reflected disturbances in the moral and political order — a storm at the play\'s opening therefore foreshadows the regicide and chaos to come. Shakespeare also exploits a theatrical reality: the Globe was open-air, so real weather could amplify the line, blurring the boundary between performance and the audience\'s world.',
+    },
+    {
       quote: 'Fair is foul, and foul is fair',
       act: 1,
       scene: "S1 · The witches open",
