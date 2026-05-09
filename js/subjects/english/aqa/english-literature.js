@@ -241,6 +241,16 @@ const TEXTS = {
       context: 'This speech is the structural turning point of the play, and Shakespeare designs it accordingly. After this moment, Macbeth abandons deliberation entirely — from Act 4 onward, he acts on impulse: ordering Macduff\'s castle burned, visiting the witches, commanding Banquo\'s murder without the anguished self-examination of Acts 1\u20133. The point of no return is also the moment when sympathy becomes most strained: we have pitied Macbeth\'s torment, but his description of murder as merely "tedious" marks the boundary of the audience\'s identification with him.',
     },
     {
+      quote: 'Double, double toil and trouble; fire burn and cauldron bubble',
+      act: 4,
+      scene: "S1 · The witches' cauldron",
+      speaker: 'The Witches',
+      themes: ['supernatural', 'chaos', 'evil'],
+      devices: ['rhyming_couplet', 'trochaic_tetrameter', 'alliteration', 'repetition'],
+      analysis: 'The chant is structured as a rhyming couplet in trochaic tetrameter (DUM-da DUM-da DUM-da DUM) — the same inverted rhythm of the play\'s opening line, sonically binding this Act 4 spell to the witches\' first appearance and reminding the audience that nothing has fundamentally changed: Macbeth is still moving to their music. The repetition of "double" suggests multiplication, intensification, doubling-down — the witches\' power, like Macbeth\'s body count, has only escalated. "Toil and trouble" yokes labour to suffering through alliteration of the hard "t", implying that evil is industrial, something manufactured through effort rather than received as a gift. The imperatives "burn" and "bubble" command the elements directly, and the plosive "b" alliteration mimics the percussive sound of a boiling cauldron, making the line onomatopoeic — the audience hears the spell as it is cast. Crucially, this is the only refrain spoken by all three witches in unison, signalling the collective, hive-mind nature of evil: it speaks with one voice and acts in concert, in stark contrast to Macbeth\'s increasing isolation.',
+      context: 'King James I\'s Demonology described witches\' rituals in extensive detail, including their use of cauldrons and grotesque ingredients to brew malevolent charms. The cauldron scene would have been read by a Jacobean audience as documentary horror, not theatrical fancy. Structurally, Shakespeare positions this chant at the threshold of Macbeth\'s moral collapse — he visits the witches voluntarily here, no longer their accidental discovery but their willing client. The same trochaic rhythm that opened the play returns to mark its tragic acceleration: the world the witches conjured in Act 1 Scene 1 has now fully arrived.',
+    },
+    {
       quote: 'By the pricking of my thumbs, something wicked this way comes',
       act: 4,
       scene: "S1 · The witches' cauldron",
