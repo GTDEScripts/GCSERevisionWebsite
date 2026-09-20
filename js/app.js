@@ -3,125 +3,125 @@ let settings={dark:false,fontSize:'1',dailyGoal:20,autoAdvance:true};
 function loadSettings(){try{const s=localStorage.getItem('gcse_settings');if(s)settings=JSON.parse(s)}catch(e){}}
 function saveSettings(){try{localStorage.setItem('gcse_settings',JSON.stringify(settings))}catch(e){}}
 function applySettings(){
-  document.documentElement.setAttribute('data-theme',settings.dark?'dark':'');
-  document.documentElement.style.setProperty('--font-scale',settings.fontSize);
-  const td=document.getElementById('toggle-dark');if(td)td.classList.toggle('on',settings.dark);
-  document.getElementById('font-size-select').value=settings.fontSize;
-  document.getElementById('daily-goal-select').value=settings.dailyGoal;
-  document.getElementById('toggle-autoadvance').classList.toggle('on',settings.autoAdvance);
-  const nb=document.getElementById('nav-dark-btn');if(nb)nb.textContent=settings.dark?'☀️':'🌙';
+ document.documentElement.setAttribute('data-theme',settings.dark?'dark':'');
+ document.documentElement.style.setProperty('--font-scale',settings.fontSize);
+ const td=document.getElementById('toggle-dark');if(td)td.classList.toggle('on',settings.dark);
+ document.getElementById('font-size-select').value=settings.fontSize;
+ document.getElementById('daily-goal-select').value=settings.dailyGoal;
+ document.getElementById('toggle-autoadvance').classList.toggle('on',settings.autoAdvance);
+ const nb=document.getElementById('nav-dark-btn');if(nb)nb.textContent=settings.dark?'☀️':'';
 }
 function toggleSettings(){document.getElementById('settings-overlay').classList.toggle('open');document.getElementById('settings-panel').classList.toggle('open')}
 function toggleDark(){settings.dark=!settings.dark;saveSettings();applySettings()}
 function navGo(target){
-  const goHome=()=>{
-    window.location.hash='';
-    document.getElementById('tool-view').classList.remove('active');
-    document.getElementById('subject-view').classList.remove('active');
-    document.getElementById('notes-view').classList.remove('active');
-    document.getElementById('home-screen').style.display='';
-    renderStreak();renderQOTD();
-  };
-  if(target==='home'){
-    goHome();window.scrollTo({top:0,behavior:'smooth'});
-  } else if(target==='subjects'){
-    goHome();
-    setTimeout(()=>{const el=document.querySelector('.subjects-section-header')||document.querySelector('.subject-section');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
-  } else if(target==='features'){
-    goHome();
-    setTimeout(()=>{const el=document.getElementById('home-features');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
-  } else if(target==='progress'){
-    goHome();
-    setTimeout(()=>{const el=document.getElementById('home-stats');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
-  } else if(target==='exams'){
-    goHome();
-    setTimeout(()=>{const el=document.getElementById('exam-countdown-section');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
-  } else if(target==='pomodoro'){
-    if(typeof togglePomo==='function')togglePomo();
-    return;
-  }
-  updateNavTabs(target);
+ const goHome=()=>{
+ window.location.hash='';
+ document.getElementById('tool-view').classList.remove('active');
+ document.getElementById('subject-view').classList.remove('active');
+ document.getElementById('notes-view').classList.remove('active');
+ document.getElementById('home-screen').style.display='';
+ renderStreak();renderQOTD();
+ };
+ if(target==='home'){
+ goHome();window.scrollTo({top:0,behavior:'smooth'});
+ } else if(target==='subjects'){
+ goHome();
+ setTimeout(()=>{const el=document.querySelector('.subjects-section-header')||document.querySelector('.subject-section');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+ } else if(target==='features'){
+ goHome();
+ setTimeout(()=>{const el=document.getElementById('home-features');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+ } else if(target==='progress'){
+ goHome();
+ setTimeout(()=>{const el=document.getElementById('home-stats');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+ } else if(target==='exams'){
+ goHome();
+ setTimeout(()=>{const el=document.getElementById('exam-countdown-section');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);
+ } else if(target==='pomodoro'){
+ if(typeof togglePomo==='function')togglePomo();
+ return;
+ }
+ updateNavTabs(target);
 }
 function updateNavTabs(active){
-  const map={home:'home',subjects:'subjects',features:'features',progress:'progress',exams:'exams',pomodoro:'focus'};
-  const needle=map[active]||active;
-  document.querySelectorAll('.navlink').forEach(t=>{
-    t.classList.toggle('active',t.textContent.toLowerCase().includes(needle));
-  });
+ const map={home:'home',subjects:'subjects',features:'features',progress:'progress',exams:'exams',pomodoro:'focus'};
+ const needle=map[active]||active;
+ document.querySelectorAll('.navlink').forEach(t=>{
+ t.classList.toggle('active',t.textContent.toLowerCase().includes(needle));
+ });
 }
 function setFontSize(v){settings.fontSize=v;saveSettings();applySettings()}
 function setDailyGoal(v){settings.dailyGoal=parseInt(v);saveSettings()}
 function toggleAutoAdvance(){settings.autoAdvance=!settings.autoAdvance;saveSettings();applySettings()}
 function resetAllProgress(){
-  // Dynamically collect all storage prefixes from TEXTS
-  const prefixes=Object.values(TEXTS).map(t=>t.storagePrefix);
-  prefixes.forEach(p=>{['_mem','_custom','_sr','_fav'].forEach(s=>localStorage.removeItem(p+s))});
-  // Also clear science quiz scores and other data
-  ['bio_quiz_scores','chem_quiz_scores','phys_quiz_scores','gcse_streak','gcse_pomo','gcse_settings'].forEach(k=>localStorage.removeItem(k));
-  alert('All progress reset.');location.reload();
+ // Dynamically collect all storage prefixes from TEXTS
+ const prefixes=Object.values(TEXTS).map(t=>t.storagePrefix);
+ prefixes.forEach(p=>{['_mem','_custom','_sr','_fav'].forEach(s=>localStorage.removeItem(p+s))});
+ // Also clear science quiz scores and other data
+ ['bio_quiz_scores','chem_quiz_scores','phys_quiz_scores','gcse_streak','gcse_pomo','gcse_settings'].forEach(k=>localStorage.removeItem(k));
+ alert('All progress reset.');location.reload();
 }
 loadSettings();applySettings();
 
 // ══════ SWIPE & DRAG HANDLING ══════
 let _swipeDragging=false,_swipeStartX=0,_swipeStartY=0,_swipeMoved=false;
 function initSwipeListeners(){
-  const cardWrap=document.querySelector('.card-wrap');
-  if(!cardWrap)return;
+ const cardWrap=document.querySelector('.card-wrap');
+ if(!cardWrap)return;
 
-  function startDrag(x,y){
-    _swipeStartX=x;_swipeStartY=y;_swipeDragging=true;_swipeMoved=false;
-    cardWrap.style.transition='none';
-  }
+ function startDrag(x,y){
+ _swipeStartX=x;_swipeStartY=y;_swipeDragging=true;_swipeMoved=false;
+ cardWrap.style.transition='none';
+ }
 
-  function moveDrag(x,y){
-    if(!_swipeDragging)return;
-    const dx=x-_swipeStartX,dy=y-_swipeStartY;
-    if(!_swipeMoved&&Math.abs(dx)<8)return;
-    if(!_swipeMoved&&Math.abs(dy)>Math.abs(dx)){_swipeDragging=false;return;}
-    _swipeMoved=true;
-    const rot=dx*0.04;
-    cardWrap.style.transform=`translateX(${dx}px) rotate(${rot}deg)`;
-    cardWrap.style.opacity=String(Math.max(0.5,1-Math.abs(dx)/500));
-  }
+ function moveDrag(x,y){
+ if(!_swipeDragging)return;
+ const dx=x-_swipeStartX,dy=y-_swipeStartY;
+ if(!_swipeMoved&&Math.abs(dx)<8)return;
+ if(!_swipeMoved&&Math.abs(dy)>Math.abs(dx)){_swipeDragging=false;return;}
+ _swipeMoved=true;
+ const rot=dx*0.04;
+ cardWrap.style.transform=`translateX(${dx}px) rotate(${rot}deg)`;
+ cardWrap.style.opacity=String(Math.max(0.5,1-Math.abs(dx)/500));
+ }
 
-  function endDrag(x){
-    if(!_swipeDragging)return;
-    _swipeDragging=false;
-    const dx=x-_swipeStartX;
-    const THRESHOLD=80;
-    cardWrap.style.transition='transform 0.3s ease, opacity 0.3s ease';
-    if(_swipeMoved&&Math.abs(dx)>THRESHOLD){
-      const dir=dx>0?1:-1;
-      cardWrap.style.transform=`translateX(${dir*110}vw) rotate(${dir*20}deg)`;
-      cardWrap.style.opacity='0';
-      setTimeout(()=>{
-        cardWrap.style.transition='none';
-        cardWrap.style.transform='';
-        cardWrap.style.opacity='';
-        if(dir>0)prev();else next();
-      },300);
-    }else{
-      cardWrap.style.transform='';
-      cardWrap.style.opacity='';
-    }
-  }
+ function endDrag(x){
+ if(!_swipeDragging)return;
+ _swipeDragging=false;
+ const dx=x-_swipeStartX;
+ const THRESHOLD=80;
+ cardWrap.style.transition='transform 0.3s ease, opacity 0.3s ease';
+ if(_swipeMoved&&Math.abs(dx)>THRESHOLD){
+ const dir=dx>0?1:-1;
+ cardWrap.style.transform=`translateX(${dir*110}vw) rotate(${dir*20}deg)`;
+ cardWrap.style.opacity='0';
+ setTimeout(()=>{
+ cardWrap.style.transition='none';
+ cardWrap.style.transform='';
+ cardWrap.style.opacity='';
+ if(dir>0)prev();else next();
+ },300);
+ }else{
+ cardWrap.style.transform='';
+ cardWrap.style.opacity='';
+ }
+ }
 
-  // Block flip click if we actually dragged
-  cardWrap.addEventListener('click',e=>{if(_swipeMoved)e.stopImmediatePropagation();},{capture:true});
+ // Block flip click if we actually dragged
+ cardWrap.addEventListener('click',e=>{if(_swipeMoved)e.stopImmediatePropagation();},{capture:true});
 
-  // Touch
-  cardWrap.addEventListener('touchstart',e=>startDrag(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
-  cardWrap.addEventListener('touchmove',e=>{
-    if(!_swipeDragging)return;
-    if(e.cancelable)e.preventDefault();
-    moveDrag(e.touches[0].clientX,e.touches[0].clientY);
-  },{passive:false});
-  cardWrap.addEventListener('touchend',e=>endDrag(e.changedTouches[0].clientX));
+ // Touch
+ cardWrap.addEventListener('touchstart',e=>startDrag(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+ cardWrap.addEventListener('touchmove',e=>{
+ if(!_swipeDragging)return;
+ if(e.cancelable)e.preventDefault();
+ moveDrag(e.touches[0].clientX,e.touches[0].clientY);
+ },{passive:false});
+ cardWrap.addEventListener('touchend',e=>endDrag(e.changedTouches[0].clientX));
 
-  // Mouse — attach move/up to window so fast drags don't break
-  cardWrap.addEventListener('mousedown',e=>{if(e.button===0)startDrag(e.clientX,e.clientY);});
-  window.addEventListener('mousemove',e=>{if(_swipeDragging)moveDrag(e.clientX,e.clientY);});
-  window.addEventListener('mouseup',e=>{if(_swipeDragging)endDrag(e.clientX);});
+ // Mouse, attach move/up to window so fast drags don't break
+ cardWrap.addEventListener('mousedown',e=>{if(e.button===0)startDrag(e.clientX,e.clientY);});
+ window.addEventListener('mousemove',e=>{if(_swipeDragging)moveDrag(e.clientX,e.clientY);});
+ window.addEventListener('mouseup',e=>{if(_swipeDragging)endDrag(e.clientX);});
 }
 window.addEventListener('load',initSwipeListeners);
 
@@ -141,68 +141,68 @@ function highlightTechniques(text){const entries=Object.entries(techNames).sort(
 // - "sr" holds spaced repetition data
 
 const app = {
-  currentSubject: null,
-  currentTextId: null,
-  currentText: null,       // was "T" — the active TEXTS entry
-  allQuotes: [],           // was "all" — full quote list including custom
-  bestQuotes: [],          // was "best" — curated best quotes
-  builtInCount: 0,         // number of non-custom quotes
-  memorised: {},
-  customQuotes: [],
-  focusMode: false,
-  parentSubject: null      // Track if we came from a subject group (sciences, humanities-business)
+ currentSubject: null,
+ currentTextId: null,
+ currentText: null, // was "T", the active TEXTS entry
+ allQuotes: [], // was "all", full quote list including custom
+ bestQuotes: [], // was "best", curated best quotes
+ builtInCount: 0, // number of non-custom quotes
+ memorised: {},
+ customQuotes: [],
+ focusMode: false,
+ parentSubject: null // Track if we came from a subject group (sciences, humanities-business)
 };
 
 const cards = {
-  mode: 'all',
-  deck: [],                // currently visible subset of quotes
-  index: 0,                // was "idx"
-  isFlipped: false
+ mode: 'all',
+ deck: [], // currently visible subset of quotes
+ index: 0, // was "idx"
+ isFlipped: false
 };
 
 const filters = {
-  acts: [],
-  themes: [],
-  techniques: []
+ acts: [],
+ themes: [],
+ techniques: []
 };
 
 const quiz = {
-  deck: [],
-  index: 0,
-  correct: 0,
-  total: 0,
-  answered: false,
-  results: [],
-  mode: 'normal',          // 'normal' | 'adaptive' | 'theme'
-  theme: null
+ deck: [],
+ index: 0,
+ correct: 0,
+ total: 0,
+ answered: false,
+ results: [],
+ mode: 'normal', // 'normal' | 'adaptive' | 'theme'
+ theme: null
 };
 
 const editor = {
-  editingIndex: -1,
-  selectedThemes: [],
-  selectedTechniques: []
+ editingIndex: -1,
+ selectedThemes: [],
+ selectedTechniques: []
 };
 
 const sr = {
-  data: {},
-  rated: false              // lock: one rating per card view
+ data: {},
+ rated: false // lock: one rating per card view
 };
 
 let favourites = {};
 
 const exam = {
-  deck: [],
-  index: 0,
-  correct: 0,
-  total: 0,
-  answered: false,
-  timer: null,
-  timeLeft: 0
+ deck: [],
+ index: 0,
+ correct: 0,
+ total: 0,
+ answered: false,
+ timer: null,
+ timeLeft: 0
 };
 
 let streakData = { days: [], current: 0, best: 0 };
 
-// Shorthand accessors — avoids "app.currentText" everywhere in hot paths
+// Shorthand accessors, avoids "app.currentText" everywhere in hot paths
 function currentText() { return app.currentText; }
 
 // ══════ STORAGE ══════
@@ -217,7 +217,7 @@ function saveStreak(){try{localStorage.setItem('gcse_streak',JSON.stringify(stre
 // ══════ STREAK ══════
 function getToday(){return new Date().toISOString().split('T')[0]}
 function recordStudyDay(){loadStreak();const today=getToday();if(!streakData.days.includes(today)){streakData.days.push(today);let streak=1;const sorted=[...streakData.days].sort().reverse();for(let i=1;i<sorted.length;i++){const prev=new Date(sorted[i-1]);prev.setDate(prev.getDate()-1);if(sorted[i]===prev.toISOString().split('T')[0])streak++;else break}streakData.current=streak;if(streak>streakData.best)streakData.best=streak;saveStreak()}renderStreak()}
-function renderStreak(){loadStreak();const bar=document.getElementById('streak-bar');const today=new Date();const days=['M','T','W','T','F','S','S'];const dow=today.getDay();const mo=(dow===0?-6:1-dow);let dots='';for(let i=0;i<7;i++){const d=new Date(today);d.setDate(today.getDate()+mo+i);const ds=d.toISOString().split('T')[0];dots+=`<div class="streak-dot${streakData.days.includes(ds)?' active':''}${ds===getToday()?' today':''}">${days[i]}</div>`}bar.innerHTML=`<div class="streak-fire">🔥</div><div class="streak-info"><div class="streak-count">${streakData.current} day${streakData.current!==1?'s':''}</div><div class="streak-label">Current streak · Best: ${streakData.best}</div></div><div class="streak-dots">${dots}</div>`;const ss=document.getElementById('stat-streak');if(ss)ss.textContent=streakData.current;renderHomeStats()}
+function renderStreak(){loadStreak();const bar=document.getElementById('streak-bar');const today=new Date();const days=['M','T','W','T','F','S','S'];const dow=today.getDay();const mo=(dow===0?-6:1-dow);let dots='';for(let i=0;i<7;i++){const d=new Date(today);d.setDate(today.getDate()+mo+i);const ds=d.toISOString().split('T')[0];dots+=`<div class="streak-dot${streakData.days.includes(ds)?' active':''}${ds===getToday()?' today':''}">${days[i]}</div>`}bar.innerHTML=`<div class="streak-fire"></div><div class="streak-info"><div class="streak-count">${streakData.current} day${streakData.current!==1?'s':''}</div><div class="streak-label">Current streak · Best: ${streakData.best}</div></div><div class="streak-dots">${dots}</div>`;const ss=document.getElementById('stat-streak');if(ss)ss.textContent=streakData.current;renderHomeStats()}
 function getStudiedToday(){try{const s=localStorage.getItem('gcse_today');if(s){const d=JSON.parse(s);if(d.date===getToday())return d.count}}catch(e){}return 0}
 function trackCardStudied(){try{const count=getStudiedToday()+1;localStorage.setItem('gcse_today',JSON.stringify({date:getToday(),count}))}catch(e){}}
 function getDueTodayAll(){const today=getToday();let due=0;try{Object.values(TEXTS).forEach(t=>{try{const s=localStorage.getItem(t.storagePrefix+'_sr');if(s){const data=JSON.parse(s);due+=Object.values(data).filter(d=>d.nextReview<=today).length}}catch(e){}})}catch(e){}return due}
@@ -226,7 +226,7 @@ function renderHomeStats(){const ss=document.getElementById('stat-studied');cons
 // ══════ SPACED REPETITION ══════
 function quoteHash(q){return HashUtil.quoteHash(q.quote, q.speaker)}
 function getSR(card){const h=quoteHash(card);if(!sr.data[h])sr.data[h]={interval:1,ef:2.5,nextReview:getToday(),lastRating:-1,reviews:0};return sr.data[h]}
-function updateModeCounters(){const due=getDueCards().length;const weak=getWeakCards().length;const fav=getFavCards().length;document.getElementById('btn-due').textContent=`🔄 DUE (${due})`;document.getElementById('btn-weak').textContent=`⚠️ WEAK (${weak})`;document.getElementById('btn-fav').textContent=`⭐ FAVS (${fav})`}
+function updateModeCounters(){const due=getDueCards().length;const weak=getWeakCards().length;const fav=getFavCards().length;document.getElementById('btn-due').textContent=`DUE (${due})`;document.getElementById('btn-weak').textContent=`WEAK (${weak})`;document.getElementById('btn-fav').textContent=`FAVS (${fav})`}
 function rateDifficulty(quality){if(sr.rated)return;sr.rated=true;const qMap=[1,5];const q=qMap[quality];const card=cards.deck[cards.index];const cardSR=getSR(card);cardSR.reviews++;const oldEF=cardSR.ef;cardSR.ef=Math.max(1.3,oldEF+(0.1-(5-q)*(0.08+(5-q)*0.02)));if(q<3)cardSR.interval=1;else if(cardSR.reviews===1)cardSR.interval=1;else if(cardSR.reviews===2)cardSR.interval=6;else cardSR.interval=Math.round(cardSR.interval*cardSR.ef);cardSR.lastRating=quality;const next=new Date();next.setDate(next.getDate()+cardSR.interval);cardSR.nextReview=next.toISOString().split('T')[0];saveSR();trackCardStudied();recordStudyDay();updateModeCounters();updateCardRatingTag();
 // Visual feedback pulse
 const btns=document.querySelectorAll('.sr-btn');btns.forEach(b=>{b.style.opacity='0.4';b.style.pointerEvents='none'});btns[quality].style.opacity='1';btns[quality].style.transform='scale(1.05)';setTimeout(()=>{btns.forEach(b=>{b.style.opacity='';b.style.pointerEvents='';b.style.transform=''})},400);
@@ -239,119 +239,119 @@ function getWeakCards(){return app.allQuotes.filter(c=>{const sr=getSR(c);return
 // ══════ NAVIGATION ══════
 // ══════ GENERALIZED BOARD SELECTOR ══════
 function showBoardSelector(id){
-  const S=SUBJECTS[id];
-  document.getElementById('sv-title').textContent=S.title;
-  document.getElementById('sv-sub').textContent='Choose your exam board';
-  const grid=document.getElementById('sv-text-grid');
-  grid.innerHTML='';
+ const S=SUBJECTS[id];
+ document.getElementById('sv-title').textContent=S.title;
+ document.getElementById('sv-sub').textContent='Choose your exam board';
+ const grid=document.getElementById('sv-text-grid');
+ grid.innerHTML='';
 
-  S.boards.forEach(b=>{
-    if(b.status==='coming-soon'){
-      grid.innerHTML+=`<div class="text-card disabled"><span class="card-badge badge-soon">Coming soon</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">Exam board content</div></div>`;
-    }else{
-      const boardTitle=S.title+' - '+b.title;
-      grid.innerHTML+=`<div class="text-card board-option" data-text-id="${b.id}" onclick="openSubjectWithRoute('${b.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">${boardTitle}</div></div>`;
-    }
-  });
+ S.boards.forEach(b=>{
+ if(b.status==='coming-soon'){
+ grid.innerHTML+=`<div class="text-card disabled"><span class="card-badge badge-soon">Coming soon</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">Exam board content</div></div>`;
+ }else{
+ const boardTitle=S.title+' - '+b.title;
+ grid.innerHTML+=`<div class="text-card board-option" data-text-id="${b.id}" onclick="openSubjectWithRoute('${b.id}')"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${b.icon}</span><div class="card-title">${b.title}</div><div class="card-desc">${boardTitle}</div></div>`;
+ }
+ });
 
-  document.getElementById('home-screen').style.display='none';
-  document.getElementById('tool-view').classList.remove('active');
-  document.getElementById('notes-view').classList.remove('active');
-  document.getElementById('subject-view').classList.add('active');
-  window.scrollTo(0,0);
+ document.getElementById('home-screen').style.display='none';
+ document.getElementById('tool-view').classList.remove('active');
+ document.getElementById('notes-view').classList.remove('active');
+ document.getElementById('subject-view').classList.add('active');
+ window.scrollTo(0,0);
 }
 
 function showBoardContent(id){
-  const S=SUBJECTS[id];
-  const subjects=S.subjects||[];
+ const S=SUBJECTS[id];
+ const subjects=S.subjects||[];
 
-  document.getElementById('sv-title').textContent=S.title;
-  document.getElementById('sv-sub').textContent=S.sub;
-  const grid=document.getElementById('sv-text-grid');
-  grid.innerHTML='';
+ document.getElementById('sv-title').textContent=S.title;
+ document.getElementById('sv-sub').textContent=S.sub;
+ const grid=document.getElementById('sv-text-grid');
+ grid.innerHTML='';
 
-  subjects.forEach(subj=>{
-    grid.innerHTML+=`<div class="text-card" data-text-id="${subj.id}" onclick="app.parentSubject='${id}';openSubject('${subj.id}');window.location.hash='${id}/${subj.id}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${subj.icon}</span><div class="card-title">${subj.title}</div><div class="card-desc">${subj.sub}</div></div>`;
-  });
+ subjects.forEach(subj=>{
+ grid.innerHTML+=`<div class="text-card" data-text-id="${subj.id}" onclick="app.parentSubject='${id}';openSubject('${subj.id}');window.location.hash='${id}/${subj.id}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${subj.icon}</span><div class="card-title">${subj.title}</div><div class="card-desc">${subj.sub}</div></div>`;
+ });
 
-  document.getElementById('home-screen').style.display='none';
-  document.getElementById('tool-view').classList.remove('active');
-  document.getElementById('notes-view').classList.remove('active');
-  document.getElementById('subject-view').classList.add('active');
-  window.scrollTo(0,0);
+ document.getElementById('home-screen').style.display='none';
+ document.getElementById('tool-view').classList.remove('active');
+ document.getElementById('notes-view').classList.remove('active');
+ document.getElementById('subject-view').classList.add('active');
+ window.scrollTo(0,0);
 }
 
 const PARENT_LABELS={'sciences':'Sciences','sciences-aqa':'AQA Sciences','sciences-edexcel':'Edexcel Sciences','english':'English','english-aqa':'AQA English','maths':'Mathematics','maths-edexcel':'Edexcel Mathematics','geography':'Geography','geography-aqa':'AQA Geography','business':'Business','business-ocr':'OCR Business','computer-science':'Computer Science','computer-science-ocr':'OCR Computer Science'};
 
 function openSubject(id){
-  app.currentSubject=id;
-  const S=SUBJECTS[id];
-  if(!S){console.error('Subject not found:',id);return}
+ app.currentSubject=id;
+ const S=SUBJECTS[id];
+ if(!S){console.error('Subject not found:',id);return}
 
-  // Determine parent subject for nested navigation
-  if(['sciences','english','maths','geography','business','computer-science'].includes(id)){
-    app.parentSubject=null;
-  }else if(id.includes('-aqa')||id.includes('-edexcel')||id.includes('-ocr')||id.includes('-wjec')){
-    const parentId=id.split('-').slice(0,-1).join('-');
-    app.parentSubject=SUBJECTS[parentId]?parentId:null;
-  }else{
-    // Individual content pages (biology, macbeth, etc)
-    // parent already set by showBoardContent
-  }
+ // Determine parent subject for nested navigation
+ if(['sciences','english','maths','geography','business','computer-science'].includes(id)){
+ app.parentSubject=null;
+ }else if(id.includes('-aqa')||id.includes('-edexcel')||id.includes('-ocr')||id.includes('-wjec')){
+ const parentId=id.split('-').slice(0,-1).join('-');
+ app.parentSubject=SUBJECTS[parentId]?parentId:null;
+ }else{
+ // Individual content pages (biology, macbeth, etc)
+ // parent already set by showBoardContent
+ }
 
-  // Update back button
-  const backBtn=document.querySelector('.subject-view .back-btn');
-  if(backBtn){
-    const label=app.parentSubject?PARENT_LABELS[app.parentSubject]:'All Subjects';
-    backBtn.textContent='\u2190 '+label;
-  }
+ // Update back button
+ const backBtn=document.querySelector('.subject-view .back-btn');
+ if(backBtn){
+ const label=app.parentSubject?PARENT_LABELS[app.parentSubject]:'All Subjects';
+ backBtn.textContent='\u2190 '+label;
+ }
 
-  // Handle different subject types
-  if(S.type==='board-selector'){
-    showBoardSelector(id);
-    return;
-  }
+ // Handle different subject types
+ if(S.type==='board-selector'){
+ showBoardSelector(id);
+ return;
+ }
 
-  if(S.type==='board-content'){
-    showBoardContent(id);
-    return;
-  }
+ if(S.type==='board-content'){
+ showBoardContent(id);
+ return;
+ }
 
-  if(S.type==='notes'){
-    openNotesView(id,S);
-    return;
-  }
+ if(S.type==='notes'){
+ openNotesView(id,S);
+ return;
+ }
 
-  // Fallback: text content
-  document.getElementById('sv-title').textContent=S.title;
-  document.getElementById('sv-sub').textContent=S.sub;
-  const grid=document.getElementById('sv-text-grid');
-  grid.innerHTML='';
+ // Fallback: text content
+ document.getElementById('sv-title').textContent=S.title;
+ document.getElementById('sv-sub').textContent=S.sub;
+ const grid=document.getElementById('sv-text-grid');
+ grid.innerHTML='';
 
-  if(S.texts){
-    S.texts.forEach(tid=>{
-      const tc=S.textCards[tid];
-      grid.innerHTML+=`<div class="text-card ${tc.cls}" data-text-id="${tid}" onclick="openTool('${tid}');window.location.hash='${app.currentSubject}/${tid}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${tc.icon}</span><div class="card-title">${tc.title}</div><div class="card-desc">${tc.desc}</div><div class="card-stats">${tc.stats.map(s=>`<span class="card-stat">${s}</span>`).join('')}</div></div>`;
-    });
-  }
+ if(S.texts){
+ S.texts.forEach(tid=>{
+ const tc=S.textCards[tid];
+ grid.innerHTML+=`<div class="text-card ${tc.cls}" data-text-id="${tid}" onclick="openTool('${tid}');window.location.hash='${app.currentSubject}/${tid}'"><span class="card-badge badge-ready">Ready</span><span class="card-icon">${tc.icon}</span><div class="card-title">${tc.title}</div><div class="card-desc">${tc.desc}</div><div class="card-stats">${tc.stats.map(s=>`<span class="card-stat">${s}</span>`).join('')}</div></div>`;
+ });
+ }
 
-  if(S.extra){
-    S.extra.forEach(e=>{
-      grid.innerHTML+=`<div class="text-card ${e.cls}${e.disabled?' disabled':''}"><span class="card-badge ${e.disabled?'badge-soon':'badge-ready'}">${e.disabled?'Coming soon':'Ready'}</span><span class="card-icon">${e.icon}</span><div class="card-title">${e.title}</div><div class="card-desc">${e.desc}</div></div>`;
-    });
-  }
+ if(S.extra){
+ S.extra.forEach(e=>{
+ grid.innerHTML+=`<div class="text-card ${e.cls}${e.disabled?' disabled':''}"><span class="card-badge ${e.disabled?'badge-soon':'badge-ready'}">${e.disabled?'Coming soon':'Ready'}</span><span class="card-icon">${e.icon}</span><div class="card-title">${e.title}</div><div class="card-desc">${e.desc}</div></div>`;
+ });
+ }
 
-  document.getElementById('home-screen').style.display='none';
-  document.getElementById('tool-view').classList.remove('active');
-  document.getElementById('notes-view').classList.remove('active');
-  document.getElementById('subject-view').classList.add('active');
-  window.scrollTo(0,0);
+ document.getElementById('home-screen').style.display='none';
+ document.getElementById('tool-view').classList.remove('active');
+ document.getElementById('notes-view').classList.remove('active');
+ document.getElementById('subject-view').classList.add('active');
+ window.scrollTo(0,0);
 }
 
 // Opens a subject and tracks the board it came from
 function openSubjectFromBoard(subjectId,boardId){
-  app.parentSubject=boardId;
-  openSubject(subjectId);
+ app.parentSubject=boardId;
+ openSubject(subjectId);
 }
 function backToHome(){window.location.hash='';app.parentSubject=null;document.getElementById('subject-view').classList.remove('active');document.getElementById('tool-view').classList.remove('active');document.getElementById('notes-view').classList.remove('active');document.getElementById('home-screen').style.display='';if(exam.timer){clearInterval(exam.timer);exam.timer=null}stopTTS();renderStreak();renderQOTD();updateNavTabs('home');window.scrollTo(0,0)}
 function getParentHash(currentId){const S=SUBJECTS[currentId];if(!S)return '';if(S.type==='texts'&&app.parentSubject)return app.parentSubject;if(S.type==='board-content'&&S.boards){const parentBoardId=Object.keys(SUBJECTS).find(k=>SUBJECTS[k].boards?.find(b=>b.id===currentId));return parentBoardId||'';}if(S.type==='board-selector')return '';return app.parentSubject||'';}function backToParent(){const parentHash=getParentHash(app.currentSubject);if(parentHash){window.location.hash=parentHash;openSubject(parentHash)}else{backToHome()}}
@@ -362,11 +362,11 @@ function switchTab(t,btn){document.querySelectorAll('#tool-view .tab-content').f
 
 // ══════ FLASHCARDS ══════
 function toBulletList(text,hl){
-  if(!text)return'';
-  const items=Array.isArray(text)?text:text.split(/\.\s+(?=[A-Z“"])/).filter(s=>s.trim().length>8);
-  if(items.length<=1){const s=Array.isArray(text)?text[0]||'':text;return hl?highlightTechniques(s):s;}
-  const cls=hl?'analysis-bullets':'context-bullets';
-  return`<ul class="${cls}">${items.map(s=>{const c=s.trim().replace(/\.$/,'');return`<li>${hl?highlightTechniques(c):c}</li>`;}).join('')}</ul>`;
+ if(!text)return'';
+ const items=Array.isArray(text)?text:text.split(/\.\s+(?=[A-Z“"])/).filter(s=>s.trim().length>8);
+ if(items.length<=1){const s=Array.isArray(text)?text[0]||'':text;return hl?highlightTechniques(s):s;}
+ const cls=hl?'analysis-bullets':'context-bullets';
+ return`<ul class="${cls}">${items.map(s=>{const c=s.trim().replace(/\.$/,'');return`<li>${hl?highlightTechniques(c):c}</li>`;}).join('')}</ul>`;
 }
 function getSource(){if(cards.mode==='best')return app.bestQuotes;if(cards.mode==='due')return getDueCards();if(cards.mode==='weak')return getWeakCards();if(cards.mode==='fav')return getFavCards();if(cards.mode==='cloze')return app.allQuotes;return app.allQuotes}
 function getFavCards(){return app.allQuotes.filter(c=>favourites[quoteHash(c)])}
@@ -374,39 +374,39 @@ function toggleFav(){if(!cards.deck.length)return;const h=quoteHash(cards.deck[c
 function updateFavBtn(){if(!cards.deck.length)return;const h=quoteHash(cards.deck[cards.index]);const btn=document.getElementById('fav-btn');const isFav=!!favourites[h];btn.textContent=isFav?'★':'☆';btn.classList.toggle('faved',isFav)}
 function pills(arr,cMap){return arr.map(x=>{const c=cMap[x]||{bg:'#F3F4F6',c:'#4B5563'};return`<span class="pill" style="background:${c.bg};color:${c.c};">${x.replace(/_/g,' ')}</span>`}).join('')}
 function buildCloze(c){
-  const quote=c.quote;
-  const escapeRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  const wrap=t=>`<span class="cloze-blank" onclick="event.stopPropagation();this.classList.add('revealed')">${t}</span>`;
-  // Extract phrases the analysis explicitly quotes (curly or straight quotes)
-  const phrases=new Set();
-  const re=/[“"]([^”"]{1,40})[”"]/g;
-  let m;
-  while((m=re.exec(c.analysis||''))!==null){
-    const p=m[1].trim().replace(/^[…\s,.;:!?]+|[…\s,.;:!?]+$/g,'');
-    if(p && p.length>=2 && quote.toLowerCase().includes(p.toLowerCase())) phrases.add(p);
-  }
-  if(phrases.size){
-    // Sort by length desc so longer phrases get blanked before their substrings
-    const sorted=[...phrases].sort((a,b)=>b.length-a.length);
-    const placeholders=[]; let out=quote;
-    sorted.forEach((p,i)=>{
-      const token=`~${i}~`;
-      const re2=new RegExp(escapeRe(p),'i');
-      const match=out.match(re2);
-      placeholders.push(match?match[0]:p);
-      if(match) out=out.replace(re2,token);
-    });
-    placeholders.forEach((p,i)=>{out=out.split(`~${i}~`).join(wrap(p))});
-    return out;
-  }
-  // Fallback: blank every long-ish content word
-  const stop=new Set(['that','this','with','from','they','their','them','were','have','been','will','what','when','your','about','into','than','then','there','these','those','which','would','could','should','some','more','most','such','only','over','upon']);
-  let n=0;
-  return quote.split(/(\s+)/).map(tok=>{
-    const w=tok.replace(/[^\w']/g,'');
-    if(w.length>4 && !stop.has(w.toLowerCase())){n++; if(n%2===0) return tok.replace(w,wrap(w));}
-    return tok;
-  }).join('');
+ const quote=c.quote;
+ const escapeRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const wrap=t=>`<span class="cloze-blank" onclick="event.stopPropagation();this.classList.add('revealed')">${t}</span>`;
+ // Extract phrases the analysis explicitly quotes (curly or straight quotes)
+ const phrases=new Set();
+ const re=/[“"]([^”"]{1,40})[”"]/g;
+ let m;
+ while((m=re.exec(c.analysis||''))!==null){
+ const p=m[1].trim().replace(/^[…\s,.;:!?]+|[…\s,.;:!?]+$/g,'');
+ if(p && p.length>=2 && quote.toLowerCase().includes(p.toLowerCase())) phrases.add(p);
+ }
+ if(phrases.size){
+ // Sort by length desc so longer phrases get blanked before their substrings
+ const sorted=[...phrases].sort((a,b)=>b.length-a.length);
+ const placeholders=[]; let out=quote;
+ sorted.forEach((p,i)=>{
+ const token=`~${i}~`;
+ const re2=new RegExp(escapeRe(p),'i');
+ const match=out.match(re2);
+ placeholders.push(match?match[0]:p);
+ if(match) out=out.replace(re2,token);
+ });
+ placeholders.forEach((p,i)=>{out=out.split(`~${i}~`).join(wrap(p))});
+ return out;
+ }
+ // Fallback: blank every long-ish content word
+ const stop=new Set(['that','this','with','from','they','their','them','were','have','been','will','what','when','your','about','into','than','then','there','these','those','which','would','could','should','some','more','most','such','only','over','upon']);
+ let n=0;
+ return quote.split(/(\s+)/).map(tok=>{
+ const w=tok.replace(/[^\w']/g,'');
+ if(w.length>4 && !stop.has(w.toLowerCase())){n++; if(n%2===0) return tok.replace(w,wrap(w));}
+ return tok;
+ }).join('');
 }
 function render(){if(!cards.deck.length){document.getElementById('quote-text').textContent='No quotes match.';document.getElementById('front-badge').style.display='none';document.getElementById('front-devices').innerHTML='';document.getElementById('progress').textContent='0 / 0';document.getElementById('prev-btn').disabled=true;document.getElementById('next-btn').disabled=true;document.getElementById('count-badge').textContent='Try removing a filter';document.getElementById('card').classList.remove('flipped');return}if(cards.index>=cards.deck.length)cards.index=cards.deck.length-1;document.getElementById('front-badge').style.display='inline-block';const c=cards.deck[cards.index];const bs=`background:${app.currentText.unitBg[c.act]};color:${app.currentText.unitText[c.act]};`;document.getElementById('front-badge').style.cssText=bs;document.getElementById('front-badge').textContent=app.currentText.unitLabel.toUpperCase()+' '+c.act+(c.scene?' · '+c.scene:'');
 document.getElementById('quote-text').style.color=app.currentText.unitText[c.act]||'';
@@ -417,33 +417,33 @@ document.getElementById('front-devices').innerHTML=pills(c.devices,DC);document.
 function flip(){cards.isFlipped=!cards.isFlipped;render()}
 function stopTTS(){try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}ttsActive=false;const b=document.getElementById('tts-btn');if(b)b.classList.remove('speaking')}
 function navCard(){
-  document.getElementById('card').classList.remove('flipped');
-  render();
+ document.getElementById('card').classList.remove('flipped');
+ render();
 }
 function next(){if(cards.index<cards.deck.length-1){cards.index++;cards.isFlipped=false;sr.rated=false;stopTTS();navCard()}}
 function prev(){if(cards.index>0){cards.index--;cards.isFlipped=false;sr.rated=false;stopTTS();navCard()}}
 function shuffle(){for(let i=cards.deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards.deck[i],cards.deck[j]]=[cards.deck[j],cards.deck[i]]}cards.index=0;cards.isFlipped=false;sr.rated=false;stopTTS();navCard()}
 function sortDeck(){cards.deck.sort((a,b)=>{const aa=a.act||0,ba=b.act||0;if(aa!==ba)return aa-ba;const sa=parseInt(((a.scene||'').match(/S(\d+)/)||[])[1]||'0');const sb=parseInt(((b.scene||'').match(/S(\d+)/)||[])[1]||'0');return sa-sb})}
 function searchQuotes(){
-  const q=document.getElementById('search-input').value.toLowerCase().trim();
-  if(!q){applyFilters();return}
+ const q=document.getElementById('search-input').value.toLowerCase().trim();
+ if(!q){applyFilters();return}
 
-  let src=getSource();
-  if(filters.acts.length)src=src.filter(c=>filters.acts.includes(c.act));
-  if(filters.themes.length)src=src.filter(c=>c.themes.some(t=>filters.themes.includes(t)));
-  if(filters.techniques.length)src=src.filter(c=>c.devices.some(d=>filters.techniques.includes(d)));
+ let src=getSource();
+ if(filters.acts.length)src=src.filter(c=>filters.acts.includes(c.act));
+ if(filters.themes.length)src=src.filter(c=>c.themes.some(t=>filters.themes.includes(t)));
+ if(filters.techniques.length)src=src.filter(c=>c.devices.some(d=>filters.techniques.includes(d)));
 
-  cards.deck=src.filter(c=>
-    c.quote.toLowerCase().includes(q) ||
-    c.speaker.toLowerCase().includes(q) ||
-    c.analysis.toLowerCase().includes(q) ||
-    c.themes.some(t=>t.includes(q))
-  );
-  sortDeck();
+ cards.deck=src.filter(c=>
+ c.quote.toLowerCase().includes(q) ||
+ c.speaker.toLowerCase().includes(q) ||
+ c.analysis.toLowerCase().includes(q) ||
+ c.themes.some(t=>t.includes(q))
+ );
+ sortDeck();
 
-  cards.index=0;
-  cards.isFlipped=false;
-  render();
+ cards.index=0;
+ cards.isFlipped=false;
+ render();
 }
 function toggleFilterPanel(){document.getElementById('filter-panel').classList.toggle('open');updateFilterBtn()}
 function updateFilterBtn(){const active=filters.acts.length+filters.themes.length+filters.techniques.length;const p=document.getElementById('filter-panel');const btn=document.getElementById('filter-toggle-btn');if(!btn)return;const open=p.classList.contains('open');btn.textContent=(open?'▲':'▼')+' FILTER'+(active?' ('+active+')':'');btn.classList.toggle('active',active>0)}
@@ -455,10 +455,10 @@ function setMode(m){cards.mode=m;['btn-all','btn-best','btn-due','btn-weak','btn
 // ══════ QUIZ ══════
 function setQuizMode(m){quiz.mode=m;['quiz-mode-normal','quiz-mode-adaptive','quiz-mode-theme'].forEach(id=>document.getElementById(id).classList.remove('active'));document.getElementById('quiz-mode-'+m).classList.add('active');document.getElementById('quiz-theme-picker').style.display=m==='theme'?'block':'none';if(m==='theme'){const p=document.getElementById('quiz-theme-picker');p.innerHTML='';[...new Set(app.allQuotes.flatMap(c=>c.themes))].sort().forEach(t=>{const b=document.createElement('button');b.className='fchip';b.textContent=t.replace(/_/g,' ');b.onclick=()=>{quiz.theme=t;startTest()};p.appendChild(b)})}else{quiz.theme=null;startTest()}}
 function startTest(){quiz.results=[];let pool=[...app.allQuotes];if(quiz.mode==='adaptive'){const weak=pool.filter(c=>{const sr=getSR(c);return sr.lastRating===0||sr.reviews===0||sr.ef<2.0});const rest=pool.filter(c=>!weak.includes(c));pool=[...weak.sort(()=>Math.random()-.5),...rest.sort(()=>Math.random()-.5)]}else if(quiz.mode==='theme'&&quiz.theme){pool=pool.filter(c=>c.themes.includes(quiz.theme))}quiz.deck=pool.sort(()=>Math.random()-.5);quiz.index=0;quiz.correct=0;quiz.total=0;quiz.answered=false;document.getElementById('test-breakdown').style.display='none';renderTestQ()}
-function renderTestQ(){if(quiz.index>=quiz.deck.length){const pct=quiz.total?Math.round(quiz.correct/quiz.total*100):0;document.getElementById('test-prompt').textContent='Test complete!';document.getElementById('test-score').textContent=`${quiz.correct}/${quiz.total} correct (${pct}%)`;document.getElementById('test-hint').textContent=pct>=90?'Outstanding! 🎉':pct>=80?'Excellent work! 🔥':pct>=60?'Good — keep practising':'Focus on the quotes you got wrong';document.getElementById('test-options').innerHTML='<button class="btn" onclick="startTest()" style="margin-top:8px">🔄 RESTART</button>';document.getElementById('test-reveal').style.display='none';document.getElementById('test-next').style.display='none';if(pct>=80)launchConfetti();renderQuizBreakdown();return}quiz.answered=false;const c=quiz.deck[quiz.index];document.getElementById('test-score').textContent=quiz.total?`Score: ${quiz.correct}/${quiz.total}`:'';const types=['speaker','act','theme'];const type=types[Math.floor(Math.random()*types.length)];let prompt='',options=[],ci=0;if(type==='speaker'){prompt=`Who says: \u201C${c.quote}\u201D?`;const sp=[...new Set(app.allQuotes.map(x=>x.speaker))];const wrong=sp.filter(s=>s!==c.speaker).sort(()=>Math.random()-.5).slice(0,3);options=[c.speaker,...wrong].sort(()=>Math.random()-.5);ci=options.indexOf(c.speaker)}else if(type==='act'){prompt=`Which ${app.currentText.unitLabel.toLowerCase()}: \u201C${c.quote}\u201D?`;options=app.currentText.units.map(u=>app.currentText.unitLabel+' '+u);ci=app.currentText.units.indexOf(c.act)}else{prompt=`Which theme fits: \u201C${c.quote}\u201D?`;const at=[...new Set(app.allQuotes.flatMap(x=>x.themes))];const ct=c.themes[Math.floor(Math.random()*c.themes.length)];const wrong=at.filter(t=>!c.themes.includes(t)).sort(()=>Math.random()-.5).slice(0,3);options=[ct,...wrong].sort(()=>Math.random()-.5).map(t=>t.replace(/_/g,' '));ci=options.indexOf(ct.replace(/_/g,' '))}document.getElementById('test-hint').textContent=`Question ${quiz.index+1} of ${quiz.deck.length}`;document.getElementById('test-prompt').innerHTML=`<span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:16px">${prompt}</span>`;const od=document.getElementById('test-options');od.innerHTML='';options.forEach((o,i)=>{const b=document.createElement('button');b.className='test-opt';b.textContent=o;b.onclick=()=>answerTest(i,ci,c);od.appendChild(b)});document.getElementById('test-reveal').style.display='none';document.getElementById('test-next').style.display='none'}
-function answerTest(picked,correct,card){if(quiz.answered)return;quiz.answered=true;quiz.total++;const ok=picked===correct;if(ok)quiz.correct++;quiz.results.push({card,correct:ok,themes:card.themes});const opts=document.querySelectorAll('#tab-test .test-opt');opts.forEach((o,i)=>{o.classList.add('disabled');if(i===correct)o.classList.add('correct');if(i===picked&&!ok)o.classList.add('wrong')});document.getElementById('test-score').textContent=`Score: ${quiz.correct}/${quiz.total}`;const rev=document.getElementById('test-reveal');rev.style.display='block';rev.innerHTML=`<p style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">${card.speaker} — ${app.currentText.unitLabel} ${card.act}</p><p class="quote-text" style="font-size:14px">\u201C${card.quote}\u201D</p><div style="margin-top:4px">${pills(card.themes,app.currentText.themes)} ${pills(card.devices,DC)}</div>`;document.getElementById('test-next').style.display='inline-block';recordStudyDay()}
+function renderTestQ(){if(quiz.index>=quiz.deck.length){const pct=quiz.total?Math.round(quiz.correct/quiz.total*100):0;document.getElementById('test-prompt').textContent='Test complete!';document.getElementById('test-score').textContent=`${quiz.correct}/${quiz.total} correct (${pct}%)`;document.getElementById('test-hint').textContent=pct>=90?'Outstanding!':pct>=80?'Excellent work!':pct>=60?'Good, keep practising':'Focus on the quotes you got wrong';document.getElementById('test-options').innerHTML='<button class="btn" onclick="startTest()" style="margin-top:8px">RESTART</button>';document.getElementById('test-reveal').style.display='none';document.getElementById('test-next').style.display='none';if(pct>=80)launchConfetti();renderQuizBreakdown();return}quiz.answered=false;const c=quiz.deck[quiz.index];document.getElementById('test-score').textContent=quiz.total?`Score: ${quiz.correct}/${quiz.total}`:'';const types=['speaker','act','theme'];const type=types[Math.floor(Math.random()*types.length)];let prompt='',options=[],ci=0;if(type==='speaker'){prompt=`Who says: \u201C${c.quote}\u201D?`;const sp=[...new Set(app.allQuotes.map(x=>x.speaker))];const wrong=sp.filter(s=>s!==c.speaker).sort(()=>Math.random()-.5).slice(0,3);options=[c.speaker,...wrong].sort(()=>Math.random()-.5);ci=options.indexOf(c.speaker)}else if(type==='act'){prompt=`Which ${app.currentText.unitLabel.toLowerCase()}: \u201C${c.quote}\u201D?`;options=app.currentText.units.map(u=>app.currentText.unitLabel+' '+u);ci=app.currentText.units.indexOf(c.act)}else{prompt=`Which theme fits: \u201C${c.quote}\u201D?`;const at=[...new Set(app.allQuotes.flatMap(x=>x.themes))];const ct=c.themes[Math.floor(Math.random()*c.themes.length)];const wrong=at.filter(t=>!c.themes.includes(t)).sort(()=>Math.random()-.5).slice(0,3);options=[ct,...wrong].sort(()=>Math.random()-.5).map(t=>t.replace(/_/g,' '));ci=options.indexOf(ct.replace(/_/g,' '))}document.getElementById('test-hint').textContent=`Question ${quiz.index+1} of ${quiz.deck.length}`;document.getElementById('test-prompt').innerHTML=`<span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:16px">${prompt}</span>`;const od=document.getElementById('test-options');od.innerHTML='';options.forEach((o,i)=>{const b=document.createElement('button');b.className='test-opt';b.textContent=o;b.onclick=()=>answerTest(i,ci,c);od.appendChild(b)});document.getElementById('test-reveal').style.display='none';document.getElementById('test-next').style.display='none'}
+function answerTest(picked,correct,card){if(quiz.answered)return;quiz.answered=true;quiz.total++;const ok=picked===correct;if(ok)quiz.correct++;quiz.results.push({card,correct:ok,themes:card.themes});const opts=document.querySelectorAll('#tab-test .test-opt');opts.forEach((o,i)=>{o.classList.add('disabled');if(i===correct)o.classList.add('correct');if(i===picked&&!ok)o.classList.add('wrong')});document.getElementById('test-score').textContent=`Score: ${quiz.correct}/${quiz.total}`;const rev=document.getElementById('test-reveal');rev.style.display='block';rev.innerHTML=`<p style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">${card.speaker}, ${app.currentText.unitLabel} ${card.act}</p><p class="quote-text" style="font-size:14px">\u201C${card.quote}\u201D</p><div style="margin-top:4px">${pills(card.themes,app.currentText.themes)} ${pills(card.devices,DC)}</div>`;document.getElementById('test-next').style.display='inline-block';recordStudyDay()}
 function nextTestQ(){quiz.index++;renderTestQ()}
-function renderQuizBreakdown(){if(!quiz.results.length)return;const bd=document.getElementById('test-breakdown');bd.style.display='block';const ts={};quiz.results.forEach(r=>{r.themes.forEach(t=>{if(!ts[t])ts[t]={correct:0,total:0};ts[t].total++;if(r.correct)ts[t].correct++})});let h='<h4>Breakdown by Theme</h4>';Object.entries(ts).sort((a,b)=>(a[1].correct/a[1].total)-(b[1].correct/b[1].total)).forEach(([t,s])=>{const p=Math.round(s.correct/s.total*100);const c=p>=80?'var(--green)':p>=50?'var(--yellow)':'var(--red)';h+=`<div class="breakdown-row"><span style="width:90px;font-weight:600;text-transform:capitalize;color:var(--text2)">${t.replace(/_/g,' ')}</span><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%;background:${c}"></div></div><span style="width:50px;text-align:right;font-weight:700;color:${c}">${p}%</span></div>`});const missed=quiz.results.filter(r=>!r.correct);if(missed.length){h+=`<h4 style="margin-top:14px">Quotes to Review (${missed.length})</h4>`;missed.forEach(r=>{h+=`<div style="padding:6px 10px;border-radius:8px;background:var(--red-bg);margin-bottom:4px;font-size:12px;color:var(--red)"><em>\u201C${r.card.quote}\u201D</em> — ${r.card.speaker}</div>`})}bd.innerHTML=h}
+function renderQuizBreakdown(){if(!quiz.results.length)return;const bd=document.getElementById('test-breakdown');bd.style.display='block';const ts={};quiz.results.forEach(r=>{r.themes.forEach(t=>{if(!ts[t])ts[t]={correct:0,total:0};ts[t].total++;if(r.correct)ts[t].correct++})});let h='<h4>Breakdown by Theme</h4>';Object.entries(ts).sort((a,b)=>(a[1].correct/a[1].total)-(b[1].correct/b[1].total)).forEach(([t,s])=>{const p=Math.round(s.correct/s.total*100);const c=p>=80?'var(--green)':p>=50?'var(--yellow)':'var(--red)';h+=`<div class="breakdown-row"><span style="width:90px;font-weight:600;text-transform:capitalize;color:var(--text2)">${t.replace(/_/g,' ')}</span><div class="breakdown-bar"><div class="breakdown-fill" style="width:${p}%;background:${c}"></div></div><span style="width:50px;text-align:right;font-weight:700;color:${c}">${p}%</span></div>`});const missed=quiz.results.filter(r=>!r.correct);if(missed.length){h+=`<h4 style="margin-top:14px">Quotes to Review (${missed.length})</h4>`;missed.forEach(r=>{h+=`<div style="padding:6px 10px;border-radius:8px;background:var(--red-bg);margin-bottom:4px;font-size:12px;color:var(--red)"><em>\u201C${r.card.quote}\u201D</em>, ${r.card.speaker}</div>`})}bd.innerHTML=h}
 
 // ══════ DASHBOARD ══════
 function renderDashboard(){const d=document.getElementById('dash-content');const memCount=app.allQuotes.filter((_,i)=>app.memorised[i]).length;const due=getDueCards().length;const weak=getWeakCards().length;const reviewed=app.allQuotes.filter(c=>getSR(c).reviews>0).length;const ts={};[...new Set(app.allQuotes.flatMap(c=>c.themes))].forEach(t=>{const cards=app.allQuotes.filter(c=>c.themes.includes(t));const m=cards.filter(c=>{const sr=getSR(c);return sr.lastRating>=1&&sr.ef>=2.0});ts[t]={total:cards.length,mastered:m.length,pct:Math.round(m.length/cards.length*100)}});let h=`<div class="dash-grid"><div class="dash-card"><div class="dash-val">${reviewed}</div><div class="dash-label">Cards Reviewed</div></div><div class="dash-card"><div class="dash-val">${due}</div><div class="dash-label">Due Today</div></div><div class="dash-card"><div class="dash-val">${memCount}</div><div class="dash-label">Memorised</div></div><div class="dash-card"><div class="dash-val">${weak}</div><div class="dash-label">Weak Cards</div></div></div>`;const op=app.allQuotes.length?Math.round(reviewed/app.allQuotes.length*100):0;h+=`<div style="margin-bottom:16px"><div style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Overall Progress</div><div class="tracker-bar" style="height:10px"><div class="tracker-fill" style="width:${op}%"></div></div><div style="font-size:11px;color:var(--text3);margin-top:4px;text-align:center">${op}% reviewed</div></div>`;h+=`<div style="margin-bottom:16px"><div style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Theme Mastery</div>`;Object.entries(ts).sort((a,b)=>a[1].pct-b[1].pct).forEach(([t,s])=>{const c=s.pct>=80?'var(--green)':s.pct>=50?'var(--yellow)':'var(--red)';h+=`<div class="mastery-row"><span class="mastery-label">${t.replace(/_/g,' ')}</span><div class="mastery-bar"><div class="mastery-fill" style="width:${s.pct}%;background:${c}"></div></div><span class="mastery-pct" style="color:${c}">${s.pct}%</span></div>`});h+=`</div>`;d.innerHTML=h}
@@ -467,95 +467,95 @@ function renderDashboard(){const d=document.getElementById('dash-content');const
 let essayMode='single', essayPickA=null, essayPickB=null;
 function essayThemeBtn(t,onClick){const col=app.currentText.themes[t]||{bg:'#F3F4F6',c:'#4B5563'};const b=document.createElement('button');b.className='essay-theme-btn';b.dataset.theme=t;b.textContent=t.replace(/_/g,' ');b.style.cssText=`border-color:${col.c};color:${col.c}`;b.onclick=()=>onClick(t,b,col);return b}
 function buildEssayThemes(){
-  const themes=[...new Set(app.allQuotes.flatMap(c=>c.themes))].sort();
-  const g=document.getElementById('essay-theme-grid');g.innerHTML='';
-  themes.forEach(t=>g.appendChild(essayThemeBtn(t,(theme,b,col)=>{
-    g.querySelectorAll('.essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''});
-    b.classList.add('active');b.style.background=col.bg;
-    buildEssayPlan(theme);
-  })));
-  ['a','b'].forEach(side=>{
-    const grid=document.getElementById('essay-theme-grid-'+side);if(!grid)return;grid.innerHTML='';
-    themes.forEach(t=>grid.appendChild(essayThemeBtn(t,(theme,b,col)=>{
-      grid.querySelectorAll('.essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''});
-      b.classList.add('active');b.style.background=col.bg;
-      if(side==='a')essayPickA=theme;else essayPickB=theme;
-      if(essayPickA&&essayPickB)buildEssayComparePlan(essayPickA,essayPickB);
-    })));
-  });
+ const themes=[...new Set(app.allQuotes.flatMap(c=>c.themes))].sort();
+ const g=document.getElementById('essay-theme-grid');g.innerHTML='';
+ themes.forEach(t=>g.appendChild(essayThemeBtn(t,(theme,b,col)=>{
+ g.querySelectorAll('.essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''});
+ b.classList.add('active');b.style.background=col.bg;
+ buildEssayPlan(theme);
+ })));
+ ['a','b'].forEach(side=>{
+ const grid=document.getElementById('essay-theme-grid-'+side);if(!grid)return;grid.innerHTML='';
+ themes.forEach(t=>grid.appendChild(essayThemeBtn(t,(theme,b,col)=>{
+ grid.querySelectorAll('.essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''});
+ b.classList.add('active');b.style.background=col.bg;
+ if(side==='a')essayPickA=theme;else essayPickB=theme;
+ if(essayPickA&&essayPickB)buildEssayComparePlan(essayPickA,essayPickB);
+ })));
+ });
 }
 function setEssayMode(m){essayMode=m;document.getElementById('essay-mode-single').classList.toggle('active',m==='single');document.getElementById('essay-mode-compare').classList.toggle('active',m==='compare');document.getElementById('essay-single-picker').style.display=m==='single'?'':'none';document.getElementById('essay-compare-picker').style.display=m==='compare'?'':'none';document.getElementById('essay-output').innerHTML='';essayPickA=null;essayPickB=null;document.querySelectorAll('#essay-theme-grid-a .essay-theme-btn,#essay-theme-grid-b .essay-theme-btn').forEach(x=>{x.classList.remove('active');x.style.background=''})}
 function essayTitleCase(s){return s.replace(/_/g,' ').replace(/\b\w/g,l=>l.toUpperCase())}
 function pickQuotesForTheme(theme,n){
-  const quotes=app.allQuotes.filter(c=>c.themes.includes(theme)).sort((a,b)=>a.act-b.act);
-  const picked=[];
-  app.currentText.units.forEach(a=>{const f=quotes.filter(q=>q.act===a);if(f.length&&picked.length<n)picked.push(f[0])});
-  if(picked.length<n){const extra=quotes.filter(q=>!picked.includes(q));while(picked.length<n&&extra.length)picked.push(extra.shift())}
-  return picked;
+ const quotes=app.allQuotes.filter(c=>c.themes.includes(theme)).sort((a,b)=>a.act-b.act);
+ const picked=[];
+ app.currentText.units.forEach(a=>{const f=quotes.filter(q=>q.act===a);if(f.length&&picked.length<n)picked.push(f[0])});
+ if(picked.length<n){const extra=quotes.filter(q=>!picked.includes(q));while(picked.length<n&&extra.length)picked.push(extra.shift())}
+ return picked;
 }
 function thesisFor(theme){const v=app.currentText.authorVerb||'The writer presents';return `${v} ${theme.replace(/_/g,' ')} as <em>[your argument \u2014 e.g. a force that exposes / a moral test that reveals / a structural arc that culminates in\u2026]</em>, ultimately to <em>[writer\u2019s purpose]</em>.`}
 function paraBlock(label,ao,quote,roleHint){
-  const aoTag=ao?`<span class="ao-tag ao-${ao.toLowerCase()}">${ao}</span>`:'';
-  const ctx=quote.context?`<div class="essay-para-point" style="margin-top:6px"><strong>Link (AO3):</strong> ${quote.context}</div>`:'';
-  return `<div class="essay-para">
-    <div class="essay-para-label">${label} ${aoTag}</div>
-    <div class="essay-para-point" style="margin-bottom:6px"><strong>Point:</strong> <em>${roleHint}</em></div>
-    <div class="essay-para-quote">\u201C${quote.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${quote.speaker}, ${app.currentText.unitLabel} ${quote.act}</span></div>
-    <div style="margin:6px 0">${pills(quote.devices,DC)}</div>
-    <div class="essay-para-point"><strong>Explain (AO2):</strong> ${quote.analysis}</div>
-    ${ctx}
-  </div>`;
+ const aoTag=ao?`<span class="ao-tag ao-${ao.toLowerCase()}">${ao}</span>`:'';
+ const ctx=quote.context?`<div class="essay-para-point" style="margin-top:6px"><strong>Link (AO3):</strong> ${quote.context}</div>`:'';
+ return `<div class="essay-para">
+ <div class="essay-para-label">${label} ${aoTag}</div>
+ <div class="essay-para-point" style="margin-bottom:6px"><strong>Point:</strong> <em>${roleHint}</em></div>
+ <div class="essay-para-quote">\u201C${quote.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${quote.speaker}, ${app.currentText.unitLabel} ${quote.act}</span></div>
+ <div style="margin:6px 0">${pills(quote.devices,DC)}</div>
+ <div class="essay-para-point"><strong>Explain (AO2):</strong> ${quote.analysis}</div>
+ ${ctx}
+ </div>`;
 }
 function buildEssayPlan(theme){
-  const out=document.getElementById('essay-output');
-  const final=pickQuotesForTheme(theme,4);
-  if(!final.length){out.innerHTML='<p style="text-align:center;color:var(--text3)">No quotes for this theme.</p>';return}
-  const roles=[
-    'Establish the theme at its starting point \u2014 how it is first introduced.',
-    'Develop the theme \u2014 show how it intensifies or complicates.',
-    'Turning point \u2014 the moment the theme reaches its crisis or shift.',
-    'Resolution \u2014 the theme\u2019s final state and what it tells us about the writer\u2019s message.'
-  ];
-  const peel=['P \u2014 Point','E \u2014 Evidence & Explain','E \u2014 Evidence & Explain','L \u2014 Link & Conclude'];
-  const aos=['AO1','AO2','AO2','AO3'];
-  let h=`<div class="essay-plan">
-    <h3>Essay Plan: ${essayTitleCase(theme)}</h3>
-    <div class="essay-thesis"><div class="essay-para-label">Thesis (Introduction)</div><div class="essay-para-point">${thesisFor(theme)}</div></div>`;
-  final.slice(0,4).forEach((q,i)=>{h+=paraBlock(peel[i]||'Supporting',aos[i]||'AO2',q,roles[i]||'Supporting evidence.')});
-  h+=`<div class="essay-conclusion"><div class="essay-para-label">Conclusion</div><div class="essay-para-point">Restate the thesis with the perspective the analysis has earned. End on the writer\u2019s purpose: <em>why</em> the theme matters to the audience \u2014 [your sentence here].</div></div>`;
-  h+=`<div class="essay-tip"><strong>Tip:</strong> ${app.currentText.essayTip}</div></div>`;
-  out.innerHTML=h;
+ const out=document.getElementById('essay-output');
+ const final=pickQuotesForTheme(theme,4);
+ if(!final.length){out.innerHTML='<p style="text-align:center;color:var(--text3)">No quotes for this theme.</p>';return}
+ const roles=[
+ 'Establish the theme at its starting point \u2014 how it is first introduced.',
+ 'Develop the theme \u2014 show how it intensifies or complicates.',
+ 'Turning point \u2014 the moment the theme reaches its crisis or shift.',
+ 'Resolution \u2014 the theme\u2019s final state and what it tells us about the writer\u2019s message.'
+ ];
+ const peel=['P \u2014 Point','E \u2014 Evidence & Explain','E \u2014 Evidence & Explain','L \u2014 Link & Conclude'];
+ const aos=['AO1','AO2','AO2','AO3'];
+ let h=`<div class="essay-plan">
+ <h3>Essay Plan: ${essayTitleCase(theme)}</h3>
+ <div class="essay-thesis"><div class="essay-para-label">Thesis (Introduction)</div><div class="essay-para-point">${thesisFor(theme)}</div></div>`;
+ final.slice(0,4).forEach((q,i)=>{h+=paraBlock(peel[i]||'Supporting',aos[i]||'AO2',q,roles[i]||'Supporting evidence.')});
+ h+=`<div class="essay-conclusion"><div class="essay-para-label">Conclusion</div><div class="essay-para-point">Restate the thesis with the perspective the analysis has earned. End on the writer\u2019s purpose: <em>why</em> the theme matters to the audience \u2014 [your sentence here].</div></div>`;
+ h+=`<div class="essay-tip"><strong>Tip:</strong> ${app.currentText.essayTip}</div></div>`;
+ out.innerHTML=h;
 }
 function buildEssayComparePlan(a,b){
-  const out=document.getElementById('essay-output');
-  const qa=pickQuotesForTheme(a,2);
-  const qb=pickQuotesForTheme(b,2);
-  if(!qa.length||!qb.length){out.innerHTML='<p style="text-align:center;color:var(--text3)">Not enough quotes to compare.</p>';return}
-  const colA=app.currentText.themes[a]||{c:'#4B5563'};
-  const colB=app.currentText.themes[b]||{c:'#4B5563'};
-  let h=`<div class="essay-plan">
-    <h3>Comparative Essay: <span style="color:${colA.c}">${essayTitleCase(a)}</span> vs <span style="color:${colB.c}">${essayTitleCase(b)}</span></h3>
-    <div class="essay-thesis"><div class="essay-para-label">Thesis (Introduction)</div><div class="essay-para-point">${app.currentText.authorVerb||'The writer presents'} <strong style="color:${colA.c}">${a.replace(/_/g,' ')}</strong> and <strong style="color:${colB.c}">${b.replace(/_/g,' ')}</strong> as <em>[connected / opposing / mutually-defining]</em> forces, ultimately to <em>[writer\u2019s overarching purpose]</em>.</div></div>`;
-  const pairs=[
-    ['P \u2014 Point','AO1','Establish how each theme first appears.',qa[0],qb[0]],
-    ['E \u2014 Evidence & Explain','AO2','Show how each theme develops or escalates.',qa[1]||qa[0],qb[1]||qb[0]]
-  ];
-  pairs.forEach(p=>{const label=p[0],ao=p[1],role=p[2],A=p[3],B=p[4];
-    h+=`<div class="essay-para" style="border-left-color:${colA.c}">
-      <div class="essay-para-label">${label} <span class="ao-tag ao-${ao.toLowerCase()}">${ao}</span></div>
-      <div class="essay-para-point" style="margin-bottom:6px"><strong>Point:</strong> <em>${role}</em></div>
-      <div class="essay-para-point" style="margin-bottom:4px;font-weight:600;color:${colA.c}">${essayTitleCase(a)}:</div>
-      <div class="essay-para-quote">\u201C${A.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${A.speaker}, ${app.currentText.unitLabel} ${A.act}</span></div>
-      <div class="essay-para-point" style="margin:6px 0"><strong>Explain:</strong> ${A.analysis.split('.').slice(0,3).join('.')}.</div>
-      <div class="essay-para-point" style="margin:8px 0 4px;font-weight:600;color:${colB.c}">${essayTitleCase(b)}:</div>
-      <div class="essay-para-quote">\u201C${B.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${B.speaker}, ${app.currentText.unitLabel} ${B.act}</span></div>
-      <div class="essay-para-point" style="margin:6px 0"><strong>Explain:</strong> ${B.analysis.split('.').slice(0,3).join('.')}.</div>
-      <div class="essay-para-point"><strong>Link:</strong> <em>How does presenting these two themes together shift the reading? \u2014 [your sentence here]</em></div>
-    </div>`;
-  });
-  h+=`<div class="essay-conclusion"><div class="essay-para-label">Conclusion <span class="ao-tag ao-ao3">AO3</span></div><div class="essay-para-point">Pull both threads together. Which theme dominates, and what does that combination tell us about <em>[context]</em>? End on the writer\u2019s purpose.</div></div>`;
-  h+=`<div class="essay-tip"><strong>Tip:</strong> ${app.currentText.essayTip}</div></div>`;
-  out.innerHTML=h;
+ const out=document.getElementById('essay-output');
+ const qa=pickQuotesForTheme(a,2);
+ const qb=pickQuotesForTheme(b,2);
+ if(!qa.length||!qb.length){out.innerHTML='<p style="text-align:center;color:var(--text3)">Not enough quotes to compare.</p>';return}
+ const colA=app.currentText.themes[a]||{c:'#4B5563'};
+ const colB=app.currentText.themes[b]||{c:'#4B5563'};
+ let h=`<div class="essay-plan">
+ <h3>Comparative Essay: <span style="color:${colA.c}">${essayTitleCase(a)}</span> vs <span style="color:${colB.c}">${essayTitleCase(b)}</span></h3>
+ <div class="essay-thesis"><div class="essay-para-label">Thesis (Introduction)</div><div class="essay-para-point">${app.currentText.authorVerb||'The writer presents'} <strong style="color:${colA.c}">${a.replace(/_/g,' ')}</strong> and <strong style="color:${colB.c}">${b.replace(/_/g,' ')}</strong> as <em>[connected / opposing / mutually-defining]</em> forces, ultimately to <em>[writer\u2019s overarching purpose]</em>.</div></div>`;
+ const pairs=[
+ ['P \u2014 Point','AO1','Establish how each theme first appears.',qa[0],qb[0]],
+ ['E \u2014 Evidence & Explain','AO2','Show how each theme develops or escalates.',qa[1]||qa[0],qb[1]||qb[0]]
+ ];
+ pairs.forEach(p=>{const label=p[0],ao=p[1],role=p[2],A=p[3],B=p[4];
+ h+=`<div class="essay-para" style="border-left-color:${colA.c}">
+ <div class="essay-para-label">${label} <span class="ao-tag ao-${ao.toLowerCase()}">${ao}</span></div>
+ <div class="essay-para-point" style="margin-bottom:6px"><strong>Point:</strong> <em>${role}</em></div>
+ <div class="essay-para-point" style="margin-bottom:4px;font-weight:600;color:${colA.c}">${essayTitleCase(a)}:</div>
+ <div class="essay-para-quote">\u201C${A.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${A.speaker}, ${app.currentText.unitLabel} ${A.act}</span></div>
+ <div class="essay-para-point" style="margin:6px 0"><strong>Explain:</strong> ${A.analysis.split('.').slice(0,3).join('.')}.</div>
+ <div class="essay-para-point" style="margin:8px 0 4px;font-weight:600;color:${colB.c}">${essayTitleCase(b)}:</div>
+ <div class="essay-para-quote">\u201C${B.quote}\u201D <span style="font-style:normal;font-size:11px;color:var(--text3)">\u2014 ${B.speaker}, ${app.currentText.unitLabel} ${B.act}</span></div>
+ <div class="essay-para-point" style="margin:6px 0"><strong>Explain:</strong> ${B.analysis.split('.').slice(0,3).join('.')}.</div>
+ <div class="essay-para-point"><strong>Link:</strong> <em>How does presenting these two themes together shift the reading? \u2014 [your sentence here]</em></div>
+ </div>`;
+ });
+ h+=`<div class="essay-conclusion"><div class="essay-para-label">Conclusion <span class="ao-tag ao-ao3">AO3</span></div><div class="essay-para-point">Pull both threads together. Which theme dominates, and what does that combination tell us about <em>[context]</em>? End on the writer\u2019s purpose.</div></div>`;
+ h+=`<div class="essay-tip"><strong>Tip:</strong> ${app.currentText.essayTip}</div></div>`;
+ out.innerHTML=h;
 }
 // Essay checker removed
 function checkEssay(){}
@@ -589,123 +589,123 @@ function speakQuote(){if(!cards.deck.length||!window.speechSynthesis)return;cons
 
 // ══════ FOCUS MODE ══════
 function toggleFocus(){
-  app.focusMode=!app.focusMode;
-  document.body.classList.toggle('focus-mode',app.focusMode);
-  document.getElementById('focus-toggle').classList.toggle('active',app.focusMode);
-  if(typeof showToast==='function')showToast(app.focusMode?'Focus mode on — distractions hidden':'Focus mode off','',2000);
+ app.focusMode=!app.focusMode;
+ document.body.classList.toggle('focus-mode',app.focusMode);
+ document.getElementById('focus-toggle').classList.toggle('active',app.focusMode);
+ if(typeof showToast==='function')showToast(app.focusMode?'Focus mode on, distractions hidden':'Focus mode off','',2000);
 }
 
 // ══════ QUOTE OF THE DAY ══════
-function renderQOTD(){const allQuotes=[];Object.values(TEXTS).forEach(t=>allQuotes.push(...t.quotes.map(q=>({...q,text:t.title,authorVerb:t.authorVerb}))));const dayNum=Math.floor(Date.now()/86400000);const qotd=allQuotes[dayNum%allQuotes.length];const d=document.getElementById('qotd');d.innerHTML=`<div class="qotd-label">✨ Quote of the Day</div><div class="qotd-text">\u201C${qotd.quote}\u201D</div><div class="qotd-meta">${qotd.speaker} — ${qotd.text}</div>`}
+function renderQOTD(){const allQuotes=[];Object.values(TEXTS).forEach(t=>allQuotes.push(...t.quotes.map(q=>({...q,text:t.title,authorVerb:t.authorVerb}))));const dayNum=Math.floor(Date.now()/86400000);const qotd=allQuotes[dayNum%allQuotes.length];const d=document.getElementById('qotd');d.innerHTML=`<div class="qotd-label">Quote of the Day</div><div class="qotd-text">\u201C${qotd.quote}\u201D</div><div class="qotd-meta">${qotd.speaker}, ${qotd.text}</div>`}
 
 // ══════ MATHS REVISION DATA ══════
 
 // ══════ NOTES RENDERING ══════
 let currentNotesData=null;
 function openNotesView(id,S){
-  currentNotesData=S.data;
-  document.getElementById('home-screen').style.display='none';
-  document.getElementById('subject-view').classList.remove('active');
-  document.getElementById('notes-view').classList.add('active');
-  document.getElementById('notes-title').textContent=S.title;
-  document.getElementById('notes-sub').textContent=S.sub;
-  // Update back button text based on parent subject
-  const backLabel=app.parentSubject?PARENT_LABELS[app.parentSubject]:'All Subjects';
-  document.getElementById('notes-back-btn').textContent='\u2190 '+backLabel;
-  document.getElementById('notes-search').value='';
+ currentNotesData=S.data;
+ document.getElementById('home-screen').style.display='none';
+ document.getElementById('subject-view').classList.remove('active');
+ document.getElementById('notes-view').classList.add('active');
+ document.getElementById('notes-title').textContent=S.title;
+ document.getElementById('notes-sub').textContent=S.sub;
+ // Update back button text based on parent subject
+ const backLabel=app.parentSubject?PARENT_LABELS[app.parentSubject]:'All Subjects';
+ document.getElementById('notes-back-btn').textContent='\u2190 '+backLabel;
+ document.getElementById('notes-search').value='';
 
-  // Add quiz button for humanities subjects (geography, business, computer-science)
-  const notesHeader = document.querySelector('.notes-header');
-  // Always remove and recreate the button to ensure correct subject is bound
-  const existingBtn = document.getElementById('notes-quiz-btn');
-  if (existingBtn) existingBtn.remove();
+ // Add quiz button for humanities subjects (geography, business, computer-science)
+ const notesHeader = document.querySelector('.notes-header');
+ // Always remove and recreate the button to ensure correct subject is bound
+ const existingBtn = document.getElementById('notes-quiz-btn');
+ if (existingBtn) existingBtn.remove();
 
-  const hasQuiz=['geography','business','computer-science'].some(subj => id.includes(subj));
-  if (hasQuiz) {
-    const quizBtn = document.createElement('button');
-    quizBtn.id = 'notes-quiz-btn';
-    quizBtn.className = 'btn secondary';
-    quizBtn.style.fontSize = '12px';
-    quizBtn.style.marginLeft = '12px';
-    quizBtn.textContent = '📝 Quiz';
-    quizBtn.onclick = (e) => { e.stopPropagation(); openShortAnsQuiz(id); };
-    notesHeader.appendChild(quizBtn);
-  }
+ const hasQuiz=['geography','business','computer-science'].some(subj => id.includes(subj));
+ if (hasQuiz) {
+ const quizBtn = document.createElement('button');
+ quizBtn.id = 'notes-quiz-btn';
+ quizBtn.className = 'btn secondary';
+ quizBtn.style.fontSize = '12px';
+ quizBtn.style.marginLeft = '12px';
+ quizBtn.textContent = 'Quiz';
+ quizBtn.onclick = (e) => { e.stopPropagation(); openShortAnsQuiz(id); };
+ notesHeader.appendChild(quizBtn);
+ }
 
-  renderAllNotes(currentNotesData);
-  window.scrollTo(0,0);
+ renderAllNotes(currentNotesData);
+ window.scrollTo(0,0);
 }
 function backToSubjectFromNotes(){
-  document.getElementById('notes-view').classList.remove('active');
-  if(app.parentSubject){
-    window.location.hash=app.parentSubject;
-    openSubject(app.parentSubject);
-  }else{
-    window.location.hash='';
-    document.getElementById('home-screen').style.display='';
-    renderStreak();renderQOTD();
-  }
-  window.scrollTo(0,0);
+ document.getElementById('notes-view').classList.remove('active');
+ if(app.parentSubject){
+ window.location.hash=app.parentSubject;
+ openSubject(app.parentSubject);
+ }else{
+ window.location.hash='';
+ document.getElementById('home-screen').style.display='';
+ renderStreak();renderQOTD();
+ }
+ window.scrollTo(0,0);
 }
 function highlightSearch(text,query){
-  if(!query)return text;
-  const escaped=query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  return text.replace(new RegExp(`(${escaped})`,'gi'),'<mark class="search-hl">$1</mark>');
+ if(!query)return text;
+ const escaped=query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ return text.replace(new RegExp(`(${escaped})`,'gi'),'<mark class="search-hl">$1</mark>');
 }
 function renderAllNotes(data,filter=''){
-  const container=document.getElementById('notes-container');container.innerHTML='';
-  const q=filter.toLowerCase().trim();
-  data.forEach(section=>{
-    const filteredTopics=section.topics.filter(t=>{
-      if(!q)return true;
-      return t.title.toLowerCase().includes(q)||t.ref.toLowerCase().includes(q)||
-        (t.formulas&&t.formulas.some(f=>f.toLowerCase().includes(q)))||
-        (t.points&&t.points.some(p=>p.toLowerCase().includes(q)))||
-        (t.tip&&t.tip.toLowerCase().includes(q));
-    });
-    if(!filteredTopics.length)return;
-    const secDiv=document.createElement('div');secDiv.style.marginBottom='20px';
-    secDiv.innerHTML=`<div class="subject-label" style="margin-bottom:12px"><span style="font-size:14px;margin-right:4px">${section.icon}</span> ${section.section}</div>`;
-    filteredTopics.forEach(topic=>{
-      const topicDiv=document.createElement('div');topicDiv.className='note-topic';
-      // Auto-open matched topics when searching
-      if(q)topicDiv.classList.add('open');
-      let bodyHtml='<div class="note-card">';
-      bodyHtml+=`<div class="note-card-title">${highlightSearch(topic.title,q)} <span class="spec-ref">${topic.ref}</span></div>`;
-      // Formulas
-      if(topic.formulas&&topic.formulas.length){
-        bodyHtml+='<div class="note-content" style="margin-bottom:10px">';
-        topic.formulas.forEach(f=>{bodyHtml+=`<span class="note-formula">${highlightSearch(f,q)}</span> `});
-        bodyHtml+='</div>';
-      }
-      // Key points
-      if(topic.points&&topic.points.length){
-        bodyHtml+='<ul class="note-keypoints">';
-        topic.points.forEach(p=>{
-          const formatted=p.replace(/^([^:]+):(.+)$/,'<strong>$1:</strong>$2');
-          bodyHtml+=`<li>${highlightSearch(formatted,q)}</li>`;
-        });
-        bodyHtml+='</ul>';
-      }
-      // Example
-      if(topic.example){
-        bodyHtml+=`<div class="note-example"><strong>Example</strong>${highlightSearch(topic.example.replace(/\n/g,'<br>'),q)}</div>`;
-      }
-      // Tip
-      if(topic.tip){
-        bodyHtml+=`<div class="note-tip">💡 ${highlightSearch(topic.tip,q)}</div>`;
-      }
-      // Image
-      if(topic.image){
-        bodyHtml+=`<div class="note-image" style="margin-top:12px;text-align:center"><img src="${topic.image}" alt="${topic.title}" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:4px;padding:8px;background:#f9f9f9"></div>`;
-      }
-      bodyHtml+='</div>';
-      topicDiv.innerHTML=`<div class="note-topic-head" onclick="this.parentElement.classList.toggle('open')"><span class="note-topic-icon">▶</span><span class="note-topic-title">${highlightSearch(topic.title,q)}</span><span class="note-topic-count">${topic.ref}</span></div><div class="note-topic-body">${bodyHtml}</div>`;
-      secDiv.appendChild(topicDiv);
-    });
-    container.appendChild(secDiv);
-  });
-  if(!container.children.length){container.innerHTML='<p style="text-align:center;color:var(--text3);padding:2rem">No topics match your search.</p>'}
+ const container=document.getElementById('notes-container');container.innerHTML='';
+ const q=filter.toLowerCase().trim();
+ data.forEach(section=>{
+ const filteredTopics=section.topics.filter(t=>{
+ if(!q)return true;
+ return t.title.toLowerCase().includes(q)||t.ref.toLowerCase().includes(q)||
+ (t.formulas&&t.formulas.some(f=>f.toLowerCase().includes(q)))||
+ (t.points&&t.points.some(p=>p.toLowerCase().includes(q)))||
+ (t.tip&&t.tip.toLowerCase().includes(q));
+ });
+ if(!filteredTopics.length)return;
+ const secDiv=document.createElement('div');secDiv.style.marginBottom='20px';
+ secDiv.innerHTML=`<div class="subject-label" style="margin-bottom:12px"><span style="font-size:14px;margin-right:4px">${section.icon}</span> ${section.section}</div>`;
+ filteredTopics.forEach(topic=>{
+ const topicDiv=document.createElement('div');topicDiv.className='note-topic';
+ // Auto-open matched topics when searching
+ if(q)topicDiv.classList.add('open');
+ let bodyHtml='<div class="note-card">';
+ bodyHtml+=`<div class="note-card-title">${highlightSearch(topic.title,q)} <span class="spec-ref">${topic.ref}</span></div>`;
+ // Formulas
+ if(topic.formulas&&topic.formulas.length){
+ bodyHtml+='<div class="note-content" style="margin-bottom:10px">';
+ topic.formulas.forEach(f=>{bodyHtml+=`<span class="note-formula">${highlightSearch(f,q)}</span> `});
+ bodyHtml+='</div>';
+ }
+ // Key points
+ if(topic.points&&topic.points.length){
+ bodyHtml+='<ul class="note-keypoints">';
+ topic.points.forEach(p=>{
+ const formatted=p.replace(/^([^:]+):(.+)$/,'<strong>$1:</strong>$2');
+ bodyHtml+=`<li>${highlightSearch(formatted,q)}</li>`;
+ });
+ bodyHtml+='</ul>';
+ }
+ // Example
+ if(topic.example){
+ bodyHtml+=`<div class="note-example"><strong>Example</strong>${highlightSearch(topic.example.replace(/\n/g,'<br>'),q)}</div>`;
+ }
+ // Tip
+ if(topic.tip){
+ bodyHtml+=`<div class="note-tip">${highlightSearch(topic.tip,q)}</div>`;
+ }
+ // Image
+ if(topic.image){
+ bodyHtml+=`<div class="note-image" style="margin-top:12px;text-align:center"><img src="${topic.image}" alt="${topic.title}" style="max-width:100%;height:auto;border:1px solid #ddd;border-radius:4px;padding:8px;background:#f9f9f9"></div>`;
+ }
+ bodyHtml+='</div>';
+ topicDiv.innerHTML=`<div class="note-topic-head" onclick="this.parentElement.classList.toggle('open')"><span class="note-topic-icon">▶</span><span class="note-topic-title">${highlightSearch(topic.title,q)}</span><span class="note-topic-count">${topic.ref}</span></div><div class="note-topic-body">${bodyHtml}</div>`;
+ secDiv.appendChild(topicDiv);
+ });
+ container.appendChild(secDiv);
+ });
+ if(!container.children.length){container.innerHTML='<p style="text-align:center;color:var(--text3);padding:2rem">No topics match your search.</p>'}
 }
 function filterNotes(){renderAllNotes(currentNotesData,document.getElementById('notes-search').value)}
 
