@@ -41,21 +41,21 @@ const SUBJECTS = {
         icon: '🗡️',
         cls: 'macbeth',
         title: 'Macbeth',
-        desc: 'Quote flashcards · Spaced repetition · Essay checker · Exam mode',
+        desc: 'Quote flashcards · Spaced repetition · Essay planner · Exam mode',
         stats: ['35 quotes', '10 themes', '5 acts']
       },
       aic: {
         icon: '🔍',
         cls: 'aic',
         title: 'An Inspector Calls',
-        desc: 'Quote flashcards · Spaced repetition · Essay checker · Exam mode',
+        desc: 'Quote flashcards · Spaced repetition · Essay planner · Exam mode',
         stats: ['25 quotes', '8 themes', '3 acts']
       },
       acc: {
         icon: '👻',
         cls: 'acc',
         title: 'A Christmas Carol',
-        desc: 'Quote flashcards · Spaced repetition · Essay checker · Exam mode',
+        desc: 'Quote flashcards · Spaced repetition · Essay planner · Exam mode',
         stats: ['25 quotes', '8 themes', '5 staves']
       },
       power_conflict: {

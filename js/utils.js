@@ -245,7 +245,7 @@ const UIUtil = {
   scrollToTop: () => window.scrollTo(0, 0),
 
   updateNavTabs: (active) => {
-    const tabs = document.querySelectorAll('.nav-tab');
+    const tabs = document.querySelectorAll('.navlink');
     tabs.forEach(t => t.classList.remove('active'));
     tabs.forEach(t => {
       if (t.textContent.toLowerCase().includes(active)) {

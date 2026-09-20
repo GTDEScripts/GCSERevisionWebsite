@@ -45,7 +45,7 @@ function navGo(target){
 function updateNavTabs(active){
   const map={home:'home',subjects:'subjects',features:'features',progress:'progress',exams:'exams',pomodoro:'focus'};
   const needle=map[active]||active;
-  document.querySelectorAll('.nav-tab').forEach(t=>{
+  document.querySelectorAll('.navlink').forEach(t=>{
     t.classList.toggle('active',t.textContent.toLowerCase().includes(needle));
   });
 }
@@ -557,35 +557,8 @@ function buildEssayComparePlan(a,b){
   h+=`<div class="essay-tip"><strong>Tip:</strong> ${app.currentText.essayTip}</div></div>`;
   out.innerHTML=h;
 }
-
-// ══════ ESSAY CHECKER (/30 marks) ══════
-function checkEssay(){const text=document.getElementById('checker-input').value;if(!text.trim()){document.getElementById('checker-results').innerHTML='<p style="text-align:center;color:var(--text3);margin-top:12px">Write something first!</p>';return}const a=analyseEssay(text);const s=scoreEssay(a);const fb=generateFeedback(a,s);renderCheckerResults(a,s,fb);recordStudyDay()}
-function analyseEssay(text){const words=text.split(/\s+/).filter(w=>w.length>0);const qm=text.match(/[\u201C\u201D"]/g)||[];const quotes=Math.floor(qm.length/2);const allTN=Object.values(techNames);const techniques=allTN.filter(t=>new RegExp(t,'gi').test(text)).length;const contextHits=app.currentText.contextWords.filter(w=>new RegExp(w,'gi').test(text)).length;const analysisVerbs=(text.match(/\b(suggest|impl(?:y|ies)|convey|highlight|emphasise|present|demonstrate|reveal|illustrate|portray|symbolise|reflect|expose|reinforce|foreshadow|mirror|represent|indicate|connot(?:e|es|ation))\b/gi)||[]).length;const writerRef=(text.match(/\b(shakespeare|priestley|dickens)\b/gi)||[]).length;const altInterp=/\b(alternatively|however|on the other hand|conversely|another reading|could also|some may argue|equally|contrastingly|yet|in contrast)\b/i.test(text);const paragraphs=text.split(/\n\s*\n/).filter(p=>p.trim().length>20).length||1;const embeddedQuotes=(text.match(/[\u201C"][^"\u201D\u201C]{1,40}[\u201D"]/g)||[]).length;return{wordCount:words.length,quotes,embeddedQuotes,techniques,contextHits,analysisVerbs,writerRef,altInterp,paragraphs}}
-function scoreEssay(a){
-  // AO1: /12 — knowledge, references, argument structure
-  let AO1=0;
-  if(a.quotes>=4)AO1+=5;else if(a.quotes>=2)AO1+=3;else if(a.quotes>=1)AO1+=2;
-  if(a.embeddedQuotes>=3)AO1+=3;else if(a.embeddedQuotes>=1)AO1+=2;
-  if(a.paragraphs>=3)AO1+=2;else if(a.paragraphs>=2)AO1+=1;
-  if(a.wordCount>=300)AO1+=2;else if(a.wordCount>=200)AO1+=1;
-  AO1=Math.min(12,AO1);
-  // AO2: /12 — analysis of language, form, structure
-  let AO2=0;
-  if(a.techniques>=4)AO2+=5;else if(a.techniques>=2)AO2+=3;else if(a.techniques>=1)AO2+=1;
-  if(a.analysisVerbs>=5)AO2+=3;else if(a.analysisVerbs>=3)AO2+=2;else if(a.analysisVerbs>=1)AO2+=1;
-  if(a.altInterp)AO2+=2;
-  if(a.writerRef>=2)AO2+=2;else if(a.writerRef>=1)AO2+=1;
-  AO2=Math.min(12,AO2);
-  // AO3: /6 — context
-  let AO3=0;
-  if(a.contextHits>=4)AO3+=5;else if(a.contextHits>=2)AO3+=3;else if(a.contextHits>=1)AO3+=2;
-  if(a.writerRef>=1)AO3+=1;
-  AO3=Math.min(6,AO3);
-  const total=AO1+AO2+AO3;const pct=Math.round(total/30*100);
-  let grade;if(pct>=85)grade=9;else if(pct>=75)grade=8;else if(pct>=65)grade=7;else if(pct>=55)grade=6;else if(pct>=45)grade=5;else if(pct>=35)grade=4;else grade=3;
-  return{AO1,AO2,AO3,total,maxTotal:30,pct,grade}}
-function generateFeedback(a,s){const fb=[];if(a.quotes>=3)fb.push({type:'strength',text:'Good use of embedded quotations.'});if(a.techniques>=3)fb.push({type:'strength',text:'Strong identification of language techniques.'});if(a.contextHits>=2)fb.push({type:'strength',text:'Context is integrated effectively.'});if(a.altInterp)fb.push({type:'strength',text:'Alternative interpretation included — high-level skill.'});if(a.analysisVerbs>=3)fb.push({type:'strength',text:'Good use of analytical verbs.'});if(a.writerRef>=2)fb.push({type:'strength',text:'Writer referenced by name — shows authorial intent awareness.'});if(a.quotes<2)fb.push({type:'target',text:'Use more short, embedded quotes to support your points.'});if(a.techniques<2)fb.push({type:'target',text:'Name specific techniques (metaphor, alliteration, dramatic irony, etc.).'});if(a.contextHits===0)fb.push({type:'target',text:`Add relevant context (${app.currentText.contextLabel}).`});if(!a.altInterp)fb.push({type:'target',text:'Add an alternative interpretation (e.g. "Alternatively…").'});if(a.analysisVerbs<3)fb.push({type:'target',text:'Use more analytical verbs: suggests, implies, conveys, highlights.'});if(a.writerRef===0)fb.push({type:'target',text:`Reference the writer by name: "${app.currentText.authorVerb}…"`});if(a.wordCount<150)fb.push({type:'target',text:'Aim for at least 250-300 words.'});if(a.paragraphs<2)fb.push({type:'target',text:'Use PEEL paragraphs: Point, Evidence, Explain, Link.'});return fb}
-function renderCheckerResults(a,s,fb){const d=document.getElementById('checker-results');const gc=s.grade>=7?'var(--green)':s.grade>=5?'var(--yellow)':'var(--red)';d.innerHTML=`<div class="checker-results"><div class="grade-display"><div class="grade-num" style="color:${gc}">Grade ${s.grade}</div><div class="grade-label">Estimated · ${s.total}/30 marks (${s.pct}%)</div></div><div class="ao-grid"><div class="ao-card" style="border-color:var(--blue)"><h4 style="color:var(--blue)">AO1</h4><div class="ao-score" style="color:var(--blue)">${s.AO1}</div><div class="ao-max">/ 12</div><div style="font-size:10px;color:var(--text3);margin-top:2px">Knowledge</div></div><div class="ao-card" style="border-color:var(--accent)"><h4 style="color:var(--accent)">AO2</h4><div class="ao-score" style="color:var(--accent)">${s.AO2}</div><div class="ao-max">/ 12</div><div style="font-size:10px;color:var(--text3);margin-top:2px">Analysis</div></div><div class="ao-card" style="border-color:var(--green)"><h4 style="color:var(--green)">AO3</h4><div class="ao-score" style="color:var(--green)">${s.AO3}</div><div class="ao-max">/ 6</div><div style="font-size:10px;color:var(--text3);margin-top:2px">Context</div></div></div><div style="font-size:11px;color:var(--text3);margin-bottom:8px;display:flex;flex-wrap:wrap;gap:8px"><span>📝 ${a.wordCount} words</span><span>💬 ${a.quotes} quotes</span><span>🔬 ${a.techniques} techniques</span><span>📚 ${a.contextHits} context refs</span></div><ul class="feedback-list">${fb.map(f=>`<li class="feedback-item ${f.type}"><span class="feedback-icon">${f.type==='strength'?'✅':'🎯'}</span>${f.text}</li>`).join('')}</ul></div>`}
+// Essay checker removed
+function checkEssay(){}
 
 // ══════ EXAM MODE ══════
 function startExam(){const qc=document.getElementById('exam-q-count').value;const tl=parseInt(document.getElementById('exam-time').value);exam.deck=[...app.allQuotes].sort(()=>Math.random()-.5);if(qc!=='all')exam.deck=exam.deck.slice(0,parseInt(qc));exam.index=0;exam.correct=0;exam.total=0;exam.answered=false;document.getElementById('exam-setup').style.display='none';document.getElementById('exam-active').style.display='block';document.getElementById('exam-results').style.display='none';if(exam.timer)clearInterval(exam.timer);if(tl>0){exam.timeLeft=tl*60;updateExamTimer();exam.timer=setInterval(()=>{exam.timeLeft--;updateExamTimer();if(exam.timeLeft<=0){clearInterval(exam.timer);finishExam()}},1000)}else{document.getElementById('exam-timer').textContent='No limit'}renderExamQ()}

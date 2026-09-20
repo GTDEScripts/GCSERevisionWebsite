@@ -1189,12 +1189,4 @@ function _setOnboardingStep(n) {
   if (btn) btn.textContent = n >= _onboardingTotal ? 'Get started →' : 'Next →';
 }
 
-// Show on first visit
-(function initOnboarding() {
-  try {
-    if (!localStorage.getItem('gcse_onboarded')) {
-      // Slight delay so the page renders first
-      setTimeout(showOnboarding, 600);
-    }
-  } catch(e) {}
-})();
+// Onboarding overlay removed — no auto-show.

@@ -4,243 +4,228 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GCSE Revision Tools</title>
-<meta name="description" content="Free GCSE revision tools: flashcards, quizzes, spaced repetition, essay feedback and exam simulation for English, Maths, Sciences, Geography, Business and Computer Science.">
+<meta name="description" content="Free GCSE revision resource: flashcards, notes, quizzes, spaced repetition and exam practice for English, Maths, Sciences, Geography, Business and Computer Science.">
 
-<!-- Open Graph Meta Tags for Social Media Embeds -->
 <meta property="og:title" content="GCSE Revision Tools">
-<meta property="og:description" content="Free GCSE revision tools: flashcards, quizzes, spaced repetition, essay feedback and exam simulation.">
+<meta property="og:description" content="Free GCSE revision: flashcards, notes, quizzes, spaced repetition and exam practice.">
 <meta property="og:image" content="img/logo-light.png">
-<meta property="og:url" content="https://yoursite.com">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="img/logo-light.png">
 <meta name="twitter:title" content="GCSE Revision Tools">
 
-<!-- Google Fonts - non-blocking load -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
-<!-- Main Stylesheet -->
-<link rel="stylesheet" href="css/styles.css?v=4">
+<link rel="stylesheet" href="css/styles.css?v=5">
 
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="img/logo-favicon.png">
 <link rel="apple-touch-icon" href="img/logo-favicon.png">
 
-<!-- Web App Manifest -->
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#7C3AED">
+<meta name="theme-color" content="#1F3A5F">
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="navbar-inner">
-    <div class="nav-logo-container" onclick="navGo('home')">
-      <img class="nav-logo-img nav-logo-light" src="img/logo-light.png" alt="GCSE Revision Tools" title="GCSE Revision Tools" width="66" height="44" decoding="async" fetchpriority="high">
-      <img class="nav-logo-img nav-logo-dark" src="img/logo-dark.png" alt="GCSE Revision Tools" title="GCSE Revision Tools" width="66" height="44" decoding="async" loading="lazy">
-      <span class="nav-logo-text">GCSE Revision</span>
-    </div>
-    <div class="nav-tabs" id="nav-tabs">
-      <button class="nav-tab active" onclick="navGo('home')">🏠 Home</button>
-      <button class="nav-tab" onclick="navGo('subjects')">📚 Subjects</button>
-      <button class="nav-tab" onclick="navGo('features')">✨ Features</button>
-      <button class="nav-tab" onclick="navGo('progress')">📊 Progress</button>
-      <button class="nav-tab" onclick="navGo('exams')">📅 Exams</button>
-      <button class="nav-tab" onclick="navGo('pomodoro')">🍅 Focus</button>
-    </div>
-    <div class="nav-actions">
-      <button class="nav-icon-btn" onclick="toggleFocus()" title="Focus mode" id="nav-focus-btn">🎯</button>
-      <button class="nav-icon-btn" onclick="toggleDark()" title="Toggle dark mode" id="nav-dark-btn">🌙</button>
-      <button class="nav-icon-btn" onclick="toggleSettings()" title="Settings">⚙️</button>
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" onclick="navGo('home')" tabindex="0">
+      <img class="brand-mark brand-light" src="img/logo-light.png" alt="" width="40" height="40" decoding="async" fetchpriority="high">
+      <img class="brand-mark brand-dark" src="img/logo-dark.png" alt="" width="40" height="40" decoding="async" loading="lazy">
+      <span class="brand-name">GCSE Revision</span>
+    </a>
+    <nav class="mainnav" id="nav-tabs" aria-label="Primary">
+      <button class="navlink active" onclick="navGo('home')">Home</button>
+      <button class="navlink" onclick="navGo('subjects')">Subjects</button>
+      <button class="navlink" onclick="navGo('features')">Features</button>
+      <button class="navlink" onclick="navGo('progress')">Progress</button>
+      <button class="navlink" onclick="navGo('exams')">Exams</button>
+      <button class="navlink" onclick="navGo('pomodoro')">Focus</button>
+    </nav>
+    <div class="topbar-actions">
+      <button class="iconbtn" onclick="toggleDark()" title="Toggle theme" id="nav-dark-btn" aria-label="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="iconbtn" onclick="toggleSettings()" title="Settings" aria-label="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
     </div>
   </div>
-</nav>
+</header>
 
 <!-- SETTINGS SIDE PANEL -->
 <div class="settings-overlay" id="settings-overlay" onclick="toggleSettings()"></div>
 <div class="settings-panel" id="settings-panel" role="dialog" aria-modal="false" aria-label="Settings">
-  <h3>⚙️ Settings <button class="settings-close" onclick="toggleSettings()">✕</button></h3>
+  <h3>Settings <button class="settings-close" onclick="toggleSettings()" aria-label="Close settings">×</button></h3>
   <div class="setting-group">
     <div class="setting-label">Appearance</div>
-    <div class="setting-row"><label for="font-size-select">Font Size</label><select class="setting-select" id="font-size-select" onchange="setFontSize(this.value)"><option value="0.9">Small</option><option value="1" selected>Medium</option><option value="1.1">Large</option></select></div>
+    <div class="setting-row"><label for="font-size-select">Font size</label><select class="setting-select" id="font-size-select" onchange="setFontSize(this.value)"><option value="0.9">Small</option><option value="1" selected>Medium</option><option value="1.1">Large</option></select></div>
   </div>
   <div class="setting-group">
     <div class="setting-label">Revision</div>
-    <div class="setting-row"><label for="daily-goal-select">Daily Card Goal</label><select class="setting-select" id="daily-goal-select" onchange="setDailyGoal(this.value)"><option value="10">10 cards</option><option value="20" selected>20 cards</option><option value="30">30 cards</option><option value="50">50 cards</option></select></div>
+    <div class="setting-row"><label for="daily-goal-select">Daily card goal</label><select class="setting-select" id="daily-goal-select" onchange="setDailyGoal(this.value)"><option value="10">10 cards</option><option value="20" selected>20 cards</option><option value="30">30 cards</option><option value="50">50 cards</option></select></div>
     <div class="setting-row"><label>Auto-advance after rating</label><div class="toggle-switch on" id="toggle-autoadvance" onclick="toggleAutoAdvance()"></div></div>
   </div>
   <div class="setting-group">
-    <div class="setting-label">Exam Dates</div>
+    <div class="setting-label">Exam dates</div>
     <div id="exam-dates-container"></div>
   </div>
   <div class="setting-group">
     <div class="setting-label">Data</div>
-    <button class="setting-danger" onclick="if(confirm('Reset ALL progress for ALL texts? This cannot be undone.')){resetAllProgress()}">Reset All Progress</button>
+    <button class="setting-danger" onclick="if(confirm('Reset ALL progress for ALL texts? This cannot be undone.')){resetAllProgress()}">Reset all progress</button>
   </div>
-  <p style="text-align:center;font-size:10px;color:var(--text3);margin-top:16px">GCSE Revision Tools v4.5</p>
+  <p class="settings-version">v5.0</p>
 </div>
 
-<div class="kb-hint" id="kb-hint">⌨ Space=flip · ←→=nav · 1/2/3=rate · S=shuffle · R=read aloud</div>
-<div class="focus-toggle" id="focus-toggle" onclick="toggleFocus()" title="Focus mode">🎯</div>
+<div class="kb-hint" id="kb-hint">Space flip · ← → nav · 1/2/3 rate · S shuffle · R read aloud</div>
 
 <!-- ═══ HOME SCREEN ═══ -->
-<div class="home-screen" id="home-screen">
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">Free · Offline · No signup needed</div>
-    <h1>GCSE Revision Tools</h1>
-    <p class="tagline">Everything you need to smash your GCSEs. <strong>Flashcards, quizzes, essay feedback & exam simulation</strong> — all in one place, completely free.</p>
-    <div class="hero-cta">
-      <button class="cta-btn primary" onclick="document.querySelector('.subject-section').scrollIntoView({behavior:'smooth'})">Get Started →</button>
-      <button class="cta-btn secondary" onclick="document.getElementById('home-features').scrollIntoView({behavior:'smooth'})">See Features</button>
-    </div>
-    <div class="hero-version">v4.5 · 9 GCSE subjects · 127 topics · 83 quotes</div>
+<main class="home-screen" id="home-screen">
+
+<section class="hero">
+  <div class="hero-tag">GCSE revision · AQA · Edexcel · OCR</div>
+  <h1>Everything you need to revise, in one place.</h1>
+  <p class="hero-lead">Structured notes, flashcards with spaced repetition, quizzes and timed exam practice for nine GCSE subjects. Free, no sign-up, works offline.</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('subjects-anchor').scrollIntoView({behavior:'smooth'})">Choose a subject</button>
+    <button class="btn-ghost" onclick="document.getElementById('home-features').scrollIntoView({behavior:'smooth'})">What's inside</button>
   </div>
-  <div class="hero-right">
-    <div class="hero-stats-grid">
-      <div class="hero-stat-card">
-        <div class="hero-stat-num">127</div>
-        <div class="hero-stat-label">Revision Topics</div>
+</section>
+
+<section class="quickstats" aria-label="Site content">
+  <div class="qs-item"><span class="qs-num">9</span><span class="qs-label">Subjects</span></div>
+  <div class="qs-item"><span class="qs-num">127</span><span class="qs-label">Topics</span></div>
+  <div class="qs-item"><span class="qs-num">83</span><span class="qs-label">Quotes</span></div>
+  <div class="qs-item"><span class="qs-num">Free</span><span class="qs-label">Forever</span></div>
+</section>
+
+<section class="dashboard-strip">
+  <div class="stats-bar" id="home-stats">
+    <div class="stat-item"><span class="stat-val" id="stat-studied">0</span><span class="stat-label">Done today</span></div>
+    <div class="stat-item"><span class="stat-val" id="stat-due">0</span><span class="stat-label">Due today</span></div>
+    <div class="stat-item"><span class="stat-val" id="stat-streak">0</span><span class="stat-label">Day streak</span></div>
+    <div class="stat-item"><span class="stat-val" id="stat-subjects">9</span><span class="stat-label">Subjects</span></div>
+  </div>
+  <div class="streak-bar" id="streak-bar"></div>
+  <div id="exam-countdown-section" class="exam-countdown-section"></div>
+  <div class="qotd" id="qotd"></div>
+  <div id="weak-spots-section" class="weak-spots-section" style="display:none"></div>
+</section>
+
+<section id="subjects-anchor" class="subjects-block">
+  <div class="section-head">
+    <h2>Subjects</h2>
+    <p>Pick your subject to open its notes, cards and quizzes.</p>
+  </div>
+
+  <div class="subjects-grid">
+    <div class="subject-section">
+      <div class="subject-label">English</div>
+      <div class="subj-grid">
+        <div class="subj-card sc-english" onclick="openSubjectWithRoute('english')"><span class="sc-badge sc-ready">Ready</span><div class="sc-title">English</div><div class="sc-desc">AQA · Literature & Language across all set texts.</div></div>
       </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-num">83</div>
-        <div class="hero-stat-label">Literary Quotes</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-num">9</div>
-        <div class="hero-stat-label">GCSE Subjects</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-num">Free</div>
-        <div class="hero-stat-label">Always &amp; Forever</div>
+    </div>
+    <div class="subject-section">
+      <div class="subject-label">Maths</div>
+      <div class="subj-grid">
+        <div class="subj-card sc-maths" onclick="openSubjectWithRoute('maths')"><span class="sc-badge sc-ready">Ready</span><div class="sc-title">Mathematics</div><div class="sc-desc">Edexcel 1MA1 Higher · 6 units, 36 topics.</div></div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="stats-bar" id="home-stats">
-  <div class="stat-item"><span class="stat-val" id="stat-studied">0</span><span class="stat-label">Done Today</span></div>
-  <div class="stat-item"><span class="stat-val" id="stat-due">0</span><span class="stat-label">Due Today</span></div>
-  <div class="stat-item"><span class="stat-val" id="stat-streak">0</span><span class="stat-label">Day Streak</span></div>
-  <div class="stat-item"><span class="stat-val" id="stat-subjects">9</span><span class="stat-label">Subjects</span></div>
-</div>
-
-<div class="streak-bar" id="streak-bar"></div>
-
-<div id="exam-countdown-section" class="exam-countdown-section"></div>
-
-<div class="qotd" id="qotd"></div>
-
-<div id="weak-spots-section" class="weak-spots-section" style="display:none"></div>
-
-<div id="home-features" class="features-section">
-  <div class="section-eyebrow">What's Included</div>
-  <h2 class="section-title">Everything you need to revise</h2>
-  <div class="feature-cards">
-    <div class="feature-card">
-      <span class="feature-card-icon">📇</span>
-      <h3 class="feature-card-title">Flashcards &amp; Spaced Repetition</h3>
-      <p class="feature-card-desc">SM-2 algorithm schedules your next review automatically so you study smarter, not harder.</p>
+    <div class="subject-section">
+      <div class="subject-label">Sciences</div>
+      <div class="subj-grid">
+        <div class="subj-card sc-sciences" onclick="openSubjectWithRoute('sciences')"><span class="sc-badge sc-ready">Ready</span><div class="sc-title">Sciences</div><div class="sc-desc">AQA & Edexcel Triple · Biology, Chemistry, Physics.</div></div>
+      </div>
     </div>
-    <div class="feature-card">
-      <span class="feature-card-icon">🧠</span>
-      <h3 class="feature-card-title">Adaptive Quizzes</h3>
-      <p class="feature-card-desc">Multiple-choice tests that focus on your weakest areas and track improvement over time.</p>
+    <div class="subject-section">
+      <div class="subject-label">Geography</div>
+      <div class="subj-grid">
+        <div class="subj-card sc-geography" onclick="openSubjectWithRoute('geography')"><span class="sc-badge sc-ready">Ready</span><div class="sc-title">Geography</div><div class="sc-desc">AQA 8035 · Hazards to Environmental Management.</div></div>
+      </div>
     </div>
-    <div class="feature-card">
-      <span class="feature-card-icon">✍️</span>
-      <h3 class="feature-card-title">Essay Checker /30</h3>
-      <p class="feature-card-desc">Paste any paragraph for instant AO1/AO2/AO3 feedback with a mark out of 30.</p>
+    <div class="subject-section">
+      <div class="subject-label">Business</div>
+      <div class="subj-grid">
+        <div class="subj-card sc-business" onclick="openSubjectWithRoute('business')"><span class="sc-badge sc-ready">Ready</span><div class="sc-title">Business</div><div class="sc-desc">OCR J204 · Business Activity to Influences.</div></div>
+      </div>
     </div>
-    <div class="feature-card">
-      <span class="feature-card-icon">⏱️</span>
-      <h3 class="feature-card-title">Exam Simulation</h3>
-      <p class="feature-card-desc">Timed quizzes under real exam conditions — no hints, randomised order, full results breakdown.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-card-icon">📊</span>
-      <h3 class="feature-card-title">Progress Dashboard</h3>
-      <p class="feature-card-desc">Track theme mastery across all your subjects and see exactly where to focus next.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-card-icon">🔥</span>
-      <h3 class="feature-card-title">Streak System</h3>
-      <p class="feature-card-desc">Daily goals and streak tracking keep you consistent in the run-up to your exams.</p>
+    <div class="subject-section">
+      <div class="subject-label">Computer Science</div>
+      <div class="subj-grid">
+        <div class="subj-card sc-computer-science" onclick="openSubjectWithRoute('computer-science')"><span class="sc-badge sc-ready">Ready</span><div class="sc-title">Computer Science</div><div class="sc-desc">OCR J277 · Architecture to Cyber Security.</div></div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="subjects-section-header">
-  <div class="section-eyebrow">Pick Your Subject</div>
-  <h2 class="section-title">Start revising</h2>
-</div>
-
-<div class="subjects-grid">
-
-<div class="subject-section" data-deco="📖">
-  <div class="subject-label">English</div>
-  <div class="subj-grid">
-    <div class="subj-card sc-english" onclick="openSubjectWithRoute('english')"><span class="sc-badge sc-ready">Ready</span><span class="sc-icon">📖</span><div class="sc-title">English</div><div class="sc-desc">AQA · Literature & Language · Multiple exam boards available</div></div>
+<section id="home-features" class="features-block">
+  <div class="section-head">
+    <h2>What's inside</h2>
+    <p>The tools each subject page opens up.</p>
   </div>
-</div>
-
-<div class="subject-section" data-deco="📐">
-  <div class="subject-label">Maths</div>
-  <div class="subj-grid">
-    <div class="subj-card sc-maths" onclick="openSubjectWithRoute('maths')"><span class="sc-badge sc-ready">Ready</span><span class="sc-icon">📐</span><div class="sc-title">Mathematics</div><div class="sc-desc">Edexcel 1MA1 · 6 units, 36 topics · Higher Tier full spec</div></div>
+  <div class="feature-list">
+    <div class="feature-item">
+      <h3>Flashcards with spaced repetition</h3>
+      <p>The SM-2 algorithm schedules each card's next review, so you spend more time on the ones you don't know yet.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Structured revision notes</h3>
+      <p>Concise, spec-linked notes for Maths, Sciences, Business, Computer Science and Geography — searchable, printable.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Adaptive quizzes</h3>
+      <p>Multiple-choice questions with instant explanations. Adaptive mode focuses on your weak topics.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Timed exam mode</h3>
+      <p>Sit a random selection under a countdown timer. No hints, no shuffling mid-paper — just the paper.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Essay planner (English Lit)</h3>
+      <p>Pick a theme and get a PEEL paragraph plan built from real quotes, with AO1 / AO2 / AO3 tags.</p>
+    </div>
+    <div class="feature-item">
+      <h3>Progress dashboard</h3>
+      <p>Track mastery per theme, per subject. See where you're strong and where you need another pass.</p>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="subject-section" data-deco="🧬">
-  <div class="subject-label">Sciences</div>
-  <div class="subj-grid">
-    <div class="subj-card sc-sciences" onclick="openSubjectWithRoute('sciences')"><span class="sc-badge sc-ready">Ready</span><span class="sc-icon">🧬</span><div class="sc-title">Sciences</div><div class="sc-desc">AQA & Edexcel Triple Science · Biology, Chemistry, Physics</div></div>
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div>
+      <div class="footer-title">GCSE Revision Tools</div>
+      <p>A free revision resource. Built by students, for students. Works offline once loaded.</p>
+    </div>
+    <div>
+      <div class="footer-title">Exam boards</div>
+      <p>AQA · Edexcel · OCR</p>
+    </div>
+    <div>
+      <div class="footer-title">Content</div>
+      <p>9 subjects · 127 topics · 83 quotes</p>
+    </div>
   </div>
-</div>
+  <div class="footer-bottom">All progress is stored locally in your browser. Nothing is uploaded.</div>
+</footer>
 
-<div class="subject-section" data-deco="🌍">
-  <div class="subject-label">Geography</div>
-  <div class="subj-grid">
-    <div class="subj-card sc-geography" onclick="openSubjectWithRoute('geography')"><span class="sc-badge sc-ready">Ready</span><span class="sc-icon">🌍</span><div class="sc-title">Geography</div><div class="sc-desc">AQA 8035 · Hazards to Environmental Management · 15 topics</div></div>
-  </div>
-</div>
-
-<div class="subject-section" data-deco="💼">
-  <div class="subject-label">Business</div>
-  <div class="subj-grid">
-    <div class="subj-card sc-business" onclick="openSubjectWithRoute('business')"><span class="sc-badge sc-ready">Ready</span><span class="sc-icon">💼</span><div class="sc-title">Business</div><div class="sc-desc">OCR J204 · Business Activity to Influences · 18 topics</div></div>
-  </div>
-</div>
-
-<div class="subject-section" data-deco="💻">
-  <div class="subject-label">Computer Science</div>
-  <div class="subj-grid">
-    <div class="subj-card sc-computer-science" onclick="openSubjectWithRoute('computer-science')"><span class="sc-badge sc-ready">Ready</span><span class="sc-icon">💻</span><div class="sc-title">Computer Science</div><div class="sc-desc">OCR J277 · Architecture to Cyber Security · 20 topics</div></div>
-  </div>
-</div>
-
-</div>
-
-<div class="home-footer">
-  <p>Built for GCSE students, by GCSE students · AQA · Edexcel · OCR<br>83 quotes · 127 revision topics · 9 GCSE subjects · All free, all offline</p>
-</div>
-</div>
+</main>
 
 <!-- ═══ SUBJECT DETAIL VIEW ═══ -->
 <div class="subject-view" id="subject-view">
-<button class="back-btn" onclick="backToParent()">← All Subjects</button>
+<button class="back-btn" onclick="backToParent()">← All subjects</button>
 <div class="sv-header"><h2 id="sv-title"></h2><div class="sv-sub" id="sv-sub"></div></div>
 <div class="text-grid" id="sv-text-grid"></div>
 </div>
 
-<!-- ═══ NOTES VIEW (for maths etc) ═══ -->
+<!-- ═══ NOTES VIEW ═══ -->
 <div class="notes-view" id="notes-view">
-<div class="notes-nav"><button class="back-btn" id="notes-back-btn" onclick="backToSubjectFromNotes()">← Back</button><button class="notes-print-btn" onclick="printRevisionSheet()" title="Print revision sheet">🖨️ Print</button></div>
+<div class="notes-nav"><button class="back-btn" id="notes-back-btn" onclick="backToSubjectFromNotes()">← Back</button><button class="notes-print-btn" onclick="printRevisionSheet()" title="Print revision sheet">Print</button></div>
 <div class="notes-header"><h2 id="notes-title"></h2><div class="notes-sub" id="notes-sub"></div></div>
-<input class="notes-search" id="notes-search" type="text" placeholder="Search topics, formulae, methods..." oninput="filterNotes()" aria-label="Search revision topics, formulae and methods">
+<input class="notes-search" id="notes-search" type="text" placeholder="Search topics, formulae, methods..." oninput="filterNotes()" aria-label="Search revision topics">
 <div id="notes-container"></div>
 </div>
 
@@ -250,66 +235,63 @@
 <div class="tool-header"><h2 id="tool-title"></h2><div class="sub" id="tool-sub"></div></div>
 <div class="tool-body">
 <div class="tab-bar">
-  <button class="tab-btn active" data-tool="flashcards" onclick="switchTab('flashcards',this)"><span class="tab-icon">📇</span><span class="tab-label">CARDS</span></button>
-  <button class="tab-btn" data-tool="test" onclick="switchTab('test',this)"><span class="tab-icon">🧠</span><span class="tab-label">QUIZ</span></button>
-  <button class="tab-btn" data-tool="dashboard" onclick="switchTab('dashboard',this)"><span class="tab-icon">📊</span><span class="tab-label">STATS</span></button>
-  <button class="tab-btn" data-tool="essay" onclick="switchTab('essay',this)"><span class="tab-icon">📝</span><span class="tab-label">ESSAY</span></button>
-  <button class="tab-btn" data-tool="checker" onclick="switchTab('checker',this)"><span class="tab-icon">✍️</span><span class="tab-label">CHECK</span></button>
-  <button class="tab-btn" data-tool="exam" onclick="switchTab('exam',this)"><span class="tab-icon">⏱️</span><span class="tab-label">EXAM</span></button>
-  <button class="tab-btn" data-tool="tracker" onclick="switchTab('tracker',this)"><span class="tab-icon">✅</span><span class="tab-label">TRACK</span></button>
-  <button class="tab-btn" data-tool="compare" onclick="switchTab('compare',this)"><span class="tab-icon">⚖️</span><span class="tab-label">COMP</span></button>
-  <button class="tab-btn" data-tool="editor" onclick="switchTab('editor',this)"><span class="tab-icon">✏️</span><span class="tab-label">EDIT</span></button>
+  <button class="tab-btn active" data-tool="flashcards" onclick="switchTab('flashcards',this)"><span class="tab-label">Cards</span></button>
+  <button class="tab-btn" data-tool="test" onclick="switchTab('test',this)"><span class="tab-label">Quiz</span></button>
+  <button class="tab-btn" data-tool="dashboard" onclick="switchTab('dashboard',this)"><span class="tab-label">Stats</span></button>
+  <button class="tab-btn" data-tool="essay" onclick="switchTab('essay',this)"><span class="tab-label">Essay</span></button>
+  <button class="tab-btn" data-tool="exam" onclick="switchTab('exam',this)"><span class="tab-label">Exam</span></button>
+  <button class="tab-btn" data-tool="tracker" onclick="switchTab('tracker',this)"><span class="tab-label">Track</span></button>
+  <button class="tab-btn" data-tool="compare" onclick="switchTab('compare',this)"><span class="tab-label">Compare</span></button>
+  <button class="tab-btn" data-tool="editor" onclick="switchTab('editor',this)"><span class="tab-label">Editor</span></button>
 </div>
 <div class="tool-content">
 <!-- FLASHCARDS -->
 <div class="tab-content active" id="tab-flashcards">
-<div class="search-wrap"><span class="search-icon">🔍</span><input class="search-input" id="search-input" type="text" placeholder="Search quotes by keyword..." oninput="searchQuotes()" aria-label="Search quotes by keyword"></div>
-<div class="mode-chips" style="display:flex;gap:4px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
-  <button class="tab-btn active" id="btn-all" onclick="setMode('all')" style="font-size:10px;padding:4px 12px">ALL QUOTES</button>
-  <button class="tab-btn" id="btn-best" onclick="setMode('best')" style="font-size:10px;padding:4px 12px">⭐ BEST</button>
-  <button class="tab-btn" id="btn-due" onclick="setMode('due')" style="font-size:10px;padding:4px 12px">🔄 DUE</button>
-  <button class="tab-btn" id="btn-weak" onclick="setMode('weak')" style="font-size:10px;padding:4px 12px">⚠️ WEAK</button>
-  <button class="tab-btn" id="btn-fav" onclick="setMode('fav')" style="font-size:10px;padding:4px 12px">⭐ FAVS</button>
-  <button class="tab-btn" id="btn-cloze" onclick="setMode('cloze')" style="font-size:10px;padding:4px 12px">📝 CLOZE</button>
+<div class="search-wrap"><span class="search-icon">⌕</span><input class="search-input" id="search-input" type="text" placeholder="Search quotes by keyword..." oninput="searchQuotes()" aria-label="Search quotes by keyword"></div>
+<div class="mode-chips">
+  <button class="tab-btn active" id="btn-all" onclick="setMode('all')">All</button>
+  <button class="tab-btn" id="btn-best" onclick="setMode('best')">Best</button>
+  <button class="tab-btn" id="btn-due" onclick="setMode('due')">Due</button>
+  <button class="tab-btn" id="btn-weak" onclick="setMode('weak')">Weak</button>
+  <button class="tab-btn" id="btn-fav" onclick="setMode('fav')">Favourites</button>
+  <button class="tab-btn" id="btn-cloze" onclick="setMode('cloze')">Cloze</button>
 </div>
-<div class="toolbar"><span class="hint" id="mode-hint">Tap card to flip · Rate difficulty after</span><div style="display:flex;gap:6px"><button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterPanel()">▼ FILTER</button><button class="shuffle-btn" onclick="shuffle()">⟳ SHUFFLE</button><button class="shuffle-btn" onclick="printFlashcards()" title="Print current deck">🖨️</button></div></div>
-<div class="filter-panel" id="filter-panel"><div class="filter-group"><div class="filter-group-label"><span id="unit-label">ACT</span></div><div class="filter-chips" id="chips-acts"></div></div><div class="filter-group"><div class="filter-group-label">THEME</div><div class="filter-chips" id="chips-themes"></div></div><div class="filter-group"><div class="filter-group-label">TECHNIQUE</div><div class="filter-chips" id="chips-techs"></div></div><div style="text-align:right;margin-top:6px"><button class="clear-filters" id="clear-btn" onclick="clearFilters()">✕ Clear all</button></div></div>
-<div class="card-wrap" onclick="flip()"><div class="card" id="card"><div class="face front" style="position:relative"><button class="fav-btn" id="fav-btn" onclick="event.stopPropagation();toggleFav()" title="Favourite">☆</button><button class="tts-btn" id="tts-btn" onclick="event.stopPropagation();speakQuote()" title="Read aloud">🔊</button><div id="front-badge" class="act-badge"></div><p class="quote-text" id="quote-text"></p><div id="front-devices"></div><div id="card-rating-tag" class="card-rating-tag" onclick="event.stopPropagation()"></div></div><div class="face back"><div style="text-align:center;margin-bottom:10px;width:100%"><div id="back-badge" class="act-badge"></div><p class="speaker-name" id="back-speaker"></p><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:3px;margin-bottom:8px" id="back-themes"></div></div><div style="border-top:1.5px solid var(--border);padding-top:10px;width:100%"><p class="section-label">Word-level analysis</p><div class="analysis-text" id="back-word"></div><p class="section-label">Context link</p><div class="context-text" id="back-context"></div></div></div></div></div>
+<div class="toolbar"><span class="hint" id="mode-hint">Tap card to flip · Rate difficulty after</span><div style="display:flex;gap:6px"><button class="filter-toggle-btn" id="filter-toggle-btn" onclick="toggleFilterPanel()">Filter ▾</button><button class="shuffle-btn" onclick="shuffle()">Shuffle</button><button class="shuffle-btn" onclick="printFlashcards()" title="Print current deck">Print</button></div></div>
+<div class="filter-panel" id="filter-panel"><div class="filter-group"><div class="filter-group-label"><span id="unit-label">ACT</span></div><div class="filter-chips" id="chips-acts"></div></div><div class="filter-group"><div class="filter-group-label">THEME</div><div class="filter-chips" id="chips-themes"></div></div><div class="filter-group"><div class="filter-group-label">TECHNIQUE</div><div class="filter-chips" id="chips-techs"></div></div><div style="text-align:right;margin-top:6px"><button class="clear-filters" id="clear-btn" onclick="clearFilters()">Clear all</button></div></div>
+<div class="card-wrap" onclick="flip()"><div class="card" id="card"><div class="face front" style="position:relative"><button class="fav-btn" id="fav-btn" onclick="event.stopPropagation();toggleFav()" title="Favourite" aria-label="Favourite">☆</button><button class="tts-btn" id="tts-btn" onclick="event.stopPropagation();speakQuote()" title="Read aloud" aria-label="Read aloud">♪</button><div id="front-badge" class="act-badge"></div><p class="quote-text" id="quote-text"></p><div id="front-devices"></div><div id="card-rating-tag" class="card-rating-tag" onclick="event.stopPropagation()"></div></div><div class="face back"><div style="text-align:center;margin-bottom:10px;width:100%"><div id="back-badge" class="act-badge"></div><p class="speaker-name" id="back-speaker"></p><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:3px;margin-bottom:8px" id="back-themes"></div></div><div style="border-top:1px solid var(--border);padding-top:10px;width:100%"><p class="section-label">Word-level analysis</p><div class="analysis-text" id="back-word"></div><p class="section-label">Context link</p><div class="context-text" id="back-context"></div></div></div></div></div>
 <div class="sr-btns"><button class="sr-btn sr-forget" onclick="rateDifficulty(0)">✗ Need to learn</button><button class="sr-btn sr-remember" onclick="rateDifficulty(1)">✓ Remembered</button></div>
-<div class="controls"><button class="btn" id="prev-btn" onclick="prev()">← PREV</button><span class="progress" id="progress"></span><button class="btn" id="next-btn" onclick="next()">NEXT →</button></div>
+<div class="controls"><button class="btn" id="prev-btn" onclick="prev()">← Prev</button><span class="progress" id="progress"></span><button class="btn" id="next-btn" onclick="next()">Next →</button></div>
 <div class="count-badge" id="count-badge"></div>
 </div>
 <!-- QUIZ -->
 <div class="tab-content" id="tab-test">
-<div style="display:flex;gap:4px;justify-content:center;margin-bottom:12px;flex-wrap:wrap"><button class="tab-btn active" id="quiz-mode-normal" onclick="setQuizMode('normal')" style="font-size:10px;padding:4px 12px">NORMAL</button><button class="tab-btn" id="quiz-mode-adaptive" onclick="setQuizMode('adaptive')" style="font-size:10px;padding:4px 12px">🎯 ADAPTIVE</button><button class="tab-btn" id="quiz-mode-theme" onclick="setQuizMode('theme')" style="font-size:10px;padding:4px 12px">🏷️ BY THEME</button></div>
+<div class="mode-chips"><button class="tab-btn active" id="quiz-mode-normal" onclick="setQuizMode('normal')">Normal</button><button class="tab-btn" id="quiz-mode-adaptive" onclick="setQuizMode('adaptive')">Adaptive</button><button class="tab-btn" id="quiz-mode-theme" onclick="setQuizMode('theme')">By theme</button></div>
 <div id="quiz-theme-picker" style="display:none;text-align:center;margin-bottom:12px"></div>
-<div class="test-card" id="test-card"><div class="test-score" id="test-score"></div><div class="test-hint" id="test-hint"></div><div class="test-prompt" id="test-prompt"></div><div class="test-options" id="test-options"></div><div class="test-reveal" id="test-reveal" style="display:none"></div><div style="margin-top:14px"><button class="btn" id="test-next" onclick="nextTestQ()" style="display:none">NEXT QUESTION →</button></div></div>
+<div class="test-card" id="test-card"><div class="test-score" id="test-score"></div><div class="test-hint" id="test-hint"></div><div class="test-prompt" id="test-prompt"></div><div class="test-options" id="test-options"></div><div class="test-reveal" id="test-reveal" style="display:none"></div><div style="margin-top:14px"><button class="btn" id="test-next" onclick="nextTestQ()" style="display:none">Next question →</button></div></div>
 <div class="test-breakdown" id="test-breakdown" style="display:none"></div>
 </div>
 <!-- DASHBOARD -->
 <div class="tab-content" id="tab-dashboard"><div class="dash-section" id="dash-content"></div></div>
 <!-- ESSAY -->
 <div class="tab-content" id="tab-essay"><div class="essay-section">
-<div style="display:flex;gap:4px;justify-content:center;margin-bottom:12px;flex-wrap:wrap"><button class="tab-btn active" id="essay-mode-single" onclick="setEssayMode('single')" style="font-size:10px;padding:4px 12px">SINGLE THEME</button><button class="tab-btn" id="essay-mode-compare" onclick="setEssayMode('compare')" style="font-size:10px;padding:4px 12px">⚖️ COMPARE TWO</button></div>
-<div id="essay-single-picker"><p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:12px">Pick a theme to generate a PEEL paragraph plan with AO tags</p><div class="essay-theme-grid" id="essay-theme-grid"></div></div>
-<div id="essay-compare-picker" style="display:none"><p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:12px">Pick two themes for a comparative essay plan</p><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin:8px 0 6px;text-align:center">Theme A</div><div class="essay-theme-grid" id="essay-theme-grid-a"></div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin:12px 0 6px;text-align:center">Theme B</div><div class="essay-theme-grid" id="essay-theme-grid-b"></div></div>
+<div class="mode-chips"><button class="tab-btn active" id="essay-mode-single" onclick="setEssayMode('single')">Single theme</button><button class="tab-btn" id="essay-mode-compare" onclick="setEssayMode('compare')">Compare two</button></div>
+<div id="essay-single-picker"><p class="essay-help">Pick a theme to generate a PEEL paragraph plan with AO tags.</p><div class="essay-theme-grid" id="essay-theme-grid"></div></div>
+<div id="essay-compare-picker" style="display:none"><p class="essay-help">Pick two themes for a comparative essay plan.</p><div class="filter-group-label" style="text-align:center;margin:8px 0 6px">Theme A</div><div class="essay-theme-grid" id="essay-theme-grid-a"></div><div class="filter-group-label" style="text-align:center;margin:12px 0 6px">Theme B</div><div class="essay-theme-grid" id="essay-theme-grid-b"></div></div>
 <div id="essay-output"></div></div></div>
-<!-- CHECKER -->
-<div class="tab-content" id="tab-checker"><div class="checker-section"><p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:12px">Paste your essay paragraph below for instant AO1/AO2/AO3 feedback (marked out of 30)</p><textarea class="checker-textarea" id="checker-input" placeholder="Paste your essay response here..."></textarea><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" onclick="checkEssay()" style="flex:1;background:var(--accent);color:#fff;border-color:var(--accent)">CHECK ESSAY</button><button class="btn" onclick="document.getElementById('checker-input').value='';document.getElementById('checker-results').innerHTML=''">CLEAR</button></div><div id="checker-results"></div></div></div>
 <!-- EXAM -->
-<div class="tab-content" id="tab-exam"><div class="exam-section" id="exam-content"><div class="exam-setup" id="exam-setup"><h3>⏱️ Exam Simulation</h3><p style="font-size:12px;color:var(--text3);margin-bottom:16px">Timed quiz under exam conditions — no hints, no filters, random order</p><div class="exam-option"><label for="exam-q-count">Questions</label><select id="exam-q-count"><option value="10">10</option><option value="20" selected>20</option><option value="all">All</option></select></div><div class="exam-option"><label for="exam-time">Time limit</label><select id="exam-time"><option value="5">5 mins</option><option value="10" selected>10 mins</option><option value="20">20 mins</option><option value="0">No limit</option></select></div><button class="btn" onclick="startExam()" style="width:100%;margin-top:16px;background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:12px">START EXAM</button></div><div id="exam-active" style="display:none"><div class="exam-timer" id="exam-timer">10:00</div><div class="test-card" id="exam-card"><div class="test-score" id="exam-score"></div><div class="test-hint" id="exam-hint"></div><div class="test-prompt" id="exam-prompt"></div><div class="test-options" id="exam-options"></div><div style="margin-top:14px"><button class="btn" id="exam-next" onclick="nextExamQ()" style="display:none">NEXT →</button></div></div></div><div id="exam-results" style="display:none"></div></div></div>
+<div class="tab-content" id="tab-exam"><div class="exam-section" id="exam-content"><div class="exam-setup" id="exam-setup"><h3>Exam simulation</h3><p style="font-size:13px;color:var(--text3);margin-bottom:16px">A timed quiz under exam conditions — no hints, no filters, random order.</p><div class="exam-option"><label for="exam-q-count">Questions</label><select id="exam-q-count"><option value="10">10</option><option value="20" selected>20</option><option value="all">All</option></select></div><div class="exam-option"><label for="exam-time">Time limit</label><select id="exam-time"><option value="5">5 mins</option><option value="10" selected>10 mins</option><option value="20">20 mins</option><option value="0">No limit</option></select></div><button class="btn-primary" onclick="startExam()" style="width:100%;margin-top:16px">Start exam</button></div><div id="exam-active" style="display:none"><div class="exam-timer" id="exam-timer">10:00</div><div class="test-card" id="exam-card"><div class="test-score" id="exam-score"></div><div class="test-hint" id="exam-hint"></div><div class="test-prompt" id="exam-prompt"></div><div class="test-options" id="exam-options"></div><div style="margin-top:14px"><button class="btn" id="exam-next" onclick="nextExamQ()" style="display:none">Next →</button></div></div></div><div id="exam-results" style="display:none"></div></div></div>
 <!-- TRACKER -->
 <div class="tab-content" id="tab-tracker"><div class="tracker-stats" id="tracker-stats"></div><div class="tracker-grid" id="tracker-grid"></div></div>
 <!-- COMPARE -->
 <div class="tab-content" id="tab-compare">
 <div class="compare-section">
-  <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:12px">Pick two themes to compare side by side</p>
-  <div class="compare-picker"><div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:6px;text-align:center">Theme A</div><div id="compare-a-chips" style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center"></div></div><div class="compare-vs">VS</div><div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:6px;text-align:center">Theme B</div><div id="compare-b-chips" style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center"></div></div></div>
+  <p class="essay-help">Pick two themes to compare side by side.</p>
+  <div class="compare-picker"><div><div class="filter-group-label" style="text-align:center;margin-bottom:6px">Theme A</div><div id="compare-a-chips" style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center"></div></div><div class="compare-vs">vs</div><div><div class="filter-group-label" style="text-align:center;margin-bottom:6px">Theme B</div><div id="compare-b-chips" style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center"></div></div></div>
   <div id="compare-output"></div>
 </div>
 </div>
 <!-- EDITOR -->
-<div class="tab-content" id="tab-editor"><div class="editor-section"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><p style="font-size:13px;color:var(--text2)"><span id="editor-count">0</span> custom quotes</p><button class="shuffle-btn" onclick="showAddForm()" id="add-new-btn">+ ADD NEW QUOTE</button></div><div id="editor-form-wrap" style="display:none;margin-bottom:16px"><div class="editor-form"><h3 id="ef-title">Add New Quote</h3><div class="ef-row"><label class="ef-label">Quote</label><input class="ef-input" id="ef-quote" placeholder="Enter quote..."></div><div class="ef-row-inline"><div class="ef-row"><label class="ef-label">Speaker</label><input class="ef-input" id="ef-speaker" placeholder="e.g. Macbeth"></div><div class="ef-row" style="max-width:80px"><label class="ef-label" id="ef-unit-label">Act</label><select class="ef-input" id="ef-act"></select></div></div><div class="ef-row"><label class="ef-label">Themes</label><div class="ef-chips" id="ef-themes"></div></div><div class="ef-row"><label class="ef-label">Techniques</label><div class="ef-chips" id="ef-techniques"></div></div><div class="ef-row"><label class="ef-label">Word-level analysis</label><textarea class="ef-input" id="ef-word" placeholder="Write your analysis..."></textarea></div><div class="ef-row"><label class="ef-label">Context link</label><textarea class="ef-input" id="ef-context" placeholder="Historical/social context..." style="min-height:50px"></textarea></div><div class="ef-actions"><button class="ef-cancel" onclick="cancelEdit()">CANCEL</button><button class="ef-submit" id="ef-submit" onclick="saveQuote()">ADD QUOTE</button></div></div></div><div id="editor-list"></div><div style="margin-top:16px;padding-top:12px;border-top:1.5px solid var(--border);display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="ef-cancel" onclick="exportAll()" style="font-size:11px;padding:8px 16px">📤 EXPORT</button><button class="ef-cancel" onclick="document.getElementById('import-file').click()" style="font-size:11px;padding:8px 16px">📥 IMPORT</button><input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)"></div></div></div>
+<div class="tab-content" id="tab-editor"><div class="editor-section"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><p style="font-size:13px;color:var(--text2)"><span id="editor-count">0</span> custom quotes</p><button class="shuffle-btn" onclick="showAddForm()" id="add-new-btn">+ Add quote</button></div><div id="editor-form-wrap" style="display:none;margin-bottom:16px"><div class="editor-form"><h3 id="ef-title">Add new quote</h3><div class="ef-row"><label class="ef-label">Quote</label><input class="ef-input" id="ef-quote" placeholder="Enter quote..."></div><div class="ef-row-inline"><div class="ef-row"><label class="ef-label">Speaker</label><input class="ef-input" id="ef-speaker" placeholder="e.g. Macbeth"></div><div class="ef-row" style="max-width:80px"><label class="ef-label" id="ef-unit-label">Act</label><select class="ef-input" id="ef-act"></select></div></div><div class="ef-row"><label class="ef-label">Themes</label><div class="ef-chips" id="ef-themes"></div></div><div class="ef-row"><label class="ef-label">Techniques</label><div class="ef-chips" id="ef-techniques"></div></div><div class="ef-row"><label class="ef-label">Word-level analysis</label><textarea class="ef-input" id="ef-word" placeholder="Write your analysis..."></textarea></div><div class="ef-row"><label class="ef-label">Context link</label><textarea class="ef-input" id="ef-context" placeholder="Historical/social context..." style="min-height:50px"></textarea></div><div class="ef-actions"><button class="ef-cancel" onclick="cancelEdit()">Cancel</button><button class="ef-submit" id="ef-submit" onclick="saveQuote()">Add quote</button></div></div></div><div id="editor-list"></div><div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="ef-cancel" onclick="exportAll()">Export</button><button class="ef-cancel" onclick="document.getElementById('import-file').click()">Import</button><input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)"></div></div></div>
 </div></div>
 </div>
 
@@ -335,48 +317,48 @@
 </div>
 
 <div class="qa-topic-list" id="qa-topic-list" style="display:none">
-  <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:16px">Select a topic to start the quiz</p>
+  <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:16px">Select a topic to start the quiz.</p>
   <div class="qa-topics" id="qa-topics"></div>
 </div>
 
 <div class="qa-active" id="qa-active" style="display:none">
   <div class="qa-question-card">
     <p class="qa-question-text" id="qa-question"></p>
-    <textarea id="qa-user-answer" placeholder="Enter your answer..." aria-label="Your answer" style="width:100%;height:120px;padding:12px;border-radius:8px;border:1px solid var(--border);font-size:14px;font-family:inherit;margin-top:12px"></textarea>
+    <textarea id="qa-user-answer" placeholder="Enter your answer..." aria-label="Your answer" style="width:100%;height:120px;padding:12px;border-radius:6px;border:1px solid var(--border);font-size:14px;font-family:inherit;margin-top:12px"></textarea>
     <div style="margin-top:12px;display:flex;gap:8px">
-      <button class="btn" onclick="revealMarkSchemeAndModel()" style="flex:1">Check Answer</button>
+      <button class="btn" onclick="revealMarkSchemeAndModel()" style="flex:1">Check answer</button>
       <button class="btn secondary" onclick="skipQuestion()" style="flex:1">Skip</button>
     </div>
   </div>
 
   <div class="qa-reveal" id="qa-reveal" style="display:none;margin-top:20px">
-    <div class="mark-scheme-box" style="background:var(--bg2);padding:12px;border-radius:8px;margin-bottom:12px">
-      <h3 style="margin:0 0 12px 0;font-size:inherit">Mark Scheme — Check what you got:</h3>
+    <div class="mark-scheme-box" style="background:var(--bg2);padding:12px;border-radius:6px;margin-bottom:12px">
+      <h3 style="margin:0 0 12px 0;font-size:inherit">Mark scheme</h3>
       <div id="qa-mark-points" style="list-style:none;padding:0;margin:0"></div>
       <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-weight:600;font-size:15px">
-        Your Score: <span id="qa-score" style="color:var(--accent);font-size:16px">0</span> / <span id="qa-max-marks">0</span>
+        Your score: <span id="qa-score" style="color:var(--accent);font-size:16px">0</span> / <span id="qa-max-marks">0</span>
       </div>
     </div>
 
-    <div class="model-answer-box" style="background:var(--bg2);padding:12px;border-radius:8px;margin-bottom:12px">
-      <h3 style="margin:0 0 8px 0;font-size:inherit">Model Answer</h3>
+    <div class="model-answer-box" style="background:var(--bg2);padding:12px;border-radius:6px;margin-bottom:12px">
+      <h3 style="margin:0 0 8px 0;font-size:inherit">Model answer</h3>
       <p id="qa-model-answer" style="margin:0;font-size:13px;line-height:1.5"></p>
     </div>
 
     <div style="display:flex;gap:8px">
-      <button class="btn" onclick="nextShortAnsQuestion()" style="flex:1">Next Question →</button>
+      <button class="btn" onclick="nextShortAnsQuestion()" style="flex:1">Next question →</button>
     </div>
   </div>
 </div>
 </div>
 
 <!-- POMODORO TIMER -->
-<button class="pomo-fab" id="pomo-fab" onclick="togglePomo()" title="Pomodoro Timer">🍅</button>
+<button class="pomo-fab" id="pomo-fab" onclick="togglePomo()" title="Pomodoro Timer" aria-label="Focus timer">◔</button>
 <div class="pomo-overlay" id="pomo-overlay" onclick="togglePomo()"></div>
 <div class="pomo-modal" id="pomo-modal" role="dialog" aria-modal="true" aria-label="Pomodoro Timer">
   <div class="pomo-header">
-    <h3>🍅 Pomodoro Timer</h3>
-    <button class="pomo-close" onclick="togglePomo()">✕</button>
+    <h3>Focus timer</h3>
+    <button class="pomo-close" onclick="togglePomo()" aria-label="Close">×</button>
   </div>
   <div class="pomo-ring-wrap">
     <svg class="pomo-ring" width="180" height="180" viewBox="0 0 180 180">
@@ -385,13 +367,13 @@
     </svg>
     <div class="pomo-time-display">
       <div class="pomo-time" id="pomo-time">25:00</div>
-      <div class="pomo-label" id="pomo-phase">Focus Time</div>
+      <div class="pomo-label" id="pomo-phase">Focus</div>
     </div>
   </div>
   <div class="pomo-controls">
-    <button class="pomo-btn primary" id="pomo-start" onclick="startPomo()">▶ Start</button>
-    <button class="pomo-btn" id="pomo-reset" onclick="resetPomo()">↺ Reset</button>
-    <button class="pomo-btn" id="pomo-skip" onclick="skipPomo()">⏭ Skip</button>
+    <button class="pomo-btn primary" id="pomo-start" onclick="startPomo()">Start</button>
+    <button class="pomo-btn" id="pomo-reset" onclick="resetPomo()">Reset</button>
+    <button class="pomo-btn" id="pomo-skip" onclick="skipPomo()">Skip</button>
   </div>
   <div class="pomo-config" id="pomo-config">
     <div class="pomo-config-row">
@@ -419,64 +401,6 @@
     <div class="pomo-stat"><div class="pomo-stat-val" id="pomo-sessions">0</div><div class="pomo-stat-label">Sessions</div></div>
     <div class="pomo-stat"><div class="pomo-stat-val" id="pomo-total-mins">0</div><div class="pomo-stat-label">Minutes</div></div>
     <div class="pomo-stat"><div class="pomo-stat-val" id="pomo-today-sessions">0</div><div class="pomo-stat-label">Today</div></div>
-  </div>
-</div>
-
-<!-- DECORATIVE ELEMENTS -->
-<div class="deco-shapes">
-  <div class="deco-shape s1"></div>
-  <div class="deco-shape s2"></div>
-  <div class="deco-shape s3"></div>
-</div>
-
-<!-- ONBOARDING OVERLAY (shown on first visit) -->
-<div id="onboarding" class="onboarding-overlay" style="display:none" role="dialog" aria-modal="true" aria-label="Welcome tutorial">
-  <div class="onboarding-modal">
-    <div class="onboarding-steps">
-      <!-- Step 1 -->
-      <div class="onboarding-step active" data-step="1">
-        <div class="onboarding-icon">📚</div>
-        <h2 class="onboarding-title">Welcome to GCSE Revision</h2>
-        <p class="onboarding-body">Your all-in-one revision toolkit for English Literature, Maths, and the Sciences. Flashcards, quizzes, spaced repetition, and more.</p>
-      </div>
-      <!-- Step 2 -->
-      <div class="onboarding-step" data-step="2">
-        <div class="onboarding-icon">🃏</div>
-        <h2 class="onboarding-title">Flashcards &amp; Spaced Repetition</h2>
-        <p class="onboarding-body">Tap a card to reveal the analysis. Rate it <strong>Hard</strong>, <strong>OK</strong>, or <strong>Easy</strong> — the app schedules your next review automatically using the SM-2 algorithm.</p>
-      </div>
-      <!-- Step 3 -->
-      <div class="onboarding-step" data-step="3">
-        <div class="onboarding-icon">🧪</div>
-        <h2 class="onboarding-title">Quizzes &amp; Exam Mode</h2>
-        <p class="onboarding-body">Use <strong>Test Mode</strong> for multiple-choice practice. <strong>Exam Mode</strong> is timed — perfect for simulating the real thing. The adaptive mode focuses on your weakest cards.</p>
-      </div>
-      <!-- Step 4 -->
-      <div class="onboarding-step" data-step="4">
-        <div class="onboarding-icon">📝</div>
-        <h2 class="onboarding-title">Notes &amp; Essay Planner</h2>
-        <p class="onboarding-body">Search your Science and Maths notes. For English Lit, the <strong>Essay tab</strong> builds a structured essay plan from your quotes — pick a theme and it scaffolds the paragraphs.</p>
-      </div>
-      <!-- Step 5 -->
-      <div class="onboarding-step" data-step="5">
-        <div class="onboarding-icon">🎯</div>
-        <h2 class="onboarding-title">You're all set!</h2>
-        <p class="onboarding-body">Your progress saves automatically. Use the <strong>Dashboard</strong> tab to track theme mastery. Good luck — you've got this! 💪</p>
-      </div>
-    </div>
-    <!-- Progress dots -->
-    <div class="onboarding-dots" id="onboarding-dots">
-      <span class="onboarding-dot active"></span>
-      <span class="onboarding-dot"></span>
-      <span class="onboarding-dot"></span>
-      <span class="onboarding-dot"></span>
-      <span class="onboarding-dot"></span>
-    </div>
-    <!-- Buttons -->
-    <div class="onboarding-actions">
-      <button class="onboarding-skip" onclick="dismissOnboarding()">Skip</button>
-      <button class="onboarding-next btn" id="onboarding-next-btn" onclick="onboardingNext()">Next →</button>
-    </div>
   </div>
 </div>
 
